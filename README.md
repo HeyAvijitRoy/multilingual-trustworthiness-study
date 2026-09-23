@@ -53,3 +53,5 @@ Study design and corpus construction in progress.
 ## Research Integrity
 
 Prompt variants should preserve the same semantic task, constraints, difficulty, and expected information requirements across language conditions. Bengali prompts should be natural rather than literal translations. Code-switched prompts should reflect realistic technical usage rather than arbitrary insertion of English words.
+
+<!-- Test commit: 2026-09-23 -->

@@ -1,0 +1,11 @@
+file,domain,id_start,id_end,rows,prompt_variants
+technical_troubleshooting_001_050.csv,technical_troubleshooting,TECH001,TECH050,50,3
+technical_troubleshooting_051_100.csv,technical_troubleshooting,TECH051,TECH100,50,3
+cybersecurity_digital_safety_001_050.csv,cybersecurity_digital_safety,CYBER001,CYBER050,50,3
+cybersecurity_digital_safety_051_100.csv,cybersecurity_digital_safety,CYBER051,CYBER100,50,3
+procedural_instructional_001_050.csv,procedural_instructional,PROC001,PROC050,50,3
+procedural_instructional_051_100.csv,procedural_instructional,PROC051,PROC100,50,3
+decision_support_001_050.csv,decision_support,DEC001,DEC050,50,3
+decision_support_051_100.csv,decision_support,DEC051,DEC100,50,3
+information_synthesis_001_050.csv,information_synthesis,SYN001,SYN050,50,3
+information_synthesis_051_100.csv,information_synthesis,SYN051,SYN100,50,3

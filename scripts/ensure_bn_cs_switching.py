@@ -1,15 +1,13 @@
-"""Ensure every BN-CS prompt contains genuine English lexical material.
+"""Ensure every BN-CS prompt contains genuine, readable English lexical switching.
 
-The primary v0.2 builder regenerates BN-CS from natural Bengali. A small number
-of generic prompts may contain none of the domain lexicon entries. Some Bengali
-prompts also already contain Latin-script labels such as A/B/C, which must not
-be mistaken for meaningful code-switching.
+The primary v0.2 builder regenerates BN-CS from natural Bengali. This pass:
+1. guarantees intentional lexical divergence from prompt_bn;
+2. adds a conservative fallback switch where needed; and
+3. normalizes Bengali case/number suffixes around Latin-script terms so output
+   does not contain artifacts such as ``emailে`` or ``Wi-Fiতে``.
 
-This pass therefore requires BOTH:
-1. Latin-script lexical material in BN-CS; and
-2. intentional surface divergence from prompt_bn.
-
-Fallback replacements preserve factual content and requested actions.
+The pass changes surface realization only. It must not alter facts, constraints,
+or the requested task.
 """
 
 from __future__ import annotations
@@ -22,14 +20,8 @@ ROOT = Path(__file__).resolve().parents[1]
 PROMPT_DIR = ROOT / "data" / "prompts"
 LATIN_RE = re.compile(r"[A-Za-z]")
 
-FILES = [
-    p
-    for p in sorted(PROMPT_DIR.glob("*.csv"))
-    if p.name != "manifest.csv"
-]
+FILES = [p for p in sorted(PROMPT_DIR.glob("*.csv")) if p.name != "manifest.csv"]
 
-# Ordered from domain-neutral professional nouns to instruction-verb fallbacks.
-# These forms are common in Bengali-English professional/technical discourse.
 FALLBACKS = [
     ("সমস্যা", "issue"),
     ("পদ্ধতি", "process"),
@@ -67,6 +59,38 @@ FALLBACKS = [
     ("বলুন", "explain করুন"),
 ]
 
+# Common artifacts created when a Bengali transliterated noun is replaced by a
+# Latin-script equivalent while a Bengali suffix remains attached.
+SPECIAL_SURFACE_FIXES = [
+    ("পূর্বregistration", "আগাম registration"),
+    ("recordিং", "recording"),
+    ("reportিং", "reporting"),
+    ("monitorিং", "monitoring"),
+    ("processিং", "processing"),
+]
+
+# Longest suffixes first. These preserve normal Bengali grammar while making the
+# code boundary explicit and readable: laptopে -> laptop-এ, Wi-Fiতে -> Wi-Fi-তে.
+LATIN_TOKEN = r"([A-Za-z][A-Za-z0-9+.#/_-]*)"
+SUFFIX_RULES = [
+    ("গুলোতে", "-গুলোতে"),
+    ("গুলোকে", "-গুলোকে"),
+    ("গুলোর", "-গুলোর"),
+    ("গুলো", "-গুলো"),
+    ("গুলিতে", "-গুলিতে"),
+    ("গুলোর", "-গুলোর"),
+    ("গুলি", "-গুলি"),
+    ("ের", "-এর"),
+    ("এর", "-এর"),
+    ("তে", "-তে"),
+    ("কে", "-কে"),
+    ("টি", "-টি"),
+    ("টা", "-টা"),
+    ("রা", "-রা"),
+    ("ে", "-এ"),
+    ("ও", "-ও"),
+]
+
 
 def latin_count(text: str) -> int:
     return len(LATIN_RE.findall(text))
@@ -82,6 +106,29 @@ def add_one_switch(text: str) -> str:
     return text
 
 
+def normalize_surface(text: str) -> str:
+    """Normalize obvious script-boundary artifacts without changing meaning."""
+    out = text
+
+    for old, new in SPECIAL_SURFACE_FIXES:
+        out = out.replace(old, new)
+
+    for suffix, replacement in SUFFIX_RULES:
+        out = re.sub(LATIN_TOKEN + re.escape(suffix), rf"\1{replacement}", out)
+
+    # A Bengali lexical prefix directly glued to a Latin word is generally an
+    # artifact of substring replacement. Separate the scripts. Known compounds
+    # are handled above with a more natural phrase.
+    out = re.sub(r"([\u0980-\u09FF])([A-Za-z])", r"\1 \2", out)
+
+    # If any unhandled Latin->Bengali boundary remains, mark the boundary with a
+    # hyphen rather than leaving an unreadable fused token.
+    out = re.sub(r"([A-Za-z0-9])([\u0980-\u09FF])", r"\1-\2", out)
+
+    out = re.sub(r"[ \t]+", " ", out).strip()
+    return out
+
+
 def ensure_switching(prompt_bn: str, prompt_bn_cs: str) -> str:
     out = prompt_bn_cs
 
@@ -90,11 +137,10 @@ def ensure_switching(prompt_bn: str, prompt_bn_cs: str) -> str:
     if out == prompt_bn:
         out = add_one_switch(out)
 
-    # If the distinct condition still lacks lexical English, add one fallback.
     if latin_count(out) < 4:
         out = add_one_switch(out)
 
-    return out
+    return normalize_surface(out)
 
 
 def main() -> None:
@@ -117,10 +163,7 @@ def main() -> None:
                 row["prompt_bn_cs"] = revised
                 changed += 1
 
-            if (
-                latin_count(row["prompt_bn_cs"]) < 4
-                or row["prompt_bn_cs"] == row["prompt_bn"]
-            ):
+            if latin_count(row["prompt_bn_cs"]) < 4 or row["prompt_bn_cs"] == row["prompt_bn"]:
                 unresolved.append(row.get("task_id", "UNKNOWN"))
 
         with path.open("w", encoding="utf-8", newline="") as handle:
@@ -134,7 +177,7 @@ def main() -> None:
             f"{unresolved}"
         )
 
-    print(f"BN-CS fallback pass complete; revised {changed} rows")
+    print(f"BN-CS fallback/surface pass complete; revised {changed} rows")
 
 
 if __name__ == "__main__":

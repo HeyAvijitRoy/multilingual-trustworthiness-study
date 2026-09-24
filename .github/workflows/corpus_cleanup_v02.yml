@@ -5,6 +5,9 @@ on:
   push:
     paths:
       - '.github/workflows/corpus_cleanup_v02.yml'
+      - 'scripts/revise_corpus_v02.py'
+      - 'scripts/ensure_bn_cs_switching.py'
+      - 'scripts/validate_prompt_corpus.py'
 
 permissions:
   contents: write
@@ -49,5 +52,4 @@ jobs:
           git commit -m "Apply corpus v0.2 language and difficulty cleanup"
           git push
 
-# One-pass workflow. Includes a conservative fallback for rows whose natural
-# Bengali prompt does not contain any of the primary code-switch lexicon terms.
+# Corpus-only data commits do not match the trigger paths, preventing loops.

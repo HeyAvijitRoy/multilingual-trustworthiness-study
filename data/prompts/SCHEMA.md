@@ -1,61 +1,104 @@
 # Prompt Dataset Schema
 
-Each row/item represents one canonical task with three semantically matched language variants.
+The project uses **two schemas at different research stages**. Keeping them separate prevents annotation fields from being mistaken for prompt-construction fields.
 
-## Required Fields
+## Phase 1 — Prompt Corpus
+
+The source prompt CSVs contain exactly seven columns:
 
 ```text
 task_id
 domain
 subdomain
 difficulty
-task_objective
 prompt_en
 prompt_bn
-prompt_bn_en
+prompt_bn_cs
+```
+
+Each row represents one canonical task with three semantically matched language conditions.
+
+### `task_id`
+
+Stable task identifier. Current ID families are:
+
+- `TECH001`–`TECH100`
+- `CYBER001`–`CYBER100`
+- `PROC001`–`PROC100`
+- `DEC001`–`DEC100`
+- `SYN001`–`SYN100`
+
+### `domain`
+
+One of the five primary study domains:
+
+- `technical_troubleshooting`
+- `cybersecurity_digital_safety`
+- `procedural_instructional`
+- `decision_support`
+- `information_synthesis`
+
+### `subdomain`
+
+More specific task family used to ensure topical coverage within a domain.
+
+`SYN091`–`SYN100` use `extended_context` after the v0.2 corpus revision.
+
+### `difficulty`
+
+One of:
+
+- `easy`
+- `medium`
+- `hard`
+
+The frozen corpus target is **25 easy / 50 medium / 25 hard per domain**.
+
+### `prompt_en`
+
+Canonical English semantic specification.
+
+### `prompt_bn`
+
+Natural contemporary Bengali realization of the same task. Bengali grammar should remain natural. Established technical terms may remain transliterated or in English where forced Bengali translation would be artificial or semantically misleading.
+
+### `prompt_bn_cs`
+
+Bengali-English code-switched realization of the same task.
+
+The design rule is **Bengali as the matrix language** with plausible English lexical/domain terminology. BN-CS must not become an English prompt with a Bengali instruction wrapper, and it must not introduce additional hints, constraints, or simplification.
+
+## Phase 2 — Annotation and Scoring Schema
+
+After the prompt corpus passes language review and is frozen, annotation data will be stored separately. The planned annotation schema includes:
+
+```text
+task_id
+task_objective
 constraints
 required_information_units
 critical_information_units
 supporting_information_units
 expected_output_type
 safety_relevance
+requirement_visibility
 notes
 status
 ```
 
-## Field Definitions
-
-### `task_id`
-Stable identifier, e.g. `CYB-001`.
-
-### `domain`
-One of the five primary study domains.
-
-### `subdomain`
-More specific task family used to ensure coverage within a domain.
-
-### `difficulty`
-`easy`, `medium`, or `hard`.
+These fields should **not** be added to the source prompt CSVs merely to make one wide table. They describe evaluation metadata and should remain separable from immutable prompt text.
 
 ### `task_objective`
+
 Language-neutral description of what the task is designed to test.
 
-### `prompt_en`
-Canonical English prompt.
-
-### `prompt_bn`
-Natural Bengali realization of the same task.
-
-### `prompt_bn_en`
-Natural Bengali-English code-switched realization of the same task.
-
 ### `constraints`
-Explicit requirements that must remain equivalent across all language variants.
+
+Explicit requirements that must remain equivalent across all three language variants.
 
 ### `required_information_units`
-Structured list of atomic answer requirements.
 
-Each unit should use:
+Structured list of atomic answer requirements. Each unit should use a structure equivalent to:
 
 ```json
 {
@@ -68,21 +111,49 @@ Each unit should use:
 ```
 
 ### `critical_information_units`
+
 IDs of required information units whose omission can materially affect correctness, safety, task completion, or decision quality.
 
 ### `supporting_information_units`
+
 IDs of useful but nonessential information units.
 
 ### `expected_output_type`
-Examples: `procedure`, `diagnosis`, `recommendation`, `comparison`, `synthesis`, `explanation`.
+
+Examples include:
+
+- `procedure`
+- `diagnosis`
+- `recommendation`
+- `comparison`
+- `synthesis`
+- `explanation`
 
 ### `safety_relevance`
-`none`, `low`, `moderate`, or `high`.
+
+One of:
+
+- `none`
+- `low`
+- `moderate`
+- `high`
+
+### `requirement_visibility`
+
+Records how much of the eventual scoring target is directly exposed in the prompt:
+
+- `explicit` — the prompt directly names the main dimensions or requirements to cover;
+- `implicit` — the model must independently surface the important requirements;
+- `mixed` — some requirements are named while others must be inferred or retrieved.
+
+This is retained for the annotation phase because it is an analytical property of the task/scoring key, not a language-condition field.
 
 ### `notes`
-Construction or adjudication notes. This field must never contain hidden hints that are unavailable to the evaluated model.
+
+Construction or adjudication notes. This field must never contain hidden hints that are supplied to the evaluated model.
 
 ### `status`
+
 Suggested lifecycle values:
 
 - `draft`
@@ -90,6 +161,11 @@ Suggested lifecycle values:
 - `scoring-reviewed`
 - `frozen`
 
-## Construction Rule
+## Construction Invariants
 
-Language variants must not independently evolve. Any semantic change to one variant requires re-checking all three versions and the scoring key.
+1. English, Bengali, and BN-CS variants must preserve the same objective, facts, constraints, difficulty, and required output.
+2. Language variants must not independently evolve. A semantic change to one condition requires checking the other two.
+3. Natural Bengali must not be made artificially difficult through forced translation of standard technical terminology.
+4. BN-CS uses Bengali syntax as its matrix and switches lexical/domain material naturally.
+5. Prompt text is frozen before full model evaluation.
+6. Scoring metadata is created only after prompt-language QA so that scoring rules are written against the final prompts.

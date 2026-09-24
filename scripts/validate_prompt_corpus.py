@@ -51,6 +51,8 @@ DOMAIN_PREFIX = {
 
 BENGALI_RE = re.compile(r"[\u0980-\u09FF]")
 LATIN_RE = re.compile(r"[A-Za-z]")
+LATIN_TO_BENGALI_ADJACENCY = re.compile(r"[A-Za-z0-9][\u0980-\u09FF]")
+BENGALI_TO_LATIN_ADJACENCY = re.compile(r"[\u0980-\u09FF][A-Za-z]")
 
 DEPRECATED_BN_PHRASES = {
     "কার্যকরী ফোল্ডার",
@@ -59,6 +61,14 @@ DEPRECATED_BN_PHRASES = {
     "বাস্তব এপিআই",
     "গ্রাহক ব্যর্থতা",
     "পুনরাবৃত্তি-নিরাপত্তা",
+}
+
+DEPRECATED_CS_FRAGMENTS = {
+    "recordিং",
+    "reportিং",
+    "monitorিং",
+    "processিং",
+    "পূর্বregistration",
 }
 
 
@@ -150,8 +160,6 @@ def validate_language_conditions(rows: list[dict[str, str]]) -> None:
 
         # Natural Bengali-matrix code-switching can be light. Requiring a large
         # English character share would itself distort the language condition.
-        # We therefore require real Latin-script material while allowing the
-        # Bengali matrix to remain dominant.
         if cs_bengali < 10 or cs_latin < 4:
             raise AssertionError(f"{task_id}: BN-CS must contain both Bengali and English material")
         if cs_bengali + cs_latin:
@@ -164,9 +172,20 @@ def validate_language_conditions(rows: list[dict[str, str]]) -> None:
         if bn == cs:
             raise AssertionError(f"{task_id}: Bengali and BN-CS prompts are identical")
 
+        # Script boundaries should be readable. Bengali suffixes on English
+        # lexical items are written with an explicit hyphen (e.g., laptop-এ),
+        # and Bengali prefixes must not be mechanically fused to Latin words.
+        if LATIN_TO_BENGALI_ADJACENCY.search(cs):
+            raise AssertionError(f"{task_id}: malformed Latin-to-Bengali token boundary in BN-CS")
+        if BENGALI_TO_LATIN_ADJACENCY.search(cs):
+            raise AssertionError(f"{task_id}: malformed Bengali-to-Latin token boundary in BN-CS")
+
         for phrase in DEPRECATED_BN_PHRASES:
             if phrase in bn:
                 raise AssertionError(f"{task_id}: deprecated technical Bengali phrase remains: {phrase}")
+        for fragment in DEPRECATED_CS_FRAGMENTS:
+            if fragment in cs:
+                raise AssertionError(f"{task_id}: malformed BN-CS fragment remains: {fragment}")
 
 
 def validate_duplicates(rows: list[dict[str, str]]) -> None:
@@ -190,7 +209,6 @@ def validate_extended_context(rows: list[dict[str, str]]) -> None:
             continue
         en_words = len(row["prompt_en"].split())
         bn_tokens = len(row["prompt_bn"].split())
-        # v0.2 requires a large increase over the original short context items.
         if en_words < 180:
             raise AssertionError(f"{row['task_id']}: English extended context only {en_words} words")
         if bn_tokens < 120:
@@ -212,6 +230,7 @@ def main() -> None:
     print("  difficulty per domain: 25 easy / 50 medium / 25 hard")
     print("  language conditions: EN / BN / BN-CS")
     print("  extended-context tasks: SYN091-SYN100")
+    print("  BN-CS script-boundary artifacts: none")
 
 
 if __name__ == "__main__":

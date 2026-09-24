@@ -2,8 +2,8 @@
 
 The primary v0.2 builder regenerates BN-CS from natural Bengali. A small number
 of generic prompts may contain none of the domain lexicon entries. This pass
-adds only common English lexical items by replacing equivalent Bengali nouns or
-process terms. It never changes factual content or sentence structure.
+adds only common English lexical items by replacing equivalent Bengali nouns,
+process terms, or instruction verbs. It never changes factual content.
 """
 
 from __future__ import annotations
@@ -22,7 +22,9 @@ FILES = [
     if p.name != "manifest.csv"
 ]
 
-# Ordered from more domain-neutral professional terms to broader fallbacks.
+# Ordered from more domain-neutral professional nouns to instruction-verb
+# fallbacks. The verb forms are common in Bengali-English technical discourse
+# and preserve the same requested action.
 FALLBACKS = [
     ("সমস্যা", "issue"),
     ("পদ্ধতি", "process"),
@@ -34,6 +36,13 @@ FALLBACKS = [
     ("সময়", "time"),
     ("নথি", "document"),
     ("সেবা", "service"),
+    ("ব্যাখ্যা করুন", "explain করুন"),
+    ("বর্ণনা করুন", "describe করুন"),
+    ("প্রস্তাব করুন", "propose করুন"),
+    ("তৈরি করুন", "design করুন"),
+    ("লিখুন", "write করুন"),
+    ("সংক্ষেপ করুন", "summarize করুন"),
+    ("বলুন", "explain করুন"),
 ]
 
 
@@ -56,6 +65,8 @@ def ensure_switching(text: str) -> str:
 
 def main() -> None:
     changed = 0
+    unresolved: list[str] = []
+
     for path in FILES:
         with path.open("r", encoding="utf-8-sig", newline="") as handle:
             reader = csv.DictReader(handle)
@@ -70,11 +81,16 @@ def main() -> None:
             if revised != row["prompt_bn_cs"]:
                 row["prompt_bn_cs"] = revised
                 changed += 1
+            if latin_count(row["prompt_bn_cs"]) < 4:
+                unresolved.append(row.get("task_id", "UNKNOWN"))
 
         with path.open("w", encoding="utf-8", newline="") as handle:
             writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
             writer.writeheader()
             writer.writerows(rows)
+
+    if unresolved:
+        raise RuntimeError(f"Unable to create natural BN-CS switching for: {unresolved}")
 
     print(f"BN-CS fallback pass complete; revised {changed} rows")
 

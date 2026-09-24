@@ -1,0 +1,47 @@
+name: Corpus v0.2 cleanup
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/corpus_cleanup_v02.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  revise-and-validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Apply deterministic corpus revision
+        run: python scripts/revise_corpus_v02.py
+
+      - name: Validate revised corpus
+        run: python scripts/validate_prompt_corpus.py
+
+      - name: Check patch integrity
+        run: git diff --check
+
+      - name: Commit revised corpus
+        shell: bash
+        run: |
+          git config user.name "HeyAvijitRoy"
+          git config user.email "hey@avijitroy.com"
+          git add data/prompts/*.csv
+          if git diff --cached --quiet; then
+            echo "No corpus changes to commit."
+            exit 0
+          fi
+          git commit -m "Apply corpus v0.2 language and difficulty cleanup"
+          git push

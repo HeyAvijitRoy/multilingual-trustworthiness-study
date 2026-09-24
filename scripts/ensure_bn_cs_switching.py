@@ -75,8 +75,6 @@ SUFFIX_RULES = [
     ("গুলো", "-গুলো"),
     ("গুলিতে", "-গুলিতে"),
     ("গুলি", "-গুলি"),
-    # Bengali possessive forms created from transliterated nouns should map to
-    # the readable English-term + Bengali genitive form, e.g. recording-এর.
     ("য়ের", "-এর"),
     ("ের", "-এর"),
     ("এর", "-এর"),
@@ -114,6 +112,13 @@ def normalize_surface(text: str) -> str:
 
     out = re.sub(r"([\u0980-\u09FF])([A-Za-z])", r"\1 \2", out)
     out = re.sub(r"([A-Za-z0-9])([\u0980-\u09FF])", r"\1-\2", out)
+
+    # Overlapping suffix rules can otherwise turn an already normalized form
+    # such as recording-এর into recording--এর. Collapse only hyphen runs that
+    # directly precede Bengali script; command-line flags such as --force are
+    # therefore unaffected.
+    out = re.sub(r"([A-Za-z0-9])-+([\u0980-\u09FF])", r"\1-\2", out)
+
     out = re.sub(r"[ \t]+", " ", out).strip()
     return out
 

@@ -7,6 +7,7 @@ on:
       - '.github/workflows/corpus_cleanup_v02.yml'
       - 'scripts/revise_corpus_v02.py'
       - 'scripts/ensure_bn_cs_switching.py'
+      - 'scripts/rebalance_synthesis_difficulty.py'
       - 'scripts/validate_prompt_corpus.py'
 
 permissions:
@@ -32,6 +33,9 @@ jobs:
 
       - name: Ensure BN-CS lexical switching
         run: python scripts/ensure_bn_cs_switching.py
+
+      - name: Rebalance synthesis difficulty
+        run: python scripts/rebalance_synthesis_difficulty.py
 
       - name: Validate revised corpus
         run: python scripts/validate_prompt_corpus.py

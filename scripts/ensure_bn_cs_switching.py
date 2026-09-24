@@ -1,9 +1,15 @@
 """Ensure every BN-CS prompt contains genuine English lexical material.
 
 The primary v0.2 builder regenerates BN-CS from natural Bengali. A small number
-of generic prompts may contain none of the domain lexicon entries. This pass
-adds only common English lexical items by replacing equivalent Bengali nouns,
-process terms, or instruction verbs. It never changes factual content.
+of generic prompts may contain none of the domain lexicon entries. Some Bengali
+prompts also already contain Latin-script labels such as A/B/C, which must not
+be mistaken for meaningful code-switching.
+
+This pass therefore requires BOTH:
+1. Latin-script lexical material in BN-CS; and
+2. intentional surface divergence from prompt_bn.
+
+Fallback replacements preserve factual content and requested actions.
 """
 
 from __future__ import annotations
@@ -22,9 +28,8 @@ FILES = [
     if p.name != "manifest.csv"
 ]
 
-# Ordered from more domain-neutral professional nouns to instruction-verb
-# fallbacks. The verb forms are common in Bengali-English technical discourse
-# and preserve the same requested action.
+# Ordered from domain-neutral professional nouns to instruction-verb fallbacks.
+# These forms are common in Bengali-English professional/technical discourse.
 FALLBACKS = [
     ("সমস্যা", "issue"),
     ("পদ্ধতি", "process"),
@@ -32,10 +37,18 @@ FALLBACKS = [
     ("ধাপ", "step"),
     ("কাজ", "task"),
     ("কারণ", "factor"),
+    ("ফলাফল", "result"),
     ("ফল", "result"),
     ("সময়", "time"),
+    ("সময়সূচি", "schedule"),
     ("নথি", "document"),
     ("সেবা", "service"),
+    ("তথ্য", "data"),
+    ("প্রমাণ", "evidence"),
+    ("সারাংশ", "summary"),
+    ("উত্তর", "response"),
+    ("পরিস্থিতি", "scenario"),
+    ("বিষয়", "point"),
     ("ব্যাখ্যা করুন", "explain করুন"),
     ("বর্ণনা করুন", "describe করুন"),
     ("প্রস্তাব করুন", "propose করুন"),
@@ -48,6 +61,7 @@ FALLBACKS = [
     ("রূপ দিন", "convert করুন"),
     ("বের করুন", "extract করুন"),
     ("দেখান", "show করুন"),
+    ("বেছে নিন", "choose করুন"),
     ("লিখুন", "write করুন"),
     ("সংক্ষেপ করুন", "summarize করুন"),
     ("বলুন", "explain করুন"),
@@ -58,16 +72,28 @@ def latin_count(text: str) -> int:
     return len(LATIN_RE.findall(text))
 
 
-def ensure_switching(text: str) -> str:
-    if latin_count(text) >= 4:
-        return text
-
-    out = text
+def add_one_switch(text: str) -> str:
+    """Apply the first natural fallback replacement that changes the text."""
     for bengali, english in FALLBACKS:
-        if bengali in out:
-            out = out.replace(bengali, english, 1)
-            if latin_count(out) >= 4:
-                break
+        if bengali in text:
+            revised = text.replace(bengali, english, 1)
+            if revised != text:
+                return revised
+    return text
+
+
+def ensure_switching(prompt_bn: str, prompt_bn_cs: str) -> str:
+    out = prompt_bn_cs
+
+    # A/B/C, model names, dates, or acronyms already present in prompt_bn do
+    # not by themselves establish a distinct code-switched condition.
+    if out == prompt_bn:
+        out = add_one_switch(out)
+
+    # If the distinct condition still lacks lexical English, add one fallback.
+    if latin_count(out) < 4:
+        out = add_one_switch(out)
+
     return out
 
 
@@ -85,11 +111,16 @@ def main() -> None:
             continue
 
         for row in rows:
-            revised = ensure_switching(row["prompt_bn_cs"])
-            if revised != row["prompt_bn_cs"]:
+            original = row["prompt_bn_cs"]
+            revised = ensure_switching(row["prompt_bn"], original)
+            if revised != original:
                 row["prompt_bn_cs"] = revised
                 changed += 1
-            if latin_count(row["prompt_bn_cs"]) < 4:
+
+            if (
+                latin_count(row["prompt_bn_cs"]) < 4
+                or row["prompt_bn_cs"] == row["prompt_bn"]
+            ):
                 unresolved.append(row.get("task_id", "UNKNOWN"))
 
         with path.open("w", encoding="utf-8", newline="") as handle:
@@ -98,7 +129,10 @@ def main() -> None:
             writer.writerows(rows)
 
     if unresolved:
-        raise RuntimeError(f"Unable to create natural BN-CS switching for: {unresolved}")
+        raise RuntimeError(
+            "Unable to create a distinct natural BN-CS condition for: "
+            f"{unresolved}"
+        )
 
     print(f"BN-CS fallback pass complete; revised {changed} rows")
 

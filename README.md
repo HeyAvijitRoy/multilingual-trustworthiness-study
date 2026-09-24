@@ -8,27 +8,27 @@ This project investigates whether language choice systematically affects respons
 
 The dataset is an experimental instrument rather than the primary scientific contribution. The study is designed around controlled paired prompts and structured scoring of trustworthiness-relevant failures.
 
-## Initial Study Design
+## Study Design
 
-- **500 evaluation tasks**
+- **500 evaluation tasks / 1,500 prompt instances**
 - **3 matched language conditions per task**
   - English
   - Natural Bengali
-  - Bengali-English code-switching
-- **5 task domains**
-- Difficulty stratification across easy, medium, and hard tasks
-- Structured required-information units for every task
-- Critical vs. non-critical omission labels
-- Cross-model evaluation
-- Repeated generations where stochastic robustness is evaluated
+  - Bengali-English code-switching with Bengali as the matrix language
+- **5 task domains, 100 tasks each**
+- **Difficulty allocation per domain:** 25 easy / 50 medium / 25 hard
+- Extended-context synthesis subset: `SYN091`–`SYN100`
+- Structured required-information-unit scoring planned after prompt freeze
+- Cross-model evaluation planned
+- Repeated generations planned where stochastic robustness is evaluated
 
-## Planned Domains
+## Domains
 
 1. Technical troubleshooting
 2. Cybersecurity and digital safety
 3. Procedural and instructional tasks
-4. Decision-support and constraint-heavy tasks
-5. Information synthesis and long-context tasks
+4. Decision support and constraint-heavy tasks
+5. Information synthesis and extended-context tasks
 
 ## Repository Structure
 
@@ -46,12 +46,34 @@ multilingual-trustworthiness-study/
 └── scripts/
 ```
 
-## Status
+## Corpus Status
 
-Study design and corpus construction in progress.
+**v0.2 candidate prompt corpus complete and validated.**
+
+Current corpus QA verifies:
+
+- 500 unique task IDs
+- 100 tasks in each of the five domains
+- 1,500 total prompt instances
+- exact 25 / 50 / 25 easy-medium-hard allocation per domain
+- complete EN / BN / BN-CS variants
+- no exact duplicate prompts
+- predominantly Bengali natural-Bengali condition
+- distinct Bengali-matrix code-switched condition
+- normalized Bengali-English script boundaries
+- substantially expanded extended-context tasks for `SYN091`–`SYN100`
+
+No model evaluation has been run on the v0.2 candidate corpus yet.
+
+Reproducible corpus QA and revision scripts are under `scripts/`, including:
+
+- `revise_corpus_v02.py`
+- `ensure_bn_cs_switching.py`
+- `rebalance_synthesis_difficulty.py`
+- `validate_prompt_corpus.py`
 
 ## Research Integrity
 
-Prompt variants should preserve the same semantic task, constraints, difficulty, and expected information requirements across language conditions. Bengali prompts should be natural rather than literal translations. Code-switched prompts should reflect realistic technical usage rather than arbitrary insertion of English words.
+Prompt variants must preserve the same semantic task, factual context, constraints, difficulty, and expected information requirements across language conditions. Bengali prompts should use natural contemporary Bengali rather than rigid literal translation. Code-switched prompts should reflect plausible Bengali-English professional or technical discourse rather than arbitrary insertion of English words or English prompts wrapped in Bengali instructions.
 
-<!-- Test commit: 2026-09-23 -->
+The prompt corpus will be frozen before full model evaluation. Annotation and scoring metadata will be stored separately from the immutable prompt text.

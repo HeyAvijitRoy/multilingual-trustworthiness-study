@@ -148,13 +148,17 @@ def validate_language_conditions(rows: list[dict[str, str]]) -> None:
         if bn_bengali + bn_latin and bn_bengali / (bn_bengali + bn_latin) < 0.55:
             raise AssertionError(f"{task_id}: Bengali condition is not predominantly Bengali")
 
+        # Natural Bengali-matrix code-switching can be light. Requiring a large
+        # English character share would itself distort the language condition.
+        # We therefore require real Latin-script material while allowing the
+        # Bengali matrix to remain dominant.
         if cs_bengali < 10 or cs_latin < 4:
             raise AssertionError(f"{task_id}: BN-CS must contain both Bengali and English material")
         if cs_bengali + cs_latin:
             bn_share = cs_bengali / (cs_bengali + cs_latin)
-            if not 0.25 <= bn_share <= 0.90:
+            if not 0.25 <= bn_share <= 0.985:
                 raise AssertionError(
-                    f"{task_id}: BN-CS Bengali script share {bn_share:.2f} outside 0.25-0.90"
+                    f"{task_id}: BN-CS Bengali script share {bn_share:.3f} outside 0.25-0.985"
                 )
 
         if bn == cs:

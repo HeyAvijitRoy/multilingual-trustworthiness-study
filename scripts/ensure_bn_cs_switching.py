@@ -59,8 +59,6 @@ FALLBACKS = [
     ("বলুন", "explain করুন"),
 ]
 
-# Common artifacts created when a Bengali transliterated noun is replaced by a
-# Latin-script equivalent while a Bengali suffix remains attached.
 SPECIAL_SURFACE_FIXES = [
     ("পূর্বregistration", "আগাম registration"),
     ("recordিং", "recording"),
@@ -69,8 +67,6 @@ SPECIAL_SURFACE_FIXES = [
     ("processিং", "processing"),
 ]
 
-# Longest suffixes first. These preserve normal Bengali grammar while making the
-# code boundary explicit and readable: laptopে -> laptop-এ, Wi-Fiতে -> Wi-Fi-তে.
 LATIN_TOKEN = r"([A-Za-z][A-Za-z0-9+.#/_-]*)"
 SUFFIX_RULES = [
     ("গুলোতে", "-গুলোতে"),
@@ -78,8 +74,10 @@ SUFFIX_RULES = [
     ("গুলোর", "-গুলোর"),
     ("গুলো", "-গুলো"),
     ("গুলিতে", "-গুলিতে"),
-    ("গুলোর", "-গুলোর"),
     ("গুলি", "-গুলি"),
+    # Bengali possessive forms created from transliterated nouns should map to
+    # the readable English-term + Bengali genitive form, e.g. recording-এর.
+    ("য়ের", "-এর"),
     ("ের", "-এর"),
     ("এর", "-এর"),
     ("তে", "-তে"),
@@ -97,7 +95,6 @@ def latin_count(text: str) -> int:
 
 
 def add_one_switch(text: str) -> str:
-    """Apply the first natural fallback replacement that changes the text."""
     for bengali, english in FALLBACKS:
         if bengali in text:
             revised = text.replace(bengali, english, 1)
@@ -107,7 +104,6 @@ def add_one_switch(text: str) -> str:
 
 
 def normalize_surface(text: str) -> str:
-    """Normalize obvious script-boundary artifacts without changing meaning."""
     out = text
 
     for old, new in SPECIAL_SURFACE_FIXES:
@@ -116,15 +112,8 @@ def normalize_surface(text: str) -> str:
     for suffix, replacement in SUFFIX_RULES:
         out = re.sub(LATIN_TOKEN + re.escape(suffix), rf"\1{replacement}", out)
 
-    # A Bengali lexical prefix directly glued to a Latin word is generally an
-    # artifact of substring replacement. Separate the scripts. Known compounds
-    # are handled above with a more natural phrase.
     out = re.sub(r"([\u0980-\u09FF])([A-Za-z])", r"\1 \2", out)
-
-    # If any unhandled Latin->Bengali boundary remains, mark the boundary with a
-    # hyphen rather than leaving an unreadable fused token.
     out = re.sub(r"([A-Za-z0-9])([\u0980-\u09FF])", r"\1-\2", out)
-
     out = re.sub(r"[ \t]+", " ", out).strip()
     return out
 
@@ -132,8 +121,6 @@ def normalize_surface(text: str) -> str:
 def ensure_switching(prompt_bn: str, prompt_bn_cs: str) -> str:
     out = prompt_bn_cs
 
-    # A/B/C, model names, dates, or acronyms already present in prompt_bn do
-    # not by themselves establish a distinct code-switched condition.
     if out == prompt_bn:
         out = add_one_switch(out)
 

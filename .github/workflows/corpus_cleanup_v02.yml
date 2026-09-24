@@ -45,3 +45,5 @@ jobs:
           fi
           git commit -m "Apply corpus v0.2 language and difficulty cleanup"
           git push
+
+# One-pass workflow. After the v0.2 corpus is verified, it can be disabled or removed.

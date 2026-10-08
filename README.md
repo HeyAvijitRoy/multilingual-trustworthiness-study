@@ -77,3 +77,18 @@ Reproducible corpus QA and revision scripts are under `scripts/`, including:
 Prompt variants must preserve the same semantic task, factual context, constraints, difficulty, and expected information requirements across language conditions. Bengali prompts should use natural contemporary Bengali rather than rigid literal translation. Code-switched prompts should reflect plausible Bengali-English professional or technical discourse rather than arbitrary insertion of English words or English prompts wrapped in Bengali instructions.
 
 The prompt corpus will be frozen before full model evaluation. Annotation and scoring metadata will be stored separately from the immutable prompt text.
+
+## RIU annotation status
+
+The 25-task pilot has been methodologically revised under schema 0.2: 155 RIUs, 82 critical, with binary scoring for discrete requirements and explicit partial-credit anchors for 22 graded requirements. [Read the audit](data/annotations/PILOT_AUDIT.md) and [annotation protocol](data/annotations/ANNOTATION_PROTOCOL.md).
+
+The current prompt files are byte-pinned to commit `74604be`; no prompts were edited during this audit. Automated corpus validation is not independent linguistic validation. The [scaling plan](data/annotations/SCALING_PLAN.md) prepares all 500 tasks but gates production annotation and model runs on independent bilingual calibration and gold sign-off. All 25 pilot records remain `method-audited`, not frozen gold. The legacy cleanup workflow is now read-only.
+
+Run local checks with Python 3.10 or newer (CI uses 3.11):
+
+```sh
+python3 scripts/validate_prompt_corpus.py
+python3 scripts/validate_pilot_annotations.py
+python3 -m unittest discover -s scripts -p 'test_*.py'
+python3 scripts/prepare_scaling_queue.py --check
+```

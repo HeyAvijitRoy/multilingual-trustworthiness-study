@@ -1,59 +1,16 @@
-name: Corpus v0.2 cleanup
-
+# Historical cleanup is retired: frozen prompts must never be rewritten by CI.
+name: Verify frozen corpus (legacy cleanup entry point)
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - '.github/workflows/corpus_cleanup_v02.yml'
-      - 'scripts/revise_corpus_v02.py'
-      - 'scripts/ensure_bn_cs_switching.py'
-      - 'scripts/rebalance_synthesis_difficulty.py'
-      - 'scripts/validate_prompt_corpus.py'
-
 permissions:
-  contents: write
-
+  contents: read
 jobs:
-  revise-and-validate:
+  verify-only:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
-      - name: Apply deterministic corpus revision
-        run: python scripts/revise_corpus_v02.py
-
-      - name: Ensure BN-CS lexical switching
-        run: python scripts/ensure_bn_cs_switching.py
-
-      - name: Rebalance synthesis difficulty
-        run: python scripts/rebalance_synthesis_difficulty.py
-
-      - name: Validate revised corpus
-        run: python scripts/validate_prompt_corpus.py
-
-      - name: Check patch integrity
-        run: git diff --check
-
-      - name: Commit revised corpus
-        shell: bash
-        run: |
-          git config user.name "HeyAvijitRoy"
-          git config user.email "hey@avijitroy.com"
-          git add data/prompts/*.csv
-          if git diff --cached --quiet; then
-            echo "No corpus changes to commit."
-            exit 0
-          fi
-          git commit -m "Apply corpus v0.2 language and difficulty cleanup"
-          git push
-
-# Corpus-only data commits do not match the trigger paths, preventing loops.
+      - run: python scripts/validate_prompt_corpus.py
+      - run: python scripts/validate_pilot_annotations.py

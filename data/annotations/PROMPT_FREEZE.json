@@ -1,0 +1,18 @@
+{
+  "baseline_commit": "74604be07b2246e1d7f063088a35799721290e81",
+  "algorithm": "sha256",
+  "files": {
+    "data/prompts/SCHEMA.md": "fa59c02898e6e3f8779393f8b8f289a273825ffaf894f8ca2d5e621ec79cdaf4",
+    "data/prompts/cybersecurity_digital_safety_001_050.csv": "d02bd163b346e1779b4aeee6ba8f9c1aecf64e1d0047862ff5ed11bf0d64ffe5",
+    "data/prompts/cybersecurity_digital_safety_051_100.csv": "573c760195c62209d63c79f1c66baade61149fe3c76bac1a8def03b712d7015b",
+    "data/prompts/decision_support_001_050.csv": "d2048f2ab5196d5b97faee072679f62613178d783ada618dbd778fd59fe3b287",
+    "data/prompts/decision_support_051_100.csv": "0eb75c27129afa99fb502e5b80cf50c820049e509ee7b7bb8b3af55eb5486e2c",
+    "data/prompts/information_synthesis_001_050.csv": "3fda1e7df9e78f770e48f962eb46538fc28315260a1e0ef2820fcf7754cfe2b0",
+    "data/prompts/information_synthesis_051_100.csv": "5abfce28b48e57706c759a8282787980dc5b1e1424f69ae61bb8aa4313d2417e",
+    "data/prompts/manifest.csv": "d28999c4f69a70efdce87a5bf98297b9f1a7b22f7bb21c84775c0d9d89e9f2d6",
+    "data/prompts/procedural_instructional_001_050.csv": "4eac8a46f37b28e39bb37dd84418d362894359de76eff051f0ddae9d3d93c294",
+    "data/prompts/procedural_instructional_051_100.csv": "9b5bb02e35ce1d7202589efc981ad1063db61e350dd282cf7f7be0e3fb4964bf",
+    "data/prompts/technical_troubleshooting_001_050.csv": "4f7461a66bfc33f30a4f3f28102aee14f89ef8c057a62fe5ccd4a9b8af47a3f4",
+    "data/prompts/technical_troubleshooting_051_100.csv": "86d0cec100770af889e14c7ded60bf00f1391f210050c6bbb06474503f978cb3"
+  }
+}

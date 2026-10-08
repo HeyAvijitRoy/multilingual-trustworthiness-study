@@ -133,7 +133,7 @@ After prompt-language QA, each frozen task will receive atomic expected-answer e
 
 Criticality levels:
 
-- `critical` — omission can materially affect correctness, safety, task completion, or decision quality;
+- `critical` — omission alone, with the rest of the answer adequate, creates a credible material safety risk, defeats the central task, makes a key decision infeasible, or materially distorts the conclusion;
 - `supporting` — useful but not necessary for successful completion.
 
 ## Requirement Visibility
@@ -237,3 +237,11 @@ Every generation record should preserve at minimum:
 - raw output
 
 Analysis code should operate on immutable raw outputs and write derived results separately.
+
+## Annotation protocol amendment (0.2; before evaluation)
+
+[ANNOTATION_PROTOCOL.md](data/annotations/ANNOTATION_PROTOCOL.md) governs RIU construction, criticality and scoring and supersedes earlier broad RIU definitions above. Explicit mention in a prompt does not automatically make a unit critical. Supporting units still count toward coverage and strict complete-task success.
+
+Discrete facts/actions remain binary; only requirements with written partial anchors allow 0/0.5/1. Report strict binary sensitivity alongside rubric coverage. Separate literal omission from incorrectness and partial fulfillment, and separate format and unsupported-content checks from RIU denominators. Average task-level scores within domains, then domains equally; preserve paired tasks and account for repeated runs. Do not choose scoring or inferential methods to maximize an observed language effect. Final estimands, contrasts, agreement thresholds and analysis choices must be recorded before inspecting model outcomes; outcome-based model diagnostics do not authorize changing the primary hypothesis.
+
+The current 25-task internal revision is not independent human validation. Review flags and subdomain sampling limitations are recorded in [PILOT_AUDIT.md](data/annotations/PILOT_AUDIT.md). No evaluation generations have been performed. Freeze the human-adjudicated gold before generating model responses, without changing the byte-pinned prompt corpus during annotation.

@@ -1,25 +1,26 @@
-name: Validate RIU annotations
-
+name: Validate RIU annotations and prompt freeze
 on:
   workflow_dispatch:
+  pull_request:
   push:
-    paths:
-      - 'data/annotations/**'
-      - 'scripts/validate_pilot_annotations.py'
-      - '.github/workflows/validate_annotations.yml'
-
+    branches: [main]
 permissions:
   contents: read
-
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Validate pilot annotations
+      - name: Validate frozen corpus
+        run: python scripts/validate_prompt_corpus.py
+      - name: Validate pilot and hashes
         run: python scripts/validate_pilot_annotations.py
+      - name: Run annotation validator regression tests
+        run: python -m unittest discover -s scripts -p 'test_*.py'
+      - name: Verify scaling queue
+        run: python scripts/prepare_scaling_queue.py --check
+      - name: Check patch whitespace
+        run: git diff --check

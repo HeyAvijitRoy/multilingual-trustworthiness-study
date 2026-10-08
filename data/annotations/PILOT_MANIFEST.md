@@ -1,14 +1,8 @@
-# RIU Pilot v0.1 Manifest
+# RIU pilot 0.2 manifest
 
-## Purpose
+The 25-task pilot has been internally audited and revised. **Local structural checks pass; independent bilingual calibration and gold freeze remain pending.** See [the audit](PILOT_AUDIT.md), [schema](ANNOTATION_SCHEMA.md), [protocol](ANNOTATION_PROTOCOL.md) and [scaling plan](SCALING_PLAN.md).
 
-This pilot tests whether the Required Information Unit (RIU) annotation scheme is sufficiently atomic, scoreable, and language-neutral before scaling annotation to all 500 tasks.
-
-No model outputs were used to create the pilot annotations.
-
-## Coverage
-
-| Domain | Selected tasks |
+| Domain | Tasks |
 |---|---|
 | Technical troubleshooting | TECH001, TECH004, TECH006, TECH009, TECH010 |
 | Cybersecurity and digital safety | CYBER001, CYBER004, CYBER006, CYBER009, CYBER010 |
@@ -16,31 +10,13 @@ No model outputs were used to create the pilot annotations.
 | Decision support | DEC001, DEC004, DEC006, DEC009, DEC010 |
 | Information synthesis | SYN004, SYN008, SYN009, SYN091, SYN100 |
 
-Total: **25 tasks**
+- 25 tasks; 5/domain; easy, medium and hard represented in every domain.
+- 155 RIUs: 82 critical (52.9%), 73 supporting.
+- 133 binary units; 22 with explicit 0/0.5/1 anchors.
+- All records `method-audited`; no independent human review claimed.
+- Extended-context items SYN091 and SYN100 retained.
+- Frozen prompt files unchanged from `74604be07b2246e1d7f063088a35799721290e81`.
+- No evaluation model calls or model outputs.
+- A deterministic queue prepares all 500 tasks, without inventing annotations for the remaining 475.
 
-The pilot includes easy, medium, and hard tasks in every domain. `SYN091` and `SYN100` represent the extended-context subset.
-
-## Current QA result
-
-- Tasks: 25
-- Domain allocation: 5 per domain
-- RIUs: 130
-- Critical RIUs: 100
-- Extended-context pilot items: SYN091, SYN100
-- Structural/schema validation: PASS
-- Prompt corpus modified: NO
-- Model generations performed: NO
-
-## Review status
-
-All records currently use `pilot-internal-reviewed`.
-
-This means they have been checked for:
-- alignment with frozen prompt semantics;
-- RIU atomicity;
-- explicit scoring rules;
-- critical/supporting distinction;
-- difficulty/domain coverage;
-- basic structural validity.
-
-It does **not** mean the pilot is a frozen gold annotation set. The next gate is annotation-method review/adjudication before scaling to 500 tasks.
+The old 130-unit/100-critical result is superseded, not a comparable scoring denominator. The new protocol removes overlaps, splits independently omittable facts, calibrates criticality by omission consequence, and separates format/unsupported-content checks from content coverage. Independent review is necessary to establish agreement and resolve frozen-language concerns; automated validation cannot certify these properties.

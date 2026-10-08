@@ -1,80 +1,63 @@
-# Annotation Schema — RIU Pilot v0.1
+# RIU annotation schema 0.2
 
-This directory stores evaluation metadata separately from the frozen prompt corpus.
+This version replaces 0.1. Annotations are separate from the unchanged prompt corpus at commit `74604be07b2246e1d7f063088a35799721290e81`. `PROMPT_FREEZE.json` pins every file under `data/prompts/`; record hashes additionally pin each language string. Neither file hashes nor a schema PASS certify language equivalence.
 
-## Pilot scope
+## Record fields
 
-- 25 tasks total
-- 5 tasks from each of the five study domains
-- easy / medium / hard coverage
-- includes extended-context synthesis tasks
-- no model outputs are used to construct these annotations
+| Field | Meaning |
+|---|---|
+| `schema_version` | `0.2` |
+| `task_id`, `domain`, `difficulty` | Must match the frozen corpus |
+| `task_objective`, `expected_output_type` | Nonempty description of the task and response form |
+| `safety_relevance` | `none`, `low`, `moderate`, `high`; not a criticality multiplier |
+| `requirement_visibility` | `explicit`, `implicit`, `mixed`; descriptive, not a scoring weight |
+| `constraints` | Exact descriptions of constraint-type RIUs, in RIU order; an index, not additional scored requirements |
+| `rius` | Nonempty list; no minimum of three and no forced critical unit |
+| `task_checks` | Separate unsupported-content and applicable format checks |
+| `prompt_sha256` | SHA-256 of UTF-8 `prompt_en`, `prompt_bn`, `prompt_bn_cs`, keyed `en`, `bn`, `bn_cs` |
+| `review` | Method-review provenance plus independent-human and language-equivalence review-log references, or `pending` |
+| `status` | `draft`, `method-audited`, `human-reviewed`, `frozen` |
+| `notes` | Provenance and limitations |
 
-## Record schema
+`method-audited` means internal rubric review, not independent human validation. Human-reviewed/frozen records require both human and bilingual review references. The validator verifies the references are supplied; a reviewer must verify their authenticity and contents. Freeze additionally requires the sign-off process in `ANNOTATION_PROTOCOL.md`.
 
-Each JSONL record contains:
+## RIU fields
 
-- `task_id`
-- `domain`
-- `difficulty`
-- `task_objective`
-- `expected_output_type`
-- `safety_relevance`
-- `requirement_visibility`
-- `constraints`
-- `rius`
-- `notes`
-- `status`
+| Field | Meaning |
+|---|---|
+| `id` | Sequential within task, `RIU-01`, etc. |
+| `source_riu_ids` | Corresponding 0.1 unit IDs for migration; empty for newly annotated tasks |
+| `riu_type` | `fact`, `action`, `evidence`, `constraint`, `warning`, `qualification`, `comparison`, `uncertainty` |
+| `criticality` | `critical` or `supporting`, using the omission-consequence test |
+| `description` | One independently assessable proposition or operational requirement |
+| `rationale` | Concrete consequence of omission, or supporting contribution |
+| `scoring_mode` | `binary` or `ordinal` |
+| `scoring_rule` | Object with exactly `0`, `0.5`, `1`; `1` equals the description; binary `0.5` is JSON null |
 
-### RIU object
+A relational proposition may retain its subject, value, direction, comparator and time window together. Do not split a number from its referent or treat every example in an alternative list as mandatory. Independently satisfiable outcomes, such as password change and session revocation, are separate units. See the protocol for safeguards against fragmentation and overlap.
 
-Each required information unit contains:
+`task_checks` entries contain sequential `id`, `kind` (`unsupported_content` or `format`), and a nonempty `rule`. They do not increase the RIU denominator. Recording an error can coexist with a failed RIU, but it is never subtracted a second time from coverage.
 
-- `id` — sequential within a task, e.g. `RIU-01`
-- `riu_type` — one of `fact`, `action`, `evidence`, `constraint`, `warning`, `qualification`, `comparison`, `uncertainty`
-- `criticality` — `critical` or `supporting`
-- `description` — language-neutral atomic requirement
-- `scoring_rule` — explicit criterion for deciding whether a response satisfies the RIU
-- `rationale` — why the unit matters to task correctness, safety, actionability, or interpretation
+## Migration
 
-## Requirement visibility
+0.1 IDs are local to the old version; never join old scores to 0.2 by RIU ID alone. Use `(schema_version, task_id, riu_id)`. `source_riu_ids` records splits and merges. SYN091's old RIU-09 is replaced by separate task checks. Re-score all responses if an annotation version changes; no responses exist for this revision.
 
-- `explicit` — principal scoring requirements are named in the prompt.
-- `implicit` — important scoring requirements must be independently surfaced.
-- `mixed` — some requirements are named while others must be inferred.
+## Validation
 
-## Safety relevance
+From the repository root:
 
-- `none`
-- `low`
-- `moderate`
-- `high`
+```sh
+python3 scripts/validate_prompt_corpus.py
+python3 scripts/validate_pilot_annotations.py
+python3 -m unittest discover -s scripts -p 'test_*.py'
+python3 scripts/prepare_scaling_queue.py --check
+```
 
-## Annotation rules
+Future annotation directories must contain only annotation JSONL files:
 
-1. RIUs describe answer requirements, not ideal prose.
-2. RIUs must remain valid for EN, BN, and BN-CS variants of the same task.
-3. A critical RIU is one whose omission can materially affect correctness, safety, task completion, or decision quality.
-4. Supporting RIUs improve completeness but are not necessary for core task success.
-5. Scoring rules should permit paraphrases and equivalent reasoning.
-6. Do not require facts not supported by the prompt or standard task knowledge needed to answer it.
-7. Do not inspect model outputs while constructing or revising gold RIUs.
-8. Prompt text remains immutable during annotation.
-9. Extended-context items may legitimately contain more RIUs than ordinary tasks.
-10. Pilot annotations remain provisional until human/adjudication review; they are not yet the frozen gold set.
+```sh
+python3 scripts/validate_pilot_annotations.py --scope batch --annotation-dir data/annotations/full
+python3 scripts/validate_pilot_annotations.py --scope full --annotation-dir data/annotations/full
+```
 
-## Pilot status values
-
-- `pilot-internal-reviewed` — internally checked for atomicity, scoreability, and alignment with frozen task semantics.
-- `human-reviewed` — reviewed/adjudicated by an additional human annotator.
-- `frozen` — approved for final model scoring.
-
-## Pilot files
-
-- `pilot_technical.jsonl`
-- `pilot_cybersecurity.jsonl`
-- `pilot_procedural.jsonl`
-- `pilot_decision_support.jsonl`
-- `pilot_information_synthesis.jsonl`
-
-The full 500-task annotation set should use the same structure after the pilot is accepted.
+Batch mode checks every supplied record and forbids duplicate task IDs. Full mode additionally requires exact coverage of all 500 frozen tasks. Both verify frozen prompt bytes. Neither command runs models or edits prompts.

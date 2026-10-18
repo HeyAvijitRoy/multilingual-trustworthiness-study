@@ -72,7 +72,7 @@ class AnnotationValidationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory); folder = root/'data/prompts'; folder.mkdir(parents=True)
             path = folder/'example.csv'; path.write_bytes(b'frozen\n')
-            manifest = {'corpus_version':'0.3', 'supersedes':{'corpus_version':'0.2', 'baseline_commit':'74604be07b2246e1d7f063088a35799721290e81'}, 'algorithm':'sha256',
+            manifest = {'corpus_version':'0.3.1', 'supersedes':{'corpus_version':'0.3', 'baseline_commit':'dfbd25fe150baeec59065ab644737955c38eb94f'}, 'algorithm':'sha256',
                         'files':{'data/prompts/example.csv':hashlib.sha256(path.read_bytes()).hexdigest()}}
             validate_freeze(root, manifest)
             path.write_bytes(b'changed\n')

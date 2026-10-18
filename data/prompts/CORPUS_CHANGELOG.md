@@ -1,6 +1,18 @@
 # Prompt corpus changelog
 
-## v0.3: language-condition repair (2026-10-18) — FROZEN
+## v0.3.1: SYN079 deadline clarification (2026-10-18) — FROZEN
+
+**Status: final, human-validated and frozen.** One English prompt changed; all Bengali and BN-CS text and all other English prompts are byte-identical to v0.3 (commit `dfbd25f`). Human validator R1 confirmed the change on 2026-10-18 (`data/annotations/review_logs/2026-10-18_R1_human_validation.md`), and the study lead froze v0.3.1 as the evaluation corpus.
+
+| Task | v0.3 English | v0.3.1 English |
+|---|---|---|
+| SYN079 | The deadline is the following Friday. | The deadline is Friday of the following week. |
+
+**Why.** "The following Friday" could mean the Friday of the start week or of the next week. The v0.3 BN and BN-CS already say পরের সপ্তাহের শুক্রবার (Friday of the next week), so only the English allowed the other reading. That reading flips the correct answer: 10 business days of work starting Monday finish exactly on Friday of week 2, so the plan is feasible with no slack only under the week-2 reading. The English now matches the Bengali, and the correct answer is the same in all three languages.
+
+**Effect.** SYN079 is not a pilot task; no annotations change.
+
+## v0.3: language-condition repair (2026-10-18) — superseded by v0.3.1
 
 **Scope:** `prompt_bn` and `prompt_bn_cs` were rewritten by hand for all 500 tasks.
 - `prompt_en` is **byte-identical to v0.2**; no English prompt was changed.
@@ -9,7 +21,7 @@
 
 **Authorization:** the study lead chose a versioned corpus repair, the route `data/annotations/PILOT_AUDIT.md` prescribes for confirmed language mismatches. v0.2 stays recoverable at commit `74604be07b2246e1d7f063088a35799721290e81`.
 
-**Status: final, human-validated and frozen.** The text was drafted with AI assistance (Claude) following `LANGUAGE_GUIDE.md`, then validated by human validator R1 and approved and frozen by the study lead on 2026-10-18 (`data/annotations/review_logs/2026-10-18_R1_human_validation.md`). v0.3 is the frozen evaluation corpus pinned in `data/annotations/PROMPT_FREEZE.json`; any further change requires a new versioned release.
+**Status: final, human-validated and frozen.** The text was drafted with AI assistance (Claude) following `LANGUAGE_GUIDE.md`, then validated by human validator R1 and approved and frozen by the study lead on 2026-10-18 (`data/annotations/review_logs/2026-10-18_R1_human_validation.md`). v0.3 was frozen and then superseded by v0.3.1 (one English clarification); any further change requires a new versioned release.
 
 ### Why
 

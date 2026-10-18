@@ -11,8 +11,9 @@ The 25-task pilot has been internally audited and revised. **Local structural ch
 | Information synthesis | SYN004, SYN008, SYN009, SYN091, SYN100 |
 
 - 25 tasks; 5/domain; easy, medium and hard represented in every domain.
-- 155 RIUs: 82 critical (52.9%), 73 supporting.
-- 133 binary units; 22 with explicit 0/0.5/1 anchors.
+- 159 RIUs after rubric revision 2: 80 critical (50.3%), 79 supporting.
+- 138 binary units; 21 with explicit 0/0.5/1 anchors.
+- AI validation after revision 2: all 25 records agreed ([log](review_logs/2026-10-18_AI_pilot_validation.md)); independent human review still pending. Reviewer packet: [review_logs/pilot_human_review_packet.md](review_logs/pilot_human_review_packet.md).
 - All records `method-audited`; no independent human review claimed.
 - Extended-context items SYN091 and SYN100 retained.
 - Prompt corpus v0.3 (2026-10-18): BN and BN-CS rewritten, English unchanged from `74604be07b2246e1d7f063088a35799721290e81`. Pilot RIU text is unchanged; prompt hashes were re-pinned. See [CORPUS_CHANGELOG.md](../prompts/CORPUS_CHANGELOG.md).

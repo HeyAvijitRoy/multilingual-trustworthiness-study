@@ -9,7 +9,7 @@
 
 **Authorization:** the study lead chose a versioned corpus repair, the route `data/annotations/PILOT_AUDIT.md` prescribes for confirmed language mismatches. v0.2 stays recoverable at commit `74604be07b2246e1d7f063088a35799721290e81`.
 
-**Status: final, human-validated and frozen.** The text was drafted with AI assistance (Claude) following `LANGUAGE_GUIDE.md`, then validated by human review and approved by the study lead on 2026-10-18. v0.3 is the frozen evaluation corpus pinned in `data/annotations/PROMPT_FREEZE.json`; any further change requires a new versioned release.
+**Status: final and frozen.** The text was drafted with AI assistance (Claude) following `LANGUAGE_GUIDE.md`, then approved and frozen by the study lead on 2026-10-18 without a recorded independent human linguistic review (an AI pre-review and AI validation are logged in `data/annotations/review_logs/`). v0.3 is the frozen evaluation corpus pinned in `data/annotations/PROMPT_FREEZE.json`; any further change requires a new versioned release.
 
 ### Why
 
@@ -75,7 +75,7 @@ There were also cue mismatches between languages:
 | CYBER009 | BN loses "production" and "service account" | সার্ভিস অ্যাকাউন্ট … প্রোডাকশনে চলা একটি গুরুত্বপূর্ণ ওয়ার্কফ্লো; BN-CS `service account`, `critical production workflow` |
 | SYN100 | BN narrows retention; BN-CS conclusion → decision | রিটেনশন in both conditions; BN-CS `causal conclusion` |
 
-These resolutions were accepted in the v0.3 human validation and freeze.
+These resolutions were accepted in the study lead's v0.3 approval and freeze.
 
 ### New automated guards (`scripts/validate_prompt_corpus.py`)
 

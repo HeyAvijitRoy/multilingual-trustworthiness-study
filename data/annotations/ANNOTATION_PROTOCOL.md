@@ -27,7 +27,7 @@ Keep the critical proportion as a diagnostic, broken down by domain, difficulty 
 
 Use **binary scoring for atomic facts, clear constraints and discrete actions**. Missing or wrong values, directions, eligibility conditions, or material contradictions receive 0; accurate equivalent statements receive 1. Never award half credit merely for mentioning a topic or reproducing a wrong number.
 
-Use **0/0.5/1 only for the 22 explicitly anchored gradable requirements in this pilot**. These capture a real but incomplete reasoning or procedural contribution (for example, recognizing a deadline without a feasible allocation). Half credit is not a remedy for bundled independent facts, uncertainty between raters, or partly correct prose. If an answer does not satisfy the written half-credit anchor, do not invent one during scoring.
+Use **0/0.5/1 only for the 21 explicitly anchored gradable requirements in this pilot**. These capture a real but incomplete reasoning or procedural contribution (for example, recognizing a deadline without a feasible allocation). Half credit is not a remedy for bundled independent facts, uncertainty between raters, or partly correct prose. If an answer does not satisfy the written half-credit anchor, do not invent one during scoring.
 
 Apply rules in this order:
 

@@ -105,7 +105,7 @@ Code-switching must not:
 - change factual context;
 - independently evolve away from the Bengali or English specification.
 
-The v0.2 construction regenerates BN-CS from the finalized Bengali prompt using a controlled domain lexicon so syntax remains aligned.
+The v0.2 construction regenerated BN-CS from the Bengali prompt using a controlled domain lexicon. Review found that substitution produced grammatical corruption and left key domain terms as Bengali calques, so corpus v0.3 replaces it: BN and BN-CS are hand-written in parallel, sentence by sentence, under [LANGUAGE_GUIDE.md](data/prompts/LANGUAGE_GUIDE.md). English prompts are unchanged from v0.2. See [CORPUS_CHANGELOG.md](data/prompts/CORPUS_CHANGELOG.md).
 
 ## Extended-Context Subset
 
@@ -218,7 +218,7 @@ scripts/revise_corpus_v02.py
 scripts/validate_prompt_corpus.py
 ```
 
-The final evaluation set is frozen **before full model evaluation**.
+The final evaluation set is frozen **before full model evaluation**. Corpus v0.3 passed automated QA and was validated by human review and approved by the study lead on 2026-10-18; it is the frozen evaluation set, pinned in `data/annotations/PROMPT_FREEZE.json`.
 
 Development items used to debug scoring logic, prompt construction, or experiment code should not be silently mixed into the inferential test set after evaluation begins.
 
@@ -244,4 +244,4 @@ Analysis code should operate on immutable raw outputs and write derived results 
 
 Discrete facts/actions remain binary; only requirements with written partial anchors allow 0/0.5/1. Report strict binary sensitivity alongside rubric coverage. Separate literal omission from incorrectness and partial fulfillment, and separate format and unsupported-content checks from RIU denominators. Average task-level scores within domains, then domains equally; preserve paired tasks and account for repeated runs. Do not choose scoring or inferential methods to maximize an observed language effect. Final estimands, contrasts, agreement thresholds and analysis choices must be recorded before inspecting model outcomes; outcome-based model diagnostics do not authorize changing the primary hypothesis.
 
-The current 25-task internal revision is not independent human validation. Review flags and subdomain sampling limitations are recorded in [PILOT_AUDIT.md](data/annotations/PILOT_AUDIT.md). No evaluation generations have been performed. Freeze the human-adjudicated gold before generating model responses, without changing the byte-pinned prompt corpus during annotation.
+The current 25-task internal revision is not independent human validation. Review flags and subdomain sampling limitations are recorded in [PILOT_AUDIT.md](data/annotations/PILOT_AUDIT.md). No evaluation generations have been performed. Freeze the human-adjudicated gold before generating model responses, without changing the byte-pinned prompt corpus during annotation. Corpus v0.3 (2026-10-18) is a versioned, study-lead-authorized language repair made before any model run; further prompt changes require another versioned release, not edits during annotation.

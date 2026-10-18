@@ -68,4 +68,12 @@ def main() -> None:
 
 
 if __name__ == "__main__":
+    import sys
+    if "--force-historical" not in sys.argv:
+        raise SystemExit(
+            "Historical v0.2 corpus script: running it would overwrite the hand-written v0.3 "
+            "Bengali conditions. See data/prompts/CORPUS_CHANGELOG.md. Pass --force-historical "
+            "only to reproduce v0.2 on a separate checkout."
+        )
+    sys.argv.remove("--force-historical")
     main()

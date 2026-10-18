@@ -1,6 +1,6 @@
 # RIU annotation schema 0.2
 
-This version replaces 0.1. Annotations are separate from the unchanged prompt corpus at commit `74604be07b2246e1d7f063088a35799721290e81`. `PROMPT_FREEZE.json` pins every file under `data/prompts/`; record hashes additionally pin each language string. Neither file hashes nor a schema PASS certify language equivalence.
+This version replaces 0.1. Annotations are separate from the prompt corpus, now at version 0.3 (Bengali and BN-CS rewritten; English byte-identical to v0.2 at commit `74604be07b2246e1d7f063088a35799721290e81`). `PROMPT_FREEZE.json` pins every file under `data/prompts/`; record hashes additionally pin each language string. Neither file hashes nor a schema PASS certify language equivalence.
 
 ## Record fields
 

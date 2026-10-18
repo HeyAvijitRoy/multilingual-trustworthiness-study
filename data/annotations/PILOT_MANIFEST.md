@@ -15,7 +15,7 @@ The 25-task pilot has been internally audited and revised. **Local structural ch
 - 133 binary units; 22 with explicit 0/0.5/1 anchors.
 - All records `method-audited`; no independent human review claimed.
 - Extended-context items SYN091 and SYN100 retained.
-- Frozen prompt files unchanged from `74604be07b2246e1d7f063088a35799721290e81`.
+- Prompt corpus v0.3 (2026-10-18): BN and BN-CS rewritten, English unchanged from `74604be07b2246e1d7f063088a35799721290e81`. Pilot RIU text is unchanged; prompt hashes were re-pinned. See [CORPUS_CHANGELOG.md](../prompts/CORPUS_CHANGELOG.md).
 - No evaluation model calls or model outputs.
 - A deterministic queue prepares all 500 tasks, without inventing annotations for the remaining 475.
 

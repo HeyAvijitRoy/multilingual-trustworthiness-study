@@ -69,7 +69,51 @@ DEPRECATED_CS_FRAGMENTS = {
     "monitorিং",
     "processিং",
     "পূর্বregistration",
+    "প্রো file",
 }
+
+# v0.3: calques that obscure or change the technical meaning (see data/prompts/LANGUAGE_GUIDE.md).
+DEPRECATED_BN_PHRASES |= {
+    "সেবা অ্যাকাউন্ট",
+    "নিরাপত্তা উন্মুক্ততা",
+    "সমর্থনযোগ্যতা",
+    "দুর্নীতি",
+    "স্থির হয়ে যায়",
+    "বিনিময়মূলক প্রভাব",
+    "স্টোরেজ বালতি",
+    "প্রান্তসুরক্ষা",
+    "রোগনির্ণয়",
+    "ছাঁকনি",
+    "দূরবর্তী ইনস্টলেশন ক্লিনিক",
+}
+
+# v0.3 language-condition guards.
+VOWEL_SIGN_AFTER_HYPHEN = re.compile(r"-[\u09BE-\u09CD\u09D7]")
+NON_BENGALI_INDIC = re.compile(r"[\u0900-\u0963\u0966-\u097F]")  # Devanagari except danda/double danda
+NUMBER_RE = re.compile(r"\d+(?:\.\d+)?")
+BENGALI_DIGITS = str.maketrans("০১২৩৪৫৬৭৮৯", "0123456789")
+CS_WORD_RE = re.compile(r"[A-Za-z][A-Za-z-]*|[\u0980-\u09FF]+")
+CS_SUFFIX_RE = re.compile(r"([A-Za-z][A-Za-z-]*)-(এর|র|এ|তে)(?![\u0980-\u09FF])")
+VOWEL_FINAL_RE = re.compile(r"(?:[aiouyw]|ee|ie|ue|oo)$", re.IGNORECASE)
+MAX_CS_ENGLISH_WORD_SHARE = 0.6
+
+
+def numbers(text: str) -> Counter[str]:
+    normalized = text.translate(BENGALI_DIGITS).replace(",", "")
+    return Counter(n for n in NUMBER_RE.findall(normalized) if n != "00")
+
+
+def bad_cs_suffixes(cs: str) -> list[str]:
+    """English stems take -এর/-এ after a consonant sound and -র/-তে after a vowel sound."""
+    bad = []
+    for match in CS_SUFFIX_RE.finditer(cs):
+        word, suffix = match.groups()
+        if word.isupper() or len(word) <= 2:  # acronyms are read by letter names; skip
+            continue
+        vowel_final = bool(VOWEL_FINAL_RE.search(word))
+        if (suffix in {"র", "তে"}) != vowel_final:
+            bad.append(match.group(0))
+    return bad
 
 
 def alpha_script_counts(text: str) -> tuple[int, int]:
@@ -181,11 +225,42 @@ def validate_language_conditions(rows: list[dict[str, str]]) -> None:
             raise AssertionError(f"{task_id}: malformed Bengali-to-Latin token boundary in BN-CS")
 
         for phrase in DEPRECATED_BN_PHRASES:
-            if phrase in bn:
+            # Word-initial match so that, e.g., অস্থির does not trigger স্থির.
+            pattern = re.compile(r"(?<![ঀ-৿])" + re.escape(phrase))
+            if pattern.search(bn) or pattern.search(cs):
                 raise AssertionError(f"{task_id}: deprecated technical Bengali phrase remains: {phrase}")
         for fragment in DEPRECATED_CS_FRAGMENTS:
             if fragment in cs:
                 raise AssertionError(f"{task_id}: malformed BN-CS fragment remains: {fragment}")
+
+        en = row["prompt_en"]
+        for name, text in (("BN", bn), ("BN-CS", cs)):
+            if NON_BENGALI_INDIC.search(text):
+                raise AssertionError(f"{task_id}: {name} contains non-Bengali Indic characters")
+            if text.count("(") > en.count("("):
+                raise AssertionError(f"{task_id}: {name} adds parenthetical material absent from EN")
+            missing = numbers(en) - numbers(text)
+            if missing:
+                raise AssertionError(f"{task_id}: {name} is missing EN numbers {sorted(missing)}")
+
+        # Natural Bengali writes English loans in Bengali script; only single-letter labels
+        # copied from EN (e.g., Group A, Model X) may stay in Latin script.
+        bn_latin = [w for w in re.findall(r"[A-Za-z]+", bn) if not (len(w) == 1 and w.isupper())]
+        if bn_latin:
+            raise AssertionError(f"{task_id}: Bengali prompt contains Latin-script words {bn_latin[:5]}")
+
+        if VOWEL_SIGN_AFTER_HYPHEN.search(cs):
+            raise AssertionError(f"{task_id}: BN-CS attaches a Bengali vowel sign to a hyphen")
+        bad_suffixes = bad_cs_suffixes(cs)
+        if bad_suffixes:
+            raise AssertionError(f"{task_id}: BN-CS suffix does not match stem pronunciation: {bad_suffixes}")
+        words = CS_WORD_RE.findall(cs)
+        english_share = sum(1 for w in words if w[0].isascii()) / len(words)
+        if english_share > MAX_CS_ENGLISH_WORD_SHARE:
+            raise AssertionError(
+                f"{task_id}: BN-CS English word share {english_share:.2f} exceeds {MAX_CS_ENGLISH_WORD_SHARE}; "
+                "Bengali must remain the matrix language"
+            )
 
 
 def validate_duplicates(rows: list[dict[str, str]]) -> None:
@@ -231,6 +306,8 @@ def main() -> None:
     print("  language conditions: EN / BN / BN-CS")
     print("  extended-context tasks: SYN091-SYN100")
     print("  BN-CS script-boundary artifacts: none")
+    print("  EN numbers preserved in BN and BN-CS; no added parentheticals; BN Latin limited to labels")
+    print("  BN-CS suffix morphology and English word share within bounds")
 
 
 if __name__ == "__main__":

@@ -80,6 +80,8 @@ The pilot is purposive, not representative: technical tasks are all operating-sy
 | CYBER009 | EN “critical production workflow”; BN `গুরুত্বপূর্ণ বাস্তব কাজ` | Potential weakening of production/operational semantics. Do not add language-specific scoring requirements; bilingual adjudication needed. |
 | SYN100 | EN “long-term retention”; BN `দীর্ঘমেয়াদি দক্ষতা ধরে রাখা` | Bengali makes skill retention more specific than the English phrase. Score the shared lack-of-retention-evidence concept and adjudicate equivalence before evaluation. |
 
+**Update, corpus v0.3 (2026-10-18).** The study lead chose the versioned-corpus-repair route for these flags. All four are addressed in the v0.3 Bengali and BN-CS text, as is every other language issue in the AI pre-review (`review_logs/2026-10-18_AI_bengali_prereview.md`). The resolutions are listed in [CORPUS_CHANGELOG.md](../prompts/CORPUS_CHANGELOG.md). English prompts and RIU text are unchanged. The v0.3 language equivalence was validated by human review and approved by the study lead on 2026-10-18, and the prompt corpus is frozen at v0.3. These corpus-level flags are therefore closed; RIU gold review below is a separate, still-open gate.
+
 These are review flags, not adjudicated exclusion decisions. Check all three variants for every task before freeze. If a material mismatch is confirmed, the study lead must choose a separately versioned corpus repair or a prospectively documented paired-task exclusion. Do not silently edit frozen prompts, tailor RIUs per language, or select exclusions after model results.
 
 ## Validation evidence and limits

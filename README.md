@@ -48,7 +48,7 @@ multilingual-trustworthiness-study/
 
 ## Corpus Status
 
-**v0.2 candidate prompt corpus complete and validated.**
+**Prompt corpus v0.3 is final: human-validated and frozen.** v0.3 hand-rewrites the Bengali and Bengali-English conditions for all 500 tasks; English is unchanged from v0.2 ([changelog](data/prompts/CORPUS_CHANGELOG.md), [language guide](data/prompts/LANGUAGE_GUIDE.md)).
 
 Current corpus QA verifies:
 
@@ -60,17 +60,19 @@ Current corpus QA verifies:
 - no exact duplicate prompts
 - predominantly Bengali natural-Bengali condition
 - distinct Bengali-matrix code-switched condition
-- normalized Bengali-English script boundaries
+- normalized Bengali-English script boundaries and pronunciation-correct suffixes
+- every English number preserved in both Bengali conditions
+- no Latin-script words in the natural-Bengali condition beyond single-letter labels
 - substantially expanded extended-context tasks for `SYN091`–`SYN100`
 
-No model evaluation has been run on the v0.2 candidate corpus yet.
+No model evaluation has been run on any corpus version yet. The v0.3 Bengali and code-switched realizations were drafted with AI assistance, then validated by human review and approved by the study lead on 2026-10-18. v0.3 is the frozen evaluation corpus.
 
-Reproducible corpus QA and revision scripts are under `scripts/`, including:
+Corpus QA scripts are under `scripts/`:
 
-- `revise_corpus_v02.py`
-- `ensure_bn_cs_switching.py`
-- `rebalance_synthesis_difficulty.py`
-- `validate_prompt_corpus.py`
+- `validate_prompt_corpus.py`: structure, difficulty, language-condition and equivalence guards
+- `freeze_prompt_corpus.py`: writes or verifies the v0.3 prompt freeze manifest
+
+`revise_corpus_v02.py`, `ensure_bn_cs_switching.py` and `rebalance_synthesis_difficulty.py` are kept only as the v0.2 construction history. They refuse to run without `--force-historical`, because they would overwrite the hand-written v0.3 Bengali conditions.
 
 ## Research Integrity
 
@@ -82,7 +84,7 @@ The prompt corpus will be frozen before full model evaluation. Annotation and sc
 
 The 25-task pilot has been methodologically revised under schema 0.2: 155 RIUs, 82 critical, with binary scoring for discrete requirements and explicit partial-credit anchors for 22 graded requirements. [Read the audit](data/annotations/PILOT_AUDIT.md) and [annotation protocol](data/annotations/ANNOTATION_PROTOCOL.md).
 
-The current prompt files are byte-pinned to commit `74604be`; no prompts were edited during this audit. Automated corpus validation is not independent linguistic validation. The [scaling plan](data/annotations/SCALING_PLAN.md) prepares all 500 tasks but gates production annotation and model runs on independent bilingual calibration and gold sign-off. All 25 pilot records remain `method-audited`, not frozen gold. The legacy cleanup workflow is now read-only.
+The prompt files are byte-pinned as corpus v0.3 in `data/annotations/PROMPT_FREEZE.json` (superseding v0.2 at commit `74604be`); English is unchanged, so the pilot RIU text still applies and only its prompt hashes were re-pinned. The corpus is frozen; any change requires a new versioned release. The [scaling plan](data/annotations/SCALING_PLAN.md) prepares all 500 tasks but gates production annotation and model runs on independent bilingual calibration and gold sign-off. All 25 pilot records remain `method-audited`, not frozen gold. The legacy cleanup workflow is now read-only.
 
 Run local checks with Python 3.10 or newer (CI uses 3.11):
 
@@ -91,4 +93,5 @@ python3 scripts/validate_prompt_corpus.py
 python3 scripts/validate_pilot_annotations.py
 python3 -m unittest discover -s scripts -p 'test_*.py'
 python3 scripts/prepare_scaling_queue.py --check
+python3 scripts/freeze_prompt_corpus.py --check
 ```

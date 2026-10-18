@@ -60,12 +60,17 @@ def read_jsonl(path):
     return rows
 
 
+CORPUS_VERSION = '0.3'
+SUPERSEDED_BASELINE = '74604be07b2246e1d7f063088a35799721290e81'
+
+
 def validate_freeze(root=ROOT, manifest=None):
-    manifest = manifest or json.loads((root/'data/annotations/PROMPT_FREEZE.json').read_text())
-    exact_keys(manifest, {'baseline_commit', 'algorithm', 'files'}, 'freeze')
-    require(manifest['baseline_commit'] == '74604be07b2246e1d7f063088a35799721290e81', 'freeze', 'unexpected baseline')
+    manifest = manifest or json.loads((root/'data/annotations/PROMPT_FREEZE.json').read_text(encoding='utf-8'))
+    exact_keys(manifest, {'corpus_version', 'supersedes', 'algorithm', 'files'}, 'freeze')
+    require(manifest['corpus_version'] == CORPUS_VERSION, 'freeze', 'unexpected corpus version')
+    require(manifest['supersedes'] == {'corpus_version': '0.2', 'baseline_commit': SUPERSEDED_BASELINE}, 'freeze', 'unexpected superseded baseline')
     require(manifest['algorithm'] == 'sha256', 'freeze', 'unexpected hash algorithm')
-    actual = {str(f.relative_to(root)): hashlib.sha256(f.read_bytes()).hexdigest()
+    actual = {f.relative_to(root).as_posix(): hashlib.sha256(f.read_bytes()).hexdigest()
               for f in (root/'data/prompts').rglob('*') if f.is_file()}
     require(actual == manifest['files'], 'freeze', 'prompt file set or bytes changed')
 

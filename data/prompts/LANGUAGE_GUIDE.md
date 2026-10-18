@@ -61,7 +61,7 @@ The target is how a Bengali-speaking IT or office professional actually writes i
 
 ## English
 
-English is the canonical specification. v0.3 changes English only to remove an ambiguity that made exact Bengali equivalence impossible. Every such change is listed in `CORPUS_CHANGELOG.md`.
+English is the canonical specification. Corpus v0.3 left all English prompts byte-identical to v0.2. Corpus v0.3.1 changes only SYN079, replacing an ambiguous deadline phrase with an explicit equivalent of the already validated Bengali and BN-CS wording. That versioned clarification is recorded in `CORPUS_CHANGELOG.md`.
 
 ## Review status
 

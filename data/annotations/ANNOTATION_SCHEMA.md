@@ -19,7 +19,7 @@ This version replaces 0.1. Annotations are separate from the prompt corpus, now 
 | `status` | `draft`, `method-audited`, `human-reviewed`, `frozen` |
 | `notes` | Provenance and limitations |
 
-`method-audited` means internal rubric review, not independent human validation. Human-reviewed/frozen records require both human and bilingual review references. The validator verifies the references are supplied; a reviewer must verify their authenticity and contents. Freeze additionally requires the sign-off process in `ANNOTATION_PROTOCOL.md`.
+`method-audited` means internal rubric review, not human validation. Human-reviewed/frozen records require references to the human validator's review log in both `independent_human_review` and `language_equivalence_review`; under the single-validator protocol both fields may cite the same log. The validator verifies the references are supplied; a reviewer must verify their authenticity and contents. Freeze additionally requires the sign-off process in `ANNOTATION_PROTOCOL.md`.
 
 ## RIU fields
 

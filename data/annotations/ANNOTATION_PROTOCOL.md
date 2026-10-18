@@ -2,7 +2,7 @@
 
 ## Decision and scope
 
-The operational rules below are finalized for the next human calibration round. The revised 25-task pilot passes internal methodological review and automated checks; it is **not frozen gold**. Independent bilingual adjudication and subdomain expansion remain prerequisites for production-scale annotation. Do not generate model responses before gold freeze. See `PILOT_AUDIT.md` and `SCALING_PLAN.md`.
+The operational rules below are finalized for the next human calibration round. The revised 25-task pilot passes internal methodological review, automated checks and human validation by the study's validator (R1, 2026-10-18); it is **not yet frozen gold**. Subdomain expansion and gold sign-off remain prerequisites for production-scale annotation. Do not generate model responses before gold freeze. See `PILOT_AUDIT.md` and `SCALING_PLAN.md`.
 
 ## Construct each annotation from the prompt
 
@@ -55,7 +55,7 @@ Average paired task-level measures within domains, then average domains equally 
 
 ## Human calibration and freeze gate
 
-Two independent annotators competent in EN and Bengali should review each pilot task's unit boundaries, coverage, criticality, and equivalence across EN/BN/BN-CS before discussion. Preserve both original decisions, reviewer identities, date, disagreements and adjudicated rationale in review logs. A second pass by the same agent does not meet this requirement.
+**One human validator** competent in EN and Bengali reviews each task's unit boundaries, coverage, criticality, scoring anchors and equivalence across EN/BN/BN-CS. (Protocol amended 2026-10-18 by the study lead: one validator replaces the earlier two-reviewer requirement.) Preserve the validator's identity or ID, date, decisions, requested changes and their resolution in review logs. An AI or agent pass, including a second pass by the same agent, does not meet this requirement. Because annotations are single-validated, no inter-annotator agreement is available for the gold itself; report this as a limitation.
 
 Before model runs, use small **human-authored** calibration responses or controlled answer fragments illustrating full credit, omission, partial reasoning, incorrect numbers, contradictions, conditional safeguards and format failures. Include all three languages. These are scoring fixtures, not model evaluation outputs. At least two independent raters should score them blind to each other's labels and, for later model responses, blind to model identity and experimental hypotheses where feasible; language itself cannot be hidden.
 

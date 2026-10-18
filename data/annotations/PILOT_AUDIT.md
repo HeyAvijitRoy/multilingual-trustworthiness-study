@@ -1,7 +1,7 @@
 # Methodological audit of the 25-task RIU pilot
 
 Audit date: 2026-10-08 UTC. Baseline: `74604be07b2246e1d7f063088a35799721290e81`.
-Reviewer provenance: one Codex agent, internal methodological review; no independent human reviewer and no evaluation model calls. Every pilot task was read against its frozen English prompt; the three-language source records were inspected, with detailed follow-up on the two extended contexts. This is not a substitute for independent bilingual semantic/naturalness review.
+Reviewer provenance: one Codex agent, internal methodological review; no independent human reviewer and no evaluation model calls. Every pilot task was read against its frozen English prompt; the three-language source records were inspected, with detailed follow-up on the two extended contexts. This is not a substitute for independent bilingual semantic/naturalness review; that human validation was completed later by R1 on 2026-10-18 (`review_logs/2026-10-18_R1_human_validation.md`).
 
 ## Finding and disposition
 
@@ -52,7 +52,7 @@ The findings in `review_logs/2026-10-18_AI_bengali_prereview.md` (sections 3–4
 - **Visibility:** TECH006, CYBER010, DEC010 explicit → mixed; DEC009 implicit → mixed.
 - **Clarifications:** silence rules (PROC001, DEC006), conditional wording (CYBER001), "major change" boundary (TECH001), Bengali sentence segmentation (SYN091), retention reading (SYN100).
 
-Result: **159 RIUs, 80 critical (50.3%), 79 supporting; 138 binary and 21 ordinal.** An AI validation agreed with all 25 revised records and listed five judgment calls for human reviewers (`review_logs/2026-10-18_AI_pilot_validation.md`). Human review fields remain `pending` and statuses remain `method-audited`. The table below records revision 1.
+Result: **159 RIUs, 80 critical (50.3%), 79 supporting; 138 binary and 21 ordinal.** An AI validation agreed with all 25 revised records and listed five judgment calls for human reviewers (`review_logs/2026-10-18_AI_pilot_validation.md`). R1 then validated all 25 records on 2026-10-18 (`review_logs/2026-10-18_R1_human_validation.md`); statuses are `human-reviewed`. The table below records revision 1.
 
 ## Distribution after revision
 
@@ -93,7 +93,7 @@ The pilot is purposive, not representative: technical tasks are all operating-sy
 | CYBER009 | EN “critical production workflow”; BN `গুরুত্বপূর্ণ বাস্তব কাজ` | Potential weakening of production/operational semantics. Do not add language-specific scoring requirements; bilingual adjudication needed. |
 | SYN100 | EN “long-term retention”; BN `দীর্ঘমেয়াদি দক্ষতা ধরে রাখা` | Bengali makes skill retention more specific than the English phrase. Score the shared lack-of-retention-evidence concept and adjudicate equivalence before evaluation. |
 
-**Update, corpus v0.3 (2026-10-18).** The study lead chose the versioned-corpus-repair route for these flags. All four are addressed in the v0.3 Bengali and BN-CS text, as is every other language issue in the AI pre-review (`review_logs/2026-10-18_AI_bengali_prereview.md`). The resolutions are listed in [CORPUS_CHANGELOG.md](../prompts/CORPUS_CHANGELOG.md). English prompts and RIU text are unchanged. The v0.3 text was approved and frozen by the study lead on 2026-10-18 without a recorded independent human linguistic review (an AI pre-review and AI validation are logged in `data/annotations/review_logs/`), and the prompt corpus is frozen at v0.3. These corpus-level flags are therefore closed; RIU gold review below is a separate, still-open gate.
+**Update, corpus v0.3 (2026-10-18).** The study lead chose the versioned-corpus-repair route for these flags. All four are addressed in the v0.3 Bengali and BN-CS text, as is every other language issue in the AI pre-review (`review_logs/2026-10-18_AI_bengali_prereview.md`). The resolutions are listed in [CORPUS_CHANGELOG.md](../prompts/CORPUS_CHANGELOG.md). English prompts and RIU text are unchanged. The v0.3 text was validated by human validator R1 and approved and frozen by the study lead on 2026-10-18 (`data/annotations/review_logs/2026-10-18_R1_human_validation.md`), and the prompt corpus is frozen at v0.3. These corpus-level flags are therefore closed.
 
 These are review flags, not adjudicated exclusion decisions. Check all three variants for every task before freeze. If a material mismatch is confirmed, the study lead must choose a separately versioned corpus repair or a prospectively documented paired-task exclusion. Do not silently edit frozen prompts, tailor RIUs per language, or select exclusions after model results.
 

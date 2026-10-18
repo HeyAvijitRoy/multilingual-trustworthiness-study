@@ -59,7 +59,7 @@ Automated checks also passed: `validate_pilot_annotations.py` (structure, hashes
 
 ## Judgment calls for the human reviewers
 
-These are defensible either way and should be decided by humans, not by this validator:
+These are defensible either way and should be decided by humans, not by this validator. (Addendum: human validator R1 accepted all five as written on 2026-10-18; see `2026-10-18_R1_human_validation.md`.)
 
 1. **SYN100 RIU-05 and RIU-18 (critical).** The response-rate change and future satisfaction may be supporting rather than critical; they are kept critical because the prompt says "without dropping caveats" and asks what "remains unknown".
 2. **SYN100 RIU-14.** The full anchor now requires both stated reasons. An answer that limits causation without giving any reason scores 0; confirm this strictness is intended.

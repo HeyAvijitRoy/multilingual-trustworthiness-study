@@ -1,12 +1,12 @@
 # Preparing annotation of all 500 tasks
 
-The repository is ready to support controlled scaling, but bulk annotation is gated on independent calibration. The current task stops at the revised pilot and preparation; the remaining 475 tasks are not annotated.
+The repository is ready to support controlled scaling, but bulk annotation is gated on expanded calibration. The current task stops at the revised pilot and preparation; the remaining 475 tasks are not annotated.
 
 ## Queue and selection
 
 `SCALING_QUEUE.json` covers every frozen task exactly once with domain, subdomain, difficulty, annotation status and next step. It contains no fabricated gold or model responses.
 
-- 25 existing pilot tasks: independent bilingual review.
+- 25 existing pilot tasks: human-validated by R1 (2026-10-18).
 - 132 expansion-calibration tasks: the lowest task ID in each domain/subdomain/difficulty stratum absent from the original pilot.
 - 343 remaining tasks: annotate after the calibration gate.
 
@@ -16,12 +16,12 @@ Regenerate only the queue with `python3 scripts/prepare_scaling_queue.py`; verif
 
 ## Execution gates
 
-1. Independently review/adjudicate the 25 revised tasks using protocol 0.2. Resolve the frozen-language flags. Preserve reviewer decisions and establish acceptable agreement criteria before collecting calibration ratings.
-2. Annotate and independently review the expansion strata in small batches. Use human-authored scoring fixtures to test binary and ordinal anchors in all three languages. Log changes and recheck the pilot when a rule changes.
-3. Freeze the accepted production annotation protocol. Annotate remaining tasks in reviewable batches of up to 25, with independent review of critical units and all ambiguities; double-review at least a prespecified stratified 20% of ordinary units per batch. If any sampled unit reveals a systematic rule error, expand review to every affected unit. These are prospective QA choices, not established empirical thresholds.
+1. Human-validate the 25 revised tasks using protocol 0.2 and resolve the frozen-language flags. **Done:** R1, 2026-10-18; language flags resolved in corpus v0.3. Establish acceptable rater-agreement criteria before collecting calibration ratings.
+2. Annotate the expansion strata in small batches and have the human validator review each batch. Use human-authored scoring fixtures to test binary and ordinal anchors in all three languages. Log changes and recheck the pilot when a rule changes.
+3. Freeze the accepted production annotation protocol. Annotate remaining tasks in reviewable batches of up to 25, with validator review of critical units and all ambiguities, and of at least a prespecified stratified 20% of ordinary units per batch. If any sampled unit reveals a systematic rule error, expand review to every affected unit. These are prospective QA choices, not established empirical thresholds.
 4. Maintain one final annotation record per task in `data/annotations/full/`, including copies of the accepted pilot/expansion records. Use empty `source_riu_ids` for new tasks. Never put queue JSONL or score logs in this annotation directory.
 5. Run batch validation after each batch and full validation at completion. Full mode must find exactly the 500 corpus task IDs with matching metadata/hashes. Review missing/extra coverage, unit-count distributions, critical proportions, scoring modes and unresolved disputes by domain, subdomain, difficulty and context length.
-6. Obtain documented independent bilingual and study-lead sign-off, assign a gold version and hash the accepted annotation files. Only then prepare evaluation runs. No generation or judge calls are part of these steps.
+6. Obtain documented human-validator and study-lead sign-off, assign a gold version and hash the accepted annotation files. Only then prepare evaluation runs. No generation or judge calls are part of these steps.
 
 Review logs should identify task/unit/version, each reviewer's initial proposed boundary/criticality/anchor, language-equivalence decision, disagreement, final resolution, adjudicator and date. Record human review references in the annotation's `review` fields; changing a status string alone is not approval.
 

@@ -21,8 +21,8 @@ def queue():
         if expansion: selected.add(key)
         rows.append({k:row[k] for k in ['task_id', 'domain', 'subdomain', 'difficulty']} | {
             'annotation_status': pilot[row['task_id']]['status'] if row['task_id'] in pilot else 'not-annotated',
-            'next_step': 'independent-bilingual-review' if row['task_id'] in pilot else ('expansion-calibration' if expansion else 'after-calibration-gate')})
-    return {'schema_version':'0.2','gate':'pending-independent-bilingual-and-expanded-calibration',
+            'next_step': ('gold-sign-off' if pilot[row['task_id']]['status'] == 'human-reviewed' else 'human-validation') if row['task_id'] in pilot else ('expansion-calibration' if expansion else 'after-calibration-gate')})
+    return {'schema_version':'0.2','gate':'pending-expanded-calibration-and-gold-sign-off',
             'selection_rule':'First task_id in each domain/subdomain/difficulty stratum absent from the original pilot; calibrate before production batches.',
             'tasks':rows}
 
@@ -30,8 +30,8 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--check',action='store_true');args=parser.parse_args()
     result=queue(); encoded=json.dumps(result,ensure_ascii=False,indent=2)+'\n'
     if args.check:
-        if not TARGET.exists() or TARGET.read_text()!=encoded:
+        if not TARGET.exists() or TARGET.read_text(encoding='utf-8')!=encoded:
             raise SystemExit('Scaling queue is missing or stale; run scripts/prepare_scaling_queue.py')
-    else: TARGET.write_text(encoded)
+    else: TARGET.write_text(encoded, encoding='utf-8', newline='\n')
     print('Scaling queue verified:',len(result['tasks']),'tasks;',dict(Counter(r['next_step'] for r in result['tasks'])))
 if __name__=='__main__': main()

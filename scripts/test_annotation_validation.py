@@ -28,7 +28,7 @@ class AnnotationValidationTests(unittest.TestCase):
             'wrong domain': lambda r: r.update(domain='information_synthesis'),
             'wrong difficulty': lambda r: r.update(difficulty='hard'),
             'stale hash': lambda r: r['prompt_sha256'].update(bn='0'*64),
-            'false review': lambda r: r.update(status='frozen'),
+            'false review': lambda r: (r.update(status='frozen'), r['review'].update(independent_human_review='pending')),
             'duplicate ID': lambda r: r['rius'][1].update(id='RIU-01'),
             'missing anchor': lambda r: r['rius'][0]['scoring_rule'].pop('0'),
             'binary partial': lambda r: r['rius'][0]['scoring_rule'].update({'0.5':'vague'}),

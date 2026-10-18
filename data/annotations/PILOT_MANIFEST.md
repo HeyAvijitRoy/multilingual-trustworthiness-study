@@ -16,7 +16,7 @@ The 25-task pilot has been internally audited and revised. **Local structural ch
 - AI validation after revision 2: all 25 records agreed ([log](review_logs/2026-10-18_AI_pilot_validation.md)). Human validation: R1 confirmed all 25 ([log](review_logs/2026-10-18_R1_human_validation.md)). Reviewer packet: [review_logs/pilot_human_review_packet.md](review_logs/pilot_human_review_packet.md).
 - All records `human-reviewed` under the single-validator protocol; not yet frozen gold.
 - Extended-context items SYN091 and SYN100 retained.
-- Prompt corpus v0.3 (2026-10-18): BN and BN-CS rewritten, English unchanged from `74604be07b2246e1d7f063088a35799721290e81`. Pilot RIU text is unchanged; prompt hashes were re-pinned. See [CORPUS_CHANGELOG.md](../prompts/CORPUS_CHANGELOG.md).
+- Prompt corpus v0.3 (2026-10-18): BN and BN-CS rewritten, English unchanged from `74604be07b2246e1d7f063088a35799721290e81`. Pilot RIU text is unchanged; prompt hashes were re-pinned. Corpus v0.3.1 changes only SYN079 (not a pilot task). See [CORPUS_CHANGELOG.md](../prompts/CORPUS_CHANGELOG.md).
 - No evaluation model calls or model outputs.
 - A deterministic queue prepares all 500 tasks, without inventing annotations for the remaining 475.
 

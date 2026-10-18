@@ -65,4 +65,4 @@ English is the canonical specification. v0.3 changes English only to remove an a
 
 ## Review status
 
-v0.3 realizations were drafted with AI assistance (Claude) under this guide, then validated by human validator R1 and approved and frozen by the study lead on 2026-10-18 (`data/annotations/review_logs/2026-10-18_R1_human_validation.md`). Corpus v0.3 is frozen; this guide governs any future versioned release.
+v0.3 realizations were drafted with AI assistance (Claude) under this guide, then validated by human validator R1 and approved and frozen by the study lead on 2026-10-18 (`data/annotations/review_logs/2026-10-18_R1_human_validation.md`). The corpus is frozen at v0.3.1; this guide governs any future versioned release.

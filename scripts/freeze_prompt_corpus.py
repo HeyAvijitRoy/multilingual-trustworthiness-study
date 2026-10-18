@@ -15,8 +15,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "data" / "annotations" / "PROMPT_FREEZE.json"
-CORPUS_VERSION = "0.3"
-SUPERSEDES = {"corpus_version": "0.2", "baseline_commit": "74604be07b2246e1d7f063088a35799721290e81"}
+CORPUS_VERSION = "0.3.1"
+SUPERSEDES = {"corpus_version": "0.3", "baseline_commit": "dfbd25fe150baeec59065ab644737955c38eb94f"}
 
 
 def build(root: Path = ROOT) -> dict:

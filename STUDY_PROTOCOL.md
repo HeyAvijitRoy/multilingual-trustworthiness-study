@@ -218,7 +218,7 @@ scripts/revise_corpus_v02.py
 scripts/validate_prompt_corpus.py
 ```
 
-The final evaluation set is frozen **before full model evaluation**. Corpus v0.3 passed automated QA and was validated by human validator R1 and approved and frozen by the study lead on 2026-10-18 (`data/annotations/review_logs/2026-10-18_R1_human_validation.md`); it is the frozen evaluation set, pinned in `data/annotations/PROMPT_FREEZE.json`.
+The final evaluation set is frozen **before full model evaluation**. Corpus v0.3 passed automated QA and was validated by human validator R1 and approved and frozen by the study lead on 2026-10-18 (`data/annotations/review_logs/2026-10-18_R1_human_validation.md`). Corpus v0.3.1 (one English clarification, SYN079, R1-confirmed) is the frozen evaluation set, pinned in `data/annotations/PROMPT_FREEZE.json`.
 
 Development items used to debug scoring logic, prompt construction, or experiment code should not be silently mixed into the inferential test set after evaluation begins.
 

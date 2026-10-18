@@ -25,3 +25,7 @@ The study lead reported this outcome. R1 checked the prompts and records directl
 
 - **Pilot records:** the `review.independent_human_review` and `review.language_equivalence_review` fields reference this log, and `status` is `human-reviewed`. The records are not `frozen`; gold freeze still requires the sign-off step in `ANNOTATION_PROTOCOL.md`.
 - **Corpus:** v0.3 documentation states that it was validated by R1 and frozen by the study lead.
+
+## Addendum: corpus v0.3.1 (2026-10-18)
+
+R1 confirmed the one-line English clarification in SYN079 ("The deadline is Friday of the following week."), which aligns the English with the existing Bengali and BN-CS wording. Reported by the study lead the same day. Corpus v0.3.1 is validated and frozen.

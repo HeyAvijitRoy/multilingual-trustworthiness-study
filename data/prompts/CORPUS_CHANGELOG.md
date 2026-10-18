@@ -103,10 +103,10 @@ The v0.2 corpus fails these checks; v0.3 passes them.
 
 ### Effect on annotations
 
-- The 25 pilot RIU records keep their RIU text unchanged, because they are written against EN and EN is unchanged.
-- Their `prompt_sha256` values were re-pinned to v0.3.
-- Their status remains `method-audited`; language-equivalence review is still pending.
-- `PROMPT_FREEZE.json` now records `corpus_version: 0.3` and the superseded v0.2 baseline.
+- The 25 pilot RIU records keep their RIU text unchanged. Corpus v0.3 changed only BN/BN-CS for pilot tasks; corpus v0.3.1 changes only SYN079, which is outside the pilot.
+- Their `prompt_sha256` values were re-pinned to the validated v0.3 prompt realizations; no pilot prompt hash changes in v0.3.1.
+- All 25 pilot records are `human-reviewed` under the current single-validator protocol. R1 completed language-equivalence and rubric validation on 2026-10-18; gold sign-off remains pending.
+- `PROMPT_FREEZE.json` records `corpus_version: 0.3.1`, superseding v0.3 at merge commit `dfbd25f`.
 - `.gitattributes` forces LF line endings under `data/` and `scripts/`, so Windows checkouts no longer alter the hashed bytes.
 
 ## v0.2

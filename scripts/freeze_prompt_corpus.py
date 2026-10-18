@@ -20,11 +20,10 @@ SUPERSEDES = {"corpus_version": "0.2", "baseline_commit": "74604be07b2246e1d7f06
 
 
 def build(root: Path = ROOT) -> dict:
-    files = {
-        f.relative_to(root).as_posix(): hashlib.sha256(f.read_bytes()).hexdigest()
-        for f in sorted((root / "data" / "prompts").rglob("*"))
-        if f.is_file()
-    }
+    # Sort on POSIX path strings: Path ordering is case-insensitive on Windows but not on Linux.
+    paths = sorted((f for f in (root / "data" / "prompts").rglob("*") if f.is_file()),
+                   key=lambda f: f.relative_to(root).as_posix())
+    files = {f.relative_to(root).as_posix(): hashlib.sha256(f.read_bytes()).hexdigest() for f in paths}
     return {"corpus_version": CORPUS_VERSION, "supersedes": SUPERSEDES, "algorithm": "sha256", "files": files}
 
 
@@ -35,8 +34,7 @@ def main() -> None:
     manifest = build()
     text = json.dumps(manifest, indent=2, ensure_ascii=False) + "\n"
     if args.check:
-        current = MANIFEST.read_text(encoding="utf-8")
-        if current != text:
+        if json.loads(MANIFEST.read_text(encoding="utf-8")) != manifest:
             raise SystemExit("PROMPT_FREEZE.json is stale: prompt bytes or file set changed")
         print(f"PROMPT_FREEZE.json matches corpus v{CORPUS_VERSION} ({len(manifest['files'])} files)")
         return

@@ -1,7 +1,7 @@
 # Methodological audit of the 25-task RIU pilot
 
 Audit date: 2026-10-08 UTC. Baseline: `74604be07b2246e1d7f063088a35799721290e81`.
-Reviewer provenance: one Codex agent, internal methodological review; no independent human reviewer and no evaluation model calls. Every pilot task was read against its frozen English prompt; the three-language source records were inspected, with detailed follow-up on the two extended contexts. This is not a substitute for independent bilingual semantic/naturalness review.
+Reviewer provenance: one Codex agent, internal methodological review; no independent human reviewer and no evaluation model calls. Every pilot task was read against its frozen English prompt; the three-language source records were inspected, with detailed follow-up on the two extended contexts. This is not a substitute for independent bilingual semantic/naturalness review; that human validation was completed later by R1 on 2026-10-18 (`review_logs/2026-10-18_R1_human_validation.md`).
 
 ## Finding and disposition
 
@@ -41,6 +41,19 @@ Counts are RIUs / critical RIUs. Migration is encoded in each new unit's `source
 | TECH009 | 5 / 4 | 5 / 3 | Separated locating capacity, explaining unexpanded size, and optional layout obstacles. Removed alignment as a standalone missing-capacity explanation; retained recovery before modification. |
 | TECH010 | 5 / 3 | 4 / 3 | Merged overlapping comparison routes from old units 1/3 into the same-operation account control. A third clean profile is not mandatory. Data protection remains conditional. |
 
+## Rubric revision 2 (2026-10-18)
+
+The findings in `review_logs/2026-10-18_AI_bengali_prereview.md` (sections 3–4) were applied to 20 records before any model run; no responses exist, so nothing needs rescoring.
+
+- **Anchor gaps closed:** TECH006 RIU-06 (interpretation without an explicit one-factor principle now earns credit); PROC004 RIU-01 (timestamp-only selection scores 0); PROC010 archive ladder.
+- **Duplicate credit removed or bounded:** TECH006 app/OS logs; TECH009 inspection vs. explanation (RIU-02 now binary); CYBER006 exceptions vs. decision log; CYBER009 validation vs. rollout and stop signal vs. rollback; DEC006 exception reasons; DEC009 rule vs. evidence; SYN100 RIU-09/19 and RIU-13/14 boundaries.
+- **Coverage:** SYN100 RIU-14 now requires both stated reasons (short observation period and implementation differences); SYN008 gains a format check for outcome/explanation separation; units added for CYBER001 credential reuse, CYBER009 infrequent operations, PROC006 shared-sheet coordination, PROC010 effective date and staff notification; PROC001 RIU-05 removed as padding.
+- **Criticality:** TECH010 RIU-04 → critical (consistent data-preservation safeguards); CYBER010 RIU-06, SYN091 RIU-10/11 → supporting.
+- **Visibility:** TECH006, CYBER010, DEC010 explicit → mixed; DEC009 implicit → mixed.
+- **Clarifications:** silence rules (PROC001, DEC006), conditional wording (CYBER001), "major change" boundary (TECH001), Bengali sentence segmentation (SYN091), retention reading (SYN100).
+
+Result: **159 RIUs, 80 critical (50.3%), 79 supporting; 138 binary and 21 ordinal.** An AI validation agreed with all 25 revised records and listed five judgment calls for human reviewers (`review_logs/2026-10-18_AI_pilot_validation.md`). R1 then validated all 25 records on 2026-10-18 (`review_logs/2026-10-18_R1_human_validation.md`); statuses are `human-reviewed`. The table below records revision 1.
+
 ## Distribution after revision
 
 | Domain | Old critical / total | New critical / total | New ordinal units |
@@ -79,6 +92,8 @@ The pilot is purposive, not representative: technical tasks are all operating-sy
 | DEC006 | BN-CS `impact-িত` | Mechanical replacement inside a Bengali word; naturalness concern not caught by script-boundary checks. Preserve bytes; pending bilingual review. |
 | CYBER009 | EN “critical production workflow”; BN `গুরুত্বপূর্ণ বাস্তব কাজ` | Potential weakening of production/operational semantics. Do not add language-specific scoring requirements; bilingual adjudication needed. |
 | SYN100 | EN “long-term retention”; BN `দীর্ঘমেয়াদি দক্ষতা ধরে রাখা` | Bengali makes skill retention more specific than the English phrase. Score the shared lack-of-retention-evidence concept and adjudicate equivalence before evaluation. |
+
+**Update, corpus v0.3 (2026-10-18).** The study lead chose the versioned-corpus-repair route for these flags. All four are addressed in the v0.3 Bengali and BN-CS text, as is every other language issue in the AI pre-review (`review_logs/2026-10-18_AI_bengali_prereview.md`). The resolutions are listed in [CORPUS_CHANGELOG.md](../prompts/CORPUS_CHANGELOG.md). English prompts and RIU text are unchanged. The v0.3 text was validated by human validator R1 and approved and frozen by the study lead on 2026-10-18 (`data/annotations/review_logs/2026-10-18_R1_human_validation.md`), and the prompt corpus is frozen at v0.3. These corpus-level flags are therefore closed.
 
 These are review flags, not adjudicated exclusion decisions. Check all three variants for every task before freeze. If a material mismatch is confirmed, the study lead must choose a separately versioned corpus repair or a prospectively documented paired-task exclusion. Do not silently edit frozen prompts, tailor RIUs per language, or select exclusions after model results.
 

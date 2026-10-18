@@ -16,6 +16,8 @@ jobs:
           python-version: '3.11'
       - name: Validate frozen corpus
         run: python scripts/validate_prompt_corpus.py
+      - name: Verify prompt freeze manifest
+        run: python scripts/freeze_prompt_corpus.py --check
       - name: Validate pilot and hashes
         run: python scripts/validate_pilot_annotations.py
       - name: Run annotation validator regression tests

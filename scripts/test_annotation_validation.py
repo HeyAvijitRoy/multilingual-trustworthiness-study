@@ -28,7 +28,7 @@ class AnnotationValidationTests(unittest.TestCase):
             'wrong domain': lambda r: r.update(domain='information_synthesis'),
             'wrong difficulty': lambda r: r.update(difficulty='hard'),
             'stale hash': lambda r: r['prompt_sha256'].update(bn='0'*64),
-            'false review': lambda r: r.update(status='frozen'),
+            'false review': lambda r: (r.update(status='frozen'), r['review'].update(independent_human_review='pending')),
             'duplicate ID': lambda r: r['rius'][1].update(id='RIU-01'),
             'missing anchor': lambda r: r['rius'][0]['scoring_rule'].pop('0'),
             'binary partial': lambda r: r['rius'][0]['scoring_rule'].update({'0.5':'vague'}),
@@ -72,7 +72,7 @@ class AnnotationValidationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory); folder = root/'data/prompts'; folder.mkdir(parents=True)
             path = folder/'example.csv'; path.write_bytes(b'frozen\n')
-            manifest = {'baseline_commit':'74604be07b2246e1d7f063088a35799721290e81', 'algorithm':'sha256',
+            manifest = {'corpus_version':'0.3', 'supersedes':{'corpus_version':'0.2', 'baseline_commit':'74604be07b2246e1d7f063088a35799721290e81'}, 'algorithm':'sha256',
                         'files':{'data/prompts/example.csv':hashlib.sha256(path.read_bytes()).hexdigest()}}
             validate_freeze(root, manifest)
             path.write_bytes(b'changed\n')

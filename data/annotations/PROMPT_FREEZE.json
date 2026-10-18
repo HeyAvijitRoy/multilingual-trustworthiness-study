@@ -1,18 +1,24 @@
 {
-  "baseline_commit": "74604be07b2246e1d7f063088a35799721290e81",
+  "corpus_version": "0.3",
+  "supersedes": {
+    "corpus_version": "0.2",
+    "baseline_commit": "74604be07b2246e1d7f063088a35799721290e81"
+  },
   "algorithm": "sha256",
   "files": {
-    "data/prompts/SCHEMA.md": "fa59c02898e6e3f8779393f8b8f289a273825ffaf894f8ca2d5e621ec79cdaf4",
-    "data/prompts/cybersecurity_digital_safety_001_050.csv": "d02bd163b346e1779b4aeee6ba8f9c1aecf64e1d0047862ff5ed11bf0d64ffe5",
-    "data/prompts/cybersecurity_digital_safety_051_100.csv": "573c760195c62209d63c79f1c66baade61149fe3c76bac1a8def03b712d7015b",
-    "data/prompts/decision_support_001_050.csv": "d2048f2ab5196d5b97faee072679f62613178d783ada618dbd778fd59fe3b287",
-    "data/prompts/decision_support_051_100.csv": "0eb75c27129afa99fb502e5b80cf50c820049e509ee7b7bb8b3af55eb5486e2c",
-    "data/prompts/information_synthesis_001_050.csv": "3fda1e7df9e78f770e48f962eb46538fc28315260a1e0ef2820fcf7754cfe2b0",
-    "data/prompts/information_synthesis_051_100.csv": "5abfce28b48e57706c759a8282787980dc5b1e1424f69ae61bb8aa4313d2417e",
+    "data/prompts/CORPUS_CHANGELOG.md": "60a613fc0f37cf0613ce2d6738a672c6ebd2e9284719a7dbaa7de0256e7eeee8",
+    "data/prompts/LANGUAGE_GUIDE.md": "bfba6c1a2c3808c9217da339600316cbfda352515801c41639897b3cee898500",
+    "data/prompts/SCHEMA.md": "4a67bc2801ddc88d4735983f3e4f4a42efdf39a0d1a7b632ad8d715af54083cc",
+    "data/prompts/cybersecurity_digital_safety_001_050.csv": "8fba9ed7c6705e9d17e20de96e229a36c37f75a220e596e601724ffe64028210",
+    "data/prompts/cybersecurity_digital_safety_051_100.csv": "26c9602350f755f591c527e42b29cff53041ea4af42771b4bc2358500c142f47",
+    "data/prompts/decision_support_001_050.csv": "95572ff4453f84b0a42f4722eb83c291aac7e1b8b14f4f2da1ee18462a9d8b82",
+    "data/prompts/decision_support_051_100.csv": "2ab57ba711d8f021ff794e3ece9b3373edf57c8b4f80b83da1b9e64c228aad47",
+    "data/prompts/information_synthesis_001_050.csv": "32df7315c814906790f15c56809685930512edae1a0638e96f148e1ccb12fed9",
+    "data/prompts/information_synthesis_051_100.csv": "6961734ca7ab6930e0ad1103b2d969af9f3e5548373faff39b040d4ecef15267",
     "data/prompts/manifest.csv": "d28999c4f69a70efdce87a5bf98297b9f1a7b22f7bb21c84775c0d9d89e9f2d6",
-    "data/prompts/procedural_instructional_001_050.csv": "4eac8a46f37b28e39bb37dd84418d362894359de76eff051f0ddae9d3d93c294",
-    "data/prompts/procedural_instructional_051_100.csv": "9b5bb02e35ce1d7202589efc981ad1063db61e350dd282cf7f7be0e3fb4964bf",
-    "data/prompts/technical_troubleshooting_001_050.csv": "4f7461a66bfc33f30a4f3f28102aee14f89ef8c057a62fe5ccd4a9b8af47a3f4",
-    "data/prompts/technical_troubleshooting_051_100.csv": "86d0cec100770af889e14c7ded60bf00f1391f210050c6bbb06474503f978cb3"
+    "data/prompts/procedural_instructional_001_050.csv": "3e36e93b1fda2979d99b4383f2664b72a1ee484e583ba55de7bc042d7bea9dee",
+    "data/prompts/procedural_instructional_051_100.csv": "5c9d2457607ade1d652f00c5a9242132d5887b33ef0759dead4bdbd94e25c175",
+    "data/prompts/technical_troubleshooting_001_050.csv": "f18f257214c0b958998b1900a7b0e07212753b06aba2d48a04d90a85c2cf9399",
+    "data/prompts/technical_troubleshooting_051_100.csv": "24a3da5e1f78830c43c64c87e5dd17c139d596950ca7fae8c5186cc57bf2ae54"
   }
 }

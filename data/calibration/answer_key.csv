@@ -1,0 +1,230 @@
+fixture_id,item_id,intended_score,intended_reason,author_id,note
+F01,RIU-01,1,met,AR,
+F01,RIU-02,1,met,AR,
+F01,RIU-03,1,met,AR,
+F01,RIU-04,1,met,AR,
+F01,RIU-05,0.5,partial,AR,"TARGET. ""Compare the results and rule out causes"" with no result-to-hypothesis example = 0.5 anchor exactly."
+F01,CHECK-01,1,,AR,
+F02,RIU-01,1,met,AR,
+F02,RIU-02,1,met,AR,
+F02,RIU-03,1,met,AR,
+F02,RIU-04,1,met,AR,Renaming the %AppData% settings folder is the anchor example.
+F02,RIU-05,1,met,AR,"TARGET, silence rule. No backup is recited, but renaming the settings folder is reversible isolation without deletion, which the anchor accepts. Scoring 0 here penalizes vacuous silence."
+F02,RIU-06,1,met,AR,Step 2 and step 4 each attribute or exclude a named cause from the comparison result.
+F02,CHECK-01,1,,AR,
+F03,RIU-01,1,met,AR,
+F03,RIU-02,0,omitted,AR,"TARGET. ""Sign out everywhere"" is RIU-04, not a check of activity/sessions; nothing reviews activity."
+F03,RIU-03,1,met,AR,
+F03,RIU-04,1,met,AR,
+F03,RIU-05,1,met,AR,
+F03,RIU-06,0,omitted,AR,TARGET. Recovery details never mentioned.
+F03,RIU-07,1,met,AR,
+F03,RIU-08,1,met,AR,
+F03,CHECK-01,1,,AR,
+F04,RIU-01,1,met,AR,
+F04,RIU-02,1,met,AR,
+F04,RIU-03,1,met,AR,
+F04,RIU-04,0,incorrect,AR,"TARGET. Correlation is stated, then contradicted: a single new-country login = confirmed compromise. Rule 1: material contradiction scores 0 even though the correct sentence is present."
+F04,RIU-05,1,met,AR,Three tiers with distinct responses; the contradictory rule does not remove them.
+F04,RIU-06,1,met,AR,
+F04,CHECK-01,1,,AR,
+F05,RIU-01,1,met,AR,
+F05,RIU-02,1,met,AR,Tags are the anchor's accepted equivalent to folders.
+F05,RIU-03,1,met,AR,"""Change only the part before the dot."""
+F05,RIU-04,1,met,AR,Suffix instead of replacing.
+F05,RIU-05,1,met,AR,
+F05,CHECK-01,1,,AR,
+F06,RIU-01,0.5,partial,AR,"TARGET. Uses history, approval and content, but assumes they agree; no way to resolve conflicting evidence. Not timestamp-only, so not 0."
+F06,RIU-02,1,met,AR,
+F06,RIU-03,1,met,AR,
+F06,RIU-04,1,met,AR,
+F06,RIU-05,1,met,AR,Owner + team lead promote future versions. This is about future designation and must not be read back into RIU-01.
+F06,CHECK-01,1,,AR,
+F07,RIU-01,0,incorrect,AR,"TARGET. Protects 90 minutes, not two hours. Wrong value scores 0, not 0.5: half credit is never given for a wrong number even though the 5 PM deadline is recognized."
+F07,RIU-02,1,met,AR,Both short tasks placed; email-first reason stated.
+F07,RIU-03,1,met,AR,"""Assuming you start at 9:00 AM."""
+F07,CHECK-01,0,,AR,Misstates the analysis as 90 minutes: material assertion contradicting the prompt.
+F08,RIU-01,1,met,AR,
+F08,RIU-02,0,incorrect,AR,"TARGET. Says the executive is scored on the same rule, then makes executive status an automatic override."
+F08,RIU-03,1,met,AR,
+F08,RIU-04,1,met,AR,"Rule published and out-of-order handling must be logged. The executive override is a stated rule, not an unlogged exception; it is penalized under RIU-02 only."
+F08,RIU-05,1,met,AR,
+F08,CHECK-01,1,,AR,
+F09,RIU-01,1,met,AR,
+F09,RIU-02,1,met,AR,
+F09,RIU-03,1,met,AR,
+F09,RIU-04,1,met,AR,Laptop requirement plus the loaner sentence covers the exception.
+F09,RIU-05,1,met,AR,
+F09,RIU-06,1,met,AR,
+F09,RIU-07,1,met,AR,
+F09,RIU-08,1,met,AR,
+F09,RIU-09,1,met,AR,
+F09,RIU-10,1,met,AR,
+F09,RIU-11,1,met,AR,
+F09,RIU-12,1,met,AR,
+F09,RIU-13,1,met,AR,
+F09,RIU-14,1,met,AR,
+F09,CHECK-01,1,,AR,
+F09,CHECK-02,0,,AR,"TARGET. Seven sentences (semicolons join clauses within sentences 5 and 7). Content is complete, so every RIU scores 1; the format failure must not reduce content scores."
+F10,RIU-01,1,met,AR,
+F10,RIU-02,1,met,AR,"""May under-represent other employees"" is a justified inference, not unsupported content."
+F10,RIU-03,0,omitted,AR,TARGET. 4.2/5 never reported.
+F10,RIU-04,1,met,AR,
+F10,RIU-05,0,omitted,AR,TARGET. Anonymity never mentioned.
+F10,CHECK-01,1,,AR,
+F11,RIU-01,1,met,AR,
+F11,RIU-02,1,met,AR,
+F11,RIU-03,1,met,AR,
+F11,RIU-04,1,met,AR,
+F11,CHECK-01,1,,AR,
+F12,RIU-01,1,met,AR,
+F12,RIU-02,1,met,AR,
+F12,RIU-03,1,met,AR,Machine-wide changes explicitly deferred.
+F12,RIU-04,0,incorrect,AR,"TARGET. Proposes deleting the profile and rebuilding it with no data preservation. Unlike F02, this is a destructive action, so the conditional safeguard applies and fails."
+F12,CHECK-01,1,,AR,
+F13,RIU-01,1,met,AR,
+F13,RIU-02,1,met,AR,
+F13,RIU-03,1,met,AR,
+F13,RIU-04,1,met,AR,
+F13,RIU-05,1,met,AR,"""A few at a time"" rather than one broad change."
+F13,RIU-06,0.5,partial,AR,TARGET. Monitors after the change but defines no signal that stops the rollout.
+F13,RIU-07,1,met,AR,"Copy of the previous permission set kept for restore. Deliberately has no failure trigger, so it does not supply RIU-06's stop signal."
+F13,RIU-08,1,met,AR,
+F13,CHECK-01,1,,AR,
+F14,RIU-01,0,incorrect,AR,TARGET. Step 1 is correct; step 3 tells the user to click the reset-email link to check the account. Unsafe contradiction defeats the unit. Parallel to F24 (BN-CS).
+F14,RIU-02,1,met,AR,
+F14,RIU-03,1,met,AR,
+F14,RIU-04,1,met,AR,Password change via the official site and sign-out tied to suspicious findings.
+F14,RIU-05,1,met,AR,
+F14,CHECK-01,1,,AR,
+F15,RIU-01,0,omitted,AR,TARGET. Edits the shared sheet in place; no copy or recoverable version. Silence fails an affirmative requirement.
+F15,RIU-02,1,met,AR,
+F15,RIU-03,1,met,AR,
+F15,RIU-04,1,met,AR,
+F15,RIU-05,1,met,AR,"BOUNDARY, flag for adjudication: reconciles against counts recorded from the source before the change; there is no separate ""replace"" step because the edit is in place."
+F15,RIU-06,0,omitted,AR,TARGET. No coordination with collaborators.
+F15,CHECK-01,1,,AR,
+F16,RIU-01,1,met,AR,
+F16,RIU-02,1,met,AR,
+F16,RIU-03,1,met,AR,
+F16,RIU-04,1,met,AR,
+F16,RIU-05,0.5,partial,AR,"TARGET. Searchable archive with a retrieval route, but no protection against alteration (the access restriction limits viewing, not editing)."
+F16,RIU-06,1,met,AR,Seven-year retention plus restricted viewing of confidential policies.
+F16,RIU-07,1,met,AR,
+F16,RIU-08,1,met,AR,
+F16,CHECK-01,1,,AR,
+F17,RIU-01,1,met,AR,
+F17,RIU-02,0,omitted,AR,"TARGET. Impact/consequence never used. ""Prerequisite"" is RIU-03 (dependencies), not impact."
+F17,RIU-03,1,met,AR,
+F17,RIU-04,1,met,AR,
+F17,RIU-05,0,omitted,AR,"TARGET. Lists factors but never says how they produce a choice. It does not even say to combine them, so it misses the 0.5 anchor too."
+F17,RIU-06,1,met,AR,Capacity limited to two staff; the rest are deferred and the teams told.
+F17,CHECK-01,1,,AR,
+F18,RIU-01,0,incorrect,AR,"TARGET. Common criteria are listed, then request volume is made the main deciding criterion; volume decides, which the anchor forbids."
+F18,RIU-02,1,met,AR,
+F18,RIU-03,1,met,AR,Council decides; no single party or senior person can override.
+F18,RIU-04,1,met,AR,
+F18,RIU-05,1,met,AR,
+F18,CHECK-01,1,,AR,
+F19,RIU-01,1,met,AR,
+F19,RIU-02,1,met,AR,
+F19,RIU-03,1,met,AR,
+F19,RIU-04,1,met,AR,States the data cannot isolate automation's share.
+F19,CHECK-01,1,,AR,
+F19,CHECK-02,0,,AR,"TARGET. Outcomes and interpretation are interleaved in the same sentences with no separation. The 18% is not attributed to automation alone, so only the separation half of the check fails."
+F20,RIU-01,1,met,AR,
+F20,RIU-02,0,incorrect,AR,TARGET. Reports 26 percent instead of 16 percent. Every other unit is satisfied.
+F20,RIU-03,1,met,AR,
+F20,RIU-04,1,met,AR,
+F20,RIU-05,1,met,AR,
+F20,RIU-06,1,met,AR,
+F20,RIU-07,1,met,AR,
+F20,RIU-08,1,met,AR,
+F20,RIU-09,1,met,AR,
+F20,RIU-10,1,met,AR,
+F20,RIU-11,1,met,AR,
+F20,RIU-12,1,met,AR,
+F20,RIU-13,1,met,AR,
+F20,RIU-14,1,met,AR,Both reasons given: eight-week period and implementation differences.
+F20,RIU-15,1,met,AR,No outage in either period; reliability improvement explicitly not claimed.
+F20,RIU-16,1,met,AR,
+F20,RIU-17,1,met,AR,
+F20,RIU-18,1,met,AR,
+F20,RIU-19,1,met,AR,
+F20,CHECK-01,0,,AR,The 26 percent figure is a material assertion unsupported by the prompt.
+F21,RIU-01,1,met,AR,
+F21,RIU-02,0,omitted,AR,TARGET. No memory check.
+F21,RIU-03,1,met,AR,
+F21,RIU-04,1,met,AR,
+F21,RIU-05,0,omitted,AR,"TARGET. Only lists checks; no comparison or interpretation at all, so it misses the 0.5 anchor too (contrast with F01)."
+F21,CHECK-01,1,,AR,
+F22,RIU-01,1,met,AR,
+F22,RIU-02,1,met,AR,
+F22,RIU-03,1,met,AR,
+F22,RIU-04,1,met,AR,"TARGET. BOUNDARY: verifies the original source drive is intact (readable, not reused) before any partition change. The anchor accepts an ""intact original clone""; confirm raters read the original drive as satisfying this."
+F22,RIU-05,1,met,AR,Extension conditional on adjacency; targets C:.
+F22,CHECK-01,1,,AR,
+F23,RIU-01,1,met,AR,
+F23,RIU-02,1,met,AR,
+F23,RIU-03,1,met,AR,
+F23,RIU-04,1,met,AR,
+F23,RIU-05,1,met,AR,
+F23,RIU-06,1,met,AR,
+F23,RIU-07,1,met,AR,
+F23,CHECK-01,1,,AR,
+F24,RIU-01,0,incorrect,AR,"TARGET. Step 1 correct; step 3 recommends clicking the email's ""Review activity"" button. Same unsafe contradiction as F14 (BN), here in BN-CS."
+F24,RIU-02,1,met,AR,Activity and sessions checked through the official app in step 2.
+F24,RIU-03,1,met,AR,
+F24,RIU-04,1,met,AR,
+F24,RIU-05,1,met,AR,
+F24,RIU-06,1,met,AR,
+F24,RIU-07,1,met,AR,
+F24,RIU-08,1,met,AR,
+F24,CHECK-01,1,,AR,
+F25,RIU-01,1,met,AR,
+F25,RIU-02,1,met,AR,
+F25,RIU-03,0.5,partial,AR,TARGET. accepted/rejected/unresolved status with no reason and no escalation path.
+F25,RIU-04,1,met,AR,
+F25,RIU-05,1,met,AR,
+F25,CHECK-01,1,,AR,
+F26,RIU-01,0,omitted,AR,"TARGET. ""A name that shows what is inside"" is not a repeatable convention such as topic+date or version."
+F26,RIU-02,1,met,AR,
+F26,RIU-03,1,met,AR,"Silence rule. Extensions are not mentioned, and the proposed renaming does not instruct changing them; the frozen anchor accepts this as met."
+F26,RIU-04,1,met,AR,Silence: nothing in the procedure overwrites or merges files.
+F26,RIU-05,0,omitted,AR,TARGET. Future downloads never mentioned.
+F26,CHECK-01,1,,AR,
+F27,RIU-01,1,met,AR,
+F27,RIU-02,1,met,AR,
+F27,RIU-03,1,met,AR,
+F27,RIU-04,1,met,AR,
+F27,RIU-05,1,met,AR,Dependencies influence migration order (step 2).
+F27,RIU-06,0.5,partial,AR,"TARGET. BOUNDARY: final rule is ""highest risk first, then the next"", with no capacity limit; dependency ordering appears in step 2 but is not combined into the replacement rule. Intended 0.5; adjudicate if raters give 1."
+F27,RIU-07,1,met,AR,"Isolation, backups and monitoring for a waiting high-risk system."
+F27,CHECK-01,1,,AR,
+F28,RIU-01,1,met,AR,
+F28,RIU-02,1,met,AR,
+F28,RIU-03,1,met,AR,
+F28,RIU-04,1,met,AR,
+F28,RIU-05,1,met,AR,
+F28,CHECK-01,1,,AR,
+F29,RIU-01,0,incorrect,AR,TARGET. 21 percent instead of 12 percent (transposed digits).
+F29,RIU-02,1,met,AR,
+F29,RIU-03,1,met,AR,
+F29,RIU-04,1,met,AR,
+F29,CHECK-01,0,,AR,The 21 percent figure is unsupported by the prompt.
+F30,RIU-01,1,met,AR,
+F30,RIU-02,1,met,AR,
+F30,RIU-03,1,met,AR,
+F30,RIU-04,1,met,AR,Laptop requirement plus the loaner sentence covers the exception.
+F30,RIU-05,1,met,AR,
+F30,RIU-06,1,met,AR,
+F30,RIU-07,1,met,AR,
+F30,RIU-08,1,met,AR,
+F30,RIU-09,1,met,AR,
+F30,RIU-10,1,met,AR,
+F30,RIU-11,1,met,AR,
+F30,RIU-12,1,met,AR,
+F30,RIU-13,1,met,AR,
+F30,RIU-14,1,met,AR,
+F30,CHECK-01,1,,AR,
+F30,CHECK-02,0,,AR,"TARGET. Five sentences by the rule (each ends with a dari; semicolon-joined clauses count as one). Counting clauses gives about nine, so this tests the segmentation rule. Content is complete."

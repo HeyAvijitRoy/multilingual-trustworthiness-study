@@ -1,39 +1,30 @@
 # Preparing annotation of all 500 tasks
 
-The repository is ready to support controlled scaling, but bulk annotation is gated on expanded calibration. The current task stops at the revised pilot and preparation; the remaining 475 tasks are not annotated.
+The repository supports controlled scaling, with bulk annotation gated on expanded calibration. The revised pilot and scaling preparation are complete; the remaining 475 tasks are not annotated.
 
 ## Queue and selection
 
 `SCALING_QUEUE.json` covers every frozen task exactly once with domain, subdomain, difficulty, annotation status and next step. It contains no fabricated gold or model responses.
 
-- 25 existing pilot tasks: human-validated by R1 (2026-10-18); frozen as gold `pilot-gold-0.2` (2026-10-19, `review_logs/2026-10-19_pilot_gold_signoff.md`).
+- 25 existing pilot tasks: validated by R1 (2026-10-18); frozen as gold `pilot-gold-0.2` (2026-10-19, `review_logs/2026-10-19_pilot_gold_signoff.md`).
 - 132 expansion-calibration tasks: the lowest task ID in each domain/subdomain/difficulty stratum absent from the original pilot.
-- 343 remaining tasks: annotate after the calibration gate.
+- 343 remaining tasks: production annotation follows the calibration gate.
 
-This intentionally broad deterministic expansion exposes domain transfer issues before repetitive production annotation. It is a proposed work allocation, not a claim that 132 additional items have been accepted. If the human team chooses a smaller stratified calibration design, document the selection and rationale prospectively and update the queue before annotation. Do not use model performance to choose items.
+This broad deterministic expansion is intended to expose domain transfer issues before production annotation. It is a proposed work allocation; the 132 additional items have not been accepted. Any smaller stratified calibration design would have a prospectively documented selection and rationale, reflected in the queue before annotation. Selection is independent of model performance.
 
-Regenerate only the queue with `python3 scripts/prepare_scaling_queue.py`; verify without writing with `--check`.
+`scripts/prepare_scaling_queue.py` generates the queue and verifies its consistency with the frozen corpus.
 
-## Execution gates
+## Planned stages and acceptance criteria
 
-1. Human-validate the 25 revised tasks using protocol 0.2 and resolve the frozen-language flags. **Done:** R1, 2026-10-18; language flags resolved in corpus v0.3; pilot gold signed off and frozen 2026-10-19. Establish acceptable rater-agreement criteria before collecting calibration ratings.
-2. Annotate the expansion strata in small batches and have the human validator review each batch. Use human-authored scoring fixtures to test binary and ordinal anchors in all three languages. Log changes and recheck the pilot when a rule changes.
-3. Freeze the accepted production annotation protocol. Annotate remaining tasks in reviewable batches of up to 25, with validator review of critical units and all ambiguities, and of at least a prespecified stratified 20% of ordinary units per batch. If any sampled unit reveals a systematic rule error, expand review to every affected unit. These are prospective QA choices, not established empirical thresholds.
-4. Maintain one final annotation record per task in `data/annotations/full/`, including copies of the accepted pilot/expansion records. Use empty `source_riu_ids` for new tasks. Never put queue JSONL or score logs in this annotation directory.
-5. Run batch validation after each batch and full validation at completion. Full mode must find exactly the 500 corpus task IDs with matching metadata/hashes. Review missing/extra coverage, unit-count distributions, critical proportions, scoring modes and unresolved disputes by domain, subdomain, difficulty and context length.
-6. Obtain documented human-validator and study-lead sign-off, assign a gold version and hash the accepted annotation files. Only then prepare evaluation runs. No generation or judge calls are part of these steps.
+1. **Pilot validation and scoring calibration.** R1 validated the 25 revised tasks on 2026-10-18. Corpus v0.3 resolved the language flags, and the pilot gold was signed off and frozen on 2026-10-19. Agreement criteria precede calibration ratings. The fixture design and agreement tooling are documented in [`data/calibration/`](../calibration/README.md).
+2. **Expansion calibration.** The expansion strata are planned in small batches with validator review of each batch. Scoring fixtures test binary and ordinal anchors in all three languages. Rule changes are logged and trigger pilot revalidation.
+3. **Production annotation.** The accepted production protocol is frozen before the remaining tasks are annotated in batches of up to 25. Planned review covers every critical unit and ambiguity, plus a prespecified stratified sample of at least 20% of ordinary units per batch. A systematic rule error in that sample triggers review of every affected unit. These are prospective QA choices, not established empirical thresholds.
+4. **Final annotation set.** `data/annotations/full/` is reserved for one final annotation record per task, including accepted pilot and expansion records. New tasks have empty `source_riu_ids`. Queue files and scoring logs are stored separately.
+5. **Coverage validation.** Batch validation follows each batch; full validation requires exactly the 500 corpus task IDs with matching metadata and hashes. Review covers missing or extra tasks, unit counts, critical proportions, scoring modes and unresolved disputes across domain, subdomain, difficulty and context length.
+6. **Production gold sign-off.** Validator and study-lead approval, a gold version and file hashes precede evaluation preparation. Annotation and calibration do not involve generation or judge calls.
 
-Review logs should identify task/unit/version, each reviewer's initial proposed boundary/criticality/anchor, language-equivalence decision, disagreement, final resolution, adjudicator and date. Record human review references in the annotation's `review` fields; changing a status string alone is not approval.
+Review logs identify task, unit and version; initial boundary, criticality and anchor judgments; language-equivalence decisions; disagreements; final resolutions; adjudicators; and dates. Annotation `review` fields reference this evidence. Status labels alone do not establish approval.
 
-## Commands
+## Validation support
 
-```sh
-python3 scripts/validate_prompt_corpus.py
-python3 scripts/validate_pilot_annotations.py
-python3 -m unittest discover -s scripts -p 'test_*.py'
-python3 scripts/prepare_scaling_queue.py --check
-python3 scripts/validate_pilot_annotations.py --scope batch --annotation-dir data/annotations/full
-python3 scripts/validate_pilot_annotations.py --scope full --annotation-dir data/annotations/full
-```
-
-The last two commands are for future batches; they intentionally fail before full annotations exist. Keep the pilot files as the method-development history. Do not invoke the historical corpus-revision scripts on the frozen corpus.
+The corpus, annotation, calibration and queue validators cover structural integrity and frozen-file consistency. Batch and full annotation validation become applicable when `data/annotations/full/` exists. The pilot files remain the method-development history; historical corpus-revision scripts are excluded from the frozen-corpus workflow.

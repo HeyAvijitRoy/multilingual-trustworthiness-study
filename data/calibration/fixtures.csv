@@ -1,0 +1,182 @@
+fixture_id,author_id,authored_date,response_text
+F01,AR,2026-10-19,"Work through the four causes one at a time.
+
+1. Software: open Event Viewer (or Reliability Monitor) and look at what was logged just before each freeze; also note any apps, drivers or updates installed shortly before the freezes began. Running a clean boot for a few days is another useful check.
+2. Memory: watch memory usage in Task Manager while you work, and run Windows Memory Diagnostic or MemTest86 overnight.
+3. Storage: check the drive's SMART health with a tool such as CrystalDiskInfo, look for disk or file-system errors in the System log, and run chkdsk.
+4. Overheating: monitor CPU temperature under a sustained load with HWMonitor, and check that the fans spin and the vents are not blocked.
+
+Once all four checks are done, compare the results and rule out the causes that the evidence does not support, so you end up with the most likely one."
+F02,AR,2026-10-19,"1. Start with the application itself: check its own crash reports or error log (and the Application entries in Event Viewer for that program), confirm it is on the latest version, and run the vendor's built-in Repair option if it has one.
+2. Rule the user profile in or out: create a new local user account, sign in, and run the application there. If it runs normally under the new profile, the problem lies in the original profile or its data, not in the application install or Windows itself; if it still crashes there, the profile is not the cause.
+3. Look at the operating system: check the System log in Event Viewer and the Windows Update history for driver or OS updates that coincide with the start of the crashes, and run sfc /scannow to verify system files.
+4. Isolate local data in the original profile: close the application, rename its settings folder in %AppData% (for example by adding .old to the folder name) so the app starts with a fresh configuration, and test again. If the crashes stop, the old settings or cache are the cause."
+F03,AR,2026-10-19,"1. Don't tap anything in the alert itself. Open the service's official app, or type its web address yourself, so you know you are dealing with the real service.
+2. From a device you trust, change the password right away to a strong one you have never used before.
+3. Use the ""sign out of all other sessions"" or ""sign out everywhere"" option so anyone else who is logged in gets kicked out.
+4. Turn on two-factor authentication if it isn't already enabled.
+5. If you used the same password on any other account, change it there too.
+6. Over the next few days, watch for further alerts, and contact the provider's official support if anything else looks wrong."
+F04,AR,2026-10-19,"Build a risk score from several signals rather than alerting on any single one.
+
+- Login context: an unusual hour, a new country or network, or ""impossible travel"" between two logins.
+- Device: a device the account has never used, or a change of browser or operating system.
+- Behaviour: deviations from the account's own baseline, such as bulk downloads, new mailbox-forwarding rules or access to systems the user never touches.
+
+Correlate these signals: one unusual factor on its own (for example, a new laptop) should only be logged, because people travel and replace devices. Use tiers:
+- Low risk (one signal): log only.
+- Medium risk (two signals): require step-up MFA and notify the user.
+- High risk (three or more signals, or a sensitive action right after an anomalous login): open an investigation with the security team.
+
+One firm rule: any login from a country the account has never logged in from is treated as a confirmed compromise, and the account is locked immediately.
+
+Have analysts label every investigated alert as a true or false positive, track the false-positive rate monthly, and raise the thresholds for signals that keep producing false alarms."
+F05,AR,2026-10-19,"First decide on one naming pattern and stick to it, for example 2026-10-19_bank_statement_september.pdf: the date first (so files sort chronologically), then the source, then a short description. Change only the part before the dot, so .pdf, .docx and similar endings stay as they are.
+
+Instead of building a deep folder tree, you can tag files: give each one a project or topic tag (Finder tags on a Mac, or the Tags field Windows offers for Office documents and photos) and find files later by searching for the tag. A couple of broad folders such as ""Work"" and ""Personal"" are fine as well.
+
+If two files would end up with the same name, add a suffix such as _v2 or _02 rather than replacing the existing file.
+
+Finally, set your browser to ask where to save each download, and name and tag new files the same way as soon as they arrive."
+F06,AR,2026-10-19,"1. Gather every copy of the report in one place.
+2. To find the current one, look at the evidence rather than the filenames: check the version history in the shared drive, see which copy was sent for or received approval (for example in the approval email or the meeting minutes), and compare the content to see which copy contains the latest agreed changes. The copy that the history, approval and content point to is the current version.
+3. Mark that copy clearly as the single current version, for example Report_CURRENT, and keep it in the team's main folder.
+4. Move the other copies into an ""Archive - superseded"" subfolder, labelled as superseded rather than deleted, so the history is preserved.
+5. From now on, name revisions Report_v1.0, v1.1, v2.0 and add the date.
+6. Agree that only the report owner, after the team lead approves, can promote a draft to the current version."
+F07,AR,2026-10-19,"Assuming you start at 9:00 AM, I'd order them like this:
+
+1. Email reply first (15 minutes). It's quick, clears a pending item and stops it from interrupting you later.
+2. The 90-minute analysis next, from about 9:15 to 10:45. It has the hard 5 PM deadline, so it gets the protected morning block while you are freshest.
+3. The 45-minute report review after that, finishing well before lunch.
+
+This leaves plenty of buffer before 5 PM in case the analysis runs over."
+F08,AR,2026-10-19,"Score every ticket, including the executive's, on two things and rank by the total:
+- Impact: how severe the problem is (service down versus a minor inconvenience) multiplied by how many people it affects, so a problem blocking 200 students outranks a cosmetic issue for one person.
+- Waiting time: add a point for every two days a ticket has been open, so older tickets keep rising and none waits forever.
+
+Executive tickets always go to the top of the queue regardless of score, since leadership requests take precedence.
+
+Publish the scoring rule to the team; if anyone handles a ticket out of order, they must log the reason. Re-score open tickets daily, or whenever a ticket's impact changes, for example when more users report the same problem."
+F09,AR,2026-10-19,"The workshop runs Friday, October 16, from 1:00 to 3:00 PM in Room 310 of the North Building, with check-in opening at 12:30 PM outside the room. Bring a laptop that can connect to Wi-Fi, and install the required analysis software before you arrive, because the first activity starts right after introductions. If you cannot install the software, join the help desk's remote installation clinic on Thursday from 4:00 to 5:30 PM instead of waiting until Friday. Only eight loaner laptops exist, and they are reserved for participants who requested one by Wednesday at noon. Lunch will not be provided; you may bring food, but keep it away from the demonstration equipment at the front of the room. Walk-ins may be admitted only if seats remain after 12:50 PM. To receive an attendance certificate, stay through the final exercise and submit the short exit form; the organizer has not yet announced whether the session will be recorded."
+F10,AR,2026-10-19,"The survey had a 62 percent response rate, but respondents were more likely to be full-time employees than the workforce as a whole, so the results may under-represent other employees. Complaints were concentrated in one department, so an overall figure could mask a localized problem there."
+F11,AR,2026-10-19,"ধাপে ধাপে এভাবে কারণ খুঁজুন:
+
+১. প্রথমে লক্ষ করুন ধীরগতি ঠিক কখন হচ্ছে—চালু হওয়ার পর প্রথম পাঁচ-দশ মিনিট, নাকি সারা দিনই ল্যাপটপ ধীর থাকে।
+২. টাস্ক ম্যানেজার খুলে সিপিইউ, মেমোরি ও ডিস্কের ব্যবহার দেখুন এবং কোন প্রসেসগুলো সবচেয়ে বেশি রিসোর্স নিচ্ছে তা চিহ্নিত করুন। 'স্টার্টআপ' ট্যাবে কোন প্রোগ্রামগুলোর স্টার্টআপ প্রভাব 'উচ্চ', তা-ও দেখে নিন।
+৩. এতে স্পষ্ট কিছু না পেলে দেখুন ড্রাইভে কতটা ফাঁকা জায়গা আছে, ইভেন্ট ভিউয়ারে বারবার কোনো এরর আসছে কি না, আর সম্প্রতি কোনো উইন্ডোজ আপডেট বা নতুন সফটওয়্যার ইনস্টল হয়েছে কি না।
+৪. প্রমাণে কোনো স্টার্টআপ প্রোগ্রাম দায়ী মনে হলে কেবল সেটি নিষ্ক্রিয় করে ল্যাপটপ আবার চালু করুন এবং দেখুন পার্থক্য হয় কি না।
+৫. এসব যাচাইয়ের পরও সমস্যা থাকলে তবেই সিস্টেম রিস্টোর বা উইন্ডোজ রিসেটের মতো বড় পরিবর্তনের কথা ভাবুন।"
+F12,AR,2026-10-19,"সিস্টেম-ব্যাপী কিছু বদলানোর আগে নিশ্চিত হোন যে সমস্যাটি নির্দিষ্ট ইউজারের মধ্যেই সীমাবদ্ধ কি না।
+
+১. যে কাজটিতে এরর আসে, ঠিক সেই কাজটি একই কম্পিউটারে একবার স্থিতিশীল অ্যাকাউন্ট থেকে এবং একবার সমস্যাযুক্ত অ্যাকাউন্ট থেকে করে দেখুন, আর ফলাফল লিখে রাখুন।
+২. শুধু সমস্যাযুক্ত অ্যাকাউন্টে এরর এলে ওই ইউজারের সেটিংস, স্টার্টআপ প্রোগ্রাম, ফোল্ডারের পারমিশন আর অ্যাপ্লিকেশন ডেটা পরীক্ষা করুন, এবং ইভেন্ট ভিউয়ারে ওই ইউজারের লগইনের সময়কার এরর দেখুন।
+৩. এই ধাপগুলোতে উইন্ডোজ রিইনস্টল, ড্রাইভার আপডেট বা সিস্টেম সেটিংস বদলাবেন না; ইউজার-স্তরের কারণ পুরোপুরি যাচাই করার পরও সমাধান না হলে তবেই সিস্টেম-ব্যাপী পরিবর্তনের কথা ভাবুন।
+৪. সমস্যাটি প্রোফাইলেই আছে বলে নিশ্চিত হলে সমস্যাযুক্ত প্রোফাইলটি মুছে ফেলে একই নামে একটি নতুন প্রোফাইল তৈরি করুন।"
+F13,AR,2026-10-19,"১. প্রথমে অ্যাকাউন্টটির বর্তমান সব পারমিশনের একটি তালিকা করুন—কোন প্রোডাকশন সার্ভার, ডেটাবেস বা স্টোরেজে কী ধরনের অ্যাক্সেস আছে।
+২. ওয়ার্কফ্লোর মালিকের সঙ্গে কথা বলে এবং গত কয়েক মাসের অ্যাক্সেস লগ বিশ্লেষণ করে বের করুন কোন পারমিশনগুলো আসলে ব্যবহৃত হয়।
+৩. মাস-শেষের রিপোর্ট, ব্যাকআপ থেকে রিস্টোর বা কী-রোটেশনের মতো কদাচিৎ চলা কাজগুলোর কথা আলাদাভাবে জিজ্ঞেস করুন, যাতে লগে দেখা না গেলেও প্রয়োজনীয় পারমিশন বাদ না পড়ে।
+৪. কমানো পারমিশন-সেট প্রথমে স্টেজিং পরিবেশে পুরো ওয়ার্কফ্লো চালিয়ে যাচাই করুন।
+৫. পরিবর্তনের আগে বর্তমান পারমিশন-সেটের একটি কপি সংরক্ষণ করুন, যাতে দরকার হলে আগের অবস্থায় ফিরিয়ে আনা যায়।
+৬. চেঞ্জ ম্যানেজমেন্ট প্রক্রিয়ার মাধ্যমে এবং সার্ভিস মালিকের সম্মতি নিয়ে প্রোডাকশনে পরিবর্তনটি ধাপে ধাপে করুন—একবারে সব পারমিশন না কমিয়ে কয়েকটি করে কমান।
+৭. পরিবর্তনের পর ওয়ার্কফ্লো ঠিকমতো চলছে কি না, নিয়মিত নজর রাখুন।"
+F14,AR,2026-10-19,"শুধু রিসেট ইমেইল আসা মানেই অ্যাকাউন্ট হ্যাক হয়েছে, এমন নয়। কেউ ভুল করে আপনার ইমেইল ঠিকানা দিতে পারে, আবার কেউ অ্যাকাউন্টে ঢোকার চেষ্টাও করতে পারে। মূল্যায়নের জন্য:
+
+১. ইমেইলের কোনো লিংকে ক্লিক না করে নিজে ব্রাউজারে ঠিকানা টাইপ করে বা অফিসিয়াল অ্যাপ খুলে অ্যাকাউন্টে ঢুকুন।
+২. সেখানে সাম্প্রতিক লগইন, সক্রিয় সেশন এবং রিকভারি ইমেইল, ফোন নম্বর বা নিরাপত্তা সেটিংসে কোনো অচেনা পরিবর্তন হয়েছে কি না দেখুন।
+৩. দ্রুত নিশ্চিত হতে চাইলে সর্বশেষ রিসেট ইমেইলের লিংকে ক্লিক করে দেখে নিন অ্যাকাউন্টের অবস্থা ঠিক আছে কি না।
+৪. অচেনা লগইন বা পরিবর্তন পেলে সঙ্গে সঙ্গে অফিসিয়াল সাইট থেকে পাসওয়ার্ড বদলান এবং সব ডিভাইস থেকে সাইন আউট করুন।
+৫. এ রকম ইমেইল আসতেই থাকলে বা আরও জোরালো লক্ষণ দেখা দিলে সেবাদাতার অফিসিয়াল সাপোর্টে জানান।"
+F15,AR,2026-10-19,"১. প্রথমে শিটের প্রতিটি কলামের নাম, তাতে কী ধরনের ডেটা আছে (সংখ্যা, তারিখ, টেক্সট) এবং কোনো ব্যতিক্রমী বা ফাঁকা মান আছে কি না তা দেখে নিন। মোট সারির সংখ্যা এবং প্রতিটি কলামে কতগুলো ঘরে মান আছে, তা-ও লিখে রাখুন।
+২. পুরোনো নাম থেকে নতুন নামের একটি তালিকা তৈরি করুন। দুটি কলামের নতুন নাম একই হয়ে গেলে বা কোনো নামের অর্থ অস্পষ্ট হলে অনুমান না করে কলামটির মালিককে জিজ্ঞেস করে আলাদা, স্পষ্ট নাম দিন।
+৩. ফরম্যাট বদলানোর সময় শূন্য দিয়ে শুরু হওয়া আইডিগুলো টেক্সট হিসেবে রাখুন, যাতে শুরুর শূন্য মুছে না যায়। ০৩/০৪/২০২৫-এর মতো যেসব তারিখে দিন আর মাস আলাদা করে বোঝা যায় না, সেগুলো অনুমান করে বদলাবেন না; আলাদা করে চিহ্নিত করুন।
+৪. এরপর সরাসরি শিটেই এই পরিবর্তনগুলো করুন।
+৫. শেষে আবার সারির সংখ্যা ও প্রতিটি কলামের পূর্ণ ঘরের সংখ্যা গুনে প্রথম ধাপের হিসাবের সঙ্গে মিলিয়ে দেখুন, কোনো মান হারিয়েছে কি না।"
+F16,AR,2026-10-19,"১. কোনো নীতিমালা বাতিলের প্রস্তাব এলে সংশ্লিষ্ট নীতির মালিক বা নীতিমালা কমিটি তা অনুমোদন করবে।
+২. অনুমোদনের পর পুরোনো নীতিটির প্রথম পাতায় স্পষ্টভাবে 'বাতিলকৃত' বা 'প্রতিস্থাপিত' লিখে দিন এবং কোন তারিখ থেকে বাতিল কার্যকর, তা-ও উল্লেখ করুন।
+৩. ইন্ট্রানেট ও নীতিমালা-তালিকার সব লিংক নতুন নীতির দিকে নির্দেশ করুন; কোনো প্রতিস্থাপন না থাকলে সেটাও সেখানে জানিয়ে দিন।
+৪. পুরোনো সংস্করণটি একটি সার্চযোগ্য আর্কাইভ ফোল্ডারে রাখুন, এবং ইন্ট্রানেটে 'নীতিমালা আর্কাইভ' নামে একটি পাতা রাখুন, যেখান থেকে কর্মীরা প্রয়োজনে পুরোনো সংস্করণ খুঁজে নিতে পারবেন।
+৫. আর্কাইভ করা নীতিমালা সাত বছর সংরক্ষণ করা হবে; গোপনীয় নীতিমালা শুধু অনুমোদিত কর্মীরা দেখতে পারবেন।
+৬. বছরে একবার সব নীতিমালা পর্যালোচনা করে কোনগুলো বাতিল করা দরকার তা ঠিক করুন, এবং একই সময়ে আর্কাইভও হালনাগাদ করুন।
+৭. কোনো নীতি বাতিল হলে সংশ্লিষ্ট কর্মীদের ইমেইলে জানান যে নীতিটি বাতিল হয়েছে এবং নতুন নীতি বা আর্কাইভ করা সংস্করণ কোথায় পাওয়া যাবে।"
+F17,AR,2026-10-19,"১. প্রতিটি অনুরোধ কতটা জরুরি—আজকের মধ্যেই শেষ করতে হবে কি না—তা দেখুন।
+২. কোন অনুরোধ অন্য কোনো অনুরোধের পূর্বশর্ত, তা চিহ্নিত করুন।
+৩. প্রতিটি কাজে আনুমানিক কত ঘণ্টা লাগবে, তা অনুমান করুন।
+৪. আজ মাত্র দুজন কর্মী আছেন, তাই তাঁদের মোট কাজের সময়ের বাইরে কোনো কাজ দেবেন না; বাকি অনুরোধগুলো সংশ্লিষ্ট টিমকে জানিয়ে পরের দিনের জন্য রেখে দিন।
+৫. এই তথ্যগুলো একটি টেবিলে লিখে রাখুন, যাতে সবার কাছে বিষয়টি পরিষ্কার থাকে।"
+F18,AR,2026-10-19,"১. সব পক্ষের অনুরোধের জন্য একটি সাধারণ মানদণ্ড ঠিক করুন: ব্যবহারকারীর ওপর প্রভাব, আয়ের ওপর প্রভাব, নিরাপত্তা বা স্থিতিশীলতার ঝুঁকি, এবং প্রয়োজনীয় ইঞ্জিনিয়ারিং শ্রম।
+২. প্রতিটি অনুরোধের সঙ্গে একই ছকে প্রমাণ জমা দিতে হবে—কতজন ব্যবহারকারী প্রভাবিত, কোন ইনসিডেন্ট বা সাপোর্ট টিকিট, কত আয় জড়িত, আর কী কারিগরি সীমাবদ্ধতা আছে।
+৩. তবে চূড়ান্ত অগ্রাধিকার ঠিক করার মূল মানদণ্ড হবে অনুরোধটি কতবার এবং কতগুলো পক্ষ থেকে এসেছে; যে অনুরোধ যত বেশি উত্থাপিত হয়েছে, সেটি তত আগে যাবে।
+৪. প্রতি মাসে একটি প্রোডাক্ট কাউন্সিল—প্রোডাক্ট লিড এবং সেলস, সাপোর্ট ও ইঞ্জিনিয়ারিংয়ের একজন করে প্রতিনিধি—এই প্রক্রিয়া অনুযায়ী সিদ্ধান্ত নেবে; কোনো একক পক্ষ বা ঊর্ধ্বতন ব্যক্তি এককভাবে এই সিদ্ধান্ত বদলাতে পারবেন না।
+৫. প্রতিটি সিদ্ধান্তের কারণ এবং বিকল্পগুলোর তুলনায় কী ছাড় দেওয়া হলো, তা লিখে রাখুন।
+৬. যে অনুরোধ পিছিয়ে দেওয়া হলো, তা পরের ত্রৈমাসিক পর্যালোচনায় আবার বিবেচনা করা হবে।"
+F19,AR,2026-10-19,"অটোমেশনের পর প্রসেসিং টাইম ১৮ শতাংশ কমেছে, তবে একই সময়ে কর্মীর সংখ্যাও ১০ শতাংশ বেড়েছে বলে এই উন্নতির কতটা শুধু অটোমেশনের কারণে, তা প্রাপ্ত ডেটা থেকে আলাদা করে বলা যায় না, আর ভুলের হারও সামান্য কমেছে। সংক্ষেপে, সময় ও ভুল দুটোই কমেছে, কিন্তু এতে অটোমেশন আর বাড়তি কর্মীর আলাদা আলাদা ভূমিকা এখনো মাপা যায়নি।"
+F20,AR,2026-10-19,"**কী উন্নত হয়েছে**
+চালুর পর প্রথম আট সপ্তাহে নতুন কেস-ম্যানেজমেন্ট সিস্টেমে ২,৪০০টি কেস সম্পন্ন হয়েছে। চালুর ঠিক আগের আট সপ্তাহের তুলনায় গড় প্রসেসিং টাইম ২৬ শতাংশ কম ছিল। ত্রুটির হার ৩.১ শতাংশ থেকে কমে ২.৬ শতাংশ হয়েছে। হেল্প-ডেস্কে আসা অনুরোধ প্রথম ও দ্বিতীয় সপ্তাহে সবচেয়ে বেশি ছিল, তারপর অষ্টম সপ্তাহ পর্যন্ত প্রতি সপ্তাহে কমেছে।
+
+**কী খারাপ হয়েছে**
+পাঁচ-পয়েন্টের স্কেলে কর্মীদের গড় সন্তুষ্টি ৪.১ থেকে কমে ৩.৬ হয়েছে। জরিপে সাড়ার হারও ৮১ শতাংশ থেকে কমে ৬৮ শতাংশ হয়েছে, তাই চালুর পরের জরিপের ফল আগের জরিপের সঙ্গে পুরোপুরি তুলনীয় নাও হতে পারে।
+
+**খরচ**
+মাসিক সফটওয়্যার লাইসেন্সিং খরচ আগের চেয়ে ১২ শতাংশ বেশি, আর ইনফ্রাস্ট্রাকচার খরচ ৮ শতাংশ কম। সাপোর্টের শ্রম ও ভবিষ্যৎ আপগ্রেডের খরচের তথ্য অসম্পূর্ণ থাকায় টোটাল কস্ট অব ওনারশিপ এখনো হিসাব করা হয়নি।
+
+**বাস্তবায়নের প্রেক্ষাপট**
+কর্মীরা দুই দিনের আনুষ্ঠানিক প্রশিক্ষণ পেয়েছেন, তবে সময়সূচির সংঘাতে ১৪ শতাংশ কর্মী অন্তত অর্ধেক দিনের প্রশিক্ষণ পাননি। প্রথম ছয় সপ্তাহে দুজন অস্থায়ী ইমপ্লিমেন্টেশন বিশেষজ্ঞ সহায়তা করেছেন, যাঁরা স্বাভাবিক জনবল-কাঠামোর অংশ নন। দুটি বিভাগ তৃতীয় সপ্তাহের মধ্যে নতুন ওয়ার্কফ্লো পুরোপুরি গ্রহণ করেছে, কিন্তু তৃতীয় বিভাগটি ষষ্ঠ সপ্তাহ পর্যন্ত পুরোনো ও নতুন মিলিয়ে একটি মিশ্র ওয়ার্কফ্লো চালিয়েছে। দুই সময়কালেই কোনো গুরুতর বিভ্রাট ঘটেনি, তাই নির্ভরযোগ্যতায় উন্নতি দাবি করা যায় না।
+
+**কী অজানা**
+দীর্ঘমেয়াদি রিটেনশন, বছরের সর্বোচ্চ কাজের চাপের সময়কার পারফরম্যান্স, ভবিষ্যৎ সন্তুষ্টি, এবং অস্থায়ী বিশেষজ্ঞরা চলে যাওয়ার পরের পারফরম্যান্স—এগুলোর কোনো ডেটা নেই।
+
+**কার্যকারণ নিয়ে সীমাবদ্ধতা**
+প্রসেসিং টাইমের উন্নতি নতুন সিস্টেম চালুর সময়কালের সঙ্গে একটি পর্যবেক্ষিত সম্পর্ক মাত্র, শুধু সফটওয়্যারের প্রভাবের পরিচ্ছন্ন প্রমাণ নয়, কারণ পর্যবেক্ষণকাল মাত্র আট সপ্তাহ এবং বিভাগগুলোর মধ্যে বাস্তবায়নের ধরন ও সময় আলাদা ছিল।"
+F21,AR,2026-10-19,"এই check-গুলো একে একে করুন:
+
+- Software: Event Viewer-এ প্রতিবার freeze হওয়ার ঠিক আগের log দেখুন, আর freeze শুরু হওয়ার আগে কোনো নতুন app, driver বা update install হয়েছে কি না check করুন।
+- Storage: CrystalDiskInfo দিয়ে drive-এর SMART health দেখুন, আর chkdsk চালিয়ে file system error আছে কি না check করুন।
+- Overheating: HWMonitor দিয়ে heavy load-এর সময় CPU temperature monitor করুন, আর fan ঠিকমতো ঘুরছে কি না ও vent-এ ধুলো জমেছে কি না দেখুন।"
+F22,AR,2026-10-19,"সবচেয়ে safe order হলো আগে শুধু দেখা, তারপর পরিবর্তন:
+
+১. প্রথমে Disk Management খুলে (বা diskpart-এ list volume দিয়ে) দেখুন নতুন SSD-তে কোন partition কত বড় আর কতটা unallocated space পড়ে আছে। এই ধাপে কিছু change করবেন না।
+২. সাধারণত clone করার সময় partition আর file system পুরোনো drive-এর size-এই copy হয়, তাই বাড়তি capacity-টা unallocated হিসেবে পড়ে থাকে, C: drive-এ যোগ হয় না।
+৩. Extend Volume option grey হয়ে থাকলে check করুন C: আর unallocated space-এর মাঝখানে কোনো recovery partition বসে আছে কি না; আর disk-টা MBR হলে ২ TB-র বেশি space ব্যবহার করা যাবে না।
+৪. কিছু change করার আগে পুরোনো original drive-টা একটা USB enclosure-এ connect করে দেখুন সব file ঠিকমতো পড়া যাচ্ছে কি না, অর্থাৎ সেটা intact আছে কি না; কাজ শেষ না হওয়া পর্যন্ত ওই drive format বা অন্য কাজে ব্যবহার করবেন না।
+৫. unallocated space যদি সরাসরি C: partition-এর পরেই থাকে, তাহলে শুধু C:-কে extend করুন; মাঝখানে recovery partition থাকলে আগে layout অনুযায়ী সেটা সরানোর পরিকল্পনা করুন, তারপর extend করুন।"
+F23,AR,2026-10-19,"১. dormant account-এর একটা clear definition ঠিক করুন, যেমন ৯০ দিন ধরে কোনো login হয়নি এমন account, আর প্রতিটি review-এর শুরুতে এই criteria দিয়ে account-এর list বের করুন।
+২. প্রতিটি account-এর জন্য তার manager বা system owner-কে জিজ্ঞেস করুন access-টা এখনো দরকার কি না, আর HR record দেখে নিশ্চিত হোন employee এখনো একই role-এ আছেন কি না। এটা confirm না হওয়া পর্যন্ত access remove করবেন না।
+৩. যেসব access আর দরকার নেই, সেগুলো সঙ্গে সঙ্গে delete না করে আগে disable করুন; ৬০ দিনের মধ্যে কেউ legitimate কারণে access চাইলে owner-এর approval নিয়ে আবার enable করা যাবে, তারপরই permanent delete।
+৪. কোনো dormant account exception হিসেবে রাখতে হলে owner-এর লিখিত justification আর security team-এর approval লাগবে।
+৫. exception account-এ MFA বাধ্যতামূলক করুন, privilege যতটা সম্ভব কমিয়ে দিন, আর একটা expiry date set করুন।
+৬. এই review প্রতি quarter-এ চালান, আর কেউ team বদলালে বা চাকরি ছাড়লে সঙ্গে সঙ্গে review trigger করুন।
+৭. review করা প্রতিটি account-এর ফলাফল—retained, disabled বা deleted—একটা log-এ রাখুন।"
+F24,AR,2026-10-19,"১. alert-এর কোনো link-এ click না করে সরাসরি service-এর official app খুলুন, বা browser-এ নিজে address type করে login করুন।
+২. সেখানে recent activity আর active session-এর list দেখুন—কোনো অচেনা device বা location আছে কি না।
+৩. alert-টা আসল কি না আরও তাড়াতাড়ি বুঝতে email-এর 'Review activity' button-এ click করে details দেখে নিতে পারেন।
+৪. নিজের trusted phone বা laptop থেকে, official app বা website-এ গিয়ে password change করুন।
+৫. 'Sign out of all other sessions' option দিয়ে অন্য সব session থেকে sign out করুন।
+৬. MFA চালু না থাকলে এখনই চালু করুন।
+৭. recovery email আর phone number এখনো আপনারই কি না, check করুন।
+৮. একই password অন্য কোনো account-এ ব্যবহার করে থাকলে সেখানেও বদলে ফেলুন।
+৯. পরের কয়েক দিন নতুন alert-এর দিকে নজর রাখুন, আর সন্দেহজনক কিছু চলতে থাকলে official support-এ যোগাযোগ করুন।"
+F25,AR,2026-10-19,"১. সব reviewer-এর comment একটা comment log spreadsheet-এ তুলুন: প্রতিটি row-তে comment, reviewer-এর নাম, আর document-এর কোন section বা page-এ comment-টা করা হয়েছে, তা লিখুন। original reviewed file-গুলোও একটা folder-এ রেখে দিন।
+২. একই বিষয়ে একাধিক comment থাকলে group করুন, কিন্তু reviewer-রা ভিন্ন ভিন্ন সমাধান বললে প্রতিটি recommendation আলাদা row-তে রাখুন, যাতে disagreement হারিয়ে না যায়।
+৩. প্রতিটি conflict-এর পাশে একটা status column-এ লিখুন: accepted, rejected অথবা unresolved।
+৪. accepted change-গুলো report-এ apply করুন, তারপর log-এর সঙ্গে মিলিয়ে দেখুন প্রতিটি accepted change সত্যিই report-এ আছে কি না।
+৫. শেষে comment আর tracked change ছাড়া একটা clean final report তৈরি করুন, আর comment log-টা আলাদা file হিসেবে একই project folder-এ রেখে দিন, যাতে পরে trace করা যায়।"
+F26,AR,2026-10-19,"১. প্রথমে Downloads folder-এর সব file খুলে দেখে নিন কোনটা কী।
+২. প্রতিটি file-কে এমন একটা নাম দিয়ে rename করুন যাতে নাম দেখেই বোঝা যায় ভিতরে কী আছে।
+৩. এরপর project বা topic অনুযায়ী কয়েকটা folder বানান—যেমন 'Office', 'Bank', 'Study'—আর প্রতিটি file সঠিক folder-এ move করুন।"
+F27,AR,2026-10-19,"১. প্রতিটি system-কে পাঁচটা criteria-তে ১ থেকে ৫ score দিন:
+- operational criticality: system বন্ধ হলে কতগুলো service বা কতজন user আটকে যায়।
+- failure likelihood: গত এক বছরে কতবার outage বা hardware failure হয়েছে।
+- security exposure: system-টা internet-facing কি না, unpatched vulnerability আছে কি না।
+- supportability: vendor support শেষ হয়ে গেছে কি না, আর maintain করার মতো লোক আছে কি না।
+- migration complexity: data কতটা, আর কতগুলো অন্য system-এর সঙ্গে যুক্ত।
+২. dependency খেয়াল রাখুন: কোনো system অন্য একটা system-এর data বা service-এর ওপর নির্ভর করলে, যেটার ওপর নির্ভর করছে সেটার migration আগে plan করতে হবে।
+৩. তারপর criticality, failure likelihood, security exposure আর supportability-র score যোগ করে যেটার total সবচেয়ে বেশি, অর্থাৎ যেটা সবচেয়ে high-risk, সেটা আগে replace করুন, তারপর পরেরটা।
+৪. যে high-risk system-কে replacement-এর জন্য অপেক্ষা করতে হবে, সেটাকে network-এ isolate করুন, নিয়মিত backup নিন আর monitoring বাড়ান।"
+F28,AR,2026-10-19,"১. প্রথমে প্রতিটি ticket-এর impact ঠিক করুন: problem কতটা severe (পুরো service বন্ধ, নাকি ছোট অসুবিধা) আর কতজন user affected। যেমন ২০০ student-এর portal বন্ধ থাকলে সেটা একজনের ছোট সমস্যার চেয়ে অনেক উপরে যাবে।
+২. executive-এর ticket-ও একই rule-এ score হবে; শুধু পদের কারণে কোনো ticket আপনাআপনি উপরে যাবে না।
+৩. waiting time যোগ করুন: যে ticket যত দিন open, প্রতি দুই দিনে তার priority এক ধাপ বাড়বে, যাতে কোনো ticket অনির্দিষ্টকাল পড়ে না থাকে।
+৪. এই rule-টা team-এর সবার কাছে publish করুন; কেউ rule-এর বাইরে গিয়ে কোনো ticket আগে নিলে তার কারণ ticket-এ লিখে রাখতে হবে।
+৫. প্রতিদিন সকালে, বা কোনো ticket-এর impact বদলালে (যেমন আরও user একই সমস্যা report করলে), priority আবার ঠিক করুন।"
+F29,AR,2026-10-19,"Group A-তে ২১ শতাংশ improvement হয়েছে, Group B-তে ৫ শতাংশ, আর Group C-তে কোনো measurable change দেখা যায়নি। তবে study-তে long-term retention test করা হয়নি, তাই এই improvement দীর্ঘদিন টিকে থাকবে কি না, তা বলা যায় না।"
+F30,AR,2026-10-19,"workshop-টা হবে শুক্রবার, ১৬ অক্টোবর, দুপুর ১টা থেকে বিকেল ৩টা পর্যন্ত, North Building-এর Room ৩১০-এ; check-in শুরু হবে দুপুর ১২টা ৩০ মিনিটে, room-এর বাইরে। Wi-Fi-তে connect করা যায় এমন একটি laptop আনতে হবে, আর প্রয়োজনীয় analysis software আসার আগেই install করে রাখতে হবে; install করতে না পারলে শুক্রবারের জন্য অপেক্ষা না করে বৃহস্পতিবার বিকেল ৪টা থেকে ৫টা ৩০ মিনিটের remote installation clinic-এ join করুন। loaner laptop আছে মাত্র আটটি, এবং সেগুলো শুধু তাঁদের জন্য reserved, যাঁরা বুধবার দুপুর ১২টার মধ্যে request করেছেন। lunch দেওয়া হবে না; খাবার আনতে পারবেন, তবে সামনের demonstration equipment-এর কাছে খাবার নেওয়া যাবে না; walk-in কেবল তখনই নেওয়া হতে পারে, যদি দুপুর ১২টা ৫০ মিনিটের পরও seat খালি থাকে। attendance certificate পেতে final exercise পর্যন্ত থাকতে হবে এবং short exit form submit করতে হবে; session record করা হবে কি না, organizer এখনো announce করেননি।"

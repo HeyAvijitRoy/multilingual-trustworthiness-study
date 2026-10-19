@@ -2,7 +2,7 @@
 
 ## Working Aim
 
-Measure whether semantically equivalent prompts produce systematically different trustworthiness outcomes across English, Bengali, and Bengali-English code-switched conditions.
+The study measures whether semantically equivalent prompts produce systematically different trustworthiness outcomes across English, Bengali and Bengali-English code-switched conditions.
 
 The scientific contribution is the **empirical analysis of language-conditioned trustworthiness failure**. The prompt corpus is the controlled experimental instrument used to measure that failure.
 
@@ -24,7 +24,7 @@ Each evaluation item is one canonical task represented by three matched prompt v
 - `bn` — natural contemporary Bengali
 - `bn_cs` — natural Bengali-English code-switching with Bengali as the matrix language
 
-All three variants must preserve:
+The three variants share:
 
 - task objective
 - factual context
@@ -69,11 +69,11 @@ One primary objective with limited interaction among constraints or evidence.
 
 ### Medium
 
-Multiple factors, steps, constraints, comparisons, or evidence elements must be integrated.
+Integration of multiple factors, steps, constraints, comparisons or evidence elements.
 
 ### Hard
 
-Several interacting constraints, dependencies, uncertainties, trade-offs, or evidence sources must be reconciled while preserving important caveats.
+Reconciliation of several interacting constraints, dependencies, uncertainties, trade-offs or evidence sources, with important caveats retained.
 
 ## Prompt Construction Principles
 
@@ -83,29 +83,29 @@ The English prompt is the canonical semantic specification.
 
 ### Bengali
 
-The Bengali version should be natural contemporary Bengali, not a rigid word-for-word translation.
+The Bengali condition uses natural contemporary Bengali rather than rigid word-for-word translation.
 
-Technical vocabulary should follow realistic Bengali professional usage. Established terms such as `driver`, `cache`, `deployment`, `credential`, `CI`, `API`, and similar concepts may remain transliterated or in English when forced Bengali translation would sound artificial, obscure the intended concept, or introduce semantic drift.
+Technical vocabulary follows realistic Bengali professional usage. Established terms such as `driver`, `cache`, `deployment`, `credential`, `CI`, `API`, and similar concepts may remain transliterated or in English when forced Bengali translation would sound artificial, obscure the intended concept, or introduce semantic drift.
 
-The Bengali condition should nevertheless remain predominantly Bengali in syntax and discourse.
+Bengali predominates in the condition's syntax and discourse.
 
 ### Bengali-English Code-Switching
 
 The BN-CS condition models plausible Bengali technical/professional discourse rather than an English prompt with Bengali framing.
 
-Design rule:
+Language design:
 
 > **Bengali remains the matrix language; English enters primarily through lexical, interface, software, professional, and domain terminology.**
 
-Code-switching must not:
+The code-switched condition preserves semantic equivalence without:
 
-- add hints;
-- omit constraints;
-- simplify the task;
-- change factual context;
-- independently evolve away from the Bengali or English specification.
+- additional hints;
+- omitted constraints;
+- reduced task difficulty;
+- changed factual context;
+- independent divergence from the Bengali or English specification.
 
-The v0.2 construction regenerated BN-CS from the Bengali prompt using a controlled domain lexicon. Review found that substitution produced grammatical corruption and left key domain terms as Bengali calques, so corpus v0.3 replaces it: BN and BN-CS are hand-written in parallel, sentence by sentence, under [LANGUAGE_GUIDE.md](data/prompts/LANGUAGE_GUIDE.md). English prompts are unchanged from v0.2. See [CORPUS_CHANGELOG.md](data/prompts/CORPUS_CHANGELOG.md).
+The v0.2 construction regenerated BN-CS from the Bengali prompt using a controlled domain lexicon. Review found that substitution produced grammatical corruption and left key domain terms as Bengali calques, so corpus v0.3 replaces it: BN and BN-CS are hand-written in parallel, sentence by sentence, under [LANGUAGE_GUIDE.md](data/prompts/LANGUAGE_GUIDE.md). English prompts are unchanged from v0.2. The version history is recorded in [CORPUS_CHANGELOG.md](data/prompts/CORPUS_CHANGELOG.md).
 
 ## Extended-Context Subset
 
@@ -113,13 +113,13 @@ The v0.2 construction regenerated BN-CS from the Bengali prompt using a controll
 
 These prompts are intentionally much longer than ordinary corpus items and contain multiple facts, dependencies, caveats, timing constraints, subgroup findings, or unknowns. Their purpose is to test **information retention and omission under denser context**, not merely general summarization ability.
 
-The extended-context prompts must:
+The extended-context subset is characterized by:
 
-- materially exceed the length of ordinary items;
-- contain multiple independently scoreable facts;
-- include at least one caveat, dependency, uncertainty, or negative constraint;
-- avoid requiring outside information;
-- remain semantically matched across language conditions.
+- substantially greater length than ordinary items;
+- multiple independently scoreable facts;
+- at least one caveat, dependency, uncertainty or negative constraint;
+- self-contained information;
+- semantic matching across language conditions.
 
 ## Required Information Units
 
@@ -141,8 +141,8 @@ Criticality levels:
 During annotation, each task will also be labeled:
 
 - `explicit` — the prompt directly names the principal dimensions to address;
-- `implicit` — important requirements must be independently surfaced by the model;
-- `mixed` — some requirements are visible while others must be inferred or retrieved.
+- `implicit` — important requirements are not directly named in the prompt and depend on the model surfacing them;
+- `mixed` — some requirements are visible while others depend on inference or retrieval.
 
 This variable is recorded during annotation rather than added to the source prompt CSVs. It can be used as a secondary factor when interpreting omission rates.
 
@@ -167,17 +167,11 @@ Secondary measures:
 
 ## Evaluation Design
 
-The study should favor structured scoring over unconstrained holistic LLM judging.
-
-Where possible:
-
-1. score RIUs deterministically or with explicit rules;
-2. use blinded human review for ambiguous cases;
-3. use model-based judging only as a supplemental measure validated against human labels.
+The evaluation design prioritizes structured scoring. RIU scores follow deterministic checks or explicit rules where possible, with blinded reviewer assessment of ambiguous cases. Model-based judging is a supplemental measure validated against reviewer labels.
 
 ## Statistical Plan
 
-Because language variants are paired within the same task, analysis must preserve that pairing.
+The analysis preserves the pairing of language variants within each task.
 
 Candidate analyses include:
 
@@ -199,7 +193,7 @@ Final statistical choices will be determined after inspecting outcome distributi
 
 ## Corpus QA and Freeze Policy
 
-Before the prompt corpus is frozen, it must pass automated and human QA covering:
+Corpus freeze depends on automated checks and reviewer assessment covering:
 
 - 500 unique IDs
 - 100 tasks per domain
@@ -218,13 +212,13 @@ scripts/revise_corpus_v02.py
 scripts/validate_prompt_corpus.py
 ```
 
-The final evaluation set is frozen **before full model evaluation**. Corpus v0.3 passed automated QA and was validated by human validator R1 and approved and frozen by the study lead on 2026-10-18 (`data/annotations/review_logs/2026-10-18_R1_human_validation.md`). Corpus v0.3.1 (one English clarification, SYN079, R1-confirmed) is the frozen evaluation set, pinned in `data/annotations/PROMPT_FREEZE.json`.
+The final evaluation set is frozen **before full model evaluation**. Corpus v0.3 passed automated QA and was validated by R1 and approved and frozen by the study lead on 2026-10-18 (`data/annotations/review_logs/2026-10-18_R1_human_validation.md`). Corpus v0.3.1 (one English clarification, SYN079, R1-confirmed) is the frozen evaluation set, pinned in `data/annotations/PROMPT_FREEZE.json`.
 
-Development items used to debug scoring logic, prompt construction, or experiment code should not be silently mixed into the inferential test set after evaluation begins.
+Development items used to debug scoring logic, prompt construction or experiment code remain distinct from the inferential test set after evaluation begins.
 
 ## Reproducibility
 
-Every generation record should preserve at minimum:
+Planned generation records contain at least:
 
 - task ID
 - language condition
@@ -236,12 +230,12 @@ Every generation record should preserve at minimum:
 - run index
 - raw output
 
-Analysis code should operate on immutable raw outputs and write derived results separately.
+The analysis design uses immutable raw outputs and stores derived results separately.
 
 ## Annotation protocol amendment (0.2; before evaluation)
 
 [ANNOTATION_PROTOCOL.md](data/annotations/ANNOTATION_PROTOCOL.md) governs RIU construction, criticality and scoring and supersedes earlier broad RIU definitions above. Explicit mention in a prompt does not automatically make a unit critical. Supporting units still count toward coverage and strict complete-task success.
 
-Discrete facts/actions remain binary; only requirements with written partial anchors allow 0/0.5/1. Report strict binary sensitivity alongside rubric coverage. Separate literal omission from incorrectness and partial fulfillment, and separate format and unsupported-content checks from RIU denominators. Average task-level scores within domains, then domains equally; preserve paired tasks and account for repeated runs. Do not choose scoring or inferential methods to maximize an observed language effect. Final estimands, contrasts, agreement thresholds and analysis choices must be recorded before inspecting model outcomes; outcome-based model diagnostics do not authorize changing the primary hypothesis.
+Discrete facts/actions remain binary; only requirements with written partial anchors allow 0/0.5/1. Planned reporting includes strict binary sensitivity alongside rubric coverage. Literal omission, incorrectness and partial fulfillment are distinct outcomes; format and unsupported-content checks remain outside RIU denominators. Overall results average task-level scores within domains, then domains equally, preserving paired tasks and accounting for repeated runs. Scoring and inferential choices are independent of observed language effects. Final estimands, contrasts, agreement thresholds and analysis choices are recorded before model outcomes are inspected; outcome-based diagnostics do not change the primary hypothesis.
 
-The 25-task pilot was human-validated by the study's single validator (R1, 2026-10-18) after internal revision and signed off as frozen gold `pilot-gold-0.2` by R1 and the study lead on 2026-10-19 (`data/annotations/review_logs/2026-10-19_pilot_gold_signoff.md`). Review flags and subdomain sampling limitations are recorded in [PILOT_AUDIT.md](data/annotations/PILOT_AUDIT.md). No evaluation generations have been performed. Freeze the human-adjudicated gold before generating model responses, without changing the byte-pinned prompt corpus during annotation. Corpus v0.3 (2026-10-18) is a versioned, study-lead-authorized language repair made before any model run; further prompt changes require another versioned release, not edits during annotation.
+The 25-task pilot was validated by the study's single validator (R1, 2026-10-18) after internal revision and signed off as frozen gold `pilot-gold-0.2` by R1 and the study lead on 2026-10-19 (`data/annotations/review_logs/2026-10-19_pilot_gold_signoff.md`). Review flags and subdomain sampling limitations are recorded in [PILOT_AUDIT.md](data/annotations/PILOT_AUDIT.md). No evaluation generations have been performed. Model evaluation follows adjudicated gold freeze, with byte-pinned prompts unchanged during annotation. Corpus v0.3 (2026-10-18) is a versioned, study-lead-authorized language repair made before any model run; further prompt changes require another versioned release, not edits during annotation.

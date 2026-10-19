@@ -1,0 +1,12 @@
+{
+  "gold_version": "pilot-gold-0.2",
+  "signoff_log": "review_logs/2026-10-19_pilot_gold_signoff.md",
+  "algorithm": "sha256",
+  "files": {
+    "data/annotations/pilot_technical.jsonl": "6f16fa8c599cdd23fa0b0bad01782dcc142b319ba6d37874d45840c1af60a39b",
+    "data/annotations/pilot_cybersecurity.jsonl": "43d7fd4a7d4b9f08826e445c1e403ecd94986f6db22549fe6db368f3ec9d8365",
+    "data/annotations/pilot_procedural.jsonl": "841e8f7cff2a8d41b6e9e10c4a3cca8f47792a518ae8febbfe8b517b988b813a",
+    "data/annotations/pilot_decision_support.jsonl": "b4b98325a17005fadcb65308da792ce428c16a99982278c32c352580f3dc2714",
+    "data/annotations/pilot_information_synthesis.jsonl": "b2246db64d271c94b5354eb295683749f7b402ed0a68c4e80d8a6c68583827b5"
+  }
+}

@@ -75,6 +75,17 @@ def validate_freeze(root=ROOT, manifest=None):
     require(actual == manifest['files'], 'freeze', 'prompt file set or bytes changed')
 
 
+def validate_gold_freeze(root=ROOT, manifest=None):
+    """Frozen pilot gold must match the signed-off hashes in PILOT_GOLD_FREEZE.json."""
+    manifest = manifest or json.loads((root/'data/annotations/PILOT_GOLD_FREEZE.json').read_text(encoding='utf-8'))
+    exact_keys(manifest, {'gold_version', 'signoff_log', 'algorithm', 'files'}, 'gold freeze')
+    require(manifest['algorithm'] == 'sha256', 'gold freeze', 'unexpected hash algorithm')
+    require(set(manifest['files']) == {f'data/annotations/{f}' for f in FILES}, 'gold freeze', 'unexpected gold file set')
+    require((root/'data/annotations'/manifest['signoff_log']).is_file(), 'gold freeze', 'sign-off log missing')
+    for name, digest in manifest['files'].items():
+        require(hashlib.sha256((root/name).read_bytes()).hexdigest() == digest, 'gold freeze', f'{name} changed after sign-off')
+
+
 def validate_record(rec, prompts):
     context = rec.get('task_id', 'UNKNOWN') if isinstance(rec, dict) else 'UNKNOWN'
     exact_keys(rec, REQUIRED, context)
@@ -177,6 +188,9 @@ def main():
         records.extend(file_rows)
     require(bool(records), args.scope, 'no annotation records')
     validate_records(records, prompts, args.scope)
+    if args.scope == 'pilot' and any(r['status'] == 'frozen' for r in records):
+        require(all(r['status'] == 'frozen' for r in records), 'pilot', 'pilot gold is partially frozen')
+        validate_gold_freeze()
     units = [u for r in records for u in r['rius']]
     critical = sum(u['criticality'] == 'critical' for u in units)
     print(f'RIU {args.scope} validation PASSED: {len(records)} tasks; {len(units)} RIUs; {critical} critical ({critical/len(units):.1%})')

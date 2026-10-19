@@ -6,7 +6,7 @@ The repository is ready to support controlled scaling, but bulk annotation is ga
 
 `SCALING_QUEUE.json` covers every frozen task exactly once with domain, subdomain, difficulty, annotation status and next step. It contains no fabricated gold or model responses.
 
-- 25 existing pilot tasks: human-validated by R1 (2026-10-18).
+- 25 existing pilot tasks: human-validated by R1 (2026-10-18); frozen as gold `pilot-gold-0.2` (2026-10-19, `review_logs/2026-10-19_pilot_gold_signoff.md`).
 - 132 expansion-calibration tasks: the lowest task ID in each domain/subdomain/difficulty stratum absent from the original pilot.
 - 343 remaining tasks: annotate after the calibration gate.
 
@@ -16,7 +16,7 @@ Regenerate only the queue with `python3 scripts/prepare_scaling_queue.py`; verif
 
 ## Execution gates
 
-1. Human-validate the 25 revised tasks using protocol 0.2 and resolve the frozen-language flags. **Done:** R1, 2026-10-18; language flags resolved in corpus v0.3. Establish acceptable rater-agreement criteria before collecting calibration ratings.
+1. Human-validate the 25 revised tasks using protocol 0.2 and resolve the frozen-language flags. **Done:** R1, 2026-10-18; language flags resolved in corpus v0.3; pilot gold signed off and frozen 2026-10-19. Establish acceptable rater-agreement criteria before collecting calibration ratings.
 2. Annotate the expansion strata in small batches and have the human validator review each batch. Use human-authored scoring fixtures to test binary and ordinal anchors in all three languages. Log changes and recheck the pilot when a rule changes.
 3. Freeze the accepted production annotation protocol. Annotate remaining tasks in reviewable batches of up to 25, with validator review of critical units and all ambiguities, and of at least a prespecified stratified 20% of ordinary units per batch. If any sampled unit reveals a systematic rule error, expand review to every affected unit. These are prospective QA choices, not established empirical thresholds.
 4. Maintain one final annotation record per task in `data/annotations/full/`, including copies of the accepted pilot/expansion records. Use empty `source_riu_ids` for new tasks. Never put queue JSONL or score logs in this annotation directory.

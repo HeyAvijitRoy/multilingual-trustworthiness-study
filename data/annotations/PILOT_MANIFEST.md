@@ -1,6 +1,6 @@
 # RIU pilot 0.2 manifest
 
-The 25-task pilot has been internally audited and revised. **Local structural checks pass and all 25 records are human-validated (R1, 2026-10-18); gold freeze remains pending.** See [the audit](PILOT_AUDIT.md), [schema](ANNOTATION_SCHEMA.md), [protocol](ANNOTATION_PROTOCOL.md) and [scaling plan](SCALING_PLAN.md).
+The 25-task pilot has been internally audited and revised. **Local structural checks pass and all 25 records are human-validated (R1, 2026-10-18) and signed off as gold `pilot-gold-0.2` by R1 and the study lead (2026-10-19; [log](review_logs/2026-10-19_pilot_gold_signoff.md)).** See [the audit](PILOT_AUDIT.md), [schema](ANNOTATION_SCHEMA.md), [protocol](ANNOTATION_PROTOCOL.md) and [scaling plan](SCALING_PLAN.md).
 
 | Domain | Tasks |
 |---|---|
@@ -14,7 +14,7 @@ The 25-task pilot has been internally audited and revised. **Local structural ch
 - 159 RIUs after rubric revision 2: 80 critical (50.3%), 79 supporting.
 - 138 binary units; 21 with explicit 0/0.5/1 anchors.
 - AI validation after revision 2: all 25 records agreed ([log](review_logs/2026-10-18_AI_pilot_validation.md)). Human validation: R1 confirmed all 25 ([log](review_logs/2026-10-18_R1_human_validation.md)). Reviewer packet: [review_logs/pilot_human_review_packet.md](review_logs/pilot_human_review_packet.md).
-- All records `human-reviewed` under the single-validator protocol; not yet frozen gold.
+- All records `frozen` as gold `pilot-gold-0.2`; file hashes pinned in [PILOT_GOLD_FREEZE.json](PILOT_GOLD_FREEZE.json) and enforced by the validator.
 - Extended-context items SYN091 and SYN100 retained.
 - Prompt corpus v0.3 (2026-10-18): BN and BN-CS rewritten, English unchanged from `74604be07b2246e1d7f063088a35799721290e81`. Pilot RIU text is unchanged; prompt hashes were re-pinned. Corpus v0.3.1 changes only SYN079 (not a pilot task). See [CORPUS_CHANGELOG.md](../prompts/CORPUS_CHANGELOG.md).
 - No evaluation model calls or model outputs.

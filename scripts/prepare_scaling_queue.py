@@ -21,8 +21,8 @@ def queue():
         if expansion: selected.add(key)
         rows.append({k:row[k] for k in ['task_id', 'domain', 'subdomain', 'difficulty']} | {
             'annotation_status': pilot[row['task_id']]['status'] if row['task_id'] in pilot else 'not-annotated',
-            'next_step': ('gold-sign-off' if pilot[row['task_id']]['status'] == 'human-reviewed' else 'human-validation') if row['task_id'] in pilot else ('expansion-calibration' if expansion else 'after-calibration-gate')})
-    return {'schema_version':'0.2','gate':'pending-expanded-calibration-and-gold-sign-off',
+            'next_step': {'frozen': 'gold-frozen', 'human-reviewed': 'gold-sign-off'}.get(pilot[row['task_id']]['status'], 'human-validation') if row['task_id'] in pilot else ('expansion-calibration' if expansion else 'after-calibration-gate')})
+    return {'schema_version':'0.2','gate':'pending-expanded-calibration',
             'selection_rule':'First task_id in each domain/subdomain/difficulty stratum absent from the original pilot; calibrate before production batches.',
             'tasks':rows}
 

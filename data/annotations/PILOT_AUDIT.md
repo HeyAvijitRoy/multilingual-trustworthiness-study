@@ -5,7 +5,7 @@ Reviewer provenance: one Codex agent, internal methodological review; no indepen
 
 ## Finding and disposition
 
-**Internal revision gate: PASS. Production scaling/gold freeze gate: PENDING.** The original schema validator checked structure, not the substantive assertions its manifest implied. Revisions now distinguish those claims. No frozen prompt bytes changed and no model responses were generated or scored.
+**Internal revision gate: PASS. Pilot gold freeze: SIGNED OFF 2026-10-19 (`review_logs/2026-10-19_pilot_gold_signoff.md`). Production scaling gate: PENDING expansion calibration.** The original schema validator checked structure, not the substantive assertions its manifest implied. Revisions now distinguish those claims. No frozen prompt bytes changed and no model responses were generated or scored.
 
 The original 130 units included 100 critical (76.9%). Broad criticality language encouraged equating explicit prompt factors with indispensable units. Bundling also inflated the difficulty of satisfying a unit and hid which facts were omitted. There is no justified target percentage: the revised distribution is an outcome of unit-level decisions, not a quota.
 
@@ -52,7 +52,7 @@ The findings in `review_logs/2026-10-18_AI_bengali_prereview.md` (sections 3–4
 - **Visibility:** TECH006, CYBER010, DEC010 explicit → mixed; DEC009 implicit → mixed.
 - **Clarifications:** silence rules (PROC001, DEC006), conditional wording (CYBER001), "major change" boundary (TECH001), Bengali sentence segmentation (SYN091), retention reading (SYN100).
 
-Result: **159 RIUs, 80 critical (50.3%), 79 supporting; 138 binary and 21 ordinal.** An AI validation agreed with all 25 revised records and listed five judgment calls for human reviewers (`review_logs/2026-10-18_AI_pilot_validation.md`). R1 then validated all 25 records on 2026-10-18 (`review_logs/2026-10-18_R1_human_validation.md`); statuses are `human-reviewed`. The table below records revision 1.
+Result: **159 RIUs, 80 critical (50.3%), 79 supporting; 138 binary and 21 ordinal.** An AI validation agreed with all 25 revised records and listed five judgment calls for human reviewers (`review_logs/2026-10-18_AI_pilot_validation.md`). R1 then validated all 25 records on 2026-10-18 (`review_logs/2026-10-18_R1_human_validation.md`); R1 and the study lead signed off the pilot as gold `pilot-gold-0.2` on 2026-10-19 (`review_logs/2026-10-19_pilot_gold_signoff.md`); statuses are `frozen`. The table below records revision 1.
 
 ## Distribution after revision
 

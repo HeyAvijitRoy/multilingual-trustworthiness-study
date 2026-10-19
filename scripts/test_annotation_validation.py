@@ -6,7 +6,7 @@ from pathlib import Path
 import tempfile
 import unittest
 from validate_pilot_annotations import (ANN, FILES, read_jsonl, validate_record,
-    validate_records, validate_freeze, load_rows)
+    validate_records, validate_freeze, validate_gold_freeze, load_rows)
 
 class AnnotationValidationTests(unittest.TestCase):
     @classmethod
@@ -81,6 +81,21 @@ class AnnotationValidationTests(unittest.TestCase):
             with self.assertRaises(ValueError): validate_freeze(root, manifest)
             (folder/'extra.csv').unlink(); path.unlink()
             with self.assertRaises(ValueError): validate_freeze(root, manifest)
+
+    def test_pilot_gold_hashes(self):
+        validate_gold_freeze()
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); folder = root/'data/annotations'; folder.mkdir(parents=True)
+            (folder/'signoff.md').write_text('signed\n')
+            files = {}
+            for name in FILES:
+                (folder/name).write_bytes(b'gold\n'); files[f'data/annotations/{name}'] = hashlib.sha256(b'gold\n').hexdigest()
+            manifest = {'gold_version':'test', 'signoff_log':'signoff.md', 'algorithm':'sha256', 'files':files}
+            validate_gold_freeze(root, manifest)
+            (folder/FILES[0]).write_bytes(b'edited\n')
+            with self.assertRaisesRegex(ValueError, 'changed after sign-off'): validate_gold_freeze(root, manifest)
+            (folder/FILES[0]).write_bytes(b'gold\n'); (folder/'signoff.md').unlink()
+            with self.assertRaisesRegex(ValueError, 'sign-off log missing'): validate_gold_freeze(root, manifest)
 
 if __name__ == '__main__':
     unittest.main()

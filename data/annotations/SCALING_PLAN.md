@@ -16,7 +16,7 @@ Regenerate only the queue with `python3 scripts/prepare_scaling_queue.py`; verif
 
 ## Execution gates
 
-1. Human-validate the 25 revised tasks using protocol 0.2 and resolve the frozen-language flags. **Done:** R1, 2026-10-18; language flags resolved in corpus v0.3; pilot gold signed off and frozen 2026-10-19. Establish acceptable rater-agreement criteria before collecting calibration ratings.
+1. Human-validate the 25 revised tasks using protocol 0.2 and resolve the frozen-language flags. **Done:** R1, 2026-10-18; language flags resolved in corpus v0.3; pilot gold signed off and frozen 2026-10-19. Establish acceptable rater-agreement criteria before collecting calibration ratings. Fixtures, blind rater sheets and the agreement analysis are set up in [`data/calibration/`](../calibration/README.md).
 2. Annotate the expansion strata in small batches and have the human validator review each batch. Use human-authored scoring fixtures to test binary and ordinal anchors in all three languages. Log changes and recheck the pilot when a rule changes.
 3. Freeze the accepted production annotation protocol. Annotate remaining tasks in reviewable batches of up to 25, with validator review of critical units and all ambiguities, and of at least a prespecified stratified 20% of ordinary units per batch. If any sampled unit reveals a systematic rule error, expand review to every affected unit. These are prospective QA choices, not established empirical thresholds.
 4. Maintain one final annotation record per task in `data/annotations/full/`, including copies of the accepted pilot/expansion records. Use empty `source_riu_ids` for new tasks. Never put queue JSONL or score logs in this annotation directory.
@@ -32,6 +32,7 @@ python3 scripts/validate_prompt_corpus.py
 python3 scripts/validate_pilot_annotations.py
 python3 -m unittest discover -s scripts -p 'test_*.py'
 python3 scripts/prepare_scaling_queue.py --check
+python3 scripts/calibration.py check
 python3 scripts/validate_pilot_annotations.py --scope batch --annotation-dir data/annotations/full
 python3 scripts/validate_pilot_annotations.py --scope full --annotation-dir data/annotations/full
 ```

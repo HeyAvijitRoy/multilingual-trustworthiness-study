@@ -1,0 +1,9 @@
+{
+  "set_by": null,
+  "set_date": null,
+  "primary_coefficient": "krippendorff_alpha_ordinal",
+  "decision_statistic": null,
+  "minimum": null,
+  "unresolved_disagreement_policy": "Every disagreement on a critical unit, a safety-relevant judgment or a semantic-equivalence judgment must be adjudicated before the production protocol is frozen, regardless of aggregate agreement (ANNOTATION_PROTOCOL.md).",
+  "notes": null
+}

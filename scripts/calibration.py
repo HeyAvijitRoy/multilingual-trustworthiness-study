@@ -6,9 +6,9 @@ Standard library only; no model calls, and it never writes response text.
   python3 scripts/calibration.py sheets --rater R2 --rater R3  # blind packet + score sheet per rater
   python3 scripts/calibration.py agreement SHEET_A SHEET_B [--out REPORT.md]
 
-Fixture preparation follows ANNOTATION_PROTOCOL.md. Sheets are written to
-data/calibration/sheets/; distribute each rater's pair privately and keep the answer
-key away from raters until both sheets are returned.
+Fixture preparation follows ANNOTATION_PROTOCOL.md. Each rater has a separate
+packet and sheet under data/calibration/sheets/. The calibration design keeps
+raters blind to the answer key until both rating sheets have been returned.
 """
 from __future__ import annotations
 import argparse
@@ -241,11 +241,11 @@ def sheets(raters, cal=CAL):
         order = sorted(plan)
         random.Random(f'{rater}-calibration').shuffle(order)
         md = [f'# Calibration scoring packet for {rater}', '',
-              'Score every item for every response, using only the anchors shown and `ANNOTATION_PROTOCOL.md`. '
-              'Work alone; do not discuss responses with the other rater until both sheets are returned. '
-              'Record scores in the matching CSV: `score` is 0/1 for binary items, 0/0.5/1 for ordinal items, '
+              'Scoring covers every item for every response, using the anchors shown and `ANNOTATION_PROTOCOL.md`. '
+              'Ratings are independent, with no discussion between raters until both sheets are returned. '
+              'The matching CSV records each rating: `score` is 0/1 for binary items, 0/0.5/1 for ordinal items, '
               'and 1 (pass) or 0 (fail/flagged) for task checks. `reason` for units is one of '
-              'met, partial, omitted, incorrect, insufficient, non_answer. Quote the deciding span in `evidence`.', '']
+              'met, partial, omitted, incorrect, insufficient, non_answer. The `evidence` field quotes the deciding span.', '']
         rows = []
         for number, fid in enumerate(order, 1):
             row, rec = plan[fid], records[plan[fid]['task_id']]

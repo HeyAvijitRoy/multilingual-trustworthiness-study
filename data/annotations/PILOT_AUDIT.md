@@ -68,8 +68,8 @@ Total: **155 RIUs, 82 critical (52.9%), 73 supporting; 133 binary and 22 ordinal
 
 ## Scoring and atomicity decisions
 
-- Binary remains adequate for accurate numeric facts, clear constraints and discrete actions. An incorrect value must not earn half credit just because its direction is correct.
-- Anchored partial credit is defensible for a limited set of reasoning/procedural requirements, subject to rater calibration. Generic “partly correct” is prohibited. Binary sensitivity analysis remains mandatory.
+- Binary remains adequate for accurate numeric facts, clear constraints and discrete actions. An incorrect value receives no half credit merely because its direction is correct.
+- Anchored partial credit is defensible for a limited set of reasoning/procedural requirements, subject to rater calibration. Partial credit depends on explicit anchors rather than a generic “partly correct” judgment. Binary sensitivity analysis accompanies rubric coverage.
 - Before/after values are attributes of a single comparison, not independent atoms. Splitting 3.1%, 2.6%, and decrease into three points would reward fragments lacking the intended relation.
 - Evidence and inference are distinct only when anchors distinguish them. TECH004 checks name concrete evidence; its critical comparison requires a result-to-hypothesis interpretation. CYBER009 current grants and required target permissions are likewise distinct.
 - “Any one example” versus “all parts required” is now explicit. There is no “enough implementation details” threshold in SYN100. TECH001 secondary checks remain alternatives, not a checklist of all possible evidence.
@@ -88,17 +88,17 @@ The pilot is purposive, not representative: technical tasks are all operating-sy
 
 | Task | Frozen evidence | Concern and handling |
 |---|---|---|
-| TECH006 | BN-CS `প্রো file` | Mechanical split of “profile”; inspect comprehensibility and whether lexical corruption changes difficulty. Preserve bytes; pending bilingual review. |
-| DEC006 | BN-CS `impact-িত` | Mechanical replacement inside a Bengali word; naturalness concern not caught by script-boundary checks. Preserve bytes; pending bilingual review. |
-| CYBER009 | EN “critical production workflow”; BN `গুরুত্বপূর্ণ বাস্তব কাজ` | Potential weakening of production/operational semantics. Do not add language-specific scoring requirements; bilingual adjudication needed. |
-| SYN100 | EN “long-term retention”; BN `দীর্ঘমেয়াদি দক্ষতা ধরে রাখা` | Bengali makes skill retention more specific than the English phrase. Score the shared lack-of-retention-evidence concept and adjudicate equivalence before evaluation. |
+| TECH006 | BN-CS `প্রো file` | Mechanical split of “profile”; the review question concerned comprehensibility and possible difficulty changes from lexical corruption. Bilingual review was pending at this stage; bytes were preserved. |
+| DEC006 | BN-CS `impact-িত` | Mechanical replacement inside a Bengali word; naturalness concern not caught by script-boundary checks. Bilingual review was pending at this stage; bytes were preserved. |
+| CYBER009 | EN “critical production workflow”; BN `গুরুত্বপূর্ণ বাস্তব কাজ` | Potential weakening of production/operational semantics. Bilingual adjudication concerned the shared requirement rather than language-specific scoring. |
+| SYN100 | EN “long-term retention”; BN `দীর্ঘমেয়াদি দক্ষতা ধরে রাখা` | Bengali makes skill retention more specific than the English phrase. Review concerned the shared lack-of-retention-evidence concept and equivalence before evaluation. |
 
 **Update, corpus v0.3 (2026-10-18).** The study lead chose the versioned-corpus-repair route for these flags. All four are addressed in the v0.3 Bengali and BN-CS text, as is every other language issue in the AI pre-review (`review_logs/2026-10-18_AI_bengali_prereview.md`). The resolutions are listed in [CORPUS_CHANGELOG.md](../prompts/CORPUS_CHANGELOG.md). English prompts and RIU text are unchanged. The v0.3 text was validated by R1 and approved and frozen by the study lead on 2026-10-18 (`data/annotations/review_logs/2026-10-18_R1_human_validation.md`), and the prompt corpus is frozen at v0.3. These corpus-level flags are therefore closed.
 
-These are review flags, not adjudicated exclusion decisions. Check all three variants for every task before freeze. If a material mismatch is confirmed, the study lead must choose a separately versioned corpus repair or a prospectively documented paired-task exclusion. Do not silently edit frozen prompts, tailor RIUs per language, or select exclusions after model results.
+These historical flags concerned review of all three variants before freeze rather than adjudicated exclusion decisions. The policy for confirmed material mismatches is a study-lead-approved versioned corpus repair or a prospectively documented paired-task exclusion. Frozen prompt edits, language-specific RIUs and outcome-dependent exclusions are outside that policy.
 
 ## Validation evidence and limits
 
 Local corpus validation, pilot validation, negative validator tests, deterministic 500-task queue verification and patch checks are required. Prompt hashes are additionally compared against the baseline git blobs during this audit. CI is read-only; the old self-mutating corpus-cleanup workflow is retired.
 
-Automated checks cover field/type/enum integrity, duplicate JSON keys and task IDs, exact pilot membership, corpus domain/difficulty joins, all three prompt hashes, binary/ordinal anchors, description-rule consistency, task checks, status gates and unchanged corpus bytes. Semantic overlap, factual adequacy, valid criticality and valid sign-off cannot be proved by these checks. No inter-rater agreement or model performance is reported. See `ANNOTATION_PROTOCOL.md` for the next validation stage.
+Automated checks cover field/type/enum integrity, duplicate JSON keys and task IDs, exact pilot membership, corpus domain/difficulty joins, all three prompt hashes, binary/ordinal anchors, description-rule consistency, task checks, status gates and unchanged corpus bytes. Semantic overlap, factual adequacy, valid criticality and valid sign-off cannot be proved by these checks. No inter-rater agreement or model performance is reported. `ANNOTATION_PROTOCOL.md` describes the next validation stage.

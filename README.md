@@ -76,22 +76,16 @@ Corpus QA scripts are under `scripts/`:
 
 ## Research Integrity
 
-Prompt variants must preserve the same semantic task, factual context, constraints, difficulty, and expected information requirements across language conditions. Bengali prompts should use natural contemporary Bengali rather than rigid literal translation. Code-switched prompts should reflect plausible Bengali-English professional or technical discourse rather than arbitrary insertion of English words or English prompts wrapped in Bengali instructions.
+The matched prompt design preserves the same semantic task, factual context, constraints, difficulty and expected information requirements across language conditions. Bengali prompts use natural contemporary Bengali. Code-switched prompts reflect plausible Bengali-English professional or technical discourse with Bengali as the matrix language.
 
-The prompt corpus will be frozen before full model evaluation. Annotation and scoring metadata will be stored separately from the immutable prompt text.
+The prompt corpus is frozen before full model evaluation. Annotation and scoring metadata are stored separately from the immutable prompt text.
 
 ## RIU annotation status
 
-The 25-task pilot has been methodologically revised under schema 0.2 (rubric revision 2, 2026-10-18): 159 RIUs, 80 critical, with binary scoring for discrete requirements and explicit partial-credit anchors for 21 graded requirements. All 25 records were validated by the study's validator (R1) on 2026-10-18 and were signed off by R1 and the study lead on 2026-10-19 and are frozen as gold `pilot-gold-0.2` ([sign-off](data/annotations/review_logs/2026-10-19_pilot_gold_signoff.md)). [Read the audit](data/annotations/PILOT_AUDIT.md) and [annotation protocol](data/annotations/ANNOTATION_PROTOCOL.md).
+The 25-task pilot has been methodologically revised under schema 0.2 (rubric revision 2, 2026-10-18): 159 RIUs, 80 critical, with binary scoring for discrete requirements and explicit partial-credit anchors for 21 graded requirements. All 25 records were validated by the study's validator (R1) on 2026-10-18 and were signed off by R1 and the study lead on 2026-10-19 and are frozen as gold `pilot-gold-0.2` ([sign-off](data/annotations/review_logs/2026-10-19_pilot_gold_signoff.md)). [Pilot audit](data/annotations/PILOT_AUDIT.md) and [annotation protocol](data/annotations/ANNOTATION_PROTOCOL.md).
 
 The prompt files are byte-pinned as corpus v0.3.1 in `data/annotations/PROMPT_FREEZE.json` (superseding v0.3 at commit `dfbd25f`, which superseded v0.2 at `74604be`); the English of all pilot tasks is unchanged, so the pilot RIU text still applies and only its prompt hashes were re-pinned. The corpus is frozen; any change requires a new versioned release. The [scaling plan](data/annotations/SCALING_PLAN.md) prepares all 500 tasks but gates production annotation and model runs on validation, expanded calibration and gold sign-off. All 25 pilot records are frozen gold; their hashes are pinned in `data/annotations/PILOT_GOLD_FREEZE.json`. The legacy cleanup workflow is now read-only.
 
-Run local checks with Python 3.10 or newer (CI uses 3.11):
+## Validation support
 
-```sh
-python3 scripts/validate_prompt_corpus.py
-python3 scripts/validate_pilot_annotations.py
-python3 -m unittest discover -s scripts -p 'test_*.py'
-python3 scripts/prepare_scaling_queue.py --check
-python3 scripts/freeze_prompt_corpus.py --check
-```
+Validation tooling covers corpus structure, pilot annotations, frozen-file hashes and scaling-queue consistency, with regression tests under `scripts/`. It supports Python 3.10 or newer; CI uses Python 3.11.

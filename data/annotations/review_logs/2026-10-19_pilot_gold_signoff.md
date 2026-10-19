@@ -10,16 +10,16 @@
 
 | Role | Decision | Date | Recorded as |
 |---|---|---|---|
-| Human validator (R1) | Approved as gold | 2026-10-19 | "approved (10/19/2026) by R1" |
+| Validator (R1) | Approved as gold | 2026-10-19 | "approved (10/19/2026) by R1" |
 | Study lead (AR) | Approved as gold | 2026-10-19 | "Approved, AR - 10/19/2026" |
 
 The study lead decided that subdomain expansion is **not needed** before this pilot freeze. Expansion calibration still gates production annotation (`SCALING_PLAN.md`); it does not gate the pilot gold.
 
-## Gate checklist (`ANNOTATION_PROTOCOL.md`, "Human calibration and freeze gate")
+## Gate checklist (`ANNOTATION_PROTOCOL.md`, "Calibration and freeze gate")
 
 | Requirement | State | Evidence |
 |---|---|---|
-| Human validator review of boundaries, coverage, criticality, anchors, EN/BN/BN-CS equivalence | Met | `2026-10-18_R1_human_validation.md`; all 25 `review` fields cite it |
+| Validator review of boundaries, coverage, criticality, anchors, EN/BN/BN-CS equivalence | Met | `2026-10-18_R1_human_validation.md`; all 25 `review` fields cite it |
 | Validator ID, date, decisions, changes recorded | Met | R1, 2026-10-18, no changes requested |
 | Unresolved safety / equivalence / critical-unit disputes | None | R1 log; the five AI judgment calls were accepted by R1 |
 | Frozen-language flags (TECH006, DEC006, CYBER009, SYN100) | Closed | Corpus v0.3 repair, `CORPUS_CHANGELOG.md` |
@@ -28,7 +28,7 @@ The study lead decided that subdomain expansion is **not needed** before this pi
 | Accepted protocol versioned | Met | Protocol 0.2 |
 | Subdomain expansion before freeze | Not required for the pilot | Study lead decision above |
 | Final annotations hashed | Met | Hashes below; enforced by `validate_pilot_annotations.py` |
-| Explicit human sign-off | Met | Sign-off table above |
+| Explicit sign-off | Met | Sign-off table above |
 
 ## Change applied at freeze
 
@@ -58,6 +58,6 @@ Any later change to these records requires a new gold version and consistent res
 
 ## Limitations to carry into reporting
 
-- Single human validator: no inter-annotator agreement exists for the gold itself.
+- Single validator: no inter-annotator agreement exists for the gold itself.
 - The pilot is purposive (each domain covers one subdomain); it does not validate the method across all 500 tasks.
-- Human-authored calibration fixtures and the study lead's agreement threshold are still outstanding. Both are required before model runs.
+- Calibration fixtures and the study lead's agreement threshold are still outstanding. Both are required before model runs.

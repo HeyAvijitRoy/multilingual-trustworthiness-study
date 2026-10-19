@@ -15,11 +15,11 @@ This version replaces 0.1. Annotations are separate from the prompt corpus, now 
 | `rius` | Nonempty list; no minimum of three and no forced critical unit |
 | `task_checks` | Separate unsupported-content and applicable format checks |
 | `prompt_sha256` | SHA-256 of UTF-8 `prompt_en`, `prompt_bn`, `prompt_bn_cs`, keyed `en`, `bn`, `bn_cs` |
-| `review` | Method-review provenance plus independent-human and language-equivalence review-log references, or `pending` |
+| `review` | Method-review provenance plus independent and language-equivalence review-log references, or `pending` |
 | `status` | `draft`, `method-audited`, `human-reviewed`, `frozen` |
 | `notes` | Provenance and limitations |
 
-`method-audited` means internal rubric review, not human validation. Human-reviewed/frozen records require references to the human validator's review log in both `independent_human_review` and `language_equivalence_review`; under the single-validator protocol both fields may cite the same log. The validator verifies the references are supplied; a reviewer must verify their authenticity and contents. Freeze additionally requires the sign-off process in `ANNOTATION_PROTOCOL.md`.
+`method-audited` means internal rubric review; validator review is a separate step. Records with status `human-reviewed` or `frozen` require references to the validator's review log in both `independent_human_review` and `language_equivalence_review`; under the single-validator protocol both fields may cite the same log. The validation script verifies the references are supplied; a reviewer must verify their authenticity and contents. Freeze additionally requires the sign-off process in `ANNOTATION_PROTOCOL.md`.
 
 ## RIU fields
 

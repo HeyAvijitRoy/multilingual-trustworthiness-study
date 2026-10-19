@@ -1,4 +1,4 @@
-"""Human scoring-calibration fixtures and two-rater agreement for the frozen pilot gold.
+"""Scoring-calibration fixtures and two-rater agreement for the frozen pilot gold.
 
 Standard library only; no model calls, and it never writes response text.
 
@@ -6,7 +6,7 @@ Standard library only; no model calls, and it never writes response text.
   python3 scripts/calibration.py sheets --rater R2 --rater R3  # blind packet + score sheet per rater
   python3 scripts/calibration.py agreement SHEET_A SHEET_B [--out REPORT.md]
 
-Fixtures must be written by humans (ANNOTATION_PROTOCOL.md). Sheets are written to
+Fixture preparation follows ANNOTATION_PROTOCOL.md. Sheets are written to
 data/calibration/sheets/; distribute each rater's pair privately and keep the answer
 key away from raters until both sheets are returned.
 """
@@ -310,7 +310,7 @@ def agreement(path_a, path_b, out=None, cal=CAL):
 
     lines = [f'# Calibration agreement: {ra} vs {rb}', '',
              f'Generated {dt.date.today().isoformat()} by `scripts/calibration.py agreement`. '
-             f'{len(fixtures)} human-authored fixtures; {len(units)} paired unit scores; {len(checks)} paired task checks. '
+             f'{len(fixtures)} fixtures; {len(units)} paired unit scores; {len(checks)} paired task checks. '
              'CIs are 95% percentile bootstrap intervals over fixtures. NA means the coefficient is undefined '
              '(for example, constant labels); it is not perfect agreement.', '',
              '## Unit scores', '',

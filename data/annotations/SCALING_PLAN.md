@@ -6,24 +6,24 @@ The repository is ready to support controlled scaling, but bulk annotation is ga
 
 `SCALING_QUEUE.json` covers every frozen task exactly once with domain, subdomain, difficulty, annotation status and next step. It contains no fabricated gold or model responses.
 
-- 25 existing pilot tasks: human-validated by R1 (2026-10-18); frozen as gold `pilot-gold-0.2` (2026-10-19, `review_logs/2026-10-19_pilot_gold_signoff.md`).
+- 25 existing pilot tasks: validated by R1 (2026-10-18); frozen as gold `pilot-gold-0.2` (2026-10-19, `review_logs/2026-10-19_pilot_gold_signoff.md`).
 - 132 expansion-calibration tasks: the lowest task ID in each domain/subdomain/difficulty stratum absent from the original pilot.
 - 343 remaining tasks: annotate after the calibration gate.
 
-This intentionally broad deterministic expansion exposes domain transfer issues before repetitive production annotation. It is a proposed work allocation, not a claim that 132 additional items have been accepted. If the human team chooses a smaller stratified calibration design, document the selection and rationale prospectively and update the queue before annotation. Do not use model performance to choose items.
+This intentionally broad deterministic expansion exposes domain transfer issues before repetitive production annotation. It is a proposed work allocation, not a claim that 132 additional items have been accepted. If the study team chooses a smaller stratified calibration design, document the selection and rationale prospectively and update the queue before annotation. Do not use model performance to choose items.
 
 Regenerate only the queue with `python3 scripts/prepare_scaling_queue.py`; verify without writing with `--check`.
 
 ## Execution gates
 
-1. Human-validate the 25 revised tasks using protocol 0.2 and resolve the frozen-language flags. **Done:** R1, 2026-10-18; language flags resolved in corpus v0.3; pilot gold signed off and frozen 2026-10-19. Establish acceptable rater-agreement criteria before collecting calibration ratings. Fixtures, blind rater sheets and the agreement analysis are set up in [`data/calibration/`](../calibration/README.md).
-2. Annotate the expansion strata in small batches and have the human validator review each batch. Use human-authored scoring fixtures to test binary and ordinal anchors in all three languages. Log changes and recheck the pilot when a rule changes.
+1. Validate the 25 revised tasks using protocol 0.2 and resolve the frozen-language flags. **Done:** R1, 2026-10-18; language flags resolved in corpus v0.3; pilot gold signed off and frozen 2026-10-19. Establish acceptable rater-agreement criteria before collecting calibration ratings. Fixtures, blind rater sheets and the agreement analysis are set up in [`data/calibration/`](../calibration/README.md).
+2. Annotate the expansion strata in small batches and have the validator review each batch. Use scoring fixtures to test binary and ordinal anchors in all three languages. Log changes and recheck the pilot when a rule changes.
 3. Freeze the accepted production annotation protocol. Annotate remaining tasks in reviewable batches of up to 25, with validator review of critical units and all ambiguities, and of at least a prespecified stratified 20% of ordinary units per batch. If any sampled unit reveals a systematic rule error, expand review to every affected unit. These are prospective QA choices, not established empirical thresholds.
 4. Maintain one final annotation record per task in `data/annotations/full/`, including copies of the accepted pilot/expansion records. Use empty `source_riu_ids` for new tasks. Never put queue JSONL or score logs in this annotation directory.
 5. Run batch validation after each batch and full validation at completion. Full mode must find exactly the 500 corpus task IDs with matching metadata/hashes. Review missing/extra coverage, unit-count distributions, critical proportions, scoring modes and unresolved disputes by domain, subdomain, difficulty and context length.
-6. Obtain documented human-validator and study-lead sign-off, assign a gold version and hash the accepted annotation files. Only then prepare evaluation runs. No generation or judge calls are part of these steps.
+6. Obtain documented validator and study-lead sign-off, assign a gold version and hash the accepted annotation files. Only then prepare evaluation runs. No generation or judge calls are part of these steps.
 
-Review logs should identify task/unit/version, each reviewer's initial proposed boundary/criticality/anchor, language-equivalence decision, disagreement, final resolution, adjudicator and date. Record human review references in the annotation's `review` fields; changing a status string alone is not approval.
+Review logs should identify task/unit/version, each reviewer's initial proposed boundary/criticality/anchor, language-equivalence decision, disagreement, final resolution, adjudicator and date. Record review references in the annotation's `review` fields; changing a status string alone is not approval.
 
 ## Commands
 

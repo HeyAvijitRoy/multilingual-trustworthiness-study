@@ -52,7 +52,7 @@ The findings in `review_logs/2026-10-18_AI_bengali_prereview.md` (sections 3–4
 - **Visibility:** TECH006, CYBER010, DEC010 explicit → mixed; DEC009 implicit → mixed.
 - **Clarifications:** silence rules (PROC001, DEC006), conditional wording (CYBER001), "major change" boundary (TECH001), Bengali sentence segmentation (SYN091), retention reading (SYN100).
 
-Result: **159 RIUs, 80 critical (50.3%), 79 supporting; 138 binary and 21 ordinal.** An AI validation agreed with all 25 revised records and listed five judgment calls for human reviewers (`review_logs/2026-10-18_AI_pilot_validation.md`). R1 then validated all 25 records on 2026-10-18 (`review_logs/2026-10-18_R1_human_validation.md`); R1 and the study lead signed off the pilot as gold `pilot-gold-0.2` on 2026-10-19 (`review_logs/2026-10-19_pilot_gold_signoff.md`); statuses are `frozen`. The table below records revision 1.
+Result: **159 RIUs, 80 critical (50.3%), 79 supporting; 138 binary and 21 ordinal.** An AI validation agreed with all 25 revised records and listed five judgment calls for reviewers (`review_logs/2026-10-18_AI_pilot_validation.md`). R1 then validated all 25 records on 2026-10-18 (`review_logs/2026-10-18_R1_human_validation.md`); R1 and the study lead signed off the pilot as gold `pilot-gold-0.2` on 2026-10-19 (`review_logs/2026-10-19_pilot_gold_signoff.md`); statuses are `frozen`. The table below records revision 1.
 
 ## Distribution after revision
 
@@ -69,7 +69,7 @@ Total: **155 RIUs, 82 critical (52.9%), 73 supporting; 133 binary and 22 ordinal
 ## Scoring and atomicity decisions
 
 - Binary remains adequate for accurate numeric facts, clear constraints and discrete actions. An incorrect value must not earn half credit just because its direction is correct.
-- Anchored partial credit is defensible for a limited set of reasoning/procedural requirements, subject to human calibration. Generic “partly correct” is prohibited. Binary sensitivity analysis remains mandatory.
+- Anchored partial credit is defensible for a limited set of reasoning/procedural requirements, subject to rater calibration. Generic “partly correct” is prohibited. Binary sensitivity analysis remains mandatory.
 - Before/after values are attributes of a single comparison, not independent atoms. Splitting 3.1%, 2.6%, and decrease into three points would reward fragments lacking the intended relation.
 - Evidence and inference are distinct only when anchors distinguish them. TECH004 checks name concrete evidence; its critical comparison requires a result-to-hypothesis interpretation. CYBER009 current grants and required target permissions are likewise distinct.
 - “Any one example” versus “all parts required” is now explicit. There is no “enough implementation details” threshold in SYN100. TECH001 secondary checks remain alternatives, not a checklist of all possible evidence.
@@ -93,7 +93,7 @@ The pilot is purposive, not representative: technical tasks are all operating-sy
 | CYBER009 | EN “critical production workflow”; BN `গুরুত্বপূর্ণ বাস্তব কাজ` | Potential weakening of production/operational semantics. Do not add language-specific scoring requirements; bilingual adjudication needed. |
 | SYN100 | EN “long-term retention”; BN `দীর্ঘমেয়াদি দক্ষতা ধরে রাখা` | Bengali makes skill retention more specific than the English phrase. Score the shared lack-of-retention-evidence concept and adjudicate equivalence before evaluation. |
 
-**Update, corpus v0.3 (2026-10-18).** The study lead chose the versioned-corpus-repair route for these flags. All four are addressed in the v0.3 Bengali and BN-CS text, as is every other language issue in the AI pre-review (`review_logs/2026-10-18_AI_bengali_prereview.md`). The resolutions are listed in [CORPUS_CHANGELOG.md](../prompts/CORPUS_CHANGELOG.md). English prompts and RIU text are unchanged. The v0.3 text was validated by human validator R1 and approved and frozen by the study lead on 2026-10-18 (`data/annotations/review_logs/2026-10-18_R1_human_validation.md`), and the prompt corpus is frozen at v0.3. These corpus-level flags are therefore closed.
+**Update, corpus v0.3 (2026-10-18).** The study lead chose the versioned-corpus-repair route for these flags. All four are addressed in the v0.3 Bengali and BN-CS text, as is every other language issue in the AI pre-review (`review_logs/2026-10-18_AI_bengali_prereview.md`). The resolutions are listed in [CORPUS_CHANGELOG.md](../prompts/CORPUS_CHANGELOG.md). English prompts and RIU text are unchanged. The v0.3 text was validated by R1 and approved and frozen by the study lead on 2026-10-18 (`data/annotations/review_logs/2026-10-18_R1_human_validation.md`), and the prompt corpus is frozen at v0.3. These corpus-level flags are therefore closed.
 
 These are review flags, not adjudicated exclusion decisions. Check all three variants for every task before freeze. If a material mismatch is confirmed, the study lead must choose a separately versioned corpus repair or a prospectively documented paired-task exclusion. Do not silently edit frozen prompts, tailor RIUs per language, or select exclusions after model results.
 
@@ -101,4 +101,4 @@ These are review flags, not adjudicated exclusion decisions. Check all three var
 
 Local corpus validation, pilot validation, negative validator tests, deterministic 500-task queue verification and patch checks are required. Prompt hashes are additionally compared against the baseline git blobs during this audit. CI is read-only; the old self-mutating corpus-cleanup workflow is retired.
 
-Automated checks cover field/type/enum integrity, duplicate JSON keys and task IDs, exact pilot membership, corpus domain/difficulty joins, all three prompt hashes, binary/ordinal anchors, description-rule consistency, task checks, status gates and unchanged corpus bytes. Semantic overlap, factual adequacy, valid criticality and genuine human sign-off cannot be proved by these checks. No inter-rater agreement or model performance is reported. See `ANNOTATION_PROTOCOL.md` for the next validation stage.
+Automated checks cover field/type/enum integrity, duplicate JSON keys and task IDs, exact pilot membership, corpus domain/difficulty joins, all three prompt hashes, binary/ordinal anchors, description-rule consistency, task checks, status gates and unchanged corpus bytes. Semantic overlap, factual adequacy, valid criticality and valid sign-off cannot be proved by these checks. No inter-rater agreement or model performance is reported. See `ANNOTATION_PROTOCOL.md` for the next validation stage.

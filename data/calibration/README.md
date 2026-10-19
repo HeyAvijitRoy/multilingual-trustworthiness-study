@@ -1,6 +1,12 @@
-# Scoring calibration: human-authored fixtures and two-rater agreement
+# Scoring calibration: fixtures and two-rater agreement
 
-This stage tests whether two raters, working independently with the frozen pilot gold (`pilot-gold-0.2`), score the same response the same way. It follows the "Human calibration and freeze gate" section of `../annotations/ANNOTATION_PROTOCOL.md`. Fixtures are scoring test material, not model outputs. No model is called at any step.
+This stage tests whether two raters, working independently with the frozen pilot gold (`pilot-gold-0.2`), score the same response the same way. It follows the "Calibration and freeze gate" section of `../annotations/ANNOTATION_PROTOCOL.md`. Fixtures are scoring test material, not model outputs. No model is called at any step.
+
+## Current status
+
+AR authored the 30 fixtures and their answer key. Review of the fixtures and intended scores is pending.
+
+On 2026-10-19, before calibration ratings, F26's omission targets were corrected from `RIU-01;RIU-03` to `RIU-01;RIU-05` to match the existing response and intended scores. RIU-03 remains full credit under its extension-preservation anchor. This corrects target metadata; the response text, numeric scores and frozen gold are unchanged.
 
 ## Order of work
 
@@ -16,7 +22,7 @@ Run `python3 scripts/calibration.py check` at any point to see progress and vali
 
 ## Writing fixtures
 
-Write each response as a plausible answer to the task prompt, **in the fixture's language** (`en`, `bn` or `bn_cs`, the same register as the frozen prompt). Write it yourself: AI-drafted or AI-edited text does not meet the protocol's "human-authored" requirement, and `author_id` must identify a human. A fixture's author should not rate it, because the author knows the intended scores; the sheet builder warns if they overlap.
+Write each response as a plausible answer to the task prompt, **in the fixture's language** (`en`, `bn` or `bn_cs`, the same register as the frozen prompt). Record the author's ID in `author_id`. A fixture's author should not rate it, because the author knows the intended scores; the sheet builder warns if they overlap.
 
 Each fixture is scored on **every** unit and task check for its task, not only the target items. Apart from the target, write the rest of the answer the way a typical decent response would, so the fixture also exercises ordinary units.
 

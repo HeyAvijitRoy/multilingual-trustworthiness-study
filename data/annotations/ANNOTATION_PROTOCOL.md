@@ -2,7 +2,7 @@
 
 ## Decision and scope
 
-The operational rules below are finalized for the next human calibration round. The revised 25-task pilot passes internal methodological review, automated checks and human validation by the study's validator (R1, 2026-10-18), and was signed off as frozen gold `pilot-gold-0.2` by R1 and the study lead on 2026-10-19 (`review_logs/2026-10-19_pilot_gold_signoff.md`). Subdomain expansion remains a prerequisite for production-scale annotation. Do not generate model responses before gold freeze. See `PILOT_AUDIT.md` and `SCALING_PLAN.md`.
+The operational rules below are finalized for the next calibration round. The revised 25-task pilot passes internal methodological review, automated checks and validation by the study's validator (R1, 2026-10-18), and was signed off as frozen gold `pilot-gold-0.2` by R1 and the study lead on 2026-10-19 (`review_logs/2026-10-19_pilot_gold_signoff.md`). Subdomain expansion remains a prerequisite for production-scale annotation. Do not generate model responses before gold freeze. See `PILOT_AUDIT.md` and `SCALING_PLAN.md`.
 
 ## Construct each annotation from the prompt
 
@@ -53,18 +53,18 @@ For each later response, retain annotation version, task, language, response/run
 
 Average paired task-level measures within domains, then average domains equally for the overall result. This prevents a 19-unit extended-context item from outweighing a four-unit item merely through fragmentation. Report ordinary and extended-context results separately as a sensitivity analysis. Preserve task pairing across languages and cluster repeated runs within tasks. Criticality creates a separate outcome, not an arbitrary numeric weight of 2 versus 1. The ordinal coverage mean is a rubric-defined index, not a claim that human utility is equally spaced.
 
-## Human calibration and freeze gate
+## Calibration and freeze gate
 
-**One human validator** competent in EN and Bengali reviews each task's unit boundaries, coverage, criticality, scoring anchors and equivalence across EN/BN/BN-CS. (Protocol amended 2026-10-18 by the study lead: one validator replaces the earlier two-reviewer requirement.) Preserve the validator's identity or ID, date, decisions, requested changes and their resolution in review logs. An AI or agent pass, including a second pass by the same agent, does not meet this requirement. Because annotations are single-validated, no inter-annotator agreement is available for the gold itself; report this as a limitation.
+**One validator** competent in EN and Bengali reviews each task's unit boundaries, coverage, criticality, scoring anchors and equivalence across EN/BN/BN-CS. (Protocol amended 2026-10-18 by the study lead: one validator replaces the earlier two-reviewer requirement.) Preserve the validator's identity or ID, date, decisions, requested changes and their resolution in review logs. The designated validator must complete the review; internal checks alone do not meet this requirement. Because annotations are single-validated, no inter-annotator agreement is available for the gold itself; report this as a limitation.
 
-Before model runs, use small **human-authored** calibration responses or controlled answer fragments illustrating full credit, omission, partial reasoning, incorrect numbers, contradictions, conditional safeguards and format failures. Include all three languages. These are scoring fixtures, not model evaluation outputs. At least two independent raters should score them blind to each other's labels and, for later model responses, blind to model identity and experimental hypotheses where feasible; language itself cannot be hidden.
+Before model runs, use short calibration responses or controlled answer fragments illustrating full credit, omission, partial reasoning, incorrect numbers, contradictions, conditional safeguards and format failures. Include all three languages. These are scoring fixtures, not model evaluation outputs. At least two independent raters should score them blind to each other's labels and, for later model responses, blind to model identity and experimental hypotheses where feasible; language itself cannot be hidden.
 
 Report exact agreement and confusion matrices; use a prespecified chance-corrected coefficient appropriate to nominal criticality labels or ordered scores, and report per-domain/score-mode results plus uncertainty. Sparse or constant labels can make coefficients undefined; report that rather than treating it as perfect agreement. No agreement values are claimed in this audit. Do not choose an arbitrary universal cutoff retrospectively: before calibration, the study lead must set and record a minimum acceptable agreement and maximum unresolved-disagreement policy. All unresolved safety, semantic-equivalence, or critical-unit disputes block freeze regardless of aggregate agreement.
 
-After resolving issues and expanding subdomain coverage, version the accepted protocol, hash the final annotations and record explicit human sign-off. Any later rubric change requires a new version and consistent rescoring, not selective revision by language/model performance.
+After resolving issues and expanding subdomain coverage, version the accepted protocol, hash the final annotations and record explicit sign-off. Any later rubric change requires a new version and consistent rescoring, not selective revision by language/model performance.
 
 ## Methodological references and limits
 
 Semantic content units have precedent in [Nenkova and Passonneau (2004), The Pyramid Method](https://aclanthology.org/N04-1019/). This study does **not** import Pyramid's reference-frequency weighting: RIUs are prompt-derived requirements with an omission-consequence classification.
 
-[Artstein and Poesio (2008), Inter-Coder Agreement for Computational Linguistics](https://aclanthology.org/J08-4004/) reviews agreement measures and their assumptions. It informs the requirement to distinguish nominal and ordinal agreement; it does not validate this pilot or prescribe its half-credit anchors. The scoring design here remains a preregistered protocol choice to be tested by human calibration.
+[Artstein and Poesio (2008), Inter-Coder Agreement for Computational Linguistics](https://aclanthology.org/J08-4004/) reviews agreement measures and their assumptions. It informs the requirement to distinguish nominal and ordinal agreement; it does not validate this pilot or prescribe its half-credit anchors. The scoring design here remains a preregistered protocol choice to be tested through rater calibration.

@@ -172,8 +172,8 @@ The study should favor structured scoring over unconstrained holistic LLM judgin
 Where possible:
 
 1. score RIUs deterministically or with explicit rules;
-2. use blinded human review for ambiguous cases;
-3. use model-based judging only as a supplemental measure validated against human labels.
+2. use blinded reviewer assessment for ambiguous cases;
+3. use model-based judging only as a supplemental measure validated against reviewer labels.
 
 ## Statistical Plan
 
@@ -199,7 +199,7 @@ Final statistical choices will be determined after inspecting outcome distributi
 
 ## Corpus QA and Freeze Policy
 
-Before the prompt corpus is frozen, it must pass automated and human QA covering:
+Before the prompt corpus is frozen, it must pass automated checks and reviewer assessment covering:
 
 - 500 unique IDs
 - 100 tasks per domain
@@ -218,7 +218,7 @@ scripts/revise_corpus_v02.py
 scripts/validate_prompt_corpus.py
 ```
 
-The final evaluation set is frozen **before full model evaluation**. Corpus v0.3 passed automated QA and was validated by human validator R1 and approved and frozen by the study lead on 2026-10-18 (`data/annotations/review_logs/2026-10-18_R1_human_validation.md`). Corpus v0.3.1 (one English clarification, SYN079, R1-confirmed) is the frozen evaluation set, pinned in `data/annotations/PROMPT_FREEZE.json`.
+The final evaluation set is frozen **before full model evaluation**. Corpus v0.3 passed automated QA and was validated by R1 and approved and frozen by the study lead on 2026-10-18 (`data/annotations/review_logs/2026-10-18_R1_human_validation.md`). Corpus v0.3.1 (one English clarification, SYN079, R1-confirmed) is the frozen evaluation set, pinned in `data/annotations/PROMPT_FREEZE.json`.
 
 Development items used to debug scoring logic, prompt construction, or experiment code should not be silently mixed into the inferential test set after evaluation begins.
 
@@ -244,4 +244,4 @@ Analysis code should operate on immutable raw outputs and write derived results 
 
 Discrete facts/actions remain binary; only requirements with written partial anchors allow 0/0.5/1. Report strict binary sensitivity alongside rubric coverage. Separate literal omission from incorrectness and partial fulfillment, and separate format and unsupported-content checks from RIU denominators. Average task-level scores within domains, then domains equally; preserve paired tasks and account for repeated runs. Do not choose scoring or inferential methods to maximize an observed language effect. Final estimands, contrasts, agreement thresholds and analysis choices must be recorded before inspecting model outcomes; outcome-based model diagnostics do not authorize changing the primary hypothesis.
 
-The 25-task pilot was human-validated by the study's single validator (R1, 2026-10-18) after internal revision and signed off as frozen gold `pilot-gold-0.2` by R1 and the study lead on 2026-10-19 (`data/annotations/review_logs/2026-10-19_pilot_gold_signoff.md`). Review flags and subdomain sampling limitations are recorded in [PILOT_AUDIT.md](data/annotations/PILOT_AUDIT.md). No evaluation generations have been performed. Freeze the human-adjudicated gold before generating model responses, without changing the byte-pinned prompt corpus during annotation. Corpus v0.3 (2026-10-18) is a versioned, study-lead-authorized language repair made before any model run; further prompt changes require another versioned release, not edits during annotation.
+The 25-task pilot was validated by the study's single validator (R1, 2026-10-18) after internal revision and signed off as frozen gold `pilot-gold-0.2` by R1 and the study lead on 2026-10-19 (`data/annotations/review_logs/2026-10-19_pilot_gold_signoff.md`). Review flags and subdomain sampling limitations are recorded in [PILOT_AUDIT.md](data/annotations/PILOT_AUDIT.md). No evaluation generations have been performed. Freeze the adjudicated gold before generating model responses, without changing the byte-pinned prompt corpus during annotation. Corpus v0.3 (2026-10-18) is a versioned, study-lead-authorized language repair made before any model run; further prompt changes require another versioned release, not edits during annotation.

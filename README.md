@@ -88,4 +88,4 @@ The prompt files are byte-pinned as corpus v0.3.1 in `data/annotations/PROMPT_FR
 
 ## Validation support
 
-Validation tooling covers corpus structure, pilot annotations, frozen-file hashes and scaling-queue consistency, with regression tests under `scripts/`. Run validation locally with Python 3.10 or newer; Python 3.11 is the reference environment.
+Validation tooling covers corpus structure, pilot annotations, frozen-file hashes, calibration, scaling-queue consistency and the prospective 132-task expansion batches, with regression tests under `scripts/`. Run the complete local suite with `python3 scripts/validate_all.py` using Python 3.10 or newer; Python 3.11 is the reference environment. The pre-rating baseline is recorded in `data/calibration/PRE_RATING_BASELINE.json`.

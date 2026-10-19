@@ -1,0 +1,16 @@
+{
+  "baseline_name": "calibration-pre-ratings-2026-10-19",
+  "baseline_commit": "37c8b387e2e4a81e5fc6c83613320c6de5cf8da4",
+  "baseline_branch": "baseline/calibration-pre-ratings-2026-10-19",
+  "recorded_date": "2026-10-19",
+  "prompt_corpus_version": "0.3.1",
+  "pilot_gold_version": "pilot-gold-0.2",
+  "agreement_preregistration": {
+    "set_by": "AR",
+    "set_date": "2026-10-19",
+    "primary_coefficient": "krippendorff_alpha_ordinal",
+    "decision_statistic": "point_estimate",
+    "minimum": 0.8
+  },
+  "note": "The baseline commit predates inspection of R2/R3 calibration ratings. Later commits may add outcome-independent local intake, reporting, validation and expansion-batch tooling without changing the frozen calibration materials or preregistered gate."
+}

@@ -13,7 +13,7 @@ class ScalingQueueTests(unittest.TestCase):
         self.assertEqual(len(rows), 500)
         self.assertEqual({r['task_id'] for r in rows}, set(source))
         self.assertEqual(Counter(r['annotation_status'] for r in rows),
-                         Counter({'human-reviewed':25, 'not-annotated':475}))
+                         Counter({'frozen':25, 'not-annotated':475}))
         for row in rows:
             for field in ['domain', 'subdomain', 'difficulty']:
                 self.assertEqual(row[field], source[row['task_id']][field])

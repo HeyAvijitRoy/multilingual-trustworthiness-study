@@ -1,6 +1,6 @@
 {
   "schema_version": "0.2",
-  "gate": "pending-expanded-calibration-and-gold-sign-off",
+  "gate": "pending-expanded-calibration",
   "selection_rule": "First task_id in each domain/subdomain/difficulty stratum absent from the original pilot; calibrate before production batches.",
   "tasks": [
     {
@@ -8,8 +8,8 @@
       "domain": "cybersecurity_digital_safety",
       "subdomain": "account_security",
       "difficulty": "easy",
-      "annotation_status": "human-reviewed",
-      "next_step": "gold-sign-off"
+      "annotation_status": "frozen",
+      "next_step": "gold-frozen"
     },
     {
       "task_id": "CYBER002",
@@ -32,8 +32,8 @@
       "domain": "cybersecurity_digital_safety",
       "subdomain": "account_security",
       "difficulty": "medium",
-      "annotation_status": "human-reviewed",
-      "next_step": "gold-sign-off"
+      "annotation_status": "frozen",
+      "next_step": "gold-frozen"
     },
     {
       "task_id": "CYBER005",
@@ -48,8 +48,8 @@
       "domain": "cybersecurity_digital_safety",
       "subdomain": "account_security",
       "difficulty": "medium",
-      "annotation_status": "human-reviewed",
-      "next_step": "gold-sign-off"
+      "annotation_status": "frozen",
+      "next_step": "gold-frozen"
     },
     {
       "task_id": "CYBER007",
@@ -72,16 +72,16 @@
       "domain": "cybersecurity_digital_safety",
       "subdomain": "account_security",
       "difficulty": "hard",
-      "annotation_status": "human-reviewed",
-      "next_step": "gold-sign-off"
+      "annotation_status": "frozen",
+      "next_step": "gold-frozen"
     },
     {
       "task_id": "CYBER010",
       "domain": "cybersecurity_digital_safety",
       "subdomain": "account_security",
       "difficulty": "hard",
-      "annotation_status": "human-reviewed",
-      "next_step": "gold-sign-off"
+      "annotation_status": "frozen",
+      "next_step": "gold-frozen"
     },
     {
       "task_id": "CYBER011",
@@ -808,8 +808,8 @@
       "domain": "decision_support",
       "subdomain": "prioritization",
       "difficulty": "easy",
-      "annotation_status": "human-reviewed",
-      "next_step": "gold-sign-off"
+      "annotation_status": "frozen",
+      "next_step": "gold-frozen"
     },
     {
       "task_id": "DEC002",
@@ -832,8 +832,8 @@
       "domain": "decision_support",
       "subdomain": "prioritization",
       "difficulty": "medium",
-      "annotation_status": "human-reviewed",
-      "next_step": "gold-sign-off"
+      "annotation_status": "frozen",
+      "next_step": "gold-frozen"
     },
     {
       "task_id": "DEC005",
@@ -848,8 +848,8 @@
       "domain": "decision_support",
       "subdomain": "prioritization",
       "difficulty": "medium",
-      "annotation_status": "human-reviewed",
-      "next_step": "gold-sign-off"
+      "annotation_status": "frozen",
+      "next_step": "gold-frozen"
     },
     {
       "task_id": "DEC007",
@@ -872,16 +872,16 @@
       "domain": "decision_support",
       "subdomain": "prioritization",
       "difficulty": "hard",
-      "annotation_status": "human-reviewed",
-      "next_step": "gold-sign-off"
+      "annotation_status": "frozen",
+      "next_step": "gold-frozen"
     },
     {
       "task_id": "DEC010",
       "domain": "decision_support",
       "subdomain": "prioritization",
       "difficulty": "hard",
-      "annotation_status": "human-reviewed",
-      "next_step": "gold-sign-off"
+      "annotation_status": "frozen",
+      "next_step": "gold-frozen"
     },
     {
       "task_id": "DEC011",
@@ -1608,8 +1608,8 @@
       "domain": "procedural_instructional",
       "subdomain": "documents_admin",
       "difficulty": "easy",
-      "annotation_status": "human-reviewed",
-      "next_step": "gold-sign-off"
+      "annotation_status": "frozen",
+      "next_step": "gold-frozen"
     },
     {
       "task_id": "PROC002",
@@ -1632,8 +1632,8 @@
       "domain": "procedural_instructional",
       "subdomain": "documents_admin",
       "difficulty": "medium",
-      "annotation_status": "human-reviewed",
-      "next_step": "gold-sign-off"
+      "annotation_status": "frozen",
+      "next_step": "gold-frozen"
     },
     {
       "task_id": "PROC005",
@@ -1648,8 +1648,8 @@
       "domain": "procedural_instructional",
       "subdomain": "documents_admin",
       "difficulty": "medium",
-      "annotation_status": "human-reviewed",
-      "next_step": "gold-sign-off"
+      "annotation_status": "frozen",
+      "next_step": "gold-frozen"
     },
     {
       "task_id": "PROC007",
@@ -1672,16 +1672,16 @@
       "domain": "procedural_instructional",
       "subdomain": "documents_admin",
       "difficulty": "hard",
-      "annotation_status": "human-reviewed",
-      "next_step": "gold-sign-off"
+      "annotation_status": "frozen",
+      "next_step": "gold-frozen"
     },
     {
       "task_id": "PROC010",
       "domain": "procedural_instructional",
       "subdomain": "documents_admin",
       "difficulty": "hard",
-      "annotation_status": "human-reviewed",
-      "next_step": "gold-sign-off"
+      "annotation_status": "frozen",
+      "next_step": "gold-frozen"
     },
     {
       "task_id": "PROC011",
@@ -2432,8 +2432,8 @@
       "domain": "information_synthesis",
       "subdomain": "fact_summary",
       "difficulty": "easy",
-      "annotation_status": "human-reviewed",
-      "next_step": "gold-sign-off"
+      "annotation_status": "frozen",
+      "next_step": "gold-frozen"
     },
     {
       "task_id": "SYN005",
@@ -2464,16 +2464,16 @@
       "domain": "information_synthesis",
       "subdomain": "fact_summary",
       "difficulty": "medium",
-      "annotation_status": "human-reviewed",
-      "next_step": "gold-sign-off"
+      "annotation_status": "frozen",
+      "next_step": "gold-frozen"
     },
     {
       "task_id": "SYN009",
       "domain": "information_synthesis",
       "subdomain": "fact_summary",
       "difficulty": "hard",
-      "annotation_status": "human-reviewed",
-      "next_step": "gold-sign-off"
+      "annotation_status": "frozen",
+      "next_step": "gold-frozen"
     },
     {
       "task_id": "SYN010",
@@ -3128,8 +3128,8 @@
       "domain": "information_synthesis",
       "subdomain": "extended_context",
       "difficulty": "medium",
-      "annotation_status": "human-reviewed",
-      "next_step": "gold-sign-off"
+      "annotation_status": "frozen",
+      "next_step": "gold-frozen"
     },
     {
       "task_id": "SYN092",
@@ -3200,16 +3200,16 @@
       "domain": "information_synthesis",
       "subdomain": "extended_context",
       "difficulty": "hard",
-      "annotation_status": "human-reviewed",
-      "next_step": "gold-sign-off"
+      "annotation_status": "frozen",
+      "next_step": "gold-frozen"
     },
     {
       "task_id": "TECH001",
       "domain": "technical_troubleshooting",
       "subdomain": "operating_system",
       "difficulty": "easy",
-      "annotation_status": "human-reviewed",
-      "next_step": "gold-sign-off"
+      "annotation_status": "frozen",
+      "next_step": "gold-frozen"
     },
     {
       "task_id": "TECH002",
@@ -3232,8 +3232,8 @@
       "domain": "technical_troubleshooting",
       "subdomain": "operating_system",
       "difficulty": "medium",
-      "annotation_status": "human-reviewed",
-      "next_step": "gold-sign-off"
+      "annotation_status": "frozen",
+      "next_step": "gold-frozen"
     },
     {
       "task_id": "TECH005",
@@ -3248,8 +3248,8 @@
       "domain": "technical_troubleshooting",
       "subdomain": "operating_system",
       "difficulty": "medium",
-      "annotation_status": "human-reviewed",
-      "next_step": "gold-sign-off"
+      "annotation_status": "frozen",
+      "next_step": "gold-frozen"
     },
     {
       "task_id": "TECH007",
@@ -3272,16 +3272,16 @@
       "domain": "technical_troubleshooting",
       "subdomain": "operating_system",
       "difficulty": "hard",
-      "annotation_status": "human-reviewed",
-      "next_step": "gold-sign-off"
+      "annotation_status": "frozen",
+      "next_step": "gold-frozen"
     },
     {
       "task_id": "TECH010",
       "domain": "technical_troubleshooting",
       "subdomain": "operating_system",
       "difficulty": "hard",
-      "annotation_status": "human-reviewed",
-      "next_step": "gold-sign-off"
+      "annotation_status": "frozen",
+      "next_step": "gold-frozen"
     },
     {
       "task_id": "TECH011",

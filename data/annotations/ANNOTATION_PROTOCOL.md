@@ -2,7 +2,7 @@
 
 ## Decision and scope
 
-The operational rules below are finalized for the next human calibration round. The revised 25-task pilot passes internal methodological review, automated checks and human validation by the study's validator (R1, 2026-10-18); it is **not yet frozen gold**. Subdomain expansion and gold sign-off remain prerequisites for production-scale annotation. Do not generate model responses before gold freeze. See `PILOT_AUDIT.md` and `SCALING_PLAN.md`.
+The operational rules below are finalized for the next human calibration round. The revised 25-task pilot passes internal methodological review, automated checks and human validation by the study's validator (R1, 2026-10-18), and was signed off as frozen gold `pilot-gold-0.2` by R1 and the study lead on 2026-10-19 (`review_logs/2026-10-19_pilot_gold_signoff.md`). Subdomain expansion remains a prerequisite for production-scale annotation. Do not generate model responses before gold freeze. See `PILOT_AUDIT.md` and `SCALING_PLAN.md`.
 
 ## Construct each annotation from the prompt
 

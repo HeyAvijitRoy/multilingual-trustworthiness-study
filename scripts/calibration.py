@@ -2,12 +2,13 @@
 
 Standard library only; no model calls, and it never writes response text.
 
-  python3 scripts/calibration.py check                       # validate plan, fixtures, key, preregistration
-  python3 scripts/calibration.py sheets --rater R2 --rater R3  # blind packet + score sheet per rater
-  python3 scripts/calibration.py agreement SHEET_A SHEET_B [--out REPORT.md]
+  python3 scripts/calibration.py check
+  python3 scripts/calibration.py sheets --rater R2 --rater R3
+  python3 scripts/calibration.py intake --rater R2 --rater R3
 
-Fixture preparation follows ANNOTATION_PROTOCOL.md. Each rater has a separate
-packet and sheet under data/calibration/sheets/. The calibration design keeps
+Fixture preparation follows ANNOTATION_PROTOCOL.md. Generated blind packets,
+returned score sheets, agreement reports and adjudication working files live
+under .local/calibration/ and are ignored by Git. The calibration design keeps
 raters blind to the answer key until both rating sheets have been returned.
 """
 from __future__ import annotations
@@ -23,6 +24,7 @@ from validate_pilot_annotations import ROOT, ANN, FILES, read_jsonl, validate_fr
 from validate_prompt_corpus import load_rows
 
 CAL = ROOT / 'data' / 'calibration'
+LOCAL = ROOT / '.local' / 'calibration'
 LANGS = {'en': 'prompt_en', 'bn': 'prompt_bn', 'bn_cs': 'prompt_bn_cs'}
 PHENOMENA = ['full_credit', 'omission', 'partial_reasoning', 'incorrect_number',
              'contradiction', 'conditional_safeguard', 'format_failure']
@@ -229,12 +231,13 @@ def check(cal=CAL):
     return plan, fixtures, records
 
 
-def sheets(raters, cal=CAL):
+def sheets(raters, cal=CAL, out_dir=None):
     plan, fixtures, records = check(cal)
     if len(fixtures) != len(plan): fail('sheets', f'{len(plan) - len(fixtures)} fixtures are not authored yet')
     if len(set(raters)) < 2: fail('sheets', 'at least two distinct raters are required')
     prompts = {r['task_id']: r for r in load_rows()}
-    out = cal / 'sheets'; out.mkdir(exist_ok=True)
+    out = Path(out_dir) if out_dir else LOCAL / 'sheets'
+    out.mkdir(parents=True, exist_ok=True)
     for rater in raters:
         authored = sorted(f for f, row in fixtures.items() if row['author_id'] == rater)
         if authored: print(f'WARNING: {rater} authored {authored}; an author is not blind to the intended scores')
@@ -267,7 +270,7 @@ def sheets(raters, cal=CAL):
         (out / f'{rater}_packet.md').write_text('\n'.join(md), encoding='utf-8')
         with open(out / f'{rater}_sheet.csv', 'w', encoding='utf-8', newline='') as handle:
             writer = csv.DictWriter(handle, SHEET_FIELDS); writer.writeheader(); writer.writerows(rows)
-        print(f'Wrote sheets/{rater}_packet.md and sheets/{rater}_sheet.csv ({len(rows)} items)')
+        print(f'Wrote {out / f"{rater}_packet.md"} and {out / f"{rater}_sheet.csv"} ({len(rows)} items)')
 
 
 def read_sheet(path, plan, records):
@@ -291,7 +294,7 @@ def read_sheet(path, plan, records):
     return rows[0]['rater_id'], scored
 
 
-def agreement(path_a, path_b, out=None, cal=CAL):
+def agreement(path_a, path_b, out=None, cal=CAL, disagreements_out=None):
     records = gold()
     plan = load_plan(records, cal)
     fixtures = load_fixtures(plan, cal)
@@ -299,10 +302,15 @@ def agreement(path_a, path_b, out=None, cal=CAL):
     key = load_key(plan, records, cal)
     (ra, a), (rb, b) = read_sheet(path_a, plan, records), read_sheet(path_b, plan, records)
     if ra == rb: fail('agreement', 'the two sheets come from the same rater')
-    meta = {(f, i['id']): (i, records[p['task_id']]['domain'], p['language'])
+    meta = {(f, i['id']): (i, records[p['task_id']]['domain'], p['language'],
+                            records[p['task_id']]['safety_relevance'])
             for f, p in plan.items() for i in items(records[p['task_id']])}
-    rows = [{'fixture_id': f, 'item': iid, 'a': a[f, iid]['score'], 'b': b[f, iid]['score'],
-             'ra': a[f, iid]['reason'], 'rb': b[f, iid]['reason'], 'info': meta[f, iid]} for f, iid in sorted(meta)]
+    rows = [{'fixture_id': f, 'task_id': plan[f]['task_id'], 'item': iid,
+             'a': a[f, iid]['score'], 'b': b[f, iid]['score'],
+             'ra': a[f, iid]['reason'], 'rb': b[f, iid]['reason'],
+             'ea': a[f, iid]['evidence'], 'eb': b[f, iid]['evidence'],
+             'na': a[f, iid]['notes'], 'nb': b[f, iid]['notes'],
+             'info': meta[f, iid]} for f, iid in sorted(meta)]
     units = [r for r in rows if r['info'][0]['kind'] == 'riu']
     checks = [r for r in rows if r['info'][0]['kind'] == 'check']
     pairs = lambda rs: [(r['a'], r['b']) for r in rs]
@@ -357,9 +365,9 @@ def agreement(path_a, path_b, out=None, cal=CAL):
     blocking = [r for r in disputes if r['info'][0]['criticality'] == 'critical']
     lines += ['', '## Disagreements', '',
               f'{len(disputes)} items differ; **{len(blocking)} on critical units block the production freeze until adjudicated.**', '',
-              f'| Fixture | Item | Language | Criticality | {ra} | {rb} |', '|---|---|---|---|---:|---:|']
-    lines += [f"| {r['fixture_id']} | {r['item']} | {r['info'][2]} | {r['info'][0]['criticality']} | {r['a']:g} | {r['b']:g} |"
-              for r in disputes]
+              f'| Fixture | Item | Language | Safety | Criticality | {ra} | {rb} |', '|---|---|---|---|---|---:|---:|']
+    lines += [f"| {r['fixture_id']} | {r['item']} | {r['info'][2]} | {r['info'][3]} | "
+              f"{r['info'][0]['criticality']} | {r['a']:g} | {r['b']:g} |" for r in disputes]
 
     first_rating = min(iso_date(s['rating_date'], 'sheet') for s in [*a.values(), *b.values()])
     lines += ['', '## Preregistered threshold', '']
@@ -378,8 +386,52 @@ def agreement(path_a, path_b, out=None, cal=CAL):
                      f"against minimum {prereg['minimum']} (set by {prereg['set_by']}, {prereg['set_date']}).")
         lines.append(f"Separately, {len(blocking)} critical-unit disagreements must be adjudicated. {prereg['unresolved_disagreement_policy']}")
     report = '\n'.join(lines) + '\n'
-    if out: Path(out).write_text(report, encoding='utf-8')
+    if out:
+        path = Path(out); path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(report, encoding='utf-8')
+    if disagreements_out:
+        path = Path(disagreements_out); path.parent.mkdir(parents=True, exist_ok=True)
+        fields = ['fixture_id', 'task_id', 'language', 'safety_relevance', 'item_id',
+                  'scoring_mode', 'criticality', 'rater_a', 'score_a', 'reason_a',
+                  'evidence_a', 'notes_a', 'rater_b', 'score_b', 'reason_b',
+                  'evidence_b', 'notes_b', 'blocking_critical', 'adjudicated_score',
+                  'adjudicated_reason', 'adjudicator_id', 'adjudication_date', 'rationale']
+        with open(path, 'w', encoding='utf-8', newline='') as handle:
+            writer = csv.DictWriter(handle, fields); writer.writeheader()
+            for r in disputes:
+                item = r['info'][0]
+                writer.writerow({
+                    'fixture_id': r['fixture_id'], 'task_id': r['task_id'],
+                    'language': r['info'][2], 'safety_relevance': r['info'][3],
+                    'item_id': r['item'], 'scoring_mode': item['mode'],
+                    'criticality': item['criticality'], 'rater_a': ra, 'score_a': r['a'],
+                    'reason_a': r['ra'], 'evidence_a': r['ea'], 'notes_a': r['na'],
+                    'rater_b': rb, 'score_b': r['b'], 'reason_b': r['rb'],
+                    'evidence_b': r['eb'], 'notes_b': r['nb'],
+                    'blocking_critical': 'yes' if item['criticality'] == 'critical' else 'no',
+                    'adjudicated_score': '', 'adjudicated_reason': '', 'adjudicator_id': '',
+                    'adjudication_date': '', 'rationale': ''})
     print(report)
+    return report
+
+
+def intake(raters, cal=CAL, local=LOCAL):
+    """Validate two returned blind sheets and produce the preregistered report + adjudication sheet."""
+    if len(raters) != 2 or len(set(raters)) != 2:
+        fail('intake', 'exactly two distinct rater IDs are required')
+    returned = Path(local) / 'returned'
+    sheet_a, sheet_b = [returned / f'{r}_sheet.csv' for r in raters]
+    for path in [sheet_a, sheet_b]:
+        if not path.is_file():
+            fail('intake', f'missing returned sheet {path}')
+    reports = Path(local) / 'reports'; reports.mkdir(parents=True, exist_ok=True)
+    stamp = dt.date.today().isoformat()
+    stem = f'{stamp}_{raters[0]}_{raters[1]}'
+    report = reports / f'{stem}_agreement.md'
+    adjudication = reports / f'{stem}_adjudication.csv'
+    agreement(sheet_a, sheet_b, out=report, cal=cal, disagreements_out=adjudication)
+    print(f'Agreement report: {report}')
+    print(f'Adjudication sheet: {adjudication}')
 
 
 def main():
@@ -387,11 +439,16 @@ def main():
     sub = parser.add_subparsers(dest='command', required=True)
     sub.add_parser('check')
     sheet = sub.add_parser('sheets'); sheet.add_argument('--rater', action='append', required=True)
-    agree = sub.add_parser('agreement'); agree.add_argument('sheet_a'); agree.add_argument('sheet_b'); agree.add_argument('--out')
+    sheet.add_argument('--out-dir', type=Path, default=LOCAL/'sheets')
+    agree = sub.add_parser('agreement'); agree.add_argument('sheet_a'); agree.add_argument('sheet_b')
+    agree.add_argument('--out'); agree.add_argument('--disagreements-out')
+    incoming = sub.add_parser('intake'); incoming.add_argument('--rater', action='append', required=True)
     args = parser.parse_args()
     if args.command == 'check': check()
-    elif args.command == 'sheets': sheets(args.rater)
-    else: agreement(args.sheet_a, args.sheet_b, args.out)
+    elif args.command == 'sheets': sheets(args.rater, out_dir=args.out_dir)
+    elif args.command == 'agreement':
+        agreement(args.sheet_a, args.sheet_b, args.out, disagreements_out=args.disagreements_out)
+    else: intake(args.rater)
 
 
 if __name__ == '__main__':

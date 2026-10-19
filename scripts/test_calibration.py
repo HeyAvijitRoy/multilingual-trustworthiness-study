@@ -8,7 +8,7 @@ import shutil
 import tempfile
 import unittest
 from calibration import (CAL, FIXTURE_FIELDS, SHEET_FIELDS, agreement, check, cohen_kappa,
-                         krippendorff_alpha, sheets)
+                         intake, krippendorff_alpha, sheets)
 
 
 class StatisticTests(unittest.TestCase):
@@ -71,20 +71,27 @@ class WorkflowTests(unittest.TestCase):
         return out.getvalue()
 
     def test_blind_sheets_and_report(self):
-        self.run_quiet(sheets, ['R2', 'R3'], cal=self.cal)
+        self.run_quiet(sheets, ['R2', 'R3'], cal=self.cal, out_dir=self.cal / 'sheets')
         packet = (self.cal / 'sheets' / 'R2_packet.md').read_text(encoding='utf-8')
         for hidden in ['phenomenon', 'partial_reasoning', 'conditional_safeguard', '(critical)', '(supporting)']:
             self.assertNotIn(hidden, packet)
         a, b = self.fill('R2'), self.fill('R3', flip=('F05', 'RIU-01'))
-        report = self.run_quiet(agreement, a, b, cal=self.cal)
+        disputes = self.cal / 'disagreements.csv'
+        report = self.run_quiet(agreement, a, b, cal=self.cal, disagreements_out=disputes)
         self.assertIn('1 on critical units block', report)
         self.assertIn('| F05 | RIU-01 |', report)
         self.assertIn('MEETS', report)
+        with open(disputes, encoding='utf-8', newline='') as handle:
+            rows = list(csv.DictReader(handle))
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]['fixture_id'], 'F05')
+        self.assertEqual(rows[0]['item_id'], 'RIU-01')
+        self.assertEqual(rows[0]['blocking_critical'], 'yes')
 
     def test_threshold_set_after_rating_is_not_evaluated(self):
         self.prereg({'set_by': 'Study lead', 'set_date': '2026-10-23', 'minimum': 0.667,
                      'decision_statistic': 'point_estimate'})
-        self.run_quiet(sheets, ['R2', 'R3'], cal=self.cal)
+        self.run_quiet(sheets, ['R2', 'R3'], cal=self.cal, out_dir=self.cal / 'sheets')
         report = self.run_quiet(agreement, self.fill('R2'), self.fill('R3'), cal=self.cal)
         self.assertIn('NOT EVALUATED', report)
 
@@ -92,12 +99,26 @@ class WorkflowTests(unittest.TestCase):
         self.write_fixtures('Claude')
         with self.assertRaisesRegex(ValueError, 'human-authored'): self.run_quiet(check, self.cal)
         self.write_fixtures('H1')
-        self.run_quiet(sheets, ['R2', 'R3'], cal=self.cal)
+        self.run_quiet(sheets, ['R2', 'R3'], cal=self.cal, out_dir=self.cal / 'sheets')
         a = self.fill('R2')
         with self.assertRaisesRegex(ValueError, 'same rater'): self.run_quiet(agreement, a, a, cal=self.cal)
         unscored = self.cal / 'sheets' / 'R3_sheet.csv'
         with self.assertRaisesRegex(ValueError, 'date must be'): self.run_quiet(agreement, a, unscored, cal=self.cal)
-        with self.assertRaisesRegex(ValueError, 'two distinct raters'): self.run_quiet(sheets, ['R2', 'R2'], cal=self.cal)
+        with self.assertRaisesRegex(ValueError, 'two distinct raters'):
+            self.run_quiet(sheets, ['R2', 'R2'], cal=self.cal, out_dir=self.cal / 'sheets')
+
+    def test_intake_uses_local_returned_sheets(self):
+        self.run_quiet(sheets, ['R2', 'R3'], cal=self.cal, out_dir=self.cal / 'sheets')
+        local = self.cal / 'local'; returned = local / 'returned'; returned.mkdir(parents=True)
+        shutil.copy(self.fill('R2'), returned / 'R2_sheet.csv')
+        shutil.copy(self.fill('R3', flip=('F05', 'RIU-01')), returned / 'R3_sheet.csv')
+        output = self.run_quiet(intake, ['R2', 'R3'], cal=self.cal, local=local)
+        self.assertIn('Agreement report:', output)
+        self.assertIn('Adjudication sheet:', output)
+        reports = list((local / 'reports').glob('*_agreement.md'))
+        adjudication = list((local / 'reports').glob('*_adjudication.csv'))
+        self.assertEqual(len(reports), 1)
+        self.assertEqual(len(adjudication), 1)
 
 
 if __name__ == '__main__':

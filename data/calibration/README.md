@@ -18,7 +18,7 @@ Each rater receives a separate packet containing prompts, responses and anchors 
 
 Agreement analysis compares the two completed sheets. Disagreements involving critical units, safety or semantic equivalence require adjudication, with resolutions recorded in `../annotations/review_logs/`. Anchor changes produce a new gold version; `pilot-gold-0.2` remains immutable.
 
-`scripts/calibration.py` provides file validation, packet generation and agreement analysis.
+`scripts/calibration.py` provides file validation, packet generation, returned-sheet intake, agreement analysis and an adjudication working sheet. Generated packets, returned sheets and reports live under `.local/calibration/` and are ignored by Git. See [`RETURN_WORKFLOW.md`](RETURN_WORKFLOW.md) for the exact handoff procedure.
 
 ## Fixture characteristics
 
@@ -42,8 +42,10 @@ Each response represents a plausible answer in its assigned language (`en`, `bn`
 | `fixtures.csv` | Fixture authors | `fixture_id, author_id, authored_date, response_text` |
 | `answer_key.csv` | Fixture authors | `fixture_id, item_id, intended_score, intended_reason, author_id, note` |
 | `AGREEMENT_PREREG.json` | Study lead | Threshold, coefficient and disagreement policy |
-| `sheets/` | Generated | Blind per-rater packets and score sheets |
-| `reports/` | Generated | Agreement reports |
+| `.local/calibration/sheets/` | Generated locally | Blind per-rater packets and blank score sheets |
+| `.local/calibration/returned/` | Local intake | Completed R2/R3 sheets, preserved exactly as returned |
+| `.local/calibration/reports/` | Generated locally | Agreement report and adjudication CSV |
+| `CALIBRATION_SIGNOFF_TEMPLATE.md` | Study lead | Versioned template for the post-adjudication calibration decision |
 
 ## What the analysis reports
 

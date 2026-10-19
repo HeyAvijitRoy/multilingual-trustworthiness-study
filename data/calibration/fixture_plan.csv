@@ -24,7 +24,7 @@ F22,TECH009,bn_cs,conditional_safeguard,RIU-04
 F23,CYBER006,bn_cs,full_credit,*
 F24,CYBER001,bn_cs,contradiction,RIU-01
 F25,PROC009,bn_cs,partial_reasoning,RIU-03
-F26,PROC001,bn_cs,omission,RIU-01;RIU-03
+F26,PROC001,bn_cs,omission,RIU-01;RIU-05
 F27,DEC010,bn_cs,partial_reasoning,RIU-06
 F28,DEC006,bn_cs,full_credit,*
 F29,SYN004,bn_cs,incorrect_number,RIU-01

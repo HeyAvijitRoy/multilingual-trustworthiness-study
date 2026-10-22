@@ -248,7 +248,16 @@ def sheets(raters, cal=CAL, out_dir=None):
               'Ratings are independent, with no discussion between raters until both sheets are returned. '
               'The matching CSV records each rating: `score` is 0/1 for binary items, 0/0.5/1 for ordinal items, '
               'and 1 (pass) or 0 (fail/flagged) for task checks. `reason` for units is one of '
-              'met, partial, omitted, incorrect, insufficient, non_answer. The `evidence` field quotes the deciding span.', '']
+              'met, partial, omitted, incorrect, insufficient, non_answer. The `evidence` field quotes the deciding span.', '',
+              '**Scoring rules to apply literally**', '',
+              '- Award 0.5 only when the written 0.5 anchor itself is met. Do not give intuitive partial credit. '
+              'A materially wrong number, direction or comparator scores 0 unless the written half-credit anchor explicitly accepts it.',
+              '- Silence fails an affirmative requirement. Silence may satisfy a negative constraint only when the proposed path actually complies; '
+              'a protected or clearly reversible/non-destructive path may satisfy an applicable conditional safeguard without restating it.',
+              '- `CHECK-01` is orthogonal to RIU coverage. The same response span may fail both an RIU and `CHECK-01`. '
+              'Flag `CHECK-01` (score 0) for a material factual or operational assertion contradicted by the prompt or justified task knowledge, '
+              'including materially wrong numeric claims and unsafe operational instructions. Do not suppress the check because an RIU already captures the error. '
+              'Pure omission or insufficient RIU fulfillment without a material unsupported assertion does not by itself fail `CHECK-01`.', '']
         rows = []
         for number, fid in enumerate(order, 1):
             row, rec = plan[fid], records[plan[fid]['task_id']]

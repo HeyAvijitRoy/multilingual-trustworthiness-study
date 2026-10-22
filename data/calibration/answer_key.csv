@@ -27,7 +27,7 @@ F04,RIU-03,1,met,AR,
 F04,RIU-04,0,incorrect,AR,"TARGET. Correlation is stated, then contradicted: a single new-country login = confirmed compromise. Rule 1: material contradiction scores 0 even though the correct sentence is present."
 F04,RIU-05,1,met,AR,Three tiers with distinct responses; the contradictory rule does not remove them.
 F04,RIU-06,1,met,AR,
-F04,CHECK-01,1,,AR,
+F04,CHECK-01,0,,AR,"Protocol 0.3 clarification: the confirmed-compromise assertion is a material unsupported operational claim. CHECK-01 is orthogonal to RIU-04 and is flagged even though the same span also causes the RIU failure."
 F05,RIU-01,1,met,AR,
 F05,RIU-02,1,met,AR,Tags are the anchor's accepted equivalent to folders.
 F05,RIU-03,1,met,AR,"""Change only the part before the dot."""
@@ -96,7 +96,7 @@ F14,RIU-02,1,met,AR,
 F14,RIU-03,1,met,AR,
 F14,RIU-04,1,met,AR,Password change via the official site and sign-out tied to suspicious findings.
 F14,RIU-05,1,met,AR,
-F14,CHECK-01,1,,AR,
+F14,CHECK-01,0,,AR,"Protocol 0.3 clarification: unsafe reset-link advice is a material unsupported operational assertion. CHECK-01 is orthogonal to RIU-01 and is flagged even though the same span also causes the RIU failure."
 F15,RIU-01,0,omitted,AR,TARGET. Edits the shared sheet in place; no copy or recoverable version. Silence fails an affirmative requirement.
 F15,RIU-02,1,met,AR,
 F15,RIU-03,1,met,AR,
@@ -180,7 +180,7 @@ F24,RIU-05,1,met,AR,
 F24,RIU-06,1,met,AR,
 F24,RIU-07,1,met,AR,
 F24,RIU-08,1,met,AR,
-F24,CHECK-01,1,,AR,
+F24,CHECK-01,0,,AR,"Protocol 0.3 clarification: unsafe alert-link advice is a material unsupported operational assertion. CHECK-01 is orthogonal to RIU-01 and is flagged even though the same span also causes the RIU failure."
 F25,RIU-01,1,met,AR,
 F25,RIU-02,1,met,AR,
 F25,RIU-03,0.5,partial,AR,TARGET. accepted/rejected/unresolved status with no reason and no escalation path.

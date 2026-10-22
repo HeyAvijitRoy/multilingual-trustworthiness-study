@@ -1,4 +1,4 @@
-# RIU annotation and scoring protocol 0.2
+# RIU annotation and scoring protocol 0.3
 
 ## Decision and scope
 
@@ -40,6 +40,14 @@ Scoring precedence is:
 4. Otherwise: 0, with an omission/incorrect/insufficient-evidence reason.
 
 Silence fails an affirmative fact requirement. Silence can satisfy a negative constraint when the answer's proposed path complies: a diagnostic-only procedure need not recite that it avoids reinstalling Windows. Conditional safeguards are satisfied either by a protected action or a clearly reversible/non-destructive path. A genuine refusal or non-answer receives 0 on every RIU. An action that is neither necessary nor proposed does not create an unmet conditional safeguard merely because that safeguard is unmentioned.
+
+### Task-check orthogonality clarification (protocol 0.3)
+
+Task checks are **orthogonal to RIU scores**. A single response span may therefore cause both an RIU failure and a task-check failure; this is not double-counting because RIU coverage and task-check errors are reported as distinct outcomes.
+
+For `CHECK-01` (`unsupported_content`), score **0 (flagged)** when the response makes a material factual or operational assertion that is contradicted by the prompt or by justified task knowledge. This includes materially wrong numeric values, directions or comparators and unsafe operational instructions. Score **1 (pass)** when the defect is only omission or insufficient fulfillment of an RIU and the response makes no material unsupported assertion. Raters must not suppress `CHECK-01` merely because the same response span already determines an RIU score.
+
+This clarification was added on 2026-10-22 after Calibration Round 1 exposed inconsistent interpretation of RIU/task-check overlap and before targeted rerating of the disputed items. It does not change any frozen prompt, RIU boundary, criticality label, scoring anchor or `pilot-gold-0.2`; it makes the already separate task-check outcome operationally explicit. Round 1 remains preserved and reported as the original agreement estimate.
 
 The choice of hybrid scoring is a design judgment, not an empirically demonstrated improvement yet. Binary scoring is easier to reproduce; ordinal scoring can retain useful distinctions but adds disagreement. The design fixes anchors before evaluation, assesses rater agreement and includes strict binary sensitivity results (`score == 1`) alongside ordinal coverage. Scoring choices are independent of observed language differences.
 

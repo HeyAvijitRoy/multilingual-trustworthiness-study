@@ -4,7 +4,13 @@ This stage tests whether two raters, working independently with the frozen pilot
 
 ## Current status
 
-AR authored the 30 fixtures and their answer key. Review of the fixtures and intended scores is pending.
+Calibration Round 1 is complete. R2 and R3 independently scored all 229 items across the 30 fixtures. The original agreement estimate is preserved: RIU exact agreement 192/196 (97.96%), Cohen's κ 0.917, ordinal Krippendorff's α 0.959 (95% fixture-bootstrap CI 0.901–1.000), and strict-binary κ 0.957. The preregistered α ≥ 0.80 point-estimate gate was met.
+
+Round 1 also exposed 10 disputed items: four RIUs and six `CHECK-01` judgments. Three RIU disputes are critical blockers, and several task-check disputes are safety-related, so calibration sign-off remains pending under the preregistered unresolved-disagreement policy.
+
+On 2026-10-22, before any production annotation or model evaluation, protocol 0.3 clarified that `CHECK-01` is orthogonal to RIU scoring: a material unsupported factual or operational assertion can fail both its RIU and `CHECK-01`. The first-round answer key had applied this rule inconsistently to three contradiction fixtures; `F04/CHECK-01`, `F14/CHECK-01`, and `F24/CHECK-01` were corrected from pass (1) to flagged (0). No response text, frozen prompt, RIU, criticality label, scoring anchor, or `pilot-gold-0.2` record changed.
+
+R2 and R3 will perform a targeted Calibration Round 2 rerating of the 10 disputed items only, independently and without access to each other's Round 1 ratings or the answer key. Round 1 remains the preregistered agreement estimate; targeted rerating is a rule-clarification/dispute-resolution step and must not be substituted for the original overall α.
 
 On 2026-10-19, before calibration ratings, F26's omission targets were corrected from `RIU-01;RIU-03` to `RIU-01;RIU-05` to match the existing response and intended scores. RIU-03 remains full credit under its extension-preservation anchor. This corrects target metadata; the response text, numeric scores and frozen gold are unchanged.
 

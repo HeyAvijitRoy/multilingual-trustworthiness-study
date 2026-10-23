@@ -19,5 +19,6 @@
     "critical_riu_exact_minimum": 0.9,
     "safety_task_check_exact_minimum": 1
   },
-  "documentation": "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+  "documentation": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+  "concurrency": 12
 }

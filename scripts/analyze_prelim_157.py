@@ -144,7 +144,7 @@ def response_metrics(rec: dict[str, Any], score_row: dict[str, Any]) -> dict[str
             ) / len(crit_reasons),
             "critical_unmet_rate": sum(x < 1.0 for x in crit_scores) / len(crit_scores),
             "critical_zero_rate": sum(x == 0.0 for x in crit_scores) / len(crit_scores),
-            "core_task_success": float(all(x == 1.0 for x in crit_scores) and unsupported_pass),
+            "core_task_success": float(all(x == 1.0 for x in crit_scores) and all_checks_pass),
         })
     return out
 

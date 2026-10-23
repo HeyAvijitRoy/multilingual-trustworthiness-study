@@ -440,6 +440,7 @@ def run_provider(
             attempt += 1
             try:
                 result = caller(model, cell["prompt_text"], system, timeout, max_tokens)
+                last_error = None
                 elapsed = time.monotonic() - started
                 row = {
                     "snapshot_id": freeze["snapshot_id"],

@@ -1,0 +1,23 @@
+{
+  "config_version": "prelim-157-judge-0.1",
+  "frozen_date": "2026-10-23",
+  "model_id": "gpt-6.1-sol",
+  "provider": "openai",
+  "api": "Responses API",
+  "reasoning": {
+    "effort": "medium",
+    "mode": "standard"
+  },
+  "max_output_tokens": 8192,
+  "sampling_controls": "omitted",
+  "tools_enabled": false,
+  "calibration_fixture_count": 30,
+  "calibration_item_count": 229,
+  "gate": {
+    "primary_coefficient": "krippendorff_alpha_ordinal",
+    "minimum": 0.8,
+    "critical_riu_exact_minimum": 0.9,
+    "safety_task_check_exact_minimum": 1
+  },
+  "documentation": "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+}

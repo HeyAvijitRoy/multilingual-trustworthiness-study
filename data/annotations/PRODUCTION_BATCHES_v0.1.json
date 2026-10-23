@@ -1,0 +1,2344 @@
+{
+  "schema_version": "0.1",
+  "version": "production-draft-plan-0.1",
+  "status": "draft-preparation-only-pending-production-protocol-and-human-approval",
+  "corpus_version": "0.3.1",
+  "source_files_sha256": {
+    "data/annotations/SCALING_QUEUE.json": "b07dd8cb017670fd8ec16639d400cd35e2b5e69817ce79590637d6d973c046fe",
+    "data/annotations/EXPANSION_BATCHES.json": "979cf96ee51bba53e4b1b2ae7b73274cf81ca61ab8aec83c9c5b636d3f6f4633"
+  },
+  "historical_queue_unchanged": true,
+  "exclusion_counts": {
+    "pilot": 25,
+    "accepted_expansion": 132
+  },
+  "task_count": 343,
+  "batch_count": 14,
+  "maximum_batch_size": 25,
+  "assignment_rule": "Exclude the original 25 pilot and 132 prospectively assigned expansion tasks. Group remaining tasks by domain/difficulty in lexical order; sort each group by subdomain/task_id. Distribute round-robin to 14 batches using a continuing rotating offset. No response or model outcome input.",
+  "review_sampling": {
+    "mandatory": "Every critical RIU, every identified ambiguity, and every task-level language-equivalence/coverage check.",
+    "ordinary_strata": [
+      "domain",
+      "difficulty",
+      "scoring_mode"
+    ],
+    "ordinary_fraction_minimum": 0.2,
+    "selection": "Within each stratum of supporting RIUs select ceil(n/5), ranked by SHA-256(salt|batch_id|task_id|riu_id).",
+    "salt": "production-review-v0.1-before-model-outcomes",
+    "sampling_is_not_acceptance": true,
+    "escalation": "A systematic rule error requires review of every affected unit in the batch and other drafted batches, including units outside the ordinary sample. Log scope, rule, affected IDs, revisions and resolution; rerun validation and regenerate packets before independent acceptance. No silent frozen edits."
+  },
+  "batches": [
+    {
+      "batch_id": "P01",
+      "task_count": 25,
+      "domain_counts": {
+        "cybersecurity_digital_safety": 5,
+        "decision_support": 5,
+        "information_synthesis": 5,
+        "procedural_instructional": 5,
+        "technical_troubleshooting": 5
+      },
+      "difficulty_counts": {
+        "easy": 6,
+        "hard": 5,
+        "medium": 14
+      },
+      "tasks": [
+        {
+          "task_id": "CYBER002",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "account_security",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "CYBER073",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "software_security",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "CYBER080",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "software_security",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "CYBER048",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "data_protection",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "CYBER037",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "network_security",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC062",
+          "domain": "decision_support",
+          "subdomain": "data_decisions",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "DEC080",
+          "domain": "decision_support",
+          "subdomain": "communication_choice",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "DEC076",
+          "domain": "decision_support",
+          "subdomain": "communication_choice",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC087",
+          "domain": "decision_support",
+          "subdomain": "process_policy",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC027",
+          "domain": "decision_support",
+          "subdomain": "tool_selection",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN053",
+          "domain": "information_synthesis",
+          "subdomain": "conflicting_evidence",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "SYN020",
+          "domain": "information_synthesis",
+          "subdomain": "comparison",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "SYN045",
+          "domain": "information_synthesis",
+          "subdomain": "action_extraction",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN065",
+          "domain": "information_synthesis",
+          "subdomain": "evidence_to_conclusion",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN077",
+          "domain": "information_synthesis",
+          "subdomain": "multi_constraint_reasoning",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC092",
+          "domain": "procedural_instructional",
+          "subdomain": "contingency_planning",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "PROC060",
+          "domain": "procedural_instructional",
+          "subdomain": "appointments_services",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "PROC026",
+          "domain": "procedural_instructional",
+          "subdomain": "academic_research",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC003",
+          "domain": "procedural_instructional",
+          "subdomain": "documents_admin",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC037",
+          "domain": "procedural_instructional",
+          "subdomain": "household_logistics",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH082",
+          "domain": "technical_troubleshooting",
+          "subdomain": "file_data",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "TECH050",
+          "domain": "technical_troubleshooting",
+          "subdomain": "development",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "TECH036",
+          "domain": "technical_troubleshooting",
+          "subdomain": "database",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH066",
+          "domain": "technical_troubleshooting",
+          "subdomain": "hardware",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH096",
+          "domain": "technical_troubleshooting",
+          "subdomain": "peripherals",
+          "difficulty": "medium"
+        }
+      ]
+    },
+    {
+      "batch_id": "P02",
+      "task_count": 25,
+      "domain_counts": {
+        "cybersecurity_digital_safety": 5,
+        "decision_support": 5,
+        "information_synthesis": 5,
+        "procedural_instructional": 5,
+        "technical_troubleshooting": 5
+      },
+      "difficulty_counts": {
+        "easy": 5,
+        "hard": 5,
+        "medium": 15
+      },
+      "tasks": [
+        {
+          "task_id": "CYBER062",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "cloud_security",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "CYBER070",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "cloud_security",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "CYBER003",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "account_security",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "CYBER024",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "device_security",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "CYBER015",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "phishing",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC002",
+          "domain": "decision_support",
+          "subdomain": "prioritization",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "DEC070",
+          "domain": "decision_support",
+          "subdomain": "data_decisions",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "DEC077",
+          "domain": "decision_support",
+          "subdomain": "communication_choice",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC088",
+          "domain": "decision_support",
+          "subdomain": "process_policy",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC028",
+          "domain": "decision_support",
+          "subdomain": "tool_selection",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN032",
+          "domain": "information_synthesis",
+          "subdomain": "constraint_extraction",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "SYN059",
+          "domain": "information_synthesis",
+          "subdomain": "conflicting_evidence",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "SYN046",
+          "domain": "information_synthesis",
+          "subdomain": "action_extraction",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN066",
+          "domain": "information_synthesis",
+          "subdomain": "evidence_to_conclusion",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN084",
+          "domain": "information_synthesis",
+          "subdomain": "risk_summary",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC093",
+          "domain": "procedural_instructional",
+          "subdomain": "contingency_planning",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "PROC099",
+          "domain": "procedural_instructional",
+          "subdomain": "contingency_planning",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "PROC027",
+          "domain": "procedural_instructional",
+          "subdomain": "academic_research",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC005",
+          "domain": "procedural_instructional",
+          "subdomain": "documents_admin",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC015",
+          "domain": "procedural_instructional",
+          "subdomain": "meeting_workflow",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH062",
+          "domain": "technical_troubleshooting",
+          "subdomain": "hardware",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "TECH090",
+          "domain": "technical_troubleshooting",
+          "subdomain": "file_data",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "TECH037",
+          "domain": "technical_troubleshooting",
+          "subdomain": "database",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH067",
+          "domain": "technical_troubleshooting",
+          "subdomain": "hardware",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH097",
+          "domain": "technical_troubleshooting",
+          "subdomain": "peripherals",
+          "difficulty": "medium"
+        }
+      ]
+    },
+    {
+      "batch_id": "P03",
+      "task_count": 25,
+      "domain_counts": {
+        "cybersecurity_digital_safety": 5,
+        "decision_support": 5,
+        "information_synthesis": 5,
+        "procedural_instructional": 5,
+        "technical_troubleshooting": 5
+      },
+      "difficulty_counts": {
+        "easy": 5,
+        "hard": 5,
+        "medium": 15
+      },
+      "tasks": [
+        {
+          "task_id": "CYBER042",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "data_protection",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "CYBER050",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "data_protection",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "CYBER005",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "account_security",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "CYBER025",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "device_security",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "CYBER016",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "phishing",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC082",
+          "domain": "decision_support",
+          "subdomain": "process_policy",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "DEC090",
+          "domain": "decision_support",
+          "subdomain": "process_policy",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "DEC064",
+          "domain": "decision_support",
+          "subdomain": "data_decisions",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC055",
+          "domain": "decision_support",
+          "subdomain": "project_tradeoffs",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC044",
+          "domain": "decision_support",
+          "subdomain": "travel_choice",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN033",
+          "domain": "information_synthesis",
+          "subdomain": "constraint_extraction",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "SYN060",
+          "domain": "information_synthesis",
+          "subdomain": "conflicting_evidence",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "SYN047",
+          "domain": "information_synthesis",
+          "subdomain": "action_extraction",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN067",
+          "domain": "information_synthesis",
+          "subdomain": "evidence_to_conclusion",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN085",
+          "domain": "information_synthesis",
+          "subdomain": "risk_summary",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC082",
+          "domain": "procedural_instructional",
+          "subdomain": "digital_workflow",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "PROC100",
+          "domain": "procedural_instructional",
+          "subdomain": "contingency_planning",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "PROC028",
+          "domain": "procedural_instructional",
+          "subdomain": "academic_research",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC007",
+          "domain": "procedural_instructional",
+          "subdomain": "documents_admin",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC016",
+          "domain": "procedural_instructional",
+          "subdomain": "meeting_workflow",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH072",
+          "domain": "technical_troubleshooting",
+          "subdomain": "mobile",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "TECH070",
+          "domain": "technical_troubleshooting",
+          "subdomain": "hardware",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "TECH044",
+          "domain": "technical_troubleshooting",
+          "subdomain": "development",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH068",
+          "domain": "technical_troubleshooting",
+          "subdomain": "hardware",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH024",
+          "domain": "technical_troubleshooting",
+          "subdomain": "software_application",
+          "difficulty": "medium"
+        }
+      ]
+    },
+    {
+      "batch_id": "P04",
+      "task_count": 25,
+      "domain_counts": {
+        "cybersecurity_digital_safety": 5,
+        "decision_support": 5,
+        "information_synthesis": 5,
+        "procedural_instructional": 5,
+        "technical_troubleshooting": 5
+      },
+      "difficulty_counts": {
+        "easy": 5,
+        "hard": 5,
+        "medium": 15
+      },
+      "tasks": [
+        {
+          "task_id": "CYBER022",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "device_security",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "CYBER030",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "device_security",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "CYBER007",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "account_security",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "CYBER026",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "device_security",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "CYBER017",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "phishing",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC052",
+          "domain": "decision_support",
+          "subdomain": "project_tradeoffs",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "DEC059",
+          "domain": "decision_support",
+          "subdomain": "project_tradeoffs",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "DEC065",
+          "domain": "decision_support",
+          "subdomain": "data_decisions",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC056",
+          "domain": "decision_support",
+          "subdomain": "project_tradeoffs",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC045",
+          "domain": "decision_support",
+          "subdomain": "travel_choice",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN062",
+          "domain": "information_synthesis",
+          "subdomain": "evidence_to_conclusion",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "SYN039",
+          "domain": "information_synthesis",
+          "subdomain": "constraint_extraction",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "SYN048",
+          "domain": "information_synthesis",
+          "subdomain": "action_extraction",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN068",
+          "domain": "information_synthesis",
+          "subdomain": "evidence_to_conclusion",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN086",
+          "domain": "information_synthesis",
+          "subdomain": "risk_summary",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC002",
+          "domain": "procedural_instructional",
+          "subdomain": "documents_admin",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "PROC090",
+          "domain": "procedural_instructional",
+          "subdomain": "digital_workflow",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "PROC055",
+          "domain": "procedural_instructional",
+          "subdomain": "appointments_services",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC008",
+          "domain": "procedural_instructional",
+          "subdomain": "documents_admin",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC017",
+          "domain": "procedural_instructional",
+          "subdomain": "meeting_workflow",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH073",
+          "domain": "technical_troubleshooting",
+          "subdomain": "mobile",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "TECH079",
+          "domain": "technical_troubleshooting",
+          "subdomain": "mobile",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "TECH045",
+          "domain": "technical_troubleshooting",
+          "subdomain": "development",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH075",
+          "domain": "technical_troubleshooting",
+          "subdomain": "mobile",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH025",
+          "domain": "technical_troubleshooting",
+          "subdomain": "software_application",
+          "difficulty": "medium"
+        }
+      ]
+    },
+    {
+      "batch_id": "P05",
+      "task_count": 25,
+      "domain_counts": {
+        "cybersecurity_digital_safety": 5,
+        "decision_support": 5,
+        "information_synthesis": 5,
+        "procedural_instructional": 5,
+        "technical_troubleshooting": 5
+      },
+      "difficulty_counts": {
+        "easy": 5,
+        "hard": 5,
+        "medium": 15
+      },
+      "tasks": [
+        {
+          "task_id": "CYBER092",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "human_factors",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "CYBER099",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "human_factors",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "CYBER008",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "account_security",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "CYBER027",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "device_security",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "CYBER084",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "privacy",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC053",
+          "domain": "decision_support",
+          "subdomain": "project_tradeoffs",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "DEC060",
+          "domain": "decision_support",
+          "subdomain": "project_tradeoffs",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "DEC066",
+          "domain": "decision_support",
+          "subdomain": "data_decisions",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC057",
+          "domain": "decision_support",
+          "subdomain": "project_tradeoffs",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC046",
+          "domain": "decision_support",
+          "subdomain": "travel_choice",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN001",
+          "domain": "information_synthesis",
+          "subdomain": "fact_summary",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "SYN040",
+          "domain": "information_synthesis",
+          "subdomain": "constraint_extraction",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "SYN015",
+          "domain": "information_synthesis",
+          "subdomain": "comparison",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN092",
+          "domain": "information_synthesis",
+          "subdomain": "extended_context",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN087",
+          "domain": "information_synthesis",
+          "subdomain": "risk_summary",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC062",
+          "domain": "procedural_instructional",
+          "subdomain": "event_planning",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "PROC070",
+          "domain": "procedural_instructional",
+          "subdomain": "event_planning",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "PROC056",
+          "domain": "procedural_instructional",
+          "subdomain": "appointments_services",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC064",
+          "domain": "procedural_instructional",
+          "subdomain": "event_planning",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC044",
+          "domain": "procedural_instructional",
+          "subdomain": "travel_logistics",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH012",
+          "domain": "technical_troubleshooting",
+          "subdomain": "networking",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "TECH080",
+          "domain": "technical_troubleshooting",
+          "subdomain": "mobile",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "TECH046",
+          "domain": "technical_troubleshooting",
+          "subdomain": "development",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH076",
+          "domain": "technical_troubleshooting",
+          "subdomain": "mobile",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH026",
+          "domain": "technical_troubleshooting",
+          "subdomain": "software_application",
+          "difficulty": "medium"
+        }
+      ]
+    },
+    {
+      "batch_id": "P06",
+      "task_count": 25,
+      "domain_counts": {
+        "cybersecurity_digital_safety": 5,
+        "decision_support": 5,
+        "information_synthesis": 5,
+        "procedural_instructional": 5,
+        "technical_troubleshooting": 5
+      },
+      "difficulty_counts": {
+        "easy": 5,
+        "hard": 5,
+        "medium": 15
+      },
+      "tasks": [
+        {
+          "task_id": "CYBER093",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "human_factors",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "CYBER100",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "human_factors",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "CYBER064",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "cloud_security",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "CYBER028",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "device_security",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "CYBER085",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "privacy",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC032",
+          "domain": "decision_support",
+          "subdomain": "resource_allocation",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "DEC039",
+          "domain": "decision_support",
+          "subdomain": "resource_allocation",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "DEC067",
+          "domain": "decision_support",
+          "subdomain": "data_decisions",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC035",
+          "domain": "decision_support",
+          "subdomain": "resource_allocation",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC047",
+          "domain": "decision_support",
+          "subdomain": "travel_choice",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN002",
+          "domain": "information_synthesis",
+          "subdomain": "fact_summary",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "SYN070",
+          "domain": "information_synthesis",
+          "subdomain": "evidence_to_conclusion",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "SYN016",
+          "domain": "information_synthesis",
+          "subdomain": "comparison",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN093",
+          "domain": "information_synthesis",
+          "subdomain": "extended_context",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN088",
+          "domain": "information_synthesis",
+          "subdomain": "risk_summary",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC072",
+          "domain": "procedural_instructional",
+          "subdomain": "financial_admin",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "PROC079",
+          "domain": "procedural_instructional",
+          "subdomain": "financial_admin",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "PROC057",
+          "domain": "procedural_instructional",
+          "subdomain": "appointments_services",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC065",
+          "domain": "procedural_instructional",
+          "subdomain": "event_planning",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC045",
+          "domain": "procedural_instructional",
+          "subdomain": "travel_logistics",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH013",
+          "domain": "technical_troubleshooting",
+          "subdomain": "networking",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "TECH019",
+          "domain": "technical_troubleshooting",
+          "subdomain": "networking",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "TECH047",
+          "domain": "technical_troubleshooting",
+          "subdomain": "development",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH077",
+          "domain": "technical_troubleshooting",
+          "subdomain": "mobile",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH027",
+          "domain": "technical_troubleshooting",
+          "subdomain": "software_application",
+          "difficulty": "medium"
+        }
+      ]
+    },
+    {
+      "batch_id": "P07",
+      "task_count": 25,
+      "domain_counts": {
+        "cybersecurity_digital_safety": 5,
+        "decision_support": 5,
+        "information_synthesis": 5,
+        "procedural_instructional": 5,
+        "technical_troubleshooting": 5
+      },
+      "difficulty_counts": {
+        "easy": 5,
+        "hard": 5,
+        "medium": 15
+      },
+      "tasks": [
+        {
+          "task_id": "CYBER052",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "incident_response",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "CYBER059",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "incident_response",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "CYBER065",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "cloud_security",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "CYBER095",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "human_factors",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "CYBER086",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "privacy",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC033",
+          "domain": "decision_support",
+          "subdomain": "resource_allocation",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "DEC040",
+          "domain": "decision_support",
+          "subdomain": "resource_allocation",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "DEC068",
+          "domain": "decision_support",
+          "subdomain": "data_decisions",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC036",
+          "domain": "decision_support",
+          "subdomain": "resource_allocation",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC048",
+          "domain": "decision_support",
+          "subdomain": "travel_choice",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN005",
+          "domain": "information_synthesis",
+          "subdomain": "fact_summary",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "SYN098",
+          "domain": "information_synthesis",
+          "subdomain": "extended_context",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "SYN017",
+          "domain": "information_synthesis",
+          "subdomain": "comparison",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN094",
+          "domain": "information_synthesis",
+          "subdomain": "extended_context",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN024",
+          "domain": "information_synthesis",
+          "subdomain": "timeline",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC073",
+          "domain": "procedural_instructional",
+          "subdomain": "financial_admin",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "PROC080",
+          "domain": "procedural_instructional",
+          "subdomain": "financial_admin",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "PROC095",
+          "domain": "procedural_instructional",
+          "subdomain": "contingency_planning",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC066",
+          "domain": "procedural_instructional",
+          "subdomain": "event_planning",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC046",
+          "domain": "procedural_instructional",
+          "subdomain": "travel_logistics",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH002",
+          "domain": "technical_troubleshooting",
+          "subdomain": "operating_system",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "TECH020",
+          "domain": "technical_troubleshooting",
+          "subdomain": "networking",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "TECH048",
+          "domain": "technical_troubleshooting",
+          "subdomain": "development",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH015",
+          "domain": "technical_troubleshooting",
+          "subdomain": "networking",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH028",
+          "domain": "technical_troubleshooting",
+          "subdomain": "software_application",
+          "difficulty": "medium"
+        }
+      ]
+    },
+    {
+      "batch_id": "P08",
+      "task_count": 24,
+      "domain_counts": {
+        "cybersecurity_digital_safety": 5,
+        "decision_support": 5,
+        "information_synthesis": 5,
+        "procedural_instructional": 5,
+        "technical_troubleshooting": 4
+      },
+      "difficulty_counts": {
+        "easy": 5,
+        "hard": 5,
+        "medium": 14
+      },
+      "tasks": [
+        {
+          "task_id": "CYBER053",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "incident_response",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "CYBER060",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "incident_response",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "CYBER066",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "cloud_security",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "CYBER096",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "human_factors",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "CYBER087",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "privacy",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC012",
+          "domain": "decision_support",
+          "subdomain": "scheduling",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "DEC019",
+          "domain": "decision_support",
+          "subdomain": "scheduling",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "DEC003",
+          "domain": "decision_support",
+          "subdomain": "prioritization",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC037",
+          "domain": "decision_support",
+          "subdomain": "resource_allocation",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC095",
+          "domain": "decision_support",
+          "subdomain": "uncertainty",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN006",
+          "domain": "information_synthesis",
+          "subdomain": "fact_summary",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "SYN099",
+          "domain": "information_synthesis",
+          "subdomain": "extended_context",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "SYN055",
+          "domain": "information_synthesis",
+          "subdomain": "conflicting_evidence",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN095",
+          "domain": "information_synthesis",
+          "subdomain": "extended_context",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN025",
+          "domain": "information_synthesis",
+          "subdomain": "timeline",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC032",
+          "domain": "procedural_instructional",
+          "subdomain": "household_logistics",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "PROC039",
+          "domain": "procedural_instructional",
+          "subdomain": "household_logistics",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "PROC096",
+          "domain": "procedural_instructional",
+          "subdomain": "contingency_planning",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC067",
+          "domain": "procedural_instructional",
+          "subdomain": "event_planning",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC047",
+          "domain": "procedural_instructional",
+          "subdomain": "travel_logistics",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH092",
+          "domain": "technical_troubleshooting",
+          "subdomain": "peripherals",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "TECH099",
+          "domain": "technical_troubleshooting",
+          "subdomain": "peripherals",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "TECH084",
+          "domain": "technical_troubleshooting",
+          "subdomain": "file_data",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH016",
+          "domain": "technical_troubleshooting",
+          "subdomain": "networking",
+          "difficulty": "medium"
+        }
+      ]
+    },
+    {
+      "batch_id": "P09",
+      "task_count": 24,
+      "domain_counts": {
+        "cybersecurity_digital_safety": 5,
+        "decision_support": 5,
+        "information_synthesis": 5,
+        "procedural_instructional": 5,
+        "technical_troubleshooting": 4
+      },
+      "difficulty_counts": {
+        "easy": 5,
+        "hard": 5,
+        "medium": 14
+      },
+      "tasks": [
+        {
+          "task_id": "CYBER032",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "network_security",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "CYBER039",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "network_security",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "CYBER067",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "cloud_security",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "CYBER097",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "human_factors",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "CYBER088",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "privacy",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC013",
+          "domain": "decision_support",
+          "subdomain": "scheduling",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "DEC020",
+          "domain": "decision_support",
+          "subdomain": "scheduling",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "DEC005",
+          "domain": "decision_support",
+          "subdomain": "prioritization",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC015",
+          "domain": "decision_support",
+          "subdomain": "scheduling",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC096",
+          "domain": "decision_support",
+          "subdomain": "uncertainty",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN072",
+          "domain": "information_synthesis",
+          "subdomain": "multi_constraint_reasoning",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "SYN010",
+          "domain": "information_synthesis",
+          "subdomain": "fact_summary",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "SYN056",
+          "domain": "information_synthesis",
+          "subdomain": "conflicting_evidence",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN096",
+          "domain": "information_synthesis",
+          "subdomain": "extended_context",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN026",
+          "domain": "information_synthesis",
+          "subdomain": "timeline",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC033",
+          "domain": "procedural_instructional",
+          "subdomain": "household_logistics",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "PROC040",
+          "domain": "procedural_instructional",
+          "subdomain": "household_logistics",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "PROC097",
+          "domain": "procedural_instructional",
+          "subdomain": "contingency_planning",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC068",
+          "domain": "procedural_instructional",
+          "subdomain": "event_planning",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC048",
+          "domain": "procedural_instructional",
+          "subdomain": "travel_logistics",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH093",
+          "domain": "technical_troubleshooting",
+          "subdomain": "peripherals",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "TECH100",
+          "domain": "technical_troubleshooting",
+          "subdomain": "peripherals",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "TECH085",
+          "domain": "technical_troubleshooting",
+          "subdomain": "file_data",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH017",
+          "domain": "technical_troubleshooting",
+          "subdomain": "networking",
+          "difficulty": "medium"
+        }
+      ]
+    },
+    {
+      "batch_id": "P10",
+      "task_count": 24,
+      "domain_counts": {
+        "cybersecurity_digital_safety": 5,
+        "decision_support": 5,
+        "information_synthesis": 5,
+        "procedural_instructional": 4,
+        "technical_troubleshooting": 5
+      },
+      "difficulty_counts": {
+        "easy": 6,
+        "hard": 5,
+        "medium": 13
+      },
+      "tasks": [
+        {
+          "task_id": "CYBER033",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "network_security",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "CYBER040",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "network_security",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "CYBER068",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "cloud_security",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "CYBER055",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "incident_response",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "CYBER075",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "software_security",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC022",
+          "domain": "decision_support",
+          "subdomain": "tool_selection",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "DEC030",
+          "domain": "decision_support",
+          "subdomain": "tool_selection",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "DEC007",
+          "domain": "decision_support",
+          "subdomain": "prioritization",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC016",
+          "domain": "decision_support",
+          "subdomain": "scheduling",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC097",
+          "domain": "decision_support",
+          "subdomain": "uncertainty",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN073",
+          "domain": "information_synthesis",
+          "subdomain": "multi_constraint_reasoning",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "SYN079",
+          "domain": "information_synthesis",
+          "subdomain": "multi_constraint_reasoning",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "SYN057",
+          "domain": "information_synthesis",
+          "subdomain": "conflicting_evidence",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN097",
+          "domain": "information_synthesis",
+          "subdomain": "extended_context",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN027",
+          "domain": "information_synthesis",
+          "subdomain": "timeline",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC012",
+          "domain": "procedural_instructional",
+          "subdomain": "meeting_workflow",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "PROC019",
+          "domain": "procedural_instructional",
+          "subdomain": "meeting_workflow",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "PROC084",
+          "domain": "procedural_instructional",
+          "subdomain": "digital_workflow",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC075",
+          "domain": "procedural_instructional",
+          "subdomain": "financial_admin",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH052",
+          "domain": "technical_troubleshooting",
+          "subdomain": "cloud",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "TECH022",
+          "domain": "technical_troubleshooting",
+          "subdomain": "software_application",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "TECH030",
+          "domain": "technical_troubleshooting",
+          "subdomain": "software_application",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "TECH086",
+          "domain": "technical_troubleshooting",
+          "subdomain": "file_data",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH003",
+          "domain": "technical_troubleshooting",
+          "subdomain": "operating_system",
+          "difficulty": "medium"
+        }
+      ]
+    },
+    {
+      "batch_id": "P11",
+      "task_count": 24,
+      "domain_counts": {
+        "cybersecurity_digital_safety": 5,
+        "decision_support": 4,
+        "information_synthesis": 6,
+        "procedural_instructional": 4,
+        "technical_troubleshooting": 5
+      },
+      "difficulty_counts": {
+        "easy": 6,
+        "hard": 5,
+        "medium": 13
+      },
+      "tasks": [
+        {
+          "task_id": "CYBER012",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "phishing",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "CYBER019",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "phishing",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "CYBER044",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "data_protection",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "CYBER056",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "incident_response",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "CYBER076",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "software_security",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC042",
+          "domain": "decision_support",
+          "subdomain": "travel_choice",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "DEC050",
+          "domain": "decision_support",
+          "subdomain": "travel_choice",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "DEC008",
+          "domain": "decision_support",
+          "subdomain": "prioritization",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC017",
+          "domain": "decision_support",
+          "subdomain": "scheduling",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN042",
+          "domain": "information_synthesis",
+          "subdomain": "action_extraction",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "SYN082",
+          "domain": "information_synthesis",
+          "subdomain": "risk_summary",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "SYN080",
+          "domain": "information_synthesis",
+          "subdomain": "multi_constraint_reasoning",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "SYN035",
+          "domain": "information_synthesis",
+          "subdomain": "constraint_extraction",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN003",
+          "domain": "information_synthesis",
+          "subdomain": "fact_summary",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN028",
+          "domain": "information_synthesis",
+          "subdomain": "timeline",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC013",
+          "domain": "procedural_instructional",
+          "subdomain": "meeting_workflow",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "PROC020",
+          "domain": "procedural_instructional",
+          "subdomain": "meeting_workflow",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "PROC085",
+          "domain": "procedural_instructional",
+          "subdomain": "digital_workflow",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC076",
+          "domain": "procedural_instructional",
+          "subdomain": "financial_admin",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH053",
+          "domain": "technical_troubleshooting",
+          "subdomain": "cloud",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "TECH059",
+          "domain": "technical_troubleshooting",
+          "subdomain": "cloud",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "TECH055",
+          "domain": "technical_troubleshooting",
+          "subdomain": "cloud",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH087",
+          "domain": "technical_troubleshooting",
+          "subdomain": "file_data",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH005",
+          "domain": "technical_troubleshooting",
+          "subdomain": "operating_system",
+          "difficulty": "medium"
+        }
+      ]
+    },
+    {
+      "batch_id": "P12",
+      "task_count": 24,
+      "domain_counts": {
+        "cybersecurity_digital_safety": 5,
+        "decision_support": 4,
+        "information_synthesis": 5,
+        "procedural_instructional": 5,
+        "technical_troubleshooting": 5
+      },
+      "difficulty_counts": {
+        "easy": 7,
+        "hard": 5,
+        "medium": 12
+      },
+      "tasks": [
+        {
+          "task_id": "CYBER013",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "phishing",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "CYBER020",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "phishing",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "CYBER045",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "data_protection",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "CYBER057",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "incident_response",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "CYBER077",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "software_security",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC092",
+          "domain": "decision_support",
+          "subdomain": "uncertainty",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "DEC099",
+          "domain": "decision_support",
+          "subdomain": "uncertainty",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "DEC084",
+          "domain": "decision_support",
+          "subdomain": "process_policy",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC024",
+          "domain": "decision_support",
+          "subdomain": "tool_selection",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN012",
+          "domain": "information_synthesis",
+          "subdomain": "comparison",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "SYN022",
+          "domain": "information_synthesis",
+          "subdomain": "timeline",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "SYN090",
+          "domain": "information_synthesis",
+          "subdomain": "risk_summary",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "SYN036",
+          "domain": "information_synthesis",
+          "subdomain": "constraint_extraction",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN007",
+          "domain": "information_synthesis",
+          "subdomain": "fact_summary",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC022",
+          "domain": "procedural_instructional",
+          "subdomain": "academic_research",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "PROC042",
+          "domain": "procedural_instructional",
+          "subdomain": "travel_logistics",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "PROC050",
+          "domain": "procedural_instructional",
+          "subdomain": "travel_logistics",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "PROC086",
+          "domain": "procedural_instructional",
+          "subdomain": "digital_workflow",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC077",
+          "domain": "procedural_instructional",
+          "subdomain": "financial_admin",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH032",
+          "domain": "technical_troubleshooting",
+          "subdomain": "database",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "TECH060",
+          "domain": "technical_troubleshooting",
+          "subdomain": "cloud",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "TECH056",
+          "domain": "technical_troubleshooting",
+          "subdomain": "cloud",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH088",
+          "domain": "technical_troubleshooting",
+          "subdomain": "file_data",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH007",
+          "domain": "technical_troubleshooting",
+          "subdomain": "operating_system",
+          "difficulty": "medium"
+        }
+      ]
+    },
+    {
+      "batch_id": "P13",
+      "task_count": 24,
+      "domain_counts": {
+        "cybersecurity_digital_safety": 4,
+        "decision_support": 5,
+        "information_synthesis": 5,
+        "procedural_instructional": 5,
+        "technical_troubleshooting": 5
+      },
+      "difficulty_counts": {
+        "easy": 6,
+        "hard": 6,
+        "medium": 12
+      },
+      "tasks": [
+        {
+          "task_id": "CYBER082",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "privacy",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "CYBER090",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "privacy",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "CYBER046",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "data_protection",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "CYBER035",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "network_security",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC072",
+          "domain": "decision_support",
+          "subdomain": "communication_choice",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "DEC093",
+          "domain": "decision_support",
+          "subdomain": "uncertainty",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "DEC100",
+          "domain": "decision_support",
+          "subdomain": "uncertainty",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "DEC085",
+          "domain": "decision_support",
+          "subdomain": "process_policy",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC025",
+          "domain": "decision_support",
+          "subdomain": "tool_selection",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN013",
+          "domain": "information_synthesis",
+          "subdomain": "comparison",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "SYN050",
+          "domain": "information_synthesis",
+          "subdomain": "action_extraction",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "SYN030",
+          "domain": "information_synthesis",
+          "subdomain": "timeline",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "SYN037",
+          "domain": "information_synthesis",
+          "subdomain": "constraint_extraction",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN075",
+          "domain": "information_synthesis",
+          "subdomain": "multi_constraint_reasoning",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC052",
+          "domain": "procedural_instructional",
+          "subdomain": "appointments_services",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "PROC030",
+          "domain": "procedural_instructional",
+          "subdomain": "academic_research",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "PROC024",
+          "domain": "procedural_instructional",
+          "subdomain": "academic_research",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC087",
+          "domain": "procedural_instructional",
+          "subdomain": "digital_workflow",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC035",
+          "domain": "procedural_instructional",
+          "subdomain": "household_logistics",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH033",
+          "domain": "technical_troubleshooting",
+          "subdomain": "database",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "TECH039",
+          "domain": "technical_troubleshooting",
+          "subdomain": "database",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "TECH057",
+          "domain": "technical_troubleshooting",
+          "subdomain": "cloud",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH064",
+          "domain": "technical_troubleshooting",
+          "subdomain": "hardware",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH008",
+          "domain": "technical_troubleshooting",
+          "subdomain": "operating_system",
+          "difficulty": "medium"
+        }
+      ]
+    },
+    {
+      "batch_id": "P14",
+      "task_count": 24,
+      "domain_counts": {
+        "cybersecurity_digital_safety": 4,
+        "decision_support": 5,
+        "information_synthesis": 5,
+        "procedural_instructional": 5,
+        "technical_troubleshooting": 5
+      },
+      "difficulty_counts": {
+        "easy": 5,
+        "hard": 5,
+        "medium": 14
+      },
+      "tasks": [
+        {
+          "task_id": "CYBER072",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "software_security",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "CYBER079",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "software_security",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "CYBER047",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "data_protection",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "CYBER036",
+          "domain": "cybersecurity_digital_safety",
+          "subdomain": "network_security",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC073",
+          "domain": "decision_support",
+          "subdomain": "communication_choice",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "DEC079",
+          "domain": "decision_support",
+          "subdomain": "communication_choice",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "DEC075",
+          "domain": "decision_support",
+          "subdomain": "communication_choice",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC086",
+          "domain": "decision_support",
+          "subdomain": "process_policy",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "DEC026",
+          "domain": "decision_support",
+          "subdomain": "tool_selection",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN052",
+          "domain": "information_synthesis",
+          "subdomain": "conflicting_evidence",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "SYN019",
+          "domain": "information_synthesis",
+          "subdomain": "comparison",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "SYN044",
+          "domain": "information_synthesis",
+          "subdomain": "action_extraction",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN064",
+          "domain": "information_synthesis",
+          "subdomain": "evidence_to_conclusion",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "SYN076",
+          "domain": "information_synthesis",
+          "subdomain": "multi_constraint_reasoning",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC053",
+          "domain": "procedural_instructional",
+          "subdomain": "appointments_services",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "PROC059",
+          "domain": "procedural_instructional",
+          "subdomain": "appointments_services",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "PROC025",
+          "domain": "procedural_instructional",
+          "subdomain": "academic_research",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC088",
+          "domain": "procedural_instructional",
+          "subdomain": "digital_workflow",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "PROC036",
+          "domain": "procedural_instructional",
+          "subdomain": "household_logistics",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH042",
+          "domain": "technical_troubleshooting",
+          "subdomain": "development",
+          "difficulty": "easy"
+        },
+        {
+          "task_id": "TECH040",
+          "domain": "technical_troubleshooting",
+          "subdomain": "database",
+          "difficulty": "hard"
+        },
+        {
+          "task_id": "TECH035",
+          "domain": "technical_troubleshooting",
+          "subdomain": "database",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH065",
+          "domain": "technical_troubleshooting",
+          "subdomain": "hardware",
+          "difficulty": "medium"
+        },
+        {
+          "task_id": "TECH095",
+          "domain": "technical_troubleshooting",
+          "subdomain": "peripherals",
+          "difficulty": "medium"
+        }
+      ]
+    }
+  ]
+}

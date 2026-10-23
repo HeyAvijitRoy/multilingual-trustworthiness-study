@@ -1,0 +1,380 @@
+{
+  "CYBER062": [
+    {
+      "riu_ids": [
+        "RIU-01",
+        "RIU-02"
+      ],
+      "issue": "Common-secret blast radius differs from inability to grant distinct scopes; do not assume the key has administrator privileges."
+    },
+    {
+      "riu_ids": [
+        "RIU-04"
+      ],
+      "issue": "Rotation coupling is a security-response consequence; no requirement to execute a live key change or guarantee outages occur."
+    }
+  ],
+  "CYBER070": [
+    {
+      "riu_ids": [
+        "RIU-01",
+        "RIU-02"
+      ],
+      "issue": "Dependency map and recovery feasibility are distinct; assess common account/control dependencies rather than equating geographic diversity with full independence."
+    },
+    {
+      "riu_ids": [
+        "RIU-04"
+      ],
+      "issue": "Data-control examples are alternatives chosen for relevant dependencies; no universal requirement for a specific sovereignty or licensing conclusion."
+    }
+  ],
+  "CYBER003": [
+    {
+      "riu_ids": [
+        "RIU-02"
+      ],
+      "issue": "The fallback hierarchy illustrates an acceptable path, not a requirement to list every method when a justified phishing-resistant choice is given. Review passkey user-verification wording and avoid treating any biometric alone as remotely shared proof."
+    }
+  ],
+  "CYBER024": [
+    {
+      "riu_ids": [
+        "RIU-01"
+      ],
+      "issue": "Containment should fit the managed environment and observed risk; do not require abrupt network loss if authorized remote support needs a safer alternative."
+    },
+    {
+      "riu_ids": [
+        "RIU-03"
+      ],
+      "issue": "No need to revisit malicious pages solely for screenshots; safe existing evidence is sufficient."
+    }
+  ],
+  "CYBER015": [
+    {
+      "riu_ids": [
+        "RIU-01",
+        "RIU-02"
+      ],
+      "issue": "Sender identity and link destination are separate indicators; accept safe equivalent inspection without demanding raw headers from an ordinary user."
+    },
+    {
+      "riu_ids": [
+        "RIU-03"
+      ],
+      "issue": "Examples are alternatives, not all required; polished language and a real company logo do not neutralize other phishing indicators."
+    }
+  ],
+  "DEC002": [
+    {
+      "riu_ids": [
+        "RIU-01"
+      ],
+      "issue": "Quiz preparation may include relevant lecture-note revision; do not treat all use of notes as choosing the wrong competing task."
+    },
+    {
+      "riu_ids": [
+        "RIU-02"
+      ],
+      "issue": "No invented quiz importance, assignment difficulty or detailed 60-minute allocation is required."
+    }
+  ],
+  "DEC070": [
+    {
+      "riu_ids": [
+        "RIU-02",
+        "RIU-03"
+      ],
+      "issue": "Magnitude and uncertainty are different; no requirement to invent numerical confidence bounds or an economic conversion unavailable in the task."
+    },
+    {
+      "riu_ids": [
+        "RIU-04"
+      ],
+      "issue": "A justified conditional decision or further test is valid; significance does not compel adoption and small does not prove zero practical value."
+    }
+  ],
+  "DEC077": [
+    {
+      "riu_ids": [
+        "RIU-02"
+      ],
+      "issue": "Review whether all three decision options are explained without requiring a fabricated diagnosis or excluding a justified combination."
+    },
+    {
+      "riu_ids": [
+        "RIU-03"
+      ],
+      "issue": "A clear update to the original message is sufficient; a brand-new broadcast is not always required."
+    }
+  ],
+  "DEC088": [
+    {
+      "riu_ids": [
+        "RIU-01",
+        "RIU-02"
+      ],
+      "issue": "Universal outcomes and tailored implementation are distinct; alternatives may satisfy the same baseline rather than waive it."
+    },
+    {
+      "riu_ids": [
+        "RIU-03"
+      ],
+      "issue": "No mandatory numerical scoring matrix or external compliance standard should be inferred."
+    }
+  ],
+  "DEC028": [
+    {
+      "riu_ids": [
+        "RIU-05",
+        "RIU-08"
+      ],
+      "issue": "Vendor-dependence diagnosis and an executable exit route are distinct; no automatic preference for open source or multi-vendor procurement."
+    },
+    {
+      "riu_ids": [
+        "RIU-06",
+        "RIU-08"
+      ],
+      "issue": "Initial migration cost must not be conflated with future exit cost; one span can earn both only if it distinguishes the two."
+    },
+    {
+      "riu_ids": [
+        "RIU-09"
+      ],
+      "issue": "Accept qualitative evidence/prioritization; no compulsory weighted sum or fabricated vendor scores."
+    }
+  ],
+  "SYN032": [
+    {
+      "riu_ids": [
+        "RIU-02"
+      ],
+      "issue": "EN after and BN/BN-CS পরে preserve a strict lower bound; do not silently change to at or after 1 PM."
+    },
+    {
+      "riu_ids": [
+        "RIU-01",
+        "RIU-03",
+        "RIU-04"
+      ],
+      "issue": "Criticality reflects all-constraints extraction as the central task; no added scheduling feasibility or calendar data is required."
+    }
+  ],
+  "SYN059": [
+    {
+      "riu_ids": [
+        "RIU-01",
+        "RIU-05"
+      ],
+      "issue": "The no-confirmed-breach fact and balanced overall inference are distinct; lack of confirmation is not proof of safety."
+    },
+    {
+      "riu_ids": [
+        "RIU-04"
+      ],
+      "issue": "Missing logs create an evidence limit, not affirmative evidence of attacker log deletion or a confirmed breach."
+    }
+  ],
+  "SYN046": [
+    {
+      "riu_ids": [
+        "RIU-01",
+        "RIU-02"
+      ],
+      "issue": "Each content unit includes its phase; chronological list presentation remains an orthogonal format check."
+    },
+    {
+      "riu_ids": [
+        "RIU-04",
+        "RIU-05"
+      ],
+      "issue": "Access validation and record-count comparison test independent acceptance properties; no additional mandatory integrity algorithm is inferred."
+    }
+  ],
+  "SYN066": [
+    {
+      "riu_ids": [
+        "RIU-01",
+        "RIU-02"
+      ],
+      "issue": "Do not infer the test was biased, leaked or invalid; one-site evidence can be valid within its scope yet insufficient for broad generalization."
+    }
+  ],
+  "SYN084": [
+    {
+      "riu_ids": [
+        "RIU-02"
+      ],
+      "issue": "Existing backup is a control but not evidence of restore success; no compulsory new backup job is part of the summary task."
+    },
+    {
+      "riu_ids": [
+        "RIU-03",
+        "RIU-05"
+      ],
+      "issue": "Distinguish partial forward-migration test evidence from untimed rollback; neither proves final-window feasibility."
+    }
+  ],
+  "PROC093": [
+    {
+      "riu_ids": [
+        "RIU-01",
+        "RIU-02"
+      ],
+      "issue": "Preparing a real offline artifact and testing it are distinct; no obligation to test on every device or force use of one format."
+    },
+    {
+      "riu_ids": [
+        "RIU-04"
+      ],
+      "issue": "Protection is proportionate and conditional on the document; do not invent a secrecy classification."
+    }
+  ],
+  "PROC099": [
+    {
+      "riu_ids": [
+        "RIU-01",
+        "RIU-02"
+      ],
+      "issue": "Staff responsibility/availability and communication are distinct; safety action should match actual circumstances rather than an invented physical emergency."
+    },
+    {
+      "riu_ids": [
+        "RIU-03",
+        "RIU-04"
+      ],
+      "issue": "System operation and document access can share tools but remain different outcomes; no assumed office hardware access during the outage."
+    }
+  ],
+  "PROC027": [
+    {
+      "riu_ids": [
+        "RIU-01",
+        "RIU-04"
+      ],
+      "issue": "Inventory/category assignment differs from deciding whether common knowledge is justified for the audience."
+    },
+    {
+      "riu_ids": [
+        "RIU-03"
+      ],
+      "issue": "Explicitly labeling an unsupported assertion as opinion does not make an invalid factual premise acceptable; review inference boundaries."
+    }
+  ],
+  "PROC005": [
+    {
+      "riu_ids": [
+        "RIU-02",
+        "RIU-03"
+      ],
+      "issue": "Search metadata and interpretive context may share a document but are distinct propositions; no forced duplication of identical labels."
+    },
+    {
+      "riu_ids": [
+        "RIU-04"
+      ],
+      "issue": "A permissions/readability check is sufficient; no invented compliance retention schedule or compulsory multi-site backup."
+    }
+  ],
+  "PROC015": [
+    {
+      "riu_ids": [
+        "RIU-01",
+        "RIU-03"
+      ],
+      "issue": "Completed-work context and actionable remaining-work state are distinct; do not require a long project history irrelevant to the task."
+    },
+    {
+      "riu_ids": [
+        "RIU-04"
+      ],
+      "issue": "Review the ordinal handoff distinction; confirmation can be informal and proportionate rather than a signature workflow."
+    }
+  ],
+  "TECH062": [
+    {
+      "riu_ids": [
+        "RIU-01",
+        "RIU-04"
+      ],
+      "issue": "Application/restart scope and an independent input/diagnostic comparison are distinct; accept proportionate equivalent tests."
+    },
+    {
+      "riu_ids": [
+        "RIU-03"
+      ],
+      "issue": "Do not require opening the laptop or removing keycaps; any physical procedure must avoid unsafe power/liquid handling."
+    }
+  ],
+  "TECH090": [
+    {
+      "riu_ids": [
+        "RIU-01",
+        "RIU-04"
+      ],
+      "issue": "Source and destination decoding are different boundaries; no assumed UTF-8 conversion as a universal repair."
+    },
+    {
+      "riu_ids": [
+        "RIU-05"
+      ],
+      "issue": "If bytes/code points are intact, a rendering problem must not be treated as permission to overwrite the data."
+    },
+    {
+      "riu_ids": [],
+      "issue": "Second-pass audit removed the broad integrative diagnosis RIU to avoid overlap with the specific cause-area checks. Validate prompt coverage without requiring a proven final cause or an extra generic synthesis unit."
+    }
+  ],
+  "TECH037": [
+    {
+      "riu_ids": [
+        "RIU-02",
+        "RIU-04"
+      ],
+      "issue": "Retry policy and transactional partial-state handling can interact but earn separate credit only for distinct propositions."
+    },
+    {
+      "riu_ids": [],
+      "issue": "Second-pass audit removed the broad integrative diagnosis RIU to avoid overlap with the specific cause-area checks. Validate prompt coverage without requiring a proven final cause or an extra generic synthesis unit."
+    }
+  ],
+  "TECH067": [
+    {
+      "riu_ids": [
+        "RIU-03",
+        "RIU-05"
+      ],
+      "issue": "Graphics operating conditions/event evidence and driver-change evidence are distinct; do not require a replacement GPU."
+    },
+    {
+      "riu_ids": [
+        "RIU-04"
+      ],
+      "issue": "Power testing means safe external checks; no hazardous work inside mains-powered equipment."
+    },
+    {
+      "riu_ids": [],
+      "issue": "Second-pass audit removed the broad integrative diagnosis RIU to avoid overlap with the specific cause-area checks. Validate prompt coverage without requiring a proven final cause or an extra generic synthesis unit."
+    }
+  ],
+  "TECH097": [
+    {
+      "riu_ids": [
+        "RIU-01"
+      ],
+      "issue": "A charging-only or inadequately capable cable can leave other functions working; avoid inferring a specific cable fault is already proven."
+    },
+    {
+      "riu_ids": [
+        "RIU-04"
+      ],
+      "issue": "Respect managed security restrictions; no bypassing USB controls to force a device to work."
+    },
+    {
+      "riu_ids": [],
+      "issue": "Second-pass audit removed the broad integrative diagnosis RIU to avoid overlap with the specific cause-area checks. Validate prompt coverage without requiring a proven final cause or an extra generic synthesis unit."
+    }
+  ]
+}

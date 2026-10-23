@@ -141,10 +141,15 @@ def verify_freeze() -> tuple[dict[str, Any], dict[str, Any], dict[str, dict[str,
         extra = sorted(set(annotations) - set(ids))
         raise RuntimeError(f"annotation membership mismatch; missing={missing}, extra={extra}")
 
+    pilot_ids = set(freeze["pilot_task_ids"])
     for task_id in ids:
         rec = annotations[task_id]
-        if rec.get("status") != "human-reviewed":
-            raise RuntimeError(f"snapshot annotation is not accepted: {task_id}")
+        expected_status = "frozen" if task_id in pilot_ids else "human-reviewed"
+        if rec.get("status") != expected_status:
+            raise RuntimeError(
+                f"snapshot annotation has unexpected status: {task_id}: "
+                f"{rec.get('status')} != {expected_status}"
+            )
         if task_id not in prompts:
             raise RuntimeError(f"missing frozen prompt row: {task_id}")
         row = prompts[task_id]

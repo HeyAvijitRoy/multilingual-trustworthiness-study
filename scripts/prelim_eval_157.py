@@ -286,6 +286,7 @@ def call_anthropic(model: dict[str, Any], prompt: str, system: str, timeout: int
         "max_tokens": max_tokens,
         "system": system,
         "messages": [{"role": "user", "content": prompt}],
+        "thinking": {"type": "adaptive"},
         "output_config": {"effort": "medium"},
     }
     payload, status = http_json(
@@ -349,6 +350,8 @@ def call_google(model: dict[str, Any], prompt: str, system: str, timeout: int, m
         "usage": payload.get("usageMetadata"),
         "provider_raw_meta": {
             "finish_message": first.get("finishMessage"),
+            "continuation_available": bool(first.get("continuationToken")),
+            "safety_ratings": first.get("safetyRatings"),
             "prompt_feedback": payload.get("promptFeedback"),
         },
     }

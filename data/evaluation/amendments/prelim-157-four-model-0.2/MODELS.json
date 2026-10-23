@@ -1,0 +1,73 @@
+{
+  "protocol_id": "prelim-157-four-model-0.2",
+  "status": "candidate-pending-feasibility-and-approval",
+  "historical_snapshot": "data/evaluation/PRELIM_157_FREEZE.json",
+  "output_directory": ".local/prelim_157_four_v02",
+  "run_count_per_prompt": 1,
+  "system_prompt": "Answer the user's request directly.",
+  "max_output_tokens": 32768,
+  "timeout_seconds": 900,
+  "request_order_seed": 20261023,
+  "tools_enabled": false,
+  "external_grounding": false,
+  "models": [
+    {
+      "partition": "openai",
+      "model_id": "gpt-6-astra",
+      "api": "Responses API",
+      "env_key": "OPENAI_API_KEY",
+      "reasoning": {"effort": "medium", "mode": "standard"},
+      "sampling_controls": "omitted",
+      "documentation": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+      "availability_evidence": null
+    },
+    {
+      "partition": "google",
+      "model_id": "gemini-4-argon",
+      "api": "Gemini GenerateContent API",
+      "env_key": "GEMINI_API_KEY",
+      "reasoning": {"thinking_level": "medium"},
+      "sampling_controls": "omitted",
+      "documentation": "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon",
+      "availability_evidence": null
+    },
+    {
+      "partition": "local_a",
+      "model_id": null,
+      "weights_revision": null,
+      "weights_sha256": null,
+      "tokenizer_revision": null,
+      "tokenizer_sha256": null,
+      "quantization": null,
+      "engine": null,
+      "engine_version": null,
+      "context_tokens": null,
+      "chat_template_sha256": null,
+      "decoding": null,
+      "endpoint_env": "PRELIM_LOCAL_A_BASE_URL",
+      "availability_evidence": null,
+      "feasibility_evidence": null,
+      "context_fit_evidence": null,
+      "adapter_smoke_evidence": null
+    },
+    {
+      "partition": "local_b",
+      "model_id": null,
+      "weights_revision": null,
+      "weights_sha256": null,
+      "tokenizer_revision": null,
+      "tokenizer_sha256": null,
+      "quantization": null,
+      "engine": null,
+      "engine_version": null,
+      "context_tokens": null,
+      "chat_template_sha256": null,
+      "decoding": null,
+      "endpoint_env": "PRELIM_LOCAL_B_BASE_URL",
+      "availability_evidence": null,
+      "feasibility_evidence": null,
+      "context_fit_evidence": null,
+      "adapter_smoke_evidence": null
+    }
+  ]
+}

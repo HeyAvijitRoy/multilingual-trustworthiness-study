@@ -1,0 +1,29 @@
+{
+  "protocol_id": "prelim-157-four-model-0.2",
+  "snapshot_id": "prelim-157-four-model-0.2-candidate",
+  "status": "candidate-not-frozen",
+  "prepared_date": "2026-10-23",
+  "historical_snapshot_sha256": "15c383838a02459c78a92ccbc997dcb73bd9c1e147a785eadf15dad3c945f0b6",
+  "task_count": 157,
+  "prompt_instances_per_model": 471,
+  "planned_model_count": 4,
+  "planned_response_count": 1884,
+  "full_study_planned_response_count": 6000,
+  "study_lead_approval_record": null,
+  "artifact_sha256": {},
+  "pending_decisions": [
+    "Verify cloud model access, quotas and callable settings with the intended API accounts",
+    "Select and pin exactly two different-family local checkpoints after independent diagnostics",
+    "Validate a study adapter for the selected local inference runtime",
+    "Verify local chat templates and prompt-plus-output context fit without truncation",
+    "Approve model panel, protocol, scoring and analysis amendment before any study generation",
+    "Create an immutable final manifest pinning all amended artifacts and approval evidence"
+  ],
+  "observed_historical_outputs": {
+    "scope": "working checkout including ignored .local and data/outputs, not remote user machines",
+    "successful_generations": 0,
+    "judge_calibration_report_present": false,
+    "successful_study_scores": 0,
+    "account_api_access_verified": false
+  }
+}

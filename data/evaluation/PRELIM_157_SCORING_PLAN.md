@@ -25,6 +25,7 @@ For preliminary throughput, the frozen automated judge is:
 - Sampling controls: omitted
 - Tools/external retrieval: disabled
 - Structured JSON output
+- Up to 12 judge requests may execute concurrently; concurrency does not change rubric content or scoring configuration.
 - Model identity of the response being scored is not provided to the judge.
 
 The exact configuration is stored in `PRELIM_157_JUDGE.json`.

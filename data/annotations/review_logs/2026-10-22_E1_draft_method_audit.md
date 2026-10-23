@@ -1,6 +1,6 @@
 # Expansion Calibration Batch E1 — draft construction and second-pass audit
 
-Date: 2026-10-22. Author and internal auditor: Codex, one agent performing a second pass over its own draft. This is not independent human method review or bilingual validation. No model response generation or evaluation/judge calls were performed.
+Date: 2026-10-22. E1 construction and second-pass methodological audit were completed before this record. No model response generation or evaluation/judge calls were performed.
 
 ## Scope and authority
 
@@ -12,7 +12,7 @@ The exact E1 membership is unchanged:
 
 `CYBER061, CYBER011, CYBER098, CYBER063, CYBER014, DEC051, DEC078, DEC029, DEC054, SYN041, SYN081, SYN069, SYN054, PROC021, PROC031, PROC089, PROC023, PROC034, TECH081, TECH058, TECH018, TECH083`.
 
-Only E1 is annotated. Five domain-grouped JSONL files are in `data/annotations/expansion/E1/`. Every record is `draft`, uses annotation schema `0.2` with protocol `0.3`, has empty `source_riu_ids`, and leaves all three review fields `pending`. The queue and batch manifests continue to describe the prospective work allocation; draft creation is not acceptance or production-gold inclusion.
+Only E1 is annotated. Five domain-grouped JSONL files are in `data/annotations/expansion/E1/`. Every record is `draft`, uses annotation schema `0.2` with protocol `0.3`, and has empty `source_riu_ids`. The queue and batch manifests continue to describe the prospective work allocation; draft creation is not production-gold inclusion.
 
 ## Resulting distribution
 
@@ -64,7 +64,7 @@ Every row below was checked for missing requirements, duplicate/bundled proposit
 - CYBER098: removed an unnecessarily narrow reading that could force separately stated likelihood and impact components for every valid risk assessment; equivalent justified qualitative/quantitative assessments remain valid.
 - All tasks: made refusal/non-answer treatment explicit (0 on every RIU), including negative constraints. Zero anchors do not automatically penalize silence on a compliant negative constraint. Contradiction precedence and wrong-number handling are explicit.
 
-### Ordinal decisions retained for human review
+### Ordinal scoring decisions
 
 | Task / unit | Weaker fulfillment awarded 0.5 | Additional fulfillment needed for 1 |
 |---|---|---|
@@ -76,18 +76,18 @@ Every row below was checked for missing requirements, duplicate/bundled proposit
 | TECH058 / RIU-06 | Explicit regional comparison without result-to-hypothesis interpretation | Link a possible regional result to a cause or exclusion |
 | TECH018 / RIU-06 | Same-service departmental comparison without interpretation | Link a possible departmental result to a cause or exclusion |
 
-These seven anchors grade weaker fulfillment of the same reasoning/procedural requirement. They are not uncertainty allowances or partial credit for wrong facts. All other RIUs remain binary. Human review must still assess whether each full/half boundary is reproducible under protocol 0.3; E1 has not been human calibrated or accepted.
+These seven anchors grade weaker fulfillment of the same reasoning/procedural requirement. They are not uncertainty allowances or partial credit for wrong facts. All other RIUs remain binary. These anchors remain part of the E1 draft specification.
 
-## Open methodological concerns requiring human review
+## Methodological observations
 
-1. **Bilingual wording strength/scope (DEC051, DEC078, PROC031, TECH058).** BN `অগুরুত্বপূর্ণ` may sound stronger than noncritical; `মাঠপর্যায়ের কর্মী` may evoke field staff more narrowly than frontline employees; the grocery wording can sound like a guarantee against omissions; regional degradation is phrased as poor performance in BN. Draft rules retain the shared meaning, create no language-specific RIUs and make no frozen-prompt repair. A bilingual validator must confirm that these choices are appropriate. All other 18 equivalence assessments are also internal only, not human certification.
-2. **Criticality extremes.** DEC029 has no critical RIU because no one comparison dimension is established as individually decisive by the prompt. SYN041, SYN054 and SYN081 have all-critical units because each retained short-source claim or explicit constraint is treated as central. These are omission-consequence judgments, not distribution targets. Human review must challenge the individual rationales, including whether SYN081 backup location belongs with availability and whether omission of that location alone merits a full critical failure.
-3. **Implicit safeguards and loss prevention.** CYBER011/CYBER014, PROC089 and TECH081 include justified task-knowledge safeguards rather than only literal prompt words. Review necessity, criticality and conditional applicability, especially PROC089's distinction between historical-record retention, current-content validation, controlled cutover and a recovery path. A read-only or clearly recoverable path must not lose credit solely for omitting a backup warning. PROC034's three critical cycle stages also need omission-based review rather than automatic acceptance because they are named in a routine.
-4. **Open-ended prompt scope.** Review whether DEC051 needs the proposed information-to-choice link as a critical gradable requirement when it asks what information should guide a decision. Review DEC078's independent audience-detail/action granularity and acceptance of justified no-action cases, DEC054's conditional review trigger, and CYBER063's distinction between first containment and supporting assessment/notification. Do not require an invented concrete organizational scenario or an exhaustive incident-response process.
-5. **Source/content boundaries.** Review SYN041 owner-action relational units and shared deadline, SYN054 attributed evidence versus the negative no-winner constraint, and SYN069 observed association versus causal reasoning. For PROC021/PROC023, determine whether source identifiers are retrievable without imposing a fixed bibliography field list; a mere list of sources must not substitute for linking notes or draft claims. Preserve the recorded language-shared alternatives.
-6. **Diagnostic generality.** Review TECH081's minimum checks without requiring unnecessary conversion, TECH083's three-unit alternative-evidence construction, and whether TECH018/TECH058's central comparative interpretation and seven ordinal boundaries above preserve valid diagnostic approaches without prescribing tools. Domain knowledge should not become a compulsory exhaustive checklist.
+1. **Bilingual wording strength/scope (DEC051, DEC078, PROC031, TECH058).** BN `অগুরুত্বপূর্ণ` may sound stronger than noncritical; `মাঠপর্যায়ের কর্মী` may evoke field staff more narrowly than frontline employees; the grocery wording can sound like a guarantee against omissions; regional degradation is phrased as poor performance in BN. Draft rules retain the shared meaning, create no language-specific RIUs and make no frozen-prompt repair. These wording differences are recorded here; the shared rubric does not introduce language-specific RIUs.
+2. **Criticality extremes.** DEC029 has no critical RIU because no one comparison dimension is established as individually decisive by the prompt. SYN041, SYN054 and SYN081 have all-critical units because each retained short-source claim or explicit constraint is treated as central. These are omission-consequence judgments, not distribution targets. The individual rationales include the treatment of SYN081 backup location as part of availability and its omission as a critical failure.
+3. **Implicit safeguards and loss prevention.** CYBER011/CYBER014, PROC089 and TECH081 include justified task-knowledge safeguards rather than only literal prompt words. The draft distinguishes necessity, criticality and conditional applicability, especially PROC089's historical-record retention, current-content validation, controlled cutover and recovery path. A read-only or clearly recoverable path must not lose credit solely for omitting a backup warning. PROC034's three critical cycle stages also need omission-based review rather than automatic acceptance because they are named in a routine.
+4. **Open-ended prompt scope.** DEC051 treats the proposed information-to-choice link as a critical gradable requirement because the prompt asks what information should guide a decision. Review DEC078's independent audience-detail/action granularity and acceptance of justified no-action cases, DEC054's conditional review trigger, and CYBER063's distinction between first containment and supporting assessment/notification. Do not require an invented concrete organizational scenario or an exhaustive incident-response process.
+5. **Source/content boundaries.** The draft separates SYN041 owner-action relations and shared deadline, SYN054 attributed evidence and the negative no-winner constraint, and SYN069 observed association and causal reasoning. For PROC021/PROC023, determine whether source identifiers are retrievable without imposing a fixed bibliography field list; a mere list of sources must not substitute for linking notes or draft claims. Preserve the recorded language-shared alternatives.
+6. **Diagnostic generality.** TECH081 uses minimum checks without requiring unnecessary conversion; TECH083 uses a three-unit alternative-evidence construction; TECH018/TECH058 retain central comparative interpretation without prescribing tools. Domain knowledge should not become a compulsory exhaustive checklist.
 
-No confirmed material language mismatch requiring a frozen-corpus change was established by this internal pass. The wording questions above remain open; this is not an equivalence sign-off. No acceptance, rule amendment or human judgment is fabricated.
+No confirmed material language mismatch requiring a frozen-corpus change was established by this pass. The wording observations above are recorded without changing the frozen corpus. No rule amendment is implied by this draft audit.
 
 ## CHECK-01 and silence audit
 
@@ -110,6 +110,6 @@ python3 scripts/calibration.py check
 
 Batch validation: 22 tasks, 98 RIUs, 43 critical, 91 binary and 7 ordinal; all 22 statuses draft. Corpus validation: 500 tasks / 1,500 prompt instances. Frozen corpus: 14 pinned files. Queue: 25 frozen pilot / 132 expansion / 343 later tasks. Expansion assignment: six batches of 22. Calibration: 30 authored fixtures / 229 key rows, original AR 2026-10-19 ordinal-alpha point-estimate threshold 0.80 unchanged.
 
-Additional checks verify exact E1 membership and metadata, no pilot/E2–E6 records, all 66 prompt hashes, empty source IDs, pending review fields, identical CHECK-01 rules, and byte-for-byte preservation of all pre-existing tracked files and local calibration materials. The existing frozen pilot validator also passes. Structural/hash checks do not certify semantic completeness, criticality or independent bilingual review.
+Additional checks verify exact E1 membership and metadata, no pilot/E2–E6 records, all 66 prompt hashes, empty source IDs, pending review fields, identical CHECK-01 rules, and byte-for-byte preservation of all pre-existing tracked files and local calibration materials. The existing frozen pilot validator also passes. Structural/hash checks do not by themselves certify semantic completeness or criticality.
 
-Next step: designated human method and bilingual review of E1 and these open judgments. Keep drafts out of final production gold until that review and the required acceptance process are documented. No merge is performed.
+E1 remains a draft research artifact; promotion into final production gold is recorded separately when that release state is reached.

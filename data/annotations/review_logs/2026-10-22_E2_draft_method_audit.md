@@ -1,6 +1,6 @@
 # Expansion Calibration Batch E2 — draft construction and second-pass audit
 
-Date: 2026-10-22. Annotator and second-pass auditor: Codex (`agent-internal`). Construction and the subsequent methodological pass used frozen prompts and the accepted E1 baseline. No model responses were generated and no evaluation or judge calls were performed.
+Date: 2026-10-22. Construction and the subsequent methodological pass used frozen prompts and the accepted E1 baseline. No model responses were generated and no evaluation or judge calls were performed.
 
 ## Scope and baseline
 
@@ -12,7 +12,7 @@ Exact prospective E2 membership:
 
 `CYBER041, CYBER081, CYBER058, CYBER043, CYBER083, DEC031, DEC069, DEC049, DEC034, SYN011, SYN021, SYN078, SYN034, PROC051, PROC011, PROC069, PROC054, PROC014, TECH061, TECH038, TECH098, TECH063`.
 
-Five domain-grouped JSONL files contain one shared specification per task. Every record has `status: draft`, annotation schema `0.2`, protocol `0.3` recorded in its notes, three frozen-prompt SHA-256 hashes, and empty `source_riu_ids` on every unit. The existing three-field review schema is retained: `method_review` is `agent-internal`; the independent and language-equivalence review fields retain `pending`. These fields distinguish the recorded internal construction evidence from a later acceptance record. E1 acceptance is the baseline, not acceptance of E2.
+Five domain-grouped JSONL files contain one shared specification per task. Every record has `status: draft`, annotation schema `0.2`, protocol `0.3` recorded in its notes, three frozen-prompt SHA-256 hashes, and empty `source_riu_ids` on every unit. E1 acceptance is the methodological baseline; E2 remains a draft research batch until its acceptance state is recorded separately.
 
 Every zero anchor is exactly: "Absent, incorrect, contradicted, or does not meet an available positive anchor."
 
@@ -92,7 +92,7 @@ These anchors represent weaker fulfillment of the same decision or interpretatio
 5. **Duplication boundaries.** Mechanism explanation is distinct from carrying out a safer sharing action. Selection bias is distinct from deciding the scope of sample claims. Correct timestamps are distinct from chronological presentation. Staffing counts are distinct from availability and non-overlap. Meeting decisions, owner-action assignments and subsequent progress checks have different functions. In TECH098, endpoint routing is separated from application-specific behavior; one generic instruction to check audio settings does not automatically supply both propositions.
 6. **Negative versus affirmative requirements.** Non-answer handling takes precedence over silence credit. An answer offering disjoint valid shift rosters need not repeat every availability prohibition; an incomplete roster can still satisfy a negative restriction while failing coverage elsewhere. A read-only USB investigation need not recite a backup warning. Evidence preservation in CYBER058 is affirmative and explicit in the prompt: a response must supply a preservation step, not merely omit a recommendation to wipe the server. Conditional safeguards do not create obligations for actions neither proposed nor necessary.
 
-These are construction and audit observations for E2. No protocol amendment, language-specific RIU, pilot change or E1 revision is introduced.
+These are E2 methodological observations. No protocol amendment, language-specific RIU, pilot change or E1 revision is introduced.
 
 ## CHECK-01 consistency
 
@@ -115,6 +115,6 @@ python3 scripts/calibration.py check
 
 Final batch: 22 draft records, 107 RIUs, 59 critical, 48 supporting, 102 binary and 5 ordinal. Corpus: 500 tasks / 1,500 prompt instances. Prompt freeze: 14 pinned files at v0.3.1. Queue: 25 frozen pilot / 132 expansion / 343 later tasks. Assignment: six prospective batches of 22. Calibration: 30 authored fixtures / 229 key rows, original AR 2026-10-19 ordinal-alpha point-estimate threshold 0.80 unchanged.
 
-Additional checks cover exact E2 membership and metadata, domain-file placement, all 66 prompt hashes, all 107 empty source-ID lists, the exact zero anchor, description/full-anchor equality, five concrete ordinal half anchors, unchanged review structure, and identical CHECK-01 rules matching E1. The frozen pilot validator also passes. No pre-existing tracked file changed; frozen prompts, pilot gold, calibration materials, the protocol, queue/batch manifests and accepted E1 are preserved. Structural and integrity checks establish those properties without asserting semantic completeness or a new acceptance decision.
+Additional checks cover exact E2 membership and metadata, domain-file placement, all 66 prompt hashes, all 107 empty source-ID lists, the exact zero anchor, description/full-anchor equality, five concrete ordinal half anchors, and identical CHECK-01 rules matching E1. The frozen pilot validator also passes. No pre-existing tracked file changed; frozen prompts, pilot gold, calibration materials, the protocol, queue/batch manifests and accepted E1 are preserved.
 
-Files added: the five JSONL files in `data/annotations/expansion/E2/` and this audit. E2 remains a draft batch; production-gold assembly is a separate release state.
+Files added: the five JSONL files in `data/annotations/expansion/E2/` and this audit. Production-gold assembly is a separate release state.

@@ -25,6 +25,7 @@ import sys
 import time
 import urllib.error
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -437,17 +438,19 @@ def run_provider(
     timeout = int(models["timeout_seconds"])
     max_tokens = int(models["max_output_tokens"])
 
-    for idx, cell in enumerate(pending, 1):
+    workers = int(models["concurrency_per_provider"])
+
+    def execute_cell(cell: dict[str, Any]) -> dict[str, Any]:
         started = time.monotonic()
         attempt = 0
         last_error: dict[str, Any] | None = None
+
         while attempt < 4:
             attempt += 1
             try:
                 result = caller(model, cell["prompt_text"], system, timeout, max_tokens)
-                last_error = None
                 elapsed = time.monotonic() - started
-                row = {
+                return {
                     "snapshot_id": freeze["snapshot_id"],
                     **hashes,
                     "task_id": cell["task_id"],
@@ -467,6 +470,7 @@ def run_provider(
                         "sampling_controls": model["sampling_controls"],
                         "tools_enabled": False,
                         "external_grounding": False,
+                        "concurrency_per_provider": workers,
                     },
                     "generated_at_utc": utc_now(),
                     "latency_seconds": round(elapsed, 6),
@@ -479,12 +483,6 @@ def run_provider(
                     "response_text": result["response_text"],
                     "provider_raw_meta": result["provider_raw_meta"],
                 }
-                append_jsonl(output_path, row)
-                print(
-                    f"[{idx}/{len(pending)}] {provider} {cell['task_id']} "
-                    f"{cell['language']} success ({elapsed:.1f}s)"
-                )
-                break
             except ProviderHTTPError as e:
                 last_error = {"type": "http", "status": e.status, "payload": e.payload}
                 if attempt < 4 and should_retry(e.status):
@@ -498,41 +496,77 @@ def run_provider(
                     continue
                 break
 
-        else:
-            last_error = last_error or {"type": "unknown"}
+        elapsed = time.monotonic() - started
+        return {
+            "snapshot_id": freeze["snapshot_id"],
+            **hashes,
+            "task_id": cell["task_id"],
+            "domain": cell["domain"],
+            "difficulty": cell["difficulty"],
+            "language": cell["language"],
+            "prompt_sha256": cell["prompt_sha256"],
+            "prompt_text": cell["prompt_text"],
+            "provider": provider,
+            "requested_model": model["model_id"],
+            "run_index": cell["run_index"],
+            "system_prompt": system,
+            "request_parameters": {
+                "reasoning": model["reasoning"],
+                "max_output_tokens": max_tokens,
+                "sampling_controls": model["sampling_controls"],
+                "tools_enabled": False,
+                "external_grounding": False,
+                "concurrency_per_provider": workers,
+            },
+            "generated_at_utc": utc_now(),
+            "latency_seconds": round(elapsed, 6),
+            "attempt_count": attempt,
+            "status": "api_error",
+            "error": last_error or {"type": "unknown"},
+        }
 
-        if last_error is not None:
-            elapsed = time.monotonic() - started
-            row = {
-                "snapshot_id": freeze["snapshot_id"],
-                **hashes,
-                "task_id": cell["task_id"],
-                "domain": cell["domain"],
-                "difficulty": cell["difficulty"],
-                "language": cell["language"],
-                "prompt_sha256": cell["prompt_sha256"],
-                "prompt_text": cell["prompt_text"],
-                "provider": provider,
-                "requested_model": model["model_id"],
-                "run_index": cell["run_index"],
-                "system_prompt": system,
-                "request_parameters": {
-                    "reasoning": model["reasoning"],
-                    "max_output_tokens": max_tokens,
-                    "sampling_controls": model["sampling_controls"],
-                    "tools_enabled": False,
-                    "external_grounding": False,
-                },
-                "generated_at_utc": utc_now(),
-                "latency_seconds": round(elapsed, 6),
-                "attempt_count": attempt,
-                "status": "api_error",
-                "error": last_error,
-            }
+    with ThreadPoolExecutor(max_workers=workers) as executor:
+        futures = {executor.submit(execute_cell, cell): cell for cell in pending}
+        completed = 0
+        for future in as_completed(futures):
+            cell = futures[future]
+            completed += 1
+            try:
+                row = future.result()
+            except Exception as e:
+                row = {
+                    "snapshot_id": freeze["snapshot_id"],
+                    **hashes,
+                    "task_id": cell["task_id"],
+                    "domain": cell["domain"],
+                    "difficulty": cell["difficulty"],
+                    "language": cell["language"],
+                    "prompt_sha256": cell["prompt_sha256"],
+                    "prompt_text": cell["prompt_text"],
+                    "provider": provider,
+                    "requested_model": model["model_id"],
+                    "run_index": cell["run_index"],
+                    "system_prompt": system,
+                    "request_parameters": {
+                        "reasoning": model["reasoning"],
+                        "max_output_tokens": max_tokens,
+                        "sampling_controls": model["sampling_controls"],
+                        "tools_enabled": False,
+                        "external_grounding": False,
+                        "concurrency_per_provider": workers,
+                    },
+                    "generated_at_utc": utc_now(),
+                    "attempt_count": 0,
+                    "status": "api_error",
+                    "error": {"type": type(e).__name__, "message": str(e)},
+                }
             append_jsonl(output_path, row)
+            label = "success" if row["status"] == "success" else "API ERROR"
+            latency = row.get("latency_seconds")
+            suffix = f" ({latency:.1f}s)" if isinstance(latency, (int, float)) else ""
             print(
-                f"[{idx}/{len(pending)}] {provider} {cell['task_id']} "
-                f"{cell['language']} API ERROR"
+                f"[{completed}/{len(pending)}] {provider} {cell['task_id']} "
+                f"{cell['language']} {label}{suffix}"
             )
 
 

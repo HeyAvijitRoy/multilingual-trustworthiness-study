@@ -305,7 +305,7 @@ def calibrate() -> None:
                 "task_id": ctx["task_id"],
                 "language": ctx["language"],
                 "item_id": rating["item_id"],
-                "scoring_mode": spec.get("scoring_mode", spec.get("check_kind", "check")),
+                "scoring_mode": spec["scoring_mode"] if spec["kind"] == "riu" else "check",
                 "score": str(rating["score"]),
                 "reason": "" if spec["kind"] == "task_check" else rating["reason"],
                 "evidence": rating["evidence"],

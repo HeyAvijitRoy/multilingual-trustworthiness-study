@@ -19,6 +19,7 @@ class HardwareDiagnosticTests(unittest.TestCase):
     def test_nvidia_directory_is_not_a_gpu_device_node(self):
         directory = SimpleNamespace(is_char_device=lambda: False)
         with patch.object(hardware_inventory, "command", return_value=(9, "")), \
+             patch.object(hardware_inventory, "nvidia_pci_devices", return_value=[]), \
              patch.object(hardware_inventory.Path, "glob", return_value=[directory]):
             result = hardware_inventory.inventory(str(ROOT))
         self.assertTrue(result["gpu"]["nvidia_matching_paths_present"])
@@ -35,6 +36,7 @@ class HardwareDiagnosticTests(unittest.TestCase):
             return (0, cpu) if args[0] == "lscpu" else (9, "")
 
         with patch.object(hardware_inventory, "command", side_effect=fake_command), \
+             patch.object(hardware_inventory, "nvidia_pci_devices", return_value=[]), \
              patch.dict("os.environ", {"SSH_CONNECTION": private, "API_KEY": private}), \
              patch.object(hardware_inventory.shutil, "which", return_value="/private/bin/tool"):
             result = hardware_inventory.inventory(str(ROOT))
@@ -44,6 +46,25 @@ class HardwareDiagnosticTests(unittest.TestCase):
         self.assertTrue(result["context"]["ssh_environment_present"])
         self.assertEqual(result["cpu"]["Model name"], "Synthetic CPU")
         self.assertEqual(result["gpu"]["nvidia_query_status"], "unavailable_or_failed")
+
+    def test_failed_smi_with_pci_hardware_is_scoped_inaccessibility(self):
+        pci = [{'vendor': 'NVIDIA', 'device_id': '0x20b0', 'class': '0x030200', 'driver': 'nvidia'}]
+        with patch.object(hardware_inventory, 'command', return_value=(9, '')), \
+             patch.object(hardware_inventory, 'nvidia_pci_devices', return_value=pci):
+            result = hardware_inventory.inventory(str(ROOT), 'sandbox')
+        self.assertEqual(result['observation_scope'], 'sandbox')
+        self.assertEqual(result['gpu']['nvidia_query_status'], 'inaccessible_in_this_execution_scope')
+        self.assertEqual(result['gpu']['nvidia_pci_devices'], pci)
+
+    def test_successful_outside_query_reports_gpu_memory(self):
+        def fake(args):
+            return (0, 'NVIDIA A100-SXM4-40GB, 40960, 40018, 580.178.04, 55, 400, 35, 0') if args[0] == 'nvidia-smi' else (9, '')
+        with patch.object(hardware_inventory, 'command', side_effect=fake), \
+             patch.object(hardware_inventory, 'nvidia_pci_devices', return_value=[]):
+            result = hardware_inventory.inventory(str(ROOT), 'outside-sandbox')
+        self.assertEqual(result['gpu']['nvidia_query_status'], 'success')
+        self.assertEqual(result['gpu']['nvidia_gpus'][0]['memory.total'], '40960')
+        self.assertEqual(result['gpu']['nvidia_gpus'][0]['memory.free'], '40018')
 
     def test_inventory_never_overwrites_observation(self):
         with tempfile.TemporaryDirectory() as directory:

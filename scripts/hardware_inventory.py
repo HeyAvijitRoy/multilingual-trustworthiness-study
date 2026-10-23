@@ -42,7 +42,20 @@ def version(package: str) -> str | None:
         return None
 
 
-def inventory(disk_path: str = ".") -> dict:
+def nvidia_pci_devices() -> list[dict]:
+    """PCI visibility can establish hardware presence when /dev is sandboxed."""
+    devices = []
+    for device in Path('/sys/bus/pci/devices').glob('*'):
+        if read(str(device / 'vendor')) != '0x10de':
+            continue
+        driver = device / 'driver'
+        devices.append({'vendor': 'NVIDIA', 'device_id': read(str(device / 'device')),
+                        'class': read(str(device / 'class')),
+                        'driver': driver.resolve().name if driver.exists() else None})
+    return sorted(devices, key=lambda d: (d['device_id'] or '', d['class'] or ''))
+
+
+def inventory(disk_path: str = ".", execution_scope: str = "unspecified") -> dict:
     cpu = {}
     rc, out = command(["lscpu", "--json"])
     if rc == 0:
@@ -69,6 +82,7 @@ def inventory(disk_path: str = ".") -> dict:
                 gpus.append(dict(zip(gpu_fields, (value.strip() for value in row))))
     disk = shutil.disk_usage(disk_path)
     nvidia_paths = list(Path("/dev").glob("nvidia*"))
+    pci_devices = nvidia_pci_devices()
     release = read("/proc/sys/kernel/osrelease") or ""
     cgroup = {}
     for name in ("cpu.max", "memory.max", "memory.current", "cpuset.cpus.effective"):
@@ -76,6 +90,7 @@ def inventory(disk_path: str = ".") -> dict:
     return {
         "schema_version": "sanitized-hardware-0.1",
         "observed_at_utc": datetime.now(timezone.utc).isoformat(),
+        "observation_scope": execution_scope,
         "os": {"system": platform.system(), "release": platform.release(),
                "architecture": platform.machine()},
         "context": {
@@ -95,8 +110,12 @@ def inventory(disk_path: str = ".") -> dict:
         "gpu": {
             "nvidia_smi_command_present": shutil.which("nvidia-smi") is not None,
             "nvidia_smi_exit_code": gpu_rc,
-            "nvidia_query_status": "success" if gpu_rc == 0 else "unavailable_or_failed",
+            "nvidia_query_status": ("success" if gpu_rc == 0 else
+                                    "inaccessible_in_this_execution_scope" if pci_devices else
+                                    "unavailable_or_failed"),
             "nvidia_gpus": gpus,
+            "nvidia_pci_devices": pci_devices,
+            "nvidia_driver_module_present": Path('/sys/module/nvidia').exists(),
             "nvidia_matching_paths_present": bool(nvidia_paths),
             "nvidia_device_nodes_present": any(p.is_char_device() for p in nvidia_paths),
             "dri_directory_present": Path("/dev/dri").is_dir(),
@@ -104,7 +123,7 @@ def inventory(disk_path: str = ".") -> dict:
             "hipconfig_command_present": shutil.which("hipconfig") is not None,
             "nvcc_command_present": shutil.which("nvcc") is not None,
             "metal_available": None,
-            "note": "GPU memory values are MiB; power W, temperature C, utilization percent. Empty GPU list is not zero VRAM on the physical host.",
+            "note": "GPU memory values are MiB; power W, temperature C, utilization percent. A failed query or empty GPU list does not establish GPU absence. Compare sandbox and outside-sandbox execution before choosing CPU-only inference.",
         },
         "disk": {"total_bytes": disk.total, "free_bytes": disk.free,
                  "note": "Filesystem containing the requested target; target path omitted."},
@@ -127,8 +146,10 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--disk-path", default=".")
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--execution-scope", choices=['unspecified', 'sandbox', 'outside-sandbox'],
+                        default='unspecified', help='Explicit scope label; no automatic privilege inference.')
     args = parser.parse_args()
-    payload = json.dumps(inventory(args.disk_path), indent=2, ensure_ascii=False) + "\n"
+    payload = json.dumps(inventory(args.disk_path, args.execution_scope), indent=2, ensure_ascii=False) + "\n"
     if args.output:
         # Exclusive creation avoids silently replacing a prior host observation.
         with args.output.open("x", encoding="utf-8") as destination:

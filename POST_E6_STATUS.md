@@ -82,7 +82,12 @@ No actual amended scoring/analysis entry points are claimed to exist.
 
 The observed agent runtime is a KVM Linux guest presenting AMD EPYC 7713,
 32 logical CPUs, about 115.14 GiB RAM, no swap, and about 107.5 GiB initially
-free disk. NVIDIA querying fails; GPU model/free VRAM cannot be established.
+free disk. The initial sandbox query failed, but a subsequent outside-sandbox
+recheck confirmed an **NVIDIA A100 SXM4, 40 GiB VRAM**, with 40,018 MiB free
+at the first recheck and driver 580.178.04. CUDA initialization and a 1 MiB
+allocation/free passed outside the sandbox. The earlier GPU-unavailable
+conclusion was a sandbox-scope error and is retracted. See
+[the GPU recheck](data/evaluation/amendments/prelim-157-four-model-0.2/GPU_ACCESS_RECHECK.md).
 This does not inspect the user's separate physical workstation. Sanitized
 inventories omit personal identifiers. Base Python is 3.12.3; an isolated reference
 3.11.17 venv was installed for repository validation, plus a separate CPU inference
@@ -106,9 +111,12 @@ violation. AI inspection is not independent human capability validation. All
 retrieved the synthetic lookup key; that does not establish 32,768-token decode
 stability or the quality needed for this study. **No final local pair is selected.**
 
-At 1,000 output tokens/cell, extrapolated serial partitions take roughly 49–118
+For the measured CPU runtime, at 1,000 output tokens/cell, extrapolated serial partitions take roughly 49–118
 hours before prefill, retries and contention; full-cap responses exceed the
-historical 900-second timeout. Exact revisions, hashes, templates, licensing,
+historical 900-second timeout. These CPU projections do not describe the A100;
+GPU diagnostics remain unrun. The installed inference PyTorch is CPU-only and
+must be replaced or isolated alongside a CUDA-enabled runtime before GPU model
+testing. Exact revisions, hashes, templates, licensing,
 KV calculations, observed latencies and diagnostic-version differences are in
 [the candidate report](data/evaluation/amendments/prelim-157-four-model-0.2/HARDWARE_AND_CANDIDATES.md).
 No frozen study prompt was used for generation. Tokenizer-only context checks
@@ -144,7 +152,7 @@ Reference interpreter: `.local/venv/bin/python` (3.11.17). Commands actually run
 | Command (with reference interpreter) | Outcome |
 | --- | --- |
 | `-m py_compile` on generation, judge, analysis, amendment, budget, hardware, diagnostics and production scripts | PASS |
-| `scripts/validate_all.py` | PASS; 71 tests, corpus/pilot/calibration/queue/expansion/freeze checks |
+| `scripts/validate_all.py` | PASS; 73 tests after the GPU-scope correction, corpus/pilot/calibration/queue/expansion/freeze checks |
 | `scripts/prelim_eval_157.py check` | PASS; historical hashes intact |
 | `scripts/prelim_eval_157.py plan` | 0 generated / 1,413 remaining |
 | `scripts/prelim_judge_157.py plan --provider all` | 0 generated / scored |
@@ -183,7 +191,9 @@ Remaining gates/work:
 
 1. Choose an acceptable local deployment/runtime and two independently assessed
    checkpoints; resolve diagnostic quality, exact stops, full output/context
-   behavior, adapter validation and CPU timeout differences.
+   behavior, adapter validation and measured timeout behavior. Reassess local
+   candidates with a CUDA-enabled runtime on the verified A100; the CPU-only
+   throughput limitation is not a host GPU limitation.
 2. Verify intended cloud-account access; complete and approve the four-model
    scientific plans and immutable final manifest before any study generation.
 3. Implement and validate amended scoring/calibration/analysis isolation and

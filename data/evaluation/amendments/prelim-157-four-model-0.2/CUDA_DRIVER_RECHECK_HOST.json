@@ -1,0 +1,23 @@
+{
+  "observed_at_utc": "2026-10-23T19:55:03.511388+00:00",
+  "observation_scope": "outside-sandbox",
+  "allocation_test_bytes": 1048576,
+  "installed_torch_version": "2.14.1+cpu",
+  "cuda_access_verified": true,
+  "cuInit_status": 0,
+  "cuDriverGetVersion_status": 0,
+  "cuda_driver_api_version": 13000,
+  "cuDeviceGetCount_status": 0,
+  "cuda_device_count": 1,
+  "cuDeviceGet_status": 0,
+  "cuDeviceGetName_status": 0,
+  "cuda_device_name": "NVIDIA A100-SXM4-40GB",
+  "cuDevicePrimaryCtxRetain_status": 0,
+  "cuCtxSetCurrent_status": 0,
+  "cuMemGetInfo_v2_status": 0,
+  "free_bytes": 41519415296,
+  "total_bytes": 42404806656,
+  "cuMemAlloc_v2_status": 0,
+  "cuMemFree_v2_status": 0,
+  "cuDevicePrimaryCtxRelease_v2_status": 0
+}

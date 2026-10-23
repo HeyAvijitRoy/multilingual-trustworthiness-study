@@ -28,8 +28,11 @@ Dry-run sends no request and writes no response record.
 ## Finish local feasibility and the amendment
 
 Use `HARDWARE_AND_CANDIDATES.md` for observed hardware, diagnostic commands and
-candidate pins. The current VM has no usable GPU. CPU inference is possible,
-but measured decode rates imply long partition runs. A 4k synthetic-input probe
+candidate pins. An outside-sandbox recheck confirmed a usable NVIDIA A100 SXM4
+with 40 GiB VRAM; see `GPU_ACCESS_RECHECK.md`. The original sandbox hid NVIDIA
+device nodes. The existing inference venv is CPU-only PyTorch; GPU diagnostics
+require a CUDA-enabled runtime executed with GPU access. Prior CPU decode rates
+describe that measured configuration only. A 4k synthetic-input probe
 does not verify full 32,768-token output or peak memory at the proposed context.
 Do not promote candidate-model cache metadata to study selection automatically.
 
@@ -38,7 +41,8 @@ selected runtime and adapter with synthetic EN/BN/BN-CS prompts, exact stop
 tokens, thinking-off behavior, context budget, precision, template and weight
 hashes. The implemented local adapter targets a loopback compatible server;
 the measured Transformers diagnostic path is not yet an integrated study server.
-CPU latency may require an explicit local-timeout amendment before approval.
+Evaluate latency on the selected GPU runtime before deciding whether a local-timeout
+amendment is necessary; CPU-only projections cannot decide that question.
 
 Pin the chosen two checkpoints/settings in `MODELS.json`, finish all scientific
 plans, obtain actual study-lead approval in a review record, then create a

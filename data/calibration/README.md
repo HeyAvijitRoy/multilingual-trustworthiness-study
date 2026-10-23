@@ -4,13 +4,19 @@ This stage tests whether two raters, working independently with the frozen pilot
 
 ## Current status
 
-Calibration Round 1 is complete. R2 and R3 independently scored all 229 items across the 30 fixtures. The original agreement estimate is preserved: RIU exact agreement 192/196 (97.96%), Cohen's κ 0.917, ordinal Krippendorff's α 0.959 (95% fixture-bootstrap CI 0.901–1.000), and strict-binary κ 0.957. The preregistered α ≥ 0.80 point-estimate gate was met.
+Calibration is **signed off and complete as of 2026-10-22**.
 
-Round 1 also exposed 10 disputed items: four RIUs and six `CHECK-01` judgments. Three RIU disputes are critical blockers, and several task-check disputes are safety-related, so calibration sign-off remains pending under the preregistered unresolved-disagreement policy.
+Round 1: R2 and R3 independently scored all 229 items across the 30 fixtures. The preregistered agreement result is preserved unchanged: RIU exact agreement 192/196 (97.96%), Cohen's κ 0.917, ordinal Krippendorff's α 0.959 (95% fixture-bootstrap CI 0.901–1.000), and strict-binary κ 0.957. The preregistered α ≥ 0.80 point-estimate gate was met.
 
-On 2026-10-22, before any production annotation or model evaluation, protocol 0.3 clarified that `CHECK-01` is orthogonal to RIU scoring: a material unsupported factual or operational assertion can fail both its RIU and `CHECK-01`. The first-round answer key had applied this rule inconsistently to three contradiction fixtures; `F04/CHECK-01`, `F14/CHECK-01`, and `F24/CHECK-01` were corrected from pass (1) to flagged (0). No response text, frozen prompt, RIU, criticality label, scoring anchor, or `pilot-gold-0.2` record changed.
+Round 1 exposed 10 score disagreements. Protocol 0.3 then clarified CHECK-01/RIU orthogonality without changing any frozen prompt, RIU boundary, criticality label, RIU scoring anchor, fixture response or `pilot-gold-0.2` record. Three inconsistent CHECK-01 answer-key entries (F04, F14, F24) were corrected.
 
-R2 and R3 will perform a targeted Calibration Round 2 rerating of the 10 disputed items only, independently and without access to each other's Round 1 ratings or the answer key. Round 1 remains the preregistered agreement estimate; targeted rerating is a rule-clarification/dispute-resolution step and must not be substituted for the original overall α.
+R2 and R3 independently rerated only the 10 disputed items. All three formerly disputed critical RIUs and all six targeted CHECK-01 scores converged. The sole remaining supporting-unit score dispute, F26/PROC001/RIU-03, was adjudicated as 1/`met` under the frozen negative-constraint anchor. F17/DEC004/RIU-05's agreed score of 0 was adjudicated with reason `omitted`. No unresolved critical, safety or semantic-equivalence score dispute remains.
+
+Final records:
+- [Calibration adjudication](../annotations/review_logs/2026-10-22_calibration_adjudication.md)
+- [Calibration sign-off](2026-10-22_CALIBRATION_SIGNOFF.md)
+
+**Decision: PROCEED TO EXPANSION CALIBRATION.**
 
 On 2026-10-19, before calibration ratings, F26's omission targets were corrected from `RIU-01;RIU-03` to `RIU-01;RIU-05` to match the existing response and intended scores. RIU-03 remains full credit under its extension-preservation anchor. This corrects target metadata; the response text, numeric scores and frozen gold are unchanged.
 

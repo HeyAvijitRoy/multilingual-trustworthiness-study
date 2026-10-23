@@ -45,5 +45,6 @@
       "env_key": "GEMINI_API_KEY",
       "documentation": "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon"
     }
-  ]
+  ],
+  "concurrency_per_provider": 8
 }

@@ -22,6 +22,7 @@ import sys
 import time
 import urllib.error
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -202,17 +203,33 @@ def http_judge(prompt: str, judge: dict[str, Any]) -> dict[str, Any]:
         },
     }
     data = json.dumps(body, ensure_ascii=False).encode("utf-8")
-    req = urllib.request.Request(
-        "https://api.openai.com/v1/responses",
-        data=data,
-        method="POST",
-        headers={
-            "Authorization": f"Bearer {key}",
-            "Content-Type": "application/json",
-        },
-    )
-    with urllib.request.urlopen(req, timeout=900) as resp:
-        payload = json.loads(resp.read().decode("utf-8"))
+    payload: dict[str, Any] | None = None
+    for attempt in range(1, 5):
+        req = urllib.request.Request(
+            "https://api.openai.com/v1/responses",
+            data=data,
+            method="POST",
+            headers={
+                "Authorization": f"Bearer {key}",
+                "Content-Type": "application/json",
+            },
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=900) as resp:
+                payload = json.loads(resp.read().decode("utf-8"))
+            break
+        except urllib.error.HTTPError as e:
+            if attempt < 4 and (e.code == 429 or 500 <= e.code <= 599):
+                time.sleep(2 ** attempt)
+                continue
+            raise
+        except (TimeoutError, urllib.error.URLError):
+            if attempt < 4:
+                time.sleep(2 ** attempt)
+                continue
+            raise
+    if payload is None:
+        raise RuntimeError("judge request exhausted retries without a response")
     text_parts: list[str] = []
     if isinstance(payload.get("output_text"), str):
         text_parts.append(payload["output_text"])
@@ -287,17 +304,21 @@ def calibrate() -> None:
     contexts = load_fixture_context(annotations, prompts)
 
     LOCAL.mkdir(parents=True, exist_ok=True)
-    rows: list[dict[str, Any]] = []
-    for order, ctx in enumerate(contexts, 1):
+    rows_by_order: dict[int, list[dict[str, Any]]] = {}
+    workers = int(judge["concurrency"])
+
+    def score_fixture(order_ctx: tuple[int, dict[str, Any]]) -> tuple[int, list[dict[str, Any]]]:
+        order, ctx = order_ctx
         result = http_judge(
             scoring_prompt(ctx["task_id"], ctx["prompt_text"], ctx["response_text"], ctx["rec"]),
             judge,
         )
         ratings = result["ratings"]
         validate_ratings(ctx["rec"], ratings)
+        fixture_rows: list[dict[str, Any]] = []
         for rating in ratings:
             spec = next(x for x in item_specs(ctx["rec"]) if x["item_id"] == rating["item_id"])
-            rows.append({
+            fixture_rows.append({
                 "rater_id": "AUTO_GPT6_1_SOL",
                 "rating_date": "2026-10-23",
                 "order": str(order),
@@ -311,7 +332,22 @@ def calibrate() -> None:
                 "evidence": rating["evidence"],
                 "notes": rating["notes"],
             })
-        print(f"calibration {order}/{len(contexts)} {ctx['fixture_id']}")
+        return order, fixture_rows
+
+    indexed = list(enumerate(contexts, 1))
+    with ThreadPoolExecutor(max_workers=workers) as executor:
+        futures = {executor.submit(score_fixture, pair): pair for pair in indexed}
+        completed = 0
+        for future in as_completed(futures):
+            order, ctx = futures[future]
+            resolved_order, fixture_rows = future.result()
+            rows_by_order[resolved_order] = fixture_rows
+            completed += 1
+            print(f"calibration {completed}/{len(contexts)} {ctx['fixture_id']}")
+
+    rows: list[dict[str, Any]] = []
+    for order in sorted(rows_by_order):
+        rows.extend(rows_by_order[order])
 
     fields = cal.SHEET_FIELDS
     with CAL_SHEET.open("w", encoding="utf-8", newline="") as f:
@@ -472,7 +508,9 @@ def score_provider(provider: str, limit: int | None = None) -> None:
         pending = pending[:limit]
 
     print(f"{provider}: {len(generations)} generated, {len(done)} scored, {len(pending)} selected now")
-    for i, row in enumerate(pending, 1):
+    workers = int(judge["concurrency"])
+
+    def score_one(row: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
         rec = annotations[row["task_id"]]
         prompt_text = prompts[row["task_id"]][LANG_FIELDS[row["language"]]]
         started = time.monotonic()
@@ -504,11 +542,24 @@ def score_provider(provider: str, limit: int | None = None) -> None:
             "judge_returned_model": result["_judge_meta"]["returned_model"],
             "judge_usage": result["_judge_meta"]["usage"],
             "judge_latency_seconds": round(elapsed, 6),
+            "judge_concurrency": workers,
             "ratings": ratings,
             "status": "success",
         }
-        append_jsonl(out_path, out)
-        print(f"[{i}/{len(pending)}] scored {provider} {row['task_id']} {row['language']}")
+        return row, out
+
+    with ThreadPoolExecutor(max_workers=workers) as executor:
+        futures = {executor.submit(score_one, row): row for row in pending}
+        completed = 0
+        for future in as_completed(futures):
+            source = futures[future]
+            _, out = future.result()
+            append_jsonl(out_path, out)
+            completed += 1
+            print(
+                f"[{completed}/{len(pending)}] scored {provider} "
+                f"{source['task_id']} {source['language']}"
+            )
 
 
 def plan(provider: str) -> None:

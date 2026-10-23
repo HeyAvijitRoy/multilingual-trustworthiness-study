@@ -23,6 +23,7 @@ import os
 import random
 import sys
 import time
+import threading
 import urllib.error
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -40,6 +41,7 @@ OUTPUT_DIR = ROOT / "data" / "outputs" / "prelim_157"
 
 LANG_FIELDS = {"en": "prompt_en", "bn": "prompt_bn", "bn_cs": "prompt_bn_cs"}
 PROVIDER_INDEX = {"openai": 1, "anthropic": 2, "google": 3}
+_APPEND_LOCK = threading.Lock()
 
 
 def read_json(path: Path) -> dict[str, Any]:
@@ -255,6 +257,8 @@ def call_openai(model: dict[str, Any], prompt: str, system: str, timeout: int, m
         body,
         timeout,
     )
+    if payload.get("status") not in {"completed", "incomplete"} or payload.get("error"):
+        raise ProviderHTTPError(status, payload)
     text_parts: list[str] = []
     if isinstance(payload.get("output_text"), str):
         text_parts.append(payload["output_text"])
@@ -267,6 +271,7 @@ def call_openai(model: dict[str, Any], prompt: str, system: str, timeout: int, m
                     text_parts.append(part["text"])
     return {
         "http_status": status,
+        "provider_raw_response": payload,
         "response_text": "".join(text_parts),
         "provider_response_id": payload.get("id"),
         "returned_model": payload.get("model"),
@@ -306,6 +311,7 @@ def call_anthropic(model: dict[str, Any], prompt: str, system: str, timeout: int
     ]
     return {
         "http_status": status,
+        "provider_raw_response": payload,
         "response_text": "".join(text_parts),
         "provider_response_id": payload.get("id"),
         "returned_model": payload.get("model"),
@@ -343,6 +349,7 @@ def call_google(model: dict[str, Any], prompt: str, system: str, timeout: int, m
     ]
     return {
         "http_status": status,
+        "provider_raw_response": payload,
         "response_text": "".join(text_parts),
         "provider_response_id": payload.get("responseId"),
         "returned_model": payload.get("modelVersion") or model["model_id"],
@@ -364,14 +371,66 @@ CALLERS = {
 }
 
 
+def read_jsonl_records(path: Path) -> list[dict[str, Any]]:
+    """Read only physical LF-delimited records; Unicode separators are response text.
+
+    Reject an interrupted final write without modifying the append-only evidence.
+    It must be explicitly recovered before a run can safely resume.
+    """
+    if not path.exists():
+        return []
+    records = []
+    with path.open("r", encoding="utf-8", newline="") as handle:
+        for number, line in enumerate(handle, 1):
+            if not line.endswith("\n"):
+                raise RuntimeError(f"unterminated JSONL record: {path}:{number}; recover explicitly before resuming")
+            if line.strip():
+                try:
+                    records.append(json.loads(line))
+                except json.JSONDecodeError as exc:
+                    raise RuntimeError(f"invalid JSONL record: {path}:{number}") from exc
+    return records
+
+
+def is_truncated(row: dict[str, Any]) -> bool:
+    details = row.get("provider_raw_meta", {}).get("incomplete_details") or {}
+    return row.get("finish_status") in {"max_tokens", "MAX_TOKENS", "length"} or (
+        row.get("finish_status") == "incomplete" and details.get("reason") == "max_output_tokens"
+    )
+
+
+def validate_generation_records(
+    path: Path,
+    freeze: dict[str, Any],
+    models: dict[str, Any],
+    annotations: dict[str, dict[str, Any]],
+    provider: str,
+) -> None:
+    """Fail closed on stale/misrouted successes rather than silently skipping cells."""
+    model_id = next(m["model_id"] for m in models["models"] if m["provider"] == provider)
+    seen: dict[tuple[str, str, str, int], str] = {}
+    for row in read_jsonl_records(path):
+        if row.get("status") != "success":
+            continue
+        task_id, language = row["task_id"], row["language"]
+        if (row.get("snapshot_id") != freeze["snapshot_id"] or row.get("provider") != provider
+                or row.get("requested_model") != model_id or int(row["run_index"]) != 1
+                or task_id not in annotations or language not in LANG_FIELDS):
+            raise RuntimeError(f"generation outside frozen provider partition: {path}")
+        if row.get("prompt_sha256") != annotations[task_id]["prompt_sha256"][language]:
+            raise RuntimeError(f"generation prompt hash mismatch: {path}: {task_id}/{language}")
+        key = (task_id, language, model_id, 1)
+        digest = sha256_bytes(row["response_text"].encode("utf-8"))
+        if key in seen and seen[key] != digest:
+            raise RuntimeError(f"conflicting successful generations: {path}: {key}; resolve explicitly")
+        seen[key] = digest
+
+
 def load_latest_success_keys(path: Path) -> set[tuple[str, str, str, int]]:
     done: set[tuple[str, str, str, int]] = set()
     if not path.exists():
         return done
-    for line in path.read_text(encoding="utf-8").splitlines():
-        if not line.strip():
-            continue
-        row = json.loads(line)
+    for row in read_jsonl_records(path):
         if row.get("status") == "success":
             done.add(
                 (
@@ -385,11 +444,18 @@ def load_latest_success_keys(path: Path) -> set[tuple[str, str, str, int]]:
 
 
 def append_jsonl(path: Path, row: dict[str, Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("a", encoding="utf-8") as f:
-        f.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
-        f.flush()
-        os.fsync(f.fileno())
+    # Judge calls may complete on worker threads. Keep every JSON record intact.
+    with _APPEND_LOCK:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        if path.exists() and path.stat().st_size:
+            with path.open("rb") as existing:
+                existing.seek(-1, os.SEEK_END)
+                if existing.read(1) != b"\n":
+                    raise RuntimeError(f"unterminated JSONL record: {path}; recover explicitly before appending")
+        with path.open("a", encoding="utf-8", newline="\n") as f:
+            f.write(json.dumps(row, ensure_ascii=False, sort_keys=True, allow_nan=False) + "\n")
+            f.flush()
+            os.fsync(f.fileno())
 
 
 def should_retry(status: int) -> bool:
@@ -412,6 +478,7 @@ def run_provider(
         raise RuntimeError(f"missing required environment variable: {env_key}")
 
     output_path = OUTPUT_DIR / f"{provider}.jsonl"
+    validate_generation_records(output_path, freeze, models, annotations, provider)
     done = load_latest_success_keys(output_path)
     cells = build_cells(
         freeze,
@@ -447,12 +514,14 @@ def run_provider(
         started = time.monotonic()
         attempt = 0
         last_error: dict[str, Any] | None = None
+        attempt_history: list[dict[str, Any]] = []
 
         while attempt < 4:
             attempt += 1
             try:
                 result = caller(model, cell["prompt_text"], system, timeout, max_tokens)
                 elapsed = time.monotonic() - started
+                attempt_history.append({"attempt": attempt, "status": "success", "at_utc": utc_now()})
                 return {
                     "snapshot_id": freeze["snapshot_id"],
                     **hashes,
@@ -478,6 +547,8 @@ def run_provider(
                     "generated_at_utc": utc_now(),
                     "latency_seconds": round(elapsed, 6),
                     "attempt_count": attempt,
+                    "attempt_history": attempt_history,
+                    "truncated": is_truncated(result),
                     "status": "success",
                     "http_status": result["http_status"],
                     "provider_response_id": result["provider_response_id"],
@@ -485,15 +556,18 @@ def run_provider(
                     "usage": result["usage"],
                     "response_text": result["response_text"],
                     "provider_raw_meta": result["provider_raw_meta"],
+                    "provider_raw_response": result.get("provider_raw_response"),
                 }
             except ProviderHTTPError as e:
                 last_error = {"type": "http", "status": e.status, "payload": e.payload}
+                attempt_history.append({"attempt": attempt, "at_utc": utc_now(), "error": last_error})
                 if attempt < 4 and should_retry(e.status):
                     time.sleep(2 ** attempt)
                     continue
                 break
             except (TimeoutError, urllib.error.URLError) as e:
                 last_error = {"type": type(e).__name__, "message": str(e)}
+                attempt_history.append({"attempt": attempt, "at_utc": utc_now(), "error": last_error})
                 if attempt < 4:
                     time.sleep(2 ** attempt)
                     continue
@@ -524,6 +598,7 @@ def run_provider(
             "generated_at_utc": utc_now(),
             "latency_seconds": round(elapsed, 6),
             "attempt_count": attempt,
+            "attempt_history": attempt_history,
             "status": "api_error",
             "error": last_error or {"type": "unknown"},
         }
@@ -591,6 +666,7 @@ def command_plan(provider: str, language: str | None) -> None:
     for p in providers:
         model = next(m for m in models["models"] if m["provider"] == p)
         output_path = OUTPUT_DIR / f"{p}.jsonl"
+        validate_generation_records(output_path, freeze, models, annotations, p)
         done = load_latest_success_keys(output_path)
         cells = build_cells(freeze, annotations, prompts, p, int(models["request_order_seed"]), language)
         remaining = sum(

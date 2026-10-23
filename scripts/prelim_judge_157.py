@@ -6,8 +6,10 @@ Commands:
   python3 scripts/prelim_judge_157.py gate
   python3 scripts/prelim_judge_157.py score --provider all
   python3 scripts/prelim_judge_157.py plan --provider all
+  python3 scripts/prelim_judge_157.py qa --provider all --out-dir .local/prelim_157/qa_round1
 
-Requires OPENAI_API_KEY. Study scoring is blocked unless the frozen
+Calibration/scoring require OPENAI_API_KEY; plan/gate/QA make no model calls.
+Study scoring is blocked unless the frozen
 calibration gate passes.
 """
 
@@ -28,6 +30,7 @@ from pathlib import Path
 from typing import Any
 
 import calibration as cal
+import prelim_eval_157 as generation
 
 ROOT = Path(__file__).resolve().parents[1]
 EVAL_DIR = ROOT / "data" / "evaluation"
@@ -240,8 +243,18 @@ def http_judge(prompt: str, judge: dict[str, Any]) -> dict[str, Any]:
             for part in item.get("content", []):
                 if part.get("type") == "output_text":
                     text_parts.append(part.get("text", ""))
+    append_jsonl(LOCAL / "judge_raw.jsonl", {
+        "received_at_utc": utc_now(),
+        "judge_config_sha256": sha256_file(JUDGE_PATH),
+        "scoring_input_sha256": hashlib.sha256(prompt.encode("utf-8")).hexdigest(),
+        "payload": payload,
+    })
+    if payload.get("status") != "completed":
+        raise RuntimeError(f"judge response not completed: {payload.get('status')}")
     if not text_parts:
         raise RuntimeError(f"judge returned no output_text; status={payload.get('status')}")
+    # Preserve the received provider payload before parsing or validating ratings.
+    # This includes malformed/truncated judge responses for subsequent audit.
     parsed = json.loads("".join(text_parts))
     parsed["_judge_meta"] = {
         "response_id": payload.get("id"),
@@ -255,6 +268,8 @@ def http_judge(prompt: str, judge: dict[str, Any]) -> dict[str, Any]:
 def validate_ratings(rec: dict[str, Any], ratings: list[dict[str, Any]]) -> None:
     expected = {x["item_id"]: x for x in item_specs(rec)}
     got = {x["item_id"]: x for x in ratings}
+    if len(got) != len(ratings):
+        raise RuntimeError(f"duplicate judge item for {rec['task_id']}")
     if set(got) != set(expected):
         raise RuntimeError(
             f"judge item mismatch for {rec['task_id']}: "
@@ -297,10 +312,10 @@ def load_fixture_context(
 
 
 def calibrate() -> None:
-    freeze = read_json(FREEZE_PATH)
+    if CAL_SHEET.exists() or CAL_REPORT.exists():
+        raise RuntimeError("calibration artifacts already exist; archive them explicitly before recalibrating")
+    freeze, _, annotations, prompts = generation.verify_freeze()
     judge = read_json(JUDGE_PATH)
-    annotations = load_annotations(freeze)
-    prompts = load_prompts(freeze)
     contexts = load_fixture_context(annotations, prompts)
 
     LOCAL.mkdir(parents=True, exist_ok=True)
@@ -320,7 +335,7 @@ def calibrate() -> None:
             spec = next(x for x in item_specs(ctx["rec"]) if x["item_id"] == rating["item_id"])
             fixture_rows.append({
                 "rater_id": "AUTO_GPT6_1_SOL",
-                "rating_date": "2026-10-23",
+                "rating_date": utc_now()[:10],
                 "order": str(order),
                 "fixture_id": ctx["fixture_id"],
                 "task_id": ctx["task_id"],
@@ -365,7 +380,11 @@ def calibrate() -> None:
 def evaluate_gate(rows: list[dict[str, Any]], annotations: dict[str, dict[str, Any]]) -> dict[str, Any]:
     key_rows = read_csv(ANSWER_KEY)
     key = {(r["fixture_id"], r["item_id"]): r for r in key_rows}
+    if len(key) != len(key_rows):
+        raise RuntimeError("duplicate calibration answer-key item")
     judged = {(r["fixture_id"], r["item_id"]): r for r in rows}
+    if len(judged) != len(rows):
+        raise RuntimeError("duplicate judge calibration item")
     if set(key) != set(judged):
         raise RuntimeError("judge calibration sheet does not match answer-key item set")
 
@@ -412,6 +431,8 @@ def evaluate_gate(rows: list[dict[str, Any]], annotations: dict[str, dict[str, A
     return {
         "judge_config_sha256": sha256_file(JUDGE_PATH),
         "scoring_plan_sha256": sha256_file(SCORING_PLAN_PATH),
+        "calibration_sheet_sha256": sha256_file(CAL_SHEET) if CAL_SHEET.exists() else None,
+        "calibration_inputs_sha256": {str(p.relative_to(ROOT)): sha256_file(p) for p in (FIXTURE_PLAN, FIXTURES, ANSWER_KEY, FREEZE_PATH)},
         "calibrated_at_utc": utc_now(),
         "riu_items": len(riu_pairs),
         "krippendorff_alpha_ordinal": alpha,
@@ -434,6 +455,11 @@ def gate() -> bool:
         report.get("gate_pass") is True
         and report.get("judge_config_sha256") == current_judge_hash
         and report.get("scoring_plan_sha256") == current_plan_hash
+        and CAL_SHEET.exists()
+        and report.get("calibration_sheet_sha256") == sha256_file(CAL_SHEET)
+        and report.get("calibration_inputs_sha256") == {
+            str(p.relative_to(ROOT)): sha256_file(p) for p in (FIXTURE_PLAN, FIXTURES, ANSWER_KEY, FREEZE_PATH)
+        }
     )
     print(json.dumps(report, indent=2))
     print("CURRENT GATE:", "PASS" if ok else "FAIL/STALE")
@@ -445,10 +471,7 @@ def load_successful_generations(provider: str) -> list[dict[str, Any]]:
     if not path.exists():
         return []
     latest: dict[tuple[str, str, str, int], dict[str, Any]] = {}
-    for line in path.read_text(encoding="utf-8").splitlines():
-        if not line.strip():
-            continue
-        row = json.loads(line)
+    for row in generation.read_jsonl_records(path):
         if row.get("status") != "success":
             continue
         key = (
@@ -463,10 +486,7 @@ def scored_keys(path: Path) -> set[tuple[str, str, str, int]]:
     out: set[tuple[str, str, str, int]] = set()
     if not path.exists():
         return out
-    for line in path.read_text(encoding="utf-8").splitlines():
-        if not line.strip():
-            continue
-        row = json.loads(line)
+    for row in generation.read_jsonl_records(path):
         if row.get("status") == "success":
             out.add((
                 row["task_id"], row["language"],
@@ -475,24 +495,39 @@ def scored_keys(path: Path) -> set[tuple[str, str, str, int]]:
     return out
 
 
+def validate_score_records(path: Path, generations: list[dict[str, Any]]) -> None:
+    """A completed key is reusable only for the exact source response and judge."""
+    sources = {(r["task_id"], r["language"], r["requested_model"], int(r["run_index"])): r for r in generations}
+    for row in generation.read_jsonl_records(path):
+        if row.get("status") != "success":
+            continue
+        key = (row["task_id"], row["language"], row["requested_model"], int(row["run_index"]))
+        source = sources.get(key)
+        if source is None:
+            raise RuntimeError(f"score has no successful generation: {path}: {key}")
+        digest = hashlib.sha256(source["response_text"].encode("utf-8")).hexdigest()
+        if (row.get("response_sha256") != digest
+                or row.get("prompt_sha256") != source["prompt_sha256"]
+                or row.get("snapshot_id") != source["snapshot_id"]
+                or row.get("judge_config_sha256") != sha256_file(JUDGE_PATH)
+                or row.get("scoring_plan_sha256") != sha256_file(SCORING_PLAN_PATH)):
+            raise RuntimeError(f"stale/mismatched score provenance: {path}: {key}; resolve explicitly")
+
+
 def append_jsonl(path: Path, row: dict[str, Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("a", encoding="utf-8") as f:
-        f.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
-        f.flush()
-        os.fsync(f.fileno())
+    generation.append_jsonl(path, row)
 
 
 def score_provider(provider: str, limit: int | None = None) -> None:
     if not gate():
         raise RuntimeError("automated-judge calibration gate has not passed")
 
-    freeze = read_json(FREEZE_PATH)
+    freeze, models, annotations, prompts = generation.verify_freeze()
     judge = read_json(JUDGE_PATH)
-    annotations = load_annotations(freeze)
-    prompts = load_prompts(freeze)
+    generation.validate_generation_records(OUTPUT_DIR / f"{provider}.jsonl", freeze, models, annotations, provider)
     generations = load_successful_generations(provider)
     out_path = OUTPUT_DIR / "scores" / f"{provider}.jsonl"
+    validate_score_records(out_path, generations)
     done = scored_keys(out_path)
 
     pending = []
@@ -534,6 +569,8 @@ def score_provider(provider: str, limit: int | None = None) -> None:
             "returned_model": row.get("returned_model"),
             "run_index": int(row["run_index"]),
             "generation_response_id": row.get("provider_response_id"),
+            "generation_truncated": generation.is_truncated(row),
+            "generation_finish_status": row.get("finish_status"),
             "prompt_sha256": row["prompt_sha256"],
             "response_sha256": hashlib.sha256(row["response_text"].encode("utf-8")).hexdigest(),
             "scored_at_utc": utc_now(),
@@ -571,11 +608,160 @@ def plan(provider: str) -> None:
         print(f"{p}: generated={len(gens)} scored={len(done)} remaining={max(0, len(gens)-len(done))}")
 
 
+def canonical_record_sha256(row: dict[str, Any]) -> str:
+    return hashlib.sha256(json.dumps(row, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False).encode("utf-8")).hexdigest()
+
+
+def build_qa_records(
+    freeze: dict[str, Any],
+    annotations: dict[str, dict[str, Any]],
+    prompts: dict[str, dict[str, str]],
+    generations: list[dict[str, Any]],
+    scores: list[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Select mandatory flags and a deterministic 10% sample of remaining cells.
+
+    The private manifest carries provenance and identities. The review packet
+    omits provider/model IDs, study hypotheses and aggregate language effects.
+    Producing either artifact does not count as human review or adjudication.
+    """
+    def key(row: dict[str, Any]) -> tuple[str, str, str, int]:
+        return row["task_id"], row["language"], row["requested_model"], int(row["run_index"])
+
+    sources = {key(row): row for row in generations if row.get("status") == "success"}
+    latest = {key(row): row for row in scores if row.get("status") == "success"}
+    flags: dict[tuple[str, str, str, int], list[str]] = {}
+    for cell, source in sorted(sources.items()):
+        reasons: list[str] = []
+        if generation.is_truncated(source):
+            reasons.append("truncated_response")
+        score = latest.get(cell)
+        if score:
+            rec = annotations[source["task_id"]]
+            validate_ratings(rec, score["ratings"])
+            specs = {item["item_id"]: item for item in item_specs(rec)}
+            for rating in score["ratings"]:
+                spec = specs[rating["item_id"]]
+                if spec["kind"] == "riu":
+                    if spec["criticality"] == "critical" and float(rating["score"]) < 1:
+                        reasons.append("critical_riu_below_full_credit")
+                    if rating["reason"] == "non_answer":
+                        reasons.append("refusal_or_nonanswer")
+                elif float(rating["score"]) == 0:
+                    reasons.append("task_check_failure")
+        if reasons:
+            flags[cell] = sorted(set(reasons))
+
+    strata: dict[tuple[str, str], list[tuple[str, str, str, int]]] = {}
+    for cell in sorted(latest):
+        if cell not in sources:
+            raise RuntimeError(f"QA score has no source generation: {cell}")
+        if cell not in flags:
+            strata.setdefault((cell[2], cell[1]), []).append(cell)
+    sample_counts: dict[str, Any] = {}
+    for (model, language), cells in sorted(strata.items()):
+        # Hash ranking avoids Python hash randomization and input/completion order.
+        ranked = sorted(cells, key=lambda cell: hashlib.sha256(
+            ("prelim-157-scoring-0.1:qa-10-percent:20261023:" + json.dumps(cell)).encode("utf-8")
+        ).hexdigest())
+        count = (len(ranked) + 9) // 10
+        for cell in ranked[:count]:
+            flags[cell] = ["stratified_10_percent_sample"]
+        sample_counts[f"{model}:{language}"] = {"remaining_scored_cells": len(cells), "sampled_cells": count}
+
+    packet: list[dict[str, Any]] = []
+    manifest_cells: list[dict[str, Any]] = []
+    for cell, reasons in sorted(flags.items()):
+        source, score = sources[cell], latest.get(cell)
+        source_hash = canonical_record_sha256(source)
+        score_hash = canonical_record_sha256(score) if score else None
+        opaque_id = "QA-" + hashlib.sha256((freeze["snapshot_id"] + source_hash).encode("utf-8")).hexdigest()[:20]
+        task_id, language, model, run_index = cell
+        rec = annotations[task_id]
+        packet.append({
+            "qa_id": opaque_id, "review_status": "pending_human_review",
+            "task_id": task_id, "language": language,
+            "prompt_text": prompts[task_id][LANG_FIELDS[language]],
+            "response_text": source["response_text"],
+            "task_objective": rec["task_objective"], "constraints": rec.get("constraints", []),
+            "rubric": item_specs(rec),
+            "automated_ratings": score["ratings"] if score else None,
+            "reviewer_id": "", "review_date": "", "review_notes": "",
+        })
+        manifest_cells.append({
+            "qa_id": opaque_id, "task_id": task_id, "language": language,
+            "provider": source["provider"], "requested_model": model, "run_index": run_index,
+            "generation_record_sha256": source_hash, "score_record_sha256": score_hash,
+            "response_sha256": hashlib.sha256(source["response_text"].encode("utf-8")).hexdigest(),
+            "selection_reasons": reasons, "has_automated_scores": score is not None,
+        })
+    # Opaque order does not expose model partitions from the private manifest.
+    packet.sort(key=lambda row: row["qa_id"])
+    manifest = {
+        "snapshot_id": freeze["snapshot_id"], "status": "pending_human_review",
+        "human_reviews_completed": 0,
+        "selection": "All critical RIUs below 1, task-check failures, refusal/nonanswer flags and truncated generations, plus ceiling(10%) of remaining scored cells in each model/language stratum. Unscored truncated generations remain reviewable.",
+        "sample_by_model_language": sample_counts,
+        "hash_encoding": "SHA-256 of canonical UTF-8 JSON record (sorted keys; no insignificant whitespace), plus raw response UTF-8 SHA-256.",
+        "cells": sorted(manifest_cells, key=lambda row: row["qa_id"]),
+    }
+    return packet, manifest
+
+
+def qa(provider: str, out_dir: Path) -> None:
+    """Write a reviewable, immutable snapshot without certifying any acceptance."""
+    freeze, models, annotations, prompts = generation.verify_freeze()
+    providers = [m["provider"] for m in models["models"]] if provider == "all" else [provider]
+    generations, scores = [], []
+    source_files: dict[str, str] = {}
+    for current in providers:
+        raw_path, score_path = OUTPUT_DIR / f"{current}.jsonl", OUTPUT_DIR / "scores" / f"{current}.jsonl"
+        generation.validate_generation_records(raw_path, freeze, models, annotations, current)
+        source = load_successful_generations(current)
+        validate_score_records(score_path, source)
+        generations.extend(source)
+        scores.extend(generation.read_jsonl_records(score_path))
+        for path in (raw_path, score_path):
+            if path.exists():
+                source_files[str(path.relative_to(ROOT))] = sha256_file(path)
+    if not generations:
+        raise RuntimeError("no successful generations available for QA; no packet written")
+    packet, manifest = build_qa_records(freeze, annotations, prompts, generations, scores)
+    if not packet:
+        raise RuntimeError("no scored or truncated generations eligible for QA; no packet written")
+    manifest.update({"source_file_sha256": source_files, "snapshot_sha256": sha256_file(FREEZE_PATH),
+                     "scoring_plan_sha256": sha256_file(SCORING_PLAN_PATH), "judge_config_sha256": sha256_file(JUDGE_PATH)})
+    # Directory creation is exclusive: regenerate into a new path after more data
+    # arrive, preserving packets already sent to human reviewers.
+    out_dir.mkdir(parents=True, exist_ok=False)
+    packet_path = out_dir / "qa_packet.jsonl"
+    with packet_path.open("x", encoding="utf-8", newline="\n") as handle:
+        for row in packet:
+            handle.write(json.dumps(row, ensure_ascii=False, sort_keys=True, allow_nan=False) + "\n")
+    manifest["packet_sha256"] = sha256_file(packet_path)
+    (out_dir / "qa_manifest_private.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+    lines = ["# Preliminary response-scoring QA packet", "",
+             "Status: pending human review. Blank review fields do not constitute acceptance.", "",
+             "Apply the supplied frozen rubric. Record disagreements and suggested corrections separately; preserve automated ratings and raw responses.", ""]
+    for row in packet:
+        lines.extend([f"## {row['qa_id']} — {row['task_id']} ({row['language']})", "",
+                      "### Prompt", "", row["prompt_text"], "", "### Response", "", row["response_text"], "",
+                      "### Objective and rubric", "", row["task_objective"], "",
+                      json.dumps(row["rubric"], ensure_ascii=False, indent=2), "",
+                      "### Automated ratings", "", json.dumps(row["automated_ratings"], ensure_ascii=False, indent=2), "",
+                      "Reviewer: __________  Date: __________", "", "Decision / disagreements / evidence: __________", ""])
+    (out_dir / "qa_packet.md").write_text("\n".join(lines), encoding="utf-8")
+    print(f"QA packet: {out_dir}; {len(packet)} response cells; status pending_human_review")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("calibrate")
     sub.add_parser("gate")
+    q = sub.add_parser("qa", help="prepare deterministic blinded human-QA packet; no model calls")
+    q.add_argument("--provider", choices=["openai", "anthropic", "google", "all"], default="all")
+    q.add_argument("--out-dir", type=Path, required=True)
 
     p = sub.add_parser("plan")
     p.add_argument("--provider", choices=["openai", "anthropic", "google", "all"], default="all")
@@ -585,6 +771,9 @@ def main() -> int:
     s.add_argument("--limit", type=int)
 
     args = parser.parse_args()
+    if args.command == "qa":
+        qa(args.provider, args.out_dir)
+        return 0
     if args.command == "calibrate":
         calibrate()
         return 0

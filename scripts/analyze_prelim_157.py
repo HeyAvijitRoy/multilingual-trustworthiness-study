@@ -83,7 +83,12 @@ def item_lookup(rec: dict[str, Any]) -> dict[str, dict[str, Any]]:
     for riu in rec["rius"]:
         out[riu["id"]] = {"kind": "riu", **riu}
     for check in rec.get("task_checks", []):
-        out[check["id"]] = {"kind": "check", **check}
+        out[check["id"]] = {
+            "kind": "check",
+            "check_kind": check["kind"],
+            "id": check["id"],
+            "rule": check["rule"],
+        }
     return out
 
 
@@ -105,12 +110,12 @@ def response_metrics(rec: dict[str, Any], score_row: dict[str, Any]) -> dict[str
     unsupported_pass = all(
         float(r["score"]) == 1.0
         for s, r in checks
-        if s.get("kind") == "unsupported_content"
+        if s.get("check_kind") == "unsupported_content"
     )
     format_pass = all(
         float(r["score"]) == 1.0
         for s, r in checks
-        if s.get("kind") == "format"
+        if s.get("check_kind") == "format"
     )
 
     non_answer = bool(scores) and all(r["reason"] == "non_answer" for _, r in riu_ratings)

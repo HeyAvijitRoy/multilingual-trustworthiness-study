@@ -43,6 +43,7 @@ The exact request configuration is pinned in `PRELIM_157_MODELS.json`.
 - Sampling controls such as temperature/top-p/top-k are omitted rather than forcing non-equivalent controls across providers.
 - Output limit: 32,768 tokens for every provider.
 - Request timeout: 900 seconds.
+- Up to 8 requests per provider may execute concurrently; concurrency changes throughput only and does not change cell membership or request parameters.
 - Prompt order is deterministically shuffled with seed 20261023 separately for each provider.
 - Run index is 1 for every cell.
 

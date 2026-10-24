@@ -12,18 +12,24 @@
   "study_lead_approval_record": null,
   "artifact_sha256": {},
   "pending_decisions": [
-    "Verify cloud model access, quotas and callable settings with the intended API accounts",
-    "Select and pin exactly two different-family local checkpoints after independent diagnostics",
-    "Validate a study adapter for the selected local inference runtime",
-    "Verify local chat templates and prompt-plus-output context fit without truncation",
-    "Approve model panel, protocol, scoring and analysis amendment before any study generation",
-    "Create an immutable final manifest pinning all amended artifacts and approval evidence"
+    "Approve recommended Qwen3.5-9B/Gemma-4-12B-it pair, exact BF16 runtime, local 5400s timeout and four-model scientific plans",
+    "Record explicit paid API budget authorization before synthetic cloud validation, automated calibration, generation or scoring",
+    "Complete authorized synthetic cloud wire validation and account quota checks; metadata-only access already returned HTTP 200",
+    "Create a new immutable final freeze pinning all artifacts and actual study-lead approval before automated calibration"
   ],
   "observed_historical_outputs": {
     "scope": "working checkout including ignored .local and data/outputs, not remote user machines",
     "successful_generations": 0,
     "judge_calibration_report_present": false,
     "successful_study_scores": 0,
-    "account_api_access_verified": false
+    "account_api_access_verified": "metadata-only HTTP 200; paid wire compatibility and quota not yet verified"
+  },
+  "execution_gates": {
+    "actual_automated_judge_calibration": "absent; required before generation",
+    "full_validation": "see VALIDATION.md",
+    "required_credentials": "present for metadata; load explicitly; endpoint settings supplied per runtime"
+  },
+  "reporting_gates": {
+    "independent_human_QA_adjudication": "pending; required before audited conclusions"
   }
 }

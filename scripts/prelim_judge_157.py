@@ -186,7 +186,8 @@ TASK_AND_RUBRIC_JSON:
 """
 
 
-def http_judge(prompt: str, judge: dict[str, Any]) -> dict[str, Any]:
+def http_judge(prompt: str, judge: dict[str, Any], *, raw_dir: Path | None = None,
+               judge_config_path: Path | None = None, max_attempts: int = 4) -> dict[str, Any]:
     key = os.environ.get("OPENAI_API_KEY")
     if not key:
         raise RuntimeError("OPENAI_API_KEY is required for judge calls")
@@ -207,7 +208,9 @@ def http_judge(prompt: str, judge: dict[str, Any]) -> dict[str, Any]:
     }
     data = json.dumps(body, ensure_ascii=False).encode("utf-8")
     payload: dict[str, Any] | None = None
-    for attempt in range(1, 5):
+    if not 1 <= max_attempts <= 4:
+        raise ValueError('judge transport attempts must be between one and four')
+    for attempt in range(1, max_attempts+1):
         req = urllib.request.Request(
             "https://api.openai.com/v1/responses",
             data=data,
@@ -222,12 +225,12 @@ def http_judge(prompt: str, judge: dict[str, Any]) -> dict[str, Any]:
                 payload = json.loads(resp.read().decode("utf-8"))
             break
         except urllib.error.HTTPError as e:
-            if attempt < 4 and (e.code == 429 or 500 <= e.code <= 599):
+            if attempt < max_attempts and (e.code == 429 or 500 <= e.code <= 599):
                 time.sleep(2 ** attempt)
                 continue
             raise
         except (TimeoutError, urllib.error.URLError):
-            if attempt < 4:
+            if attempt < max_attempts:
                 time.sleep(2 ** attempt)
                 continue
             raise
@@ -243,9 +246,9 @@ def http_judge(prompt: str, judge: dict[str, Any]) -> dict[str, Any]:
             for part in item.get("content", []):
                 if part.get("type") == "output_text":
                     text_parts.append(part.get("text", ""))
-    append_jsonl(LOCAL / "judge_raw.jsonl", {
+    append_jsonl((raw_dir or LOCAL) / "judge_raw.jsonl", {
         "received_at_utc": utc_now(),
-        "judge_config_sha256": sha256_file(JUDGE_PATH),
+        "judge_config_sha256": sha256_file(judge_config_path or JUDGE_PATH),
         "scoring_input_sha256": hashlib.sha256(prompt.encode("utf-8")).hexdigest(),
         "payload": payload,
     })

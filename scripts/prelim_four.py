@@ -117,6 +117,10 @@ def require_frozen(config, manifest, config_path=CONFIG, manifest_path=MANIFEST)
                 str((AMENDMENT / "SCORING_PLAN.md").relative_to(ROOT)),
                 str(Path(__file__).resolve().relative_to(ROOT)),
                 str(Path(historical.__file__).resolve().relative_to(ROOT))}
+    for name in ('prelim_four_judge.py','analyze_prelim_four.py','research_approvals.py',
+                 'local_gpu_runtime.py','local_gpu_server.py','prelim_judge_157.py','analyze_prelim_157.py'):
+        required.add('scripts/'+name)
+    required.add(str((AMENDMENT/'JUDGE.json').relative_to(ROOT)))
     for model in config["models"]:
         for field in ("availability_evidence", "feasibility_evidence", "context_fit_evidence", "adapter_smoke_evidence"):
             if model.get(field):
@@ -140,9 +144,22 @@ def generation_readiness(config, manifest, config_path=CONFIG, manifest_path=MAN
     if not blockers:
         try:
             require_frozen(config, manifest, config_path, manifest_path)
+            require_execution_gates(config,manifest,config_path,manifest_path)
         except (RuntimeError, ValueError, OSError) as exc:
             blockers.append(str(exc))
     return blockers
+
+
+def require_execution_gates(config,manifest,config_path=CONFIG,manifest_path=MANIFEST):
+    from research_approvals import require_spending_approval
+    from prelim_four_judge import ScoringContext
+    require_spending_approval(config,manifest,'generation')
+    if not ScoringContext(config_path,manifest_path).gate()['gate_pass']:
+        raise RuntimeError('all study generation requires the passing four-model automated-judge gate')
+    for model in config['models']:
+        env=model.get('env_key') or model.get('endpoint_env')
+        if env and not os.environ.get(env):
+            raise RuntimeError('required panel credential/runtime setting is absent: '+env)
 
 
 def cells_for(config, freeze, annotations, prompts, partition, language=None):
@@ -188,8 +205,6 @@ def validated_records(path, config, partition, expected_cells, pins):
         elif row["status"] == "api_error":
             errors += 1
         else:
-            if row["status"] not in {"success", "http_error", "transport_error", "runtime_error"}:
-                raise RuntimeError("unknown attempt outcome status")
             raise RuntimeError(f"unknown record status in {path.name}")
     return successes, errors
 
@@ -219,8 +234,13 @@ def validate_attempt_history(path, config, partition, expected_cells, pins, succ
                 raise RuntimeError("duplicate request-start event")
             started[identifier] = row
         else:
+            if row["status"] not in {"success", "http_error", "transport_error", "runtime_error"}:
+                raise RuntimeError("unknown attempt outcome status")
             if identifier not in started or identifier in finished:
                 raise RuntimeError("attempt outcome has no unique request-start event")
+            if any(row.get(k)!=started[identifier].get(k) for k in
+                   ("task_id", "language", "prompt_sha256")):
+                raise RuntimeError("attempt outcome belongs to a different cell")
             finished[identifier] = row
             if row["status"] == "success":
                 source = successes.get(key)
@@ -276,8 +296,8 @@ def local_http_json(url, headers, body, timeout):
 def local_chat(model, prompt, system, timeout, max_tokens):
     """Adapter for a separately pinned local OpenAI-compatible chat server.
 
-    Diagnostics currently use Transformers directly. This adapter is tested
-    with fixtures only; selecting a server/engine requires real smoke evidence.
+    The loopback server uses the same native CUDA runtime as the benchmarks.
+    Selecting a checkpoint still requires recorded real synthetic smoke evidence.
     Never infer or strip private reasoning from an unpinned template.
     """
     endpoint = os.environ.get(model["endpoint_env"], "")
@@ -291,6 +311,8 @@ def local_chat(model, prompt, system, timeout, max_tokens):
     body = {"model": model["model_id"], "messages": [
         {"role": "system", "content": system}, {"role": "user", "content": prompt}],
         "max_tokens": max_tokens, "stream": False, **model["decoding"]}
+    from local_gpu_runtime import canonical_request_id
+    body['request_id']=canonical_request_id(body)
     if set(model["decoding"]) - {"temperature", "top_p", "seed", "stop", "chat_template_kwargs"}:
         raise RuntimeError("unsupported local decoding setting")
     payload, status = local_http_json(endpoint.rstrip("/") + "/chat/completions",
@@ -313,6 +335,19 @@ def local_chat(model, prompt, system, timeout, max_tokens):
         invalid("local server did not return visible response text")
     if payload.get("model") != model["model_id"]:
         invalid("local server returned a different model ID")
+    if model.get('weights_revision'):
+        actual=payload.get('runtime_provenance',{})
+        if (payload.get('revision')!=model['weights_revision'] or actual.get('context_tokens')!=model['context_tokens']
+                or actual.get('engine_version')!=model['engine_version'] or actual.get('precision')!='bfloat16'
+                or actual.get('enable_thinking') is not False or actual.get('cpu_offload') is not False):
+            invalid('local runtime provenance differs from pinned model configuration')
+        for name,expected in {**model['weights_sha256'],**model['tokenizer_sha256']}.items():
+            if actual.get('artifact_sha256',{}).get(name)!=expected:
+                invalid('local loaded artifact hash mismatch')
+        if model.get('chat_template_sha256') and actual.get('artifact_sha256',{}).get('chat_template.jinja')!=model['chat_template_sha256']:
+            invalid('local chat template differs from pinned configuration')
+        if any(actual.get(k)!=v for k,v in model.get('runtime_parameters',{}).items()):
+            invalid('local runtime parameters differ from pinned configuration')
     return {"http_status": status, "response_text": text, "returned_model": payload["model"],
             "provider_response_id": payload.get("id"), "finish_status": choice.get("finish_reason"),
             "usage": payload.get("usage"), "provider_raw_meta": {"timings": payload.get("timings")},
@@ -326,6 +361,7 @@ def run_partition(config, manifest, freeze, annotations, prompts, partition, lim
         print(f"{partition}: dry-run only; {len(selected)} frozen prompt instances; no request sent")
         return
     require_frozen(config, manifest, config_path, manifest_path)
+    require_execution_gates(config,manifest,config_path,manifest_path)
     model = next(m for m in config["models"] if m["partition"] == partition)
     if partition in EXACT_CLOUD_IDS and not os.environ.get(model["env_key"]):
         raise RuntimeError(f"required API key not set: {model['env_key']}")
@@ -335,6 +371,11 @@ def run_partition(config, manifest, freeze, annotations, prompts, partition, lim
         done, _ = validated_records(root / f"{partition}.jsonl", config, partition, selected, pins)
         validate_attempt_history(root / "attempts" / f"{partition}.jsonl",
                                  config, partition, selected, pins, done)
+        prior_attempts={}
+        for event in historical.read_jsonl_records(root/'attempts'/f'{partition}.jsonl'):
+            if event['status']=='started':
+                key=(event['task_id'],event['language'])
+                prior_attempts[key]=prior_attempts.get(key,0)+1
         pending = [c for c in selected if (c["task_id"], c["language"]) not in done]
         if limit is not None:
             pending = pending[:limit]
@@ -342,6 +383,10 @@ def run_partition(config, manifest, freeze, annotations, prompts, partition, lim
         # Intentionally sequential. Local models share memory; cloud concurrency
         # can be added after a separate throughput check without changing cells.
         for cell in pending:
+            used=prior_attempts.get((cell['task_id'],cell['language']),0)
+            if used>=4:
+                print(f"{partition} {cell['task_id']} {cell['language']}: four-attempt budget exhausted",flush=True)
+                continue
             started = time.monotonic()
             attempts = []
             result = None
@@ -351,7 +396,7 @@ def run_partition(config, manifest, freeze, annotations, prompts, partition, lim
                     "system_prompt": config["system_prompt"],
                     "request_parameters": {"model": model, "max_output_tokens": config["max_output_tokens"],
                                            "tools_enabled": False, "external_grounding": False}}
-            for attempt in range(1, 5):
+            for attempt in range(used+1, 5):
                 attempt_start = historical.utc_now()
                 attempt_id = uuid.uuid4().hex
                 historical.append_jsonl(root / "attempts" / f"{partition}.jsonl",
@@ -359,7 +404,7 @@ def run_partition(config, manifest, freeze, annotations, prompts, partition, lim
                      "started_at_utc": attempt_start, "status": "started"})
                 try:
                     result = caller(model, cell["prompt_text"], config["system_prompt"],
-                                    config["timeout_seconds"], config["max_output_tokens"])
+                                    model.get('timeout_seconds',config["timeout_seconds"]), config["max_output_tokens"])
                     outcome = {"attempt": attempt, "started_at_utc": attempt_start, "status": "success"}
                 except historical.ProviderHTTPError as exc:
                     outcome = {"attempt": attempt, "started_at_utc": attempt_start,
@@ -407,6 +452,7 @@ def main():
     parser.add_argument("--config", type=Path, default=CONFIG)
     parser.add_argument("--manifest", type=Path, default=MANIFEST,
                         help="default candidate cannot generate; pass the later approved FREEZE.json explicitly")
+    parser.add_argument('--env-file',type=Path,help='Optional explicit local credentials file; values never logged')
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("check")
     sub.add_parser("readiness")
@@ -416,6 +462,8 @@ def main():
     p.add_argument("--limit", type=int)
     p.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
+    from research_approvals import load_api_environment
+    load_api_environment(args.env_file)
     args.config, args.manifest = args.config.resolve(), args.manifest.resolve()
     config, manifest, freeze, annotations, prompts = verify_candidate(args.config, args.manifest)
     if args.command in {"check", "readiness"}:

@@ -26,6 +26,14 @@ Keep raw scores, a separately hash-linked adjudication layer, dispute resolution
 and reviewer evidence. A systematic error triggers review of its affected class.
 Until QA is complete, any later analysis is explicitly provisional/unreviewed.
 
-Amended scoring execution and adjudication ingestion remain implementation
-blockers. The historical judge commands operate only on the historical panel;
-they are not commands for this candidate four-model study.
+`scripts/prelim_four_judge.py` implements isolated calibration, scoring, resume
+receipts, four-attempt retry budgets across restarts and blinded QA packets.
+`JUDGE.json` proposes concurrency 1 (within the historical upper limit of 12);
+all scientific judge settings, fixtures and thresholds are unchanged.
+`analyze_prelim_four.py` accepts separately resolved, source-hash-linked
+adjudications with reviewer/date and hashed review-log evidence, plus an explicit
+supersession chain. These structural checks do not authenticate a reviewer or
+certify independent human QA. Reports remain provisional pending that review.
+Synthetic oracle-key tests exercise the gate; they never count as measured
+calibration. The actual automated judge gate is absent and remains blocking.
+See `RUNBOOK.md` for implemented commands; historical commands retain their panel.

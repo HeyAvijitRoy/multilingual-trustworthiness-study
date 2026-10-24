@@ -342,6 +342,7 @@ def generation_status(
     freeze: dict[str, Any],
     model_cfg: dict[str, Any],
     score_rows: dict[tuple[str, str, str, int], dict[str, Any]],
+    output_dir: Path | None = None,
 ) -> tuple[dict[str, Any], set[tuple[str, str, str]]]:
     """Describe missingness from raw evidence, not from missing scores alone."""
     ids = sorted(snapshot_ids(freeze))
@@ -352,7 +353,7 @@ def generation_status(
     for config in model_cfg["models"]:
         model, provider = config["model_id"], config["provider"]
         attempts: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
-        for row in generation.read_jsonl_records(OUTPUT_DIR / f"{provider}.jsonl"):
+        for row in generation.read_jsonl_records((output_dir or OUTPUT_DIR) / f"{provider}.jsonl"):
             if (row.get("requested_model") == model and row.get("task_id") in ids
                     and row.get("language") in LANGS and int(row.get("run_index", 0)) == 1
                     and row.get("snapshot_id") == freeze["snapshot_id"]):

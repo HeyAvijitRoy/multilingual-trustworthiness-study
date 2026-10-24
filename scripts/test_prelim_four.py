@@ -118,7 +118,7 @@ class FourModelTests(unittest.TestCase):
                   "provider_raw_meta": {}, "returned_model": "gpt-6-astra"}
         with tempfile.TemporaryDirectory() as tmp, patch.dict(os.environ, {"OPENAI_API_KEY": "test-only"}):
             root = Path(tmp)
-            with patch.object(four, "require_frozen"), patch.object(four, "output_root", return_value=root), \
+            with patch.object(four, "require_frozen"), patch.object(four, 'require_execution_gates'), patch.object(four, "output_root", return_value=root), \
                  patch.object(four, "cells_for", return_value=[cell]), patch.object(four.time, "sleep"), \
                  patch.dict(four.historical.CALLERS, {"openai": unittest.mock.Mock(side_effect=[
                      four.historical.ProviderHTTPError(429, {"error": "retry"}), result])}):
@@ -137,7 +137,7 @@ class FourModelTests(unittest.TestCase):
         cell = four.cells_for(self.config, self.freeze, self.annotations, self.prompts, "openai")[0]
         with tempfile.TemporaryDirectory() as tmp, patch.dict(os.environ, {"OPENAI_API_KEY": "test-only"}):
             root = Path(tmp)
-            with patch.object(four, "require_frozen"), patch.object(four, "output_root", return_value=root), \
+            with patch.object(four, "require_frozen"), patch.object(four, 'require_execution_gates'), patch.object(four, "output_root", return_value=root), \
                  patch.object(four, "cells_for", return_value=[cell]), \
                  patch.dict(four.historical.CALLERS, {"openai": unittest.mock.Mock(side_effect=RuntimeError("unavailable"))}):
                 four.run_partition(self.config, self.manifest, self.freeze,
@@ -158,7 +158,7 @@ class FourModelTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp, patch.dict(os.environ, {"OPENAI_API_KEY": "test-only"}):
             root = Path(tmp)
             caller = unittest.mock.Mock(return_value=result)
-            with patch.object(four, "require_frozen"), patch.object(four, "output_root", return_value=root), \
+            with patch.object(four, "require_frozen"), patch.object(four, 'require_execution_gates'), patch.object(four, "output_root", return_value=root), \
                  patch.object(four, "cells_for", return_value=[cell]), \
                  patch.dict(four.historical.CALLERS, {"openai": caller}):
                 with patch.object(four.historical, "append_jsonl", side_effect=interrupted):

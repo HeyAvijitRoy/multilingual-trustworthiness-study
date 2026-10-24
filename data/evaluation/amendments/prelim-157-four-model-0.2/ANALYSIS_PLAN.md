@@ -24,7 +24,13 @@ Historical panel results, if later discovered, remain separately identified;
 their outputs cannot be silently pooled with newly generated cloud cells.
 
 The existing historical analysis command is for 1,413 historical cells only.
-An amended analysis entry point, input provenance checks, adjudication ingestion
-and QA-completion evidence must be validated before amended scoring/analysis.
+`scripts/analyze_prelim_four.py` implements the amended fixed-panel analysis,
+source validation and separate adjudication ingestion using the shared historical
+metric/bootstrap functions. Independent human QA-completion evidence remains an
+external requirement. `scripts/plot_prelim_four.py` exports standalone PNG/PDF/SVG
+figures from a saved report, showing paired primary-effect intervals and separate
+descriptive language means with defined-cell denominators. Figure provenance pins
+the source report and plotting implementation/dependency versions.
 Do not feed four-model records to the historical command by renaming files.
-No amended effect estimates have been computed.
+No actual amended study estimates have been computed; synthetic end-to-end test
+estimates are not scientific results.

@@ -25,6 +25,10 @@ def smoke(config_path,manifest_path,out_dir,provider='all'):
     cfg,manifest,_,_,prompts=four.verify_candidate(config_path,manifest_path)
     models=[m for m in cfg['models'][:2] if provider=='all' or m['partition']==provider]
     if any(m['partition']=='openai' for m in models):require_spending_approval(cfg,manifest,'cloud_validation')
+    budget=None
+    if cfg["protocol_id"].endswith("0.3") and any(m["partition"]=="openai" for m in models):
+        from api_budget import BudgetLedger
+        budget=BudgetLedger(cfg,manifest,"cloud_validation")
     quota=None
     if cfg['protocol_id'].endswith('0.3') and any(m['partition']=='google' for m in models):
         from gemini_quota import QuotaLedger
@@ -44,6 +48,8 @@ def smoke(config_path,manifest_path,out_dir,provider='all'):
         if quota and model['partition']=='google':
             from gemini_quota import input_reservation
             quota.reserve(request_id,input_reservation(prompt,cfg['system_prompt']),cfg['protocol_id'],hashlib.sha256(prompt.encode()).hexdigest())
+        if budget and model['partition']=='openai':
+            budget.reserve(request_id,model['model_id'],prompt,cfg['system_prompt'],cfg['max_output_tokens'])
         historical.append_jsonl(out_dir/'raw.jsonl',{**base,'status':'started'})
         try:
             caller=historical.CALLERS[model['partition']]
@@ -57,6 +63,7 @@ def smoke(config_path,manifest_path,out_dir,provider='all'):
             if quota and model['partition']=='google':quota.finish(request_id,error_status=getattr(exc,'status',None),error_payload=getattr(exc,'payload',None))
             raise
         historical.append_jsonl(out_dir/'raw.jsonl',{**base,'status':'received','result':result})
+        if budget and model['partition']=='openai':budget.settle(request_id,result.get('usage'))
         if quota and model['partition']=='google':quota.finish(request_id,usage=result.get('usage'))
         print(json.dumps({'model':model['model_id'],'language':language,'status':'received','study_generations':0}),flush=True)
 

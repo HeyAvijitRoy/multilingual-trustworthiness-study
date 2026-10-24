@@ -139,7 +139,7 @@ def require_frozen(config, manifest, config_path=CONFIG, manifest_path=MANIFEST)
         required.add('scripts/'+name)
     required.add(str((amendment/'JUDGE.json').relative_to(ROOT)))
     if config['protocol_id'].endswith('0.3'):
-        required.update({'scripts/cloud_four_adapters.py','scripts/gemini_quota.py','scripts/plot_prelim_four.py','scripts/audit_four_qa.py'})
+        required.update({'scripts/api_budget.py','scripts/cloud_four_adapters.py','scripts/gemini_quota.py','scripts/plot_prelim_four.py','scripts/audit_four_qa.py'})
         from prelim_judge_157 import FIXTURE_PLAN,FIXTURES,ANSWER_KEY
         required.update(str(p.relative_to(ROOT)) for p in (FIXTURE_PLAN,FIXTURES,ANSWER_KEY,historical.FREEZE_PATH))
         if not manifest.get('judge_approval_record'):raise RuntimeError('explicit primary-judge approval evidence missing')
@@ -403,6 +403,10 @@ def run_partition(config, manifest, freeze, annotations, prompts, partition, lim
     root = output_root(config)
     pins = provenance(config_path, manifest_path)
     revised=config['protocol_id'].endswith('0.3')
+    budget=None
+    if revised and partition=='openai':
+        from api_budget import BudgetLedger
+        budget=BudgetLedger(config,manifest,'generation')
     quota=None
     if revised and partition=='google':
         from gemini_quota import QuotaLedger
@@ -457,6 +461,8 @@ def run_partition(config, manifest, freeze, annotations, prompts, partition, lim
                                  'latency_seconds':time.monotonic()-started,'status':'api_error'})
                         print(f"google {cell['task_id']} {cell['language']}: {exc}",flush=True)
                         return pause
+                if budget:
+                    budget.reserve(attempt_id,model["model_id"],cell["prompt_text"],config["system_prompt"],config["max_output_tokens"])
                 historical.append_jsonl(root / "attempts" / f"{partition}.jsonl",
                     {**base, "attempt": attempt, "attempt_id": attempt_id,
                      "started_at_utc": attempt_start, "status": "started"})
@@ -482,6 +488,9 @@ def run_partition(config, manifest, freeze, annotations, prompts, partition, lim
                 historical.append_jsonl(root / "attempts" / f"{partition}.jsonl",
                     {**base, **outcome, "attempt_id": attempt_id, "finished_at_utc": historical.utc_now(),
                      **({"received_response": result} if result is not None else {})})
+                if budget and result is not None:budget.settle(attempt_id,result.get("usage"))
+                if outcome.get("http_status")==200 and outcome.get("provider_error",{}).get("validation_error"):
+                    raise RuntimeError("cloud response validation failed; preserved raw evidence; execution halted")
                 if quota:
                     quota.finish(attempt_id,usage=result.get('usage') if result else None,
                                  error_status=outcome.get('http_status'),error_payload=outcome.get('provider_error'),

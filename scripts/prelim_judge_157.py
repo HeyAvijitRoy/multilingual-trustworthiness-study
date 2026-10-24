@@ -206,6 +206,8 @@ def http_judge(prompt: str, judge: dict[str, Any], *, raw_dir: Path | None = Non
             }
         },
     }
+    if judge.get("service_tier"):
+        body["service_tier"] = judge["service_tier"]
     data = json.dumps(body, ensure_ascii=False).encode("utf-8")
     payload: dict[str, Any] | None = None
     if not 1 <= max_attempts <= 4:

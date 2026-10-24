@@ -22,6 +22,10 @@ import research_approvals as approvals
 
 
 class GPURoutingTests(unittest.TestCase):
+    def setUp(self):
+        budget_patch=patch("api_budget.BudgetLedger")
+        budget_patch.start();self.addCleanup(budget_patch.stop)
+
     def test_upstream_hashes_override_cache_blob_filename_assumptions(self):
         with tempfile.TemporaryDirectory() as folder:
             root=Path(folder);snapshot=root/'snapshot';snapshot.mkdir()
@@ -147,6 +151,10 @@ class ApprovalTests(unittest.TestCase):
 
 
 class FourJudgeTests(unittest.TestCase):
+    def setUp(self):
+        budget_patch=patch("api_budget.BudgetLedger")
+        budget_patch.start();self.addCleanup(budget_patch.stop)
+
     @classmethod
     def setUpClass(cls):
         cls.ctx=ScoringContext()

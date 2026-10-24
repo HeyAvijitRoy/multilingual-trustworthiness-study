@@ -143,6 +143,10 @@ class QuotaTests(unittest.TestCase):
 
 
 class AdapterAndJudgeTests(unittest.TestCase):
+    def setUp(self):
+        budget_patch=patch("api_budget.BudgetLedger")
+        budget_patch.start();self.addCleanup(budget_patch.stop)
+
     def model(self):return four.read(four.CONFIG)['models'][1]
 
     def payload(self,finish='STOP'):
@@ -157,7 +161,7 @@ class AdapterAndJudgeTests(unittest.TestCase):
             result=historical.call_openai(model,'unchanged prompt','unchanged system',900,32768)
         body=http.call_args.args[2]
         self.assertEqual(body,{'model':'gpt-6.1-sol','instructions':'unchanged system','input':'unchanged prompt',
-                               'reasoning':{'effort':'medium','mode':'standard'},'max_output_tokens':32768})
+                               'reasoning':{'effort':'medium','mode':'standard'},'max_output_tokens':32768,'service_tier':'default'})
         self.assertEqual(result['provider_raw_response'],payload)
 
     def test_quota_deferred_cell_is_pending_until_scored_or_retry_budget_exhausted(self):

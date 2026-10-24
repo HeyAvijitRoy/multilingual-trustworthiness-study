@@ -1,0 +1,46 @@
+{
+  "protocol_id": "prelim-157-four-model-0.3",
+  "snapshot_id": "prelim-157-four-model-0.3-candidate",
+  "status": "candidate-not-frozen",
+  "prepared_date": "2026-10-23",
+  "historical_snapshot_sha256": "15c383838a02459c78a92ccbc997dcb73bd9c1e147a785eadf15dad3c945f0b6",
+  "task_count": 157,
+  "prompt_instances_per_model": 471,
+  "planned_model_count": 4,
+  "planned_response_count": 1884,
+  "full_study_planned_response_count": 6000,
+  "study_lead_approval_record": "data/evaluation/amendments/prelim-157-four-model-0.3/APPROVAL_20261023.json",
+  "artifact_sha256": {
+    "data/evaluation/amendments/prelim-157-four-model-0.3/APPROVAL_20261023.json": "ea867628c2dffb1103489be1ec4bc41ede968fb039b915c9781f110d835cf506"
+  },
+  "pending_decisions": [
+    "Validate cloud wire settings and exact returned model identities under approved billing conditions",
+    "Create immutable final freeze before actual judge calibration and any study generation"
+  ],
+  "observed_historical_outputs": {
+    "scope": "working checkout including ignored .local and data/outputs, not remote user machines",
+    "successful_generations": 0,
+    "judge_calibration_report_present": false,
+    "successful_study_scores": 0,
+    "account_api_access_verified": "metadata-only HTTP 200; paid wire compatibility and quota not yet verified"
+  },
+  "execution_gates": {
+    "actual_automated_judge_calibration": "new GPT-5.4 calibration absent; no prior gate may be reused",
+    "full_validation": "see VALIDATION.md",
+    "required_credentials": "present for metadata; load explicitly; endpoint settings supplied per runtime"
+  },
+  "reporting_gates": {
+    "independent_human_QA_adjudication": "pending, with independently collected first-pass ratings, agreement audit and separate adjudication"
+  },
+  "supersedes_candidate": "prelim-157-four-model-0.2",
+  "spending_approval_record": "data/evaluation/amendments/prelim-157-four-model-0.3/APPROVAL_20261023.json",
+  "judge_approval_record": "data/evaluation/amendments/prelim-157-four-model-0.3/APPROVAL_20261023.json",
+  "observed_revised_outputs": {
+    "scope": "this checkout and known ignored output namespaces only",
+    "successful_generations": 0,
+    "successful_scores": 0,
+    "actual_new_judge_calibration": false,
+    "paid_inference_calls": 0,
+    "model_choice_confirmed": "User confirmed Gemini 3.8 Flash in this conversation; final protocol/judge approval and quota evidence remain pending"
+  }
+}

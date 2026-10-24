@@ -3,3 +3,6 @@ __pycache__/
 /.local/
 /data/outputs/
 .env
+
+# Local cloud credential path (file or directory)
+/.aws

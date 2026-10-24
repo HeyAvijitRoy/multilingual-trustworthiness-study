@@ -25,7 +25,9 @@
       "availability_evidence": "data/evaluation/amendments/prelim-157-four-model-0.3/CLOUD_ACCESS.json",
       "allowed_returned_model_ids": [
         "gpt-6.1-sol"
-      ]
+      ],
+      "service_tier": "default",
+      "wire_validation_evidence": "data/evaluation/amendments/prelim-157-four-model-0.3/CLOUD_WIRE_VALIDATION.json"
     },
     {
       "partition": "google",
@@ -39,9 +41,11 @@
       "documentation": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
       "availability_evidence": "data/evaluation/amendments/prelim-157-four-model-0.3/CLOUD_ACCESS.json",
       "billing_policy": "free-tier-only-no-paid-fallback",
-      "quota_config": "data/evaluation/amendments/prelim-157-four-model-0.3/GEMINI_QUOTA_CANDIDATE.json",
-      "wire_validation_evidence": null,
-      "allowed_returned_model_ids": [],
+      "quota_config": "data/evaluation/amendments/prelim-157-four-model-0.3/GEMINI_QUOTA_VERIFIED.json",
+      "wire_validation_evidence": "data/evaluation/amendments/prelim-157-four-model-0.3/CLOUD_WIRE_VALIDATION.json",
+      "allowed_returned_model_ids": [
+        "gemini-3.8-flash"
+      ],
       "metadata_version": "3.0"
     },
     {

@@ -1,4 +1,4 @@
-# Preliminary four-model amendment 0.3 — candidate, not frozen
+# Preliminary four-model amendment 0.3 — approved protocol
 
 Prepared prospectively from latest origin/main `b361477`, before any study outputs
 in this checkout. This new version supersedes candidate 0.2 for proposed future
@@ -8,9 +8,8 @@ unchanged. A replacement judge requires a prospective scoring version under the
 historical scoring plan; therefore 0.2 is archived instead of overwritten.
 
 Proposed panel: OpenAI **gpt-6.1-sol**, Google **gemini-3.8-flash**, local A
-**Qwen/Qwen3.5-9B**, local B **google/gemma-4-12B-it**. The user confirmed the 3.8
-Flash target in this conversation; that is not final protocol/judge approval or
-paid authorization. All exact model/local-artifact settings are in `MODELS.json`.
+**Qwen/Qwen3.5-9B**, local B **google/gemma-4-12B-it**. The study lead approved this panel and GPT-5.4-2026-03-05 primary judge
+in the conversation on 2026-10-23, subject to calibration and integrity gates. All exact model/local-artifact settings are in `MODELS.json`.
 OpenAI generation remains Responses API, medium/standard reasoning. Google
 GenerateContent uses medium thinking, with all sampling controls omitted.
 No dynamic `latest` alias, paid Gemini fallback or automatic model rotation.
@@ -39,11 +38,13 @@ functions/runtime are unchanged, checked separately from new cloud/quota code.
 free-tier entitlement, callable inference, quota or model quality. Public pricing
 lists 3.8 Flash text generation as free-tier eligible; metadata lists 1,048,576
 input and 65,536 output tokens. Preserve the experimental allowance 32,768.
-The actual project billing tier, eligibility, RPM, input TPM and RPD must be
-confirmed in AI Studio with dated evidence before Google generation. These
-values are deliberately null in `GEMINI_QUOTA_CANDIDATE.json`; no public generic
-quota is substituted. No OAuth/ADC/gcloud or authenticated browser is available
-here to retrieve account quotas. See `CLOUD_MODEL_ASSESSMENT.md`.
+The study lead reported direct AI Studio verification on 2026-10-23:
+Free billing, free-tier eligible, 5 RPM, 250,000 input TPM, 20 RPD, peak usage 0.
+`GEMINI_ACCOUNT_REPORT_20261023.json` records the user observation; the agent did
+not independently access authenticated AI Studio. Active settings are in
+`GEMINI_QUOTA_VERIFIED.json`; the null candidate is retained as history. Three
+synthetic language checks per cloud provider passed; exact observed identities
+and ignored raw-evidence hashes are in `CLOUD_WIRE_VALIDATION.json`.
 
 Persist every Google request reservation (including synthetic probes, failures,
 retries and ambiguous calls) in one shared project/model ledger outside the study
@@ -72,8 +73,8 @@ The 0.2 and historical namespaces cannot be reused or pooled. No 0.3 study recor
 were discovered; new outcomes cannot be generated until actual panel and primary
 judge approval, paid budget authorization, full validation, a new immutable final
 freeze and a passing new judge calibration all exist. Freeze code/settings/evidence
-and actual approval records before calibration/generation. The proposed USD 200
-reference is not authorization. Google must remain free-tier-only; do not upgrade
+and actual approval records before calibration/generation. The USD 200 proposal was rejected. The actual approved combined paid cap is
+**USD 100**, including all smoke tests, calibration, generation, scoring and retries. Google must remain free-tier-only; do not upgrade
 billing or use a paid fallback. Paid Sol/judge calls require explicit scope/cap.
 
 The primary estimand and statistical principles remain unchanged, except the
@@ -81,3 +82,33 @@ prospectively revised fixed identities. Human QA and resolved adjudications are
 mandatory before independently reviewed claims. Production P01/P02 are preserved;
 P03–P14 follow preliminary evaluation under the continuation instructions. Full
 500-task gold and 6,000 responses require separate acceptance, freeze and budget.
+
+## Approved execution and budget addendum — 2026-10-23
+
+`APPROVAL_20261023.json` records the explicit study-lead authorization and conditions.
+Before each paid HTTP attempt, `api_budget.py` takes a cross-process lock and
+persists its maximum-cost reservation in `.local/paid_api_budget/` under a stable
+authorization ID shared across smoke, calibration, generation and scoring.
+Every retry needs a new reservation. In-flight and ambiguous outcomes retain the
+full hold; known successful usage settles only after its receipt is preserved.
+A torn ledger, changed approval, invalid usage or insufficient available balance
+halts spending. The cap cannot be increased by a runner or reset on resume.
+
+Reservations cover the full frozen output allowance, conservative UTF-8 input
+bounds plus schema/instructions and 4,096 framing tokens, and long-context prices.
+Settlement uses reported input/output usage, including reasoning within output,
+with no cache discounts and a 1.25x Sol input allowance covering cache writes.
+Amounts remain conservative API-charge estimates rather than provider invoices.
+Explicit `service_tier=default` prevents paid priority routing; reasoning and
+all scientific parameters remain unchanged. Pricing sources are the official
+Sol and GPT-5.4 model pages, rechecked on 2026-10-23 local date. Standard rates:
+Sol $2 input / $10 output per million, cache writes 1.25x input; GPT-5.4 $2.50 /
+$15. Inputs over 272K incur 2x input / 1.5x output. No tools or regional endpoints.
+
+Actual calibration must meet alpha >= 0.80, critical RIU exact >= 0.90 and safety
+check exact = 1.00. Failure blocks every study partition. Do not alter thresholds,
+accepted labels, prompts, output limits or sampling to obtain a pass or fit budget.
+All 1,884 preliminary responses are authorized only once the gates pass. Independent
+human QA and adjudication remain required before audited scientific conclusions.
+20 Gemini requests per Pacific day imply at least 24 quota days including the
+three synthetic checks; quota pauses are retained as pending work.

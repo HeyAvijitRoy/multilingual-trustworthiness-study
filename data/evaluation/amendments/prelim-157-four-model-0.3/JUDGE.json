@@ -19,10 +19,11 @@
   },
   "documentation": "https://developers.openai.com/api/docs/models/gpt-5.4",
   "concurrency": 1,
-  "status": "proposed-new-judge-not-approved-or-calibrated",
+  "status": "approved-primary-judge-calibration-required",
   "allowed_returned_model_ids": [
     "gpt-5.4-2026-03-05"
   ],
   "independence": "distinct checkpoint from all generators; same-provider bias remains; blinded calibrated and human-reviewed",
-  "source_historical_config_sha256": "df1efdc71fd44041107c31b85f3bcbabc9f4fc7d2a8615528ee5995345dd66a4"
+  "source_historical_config_sha256": "df1efdc71fd44041107c31b85f3bcbabc9f4fc7d2a8615528ee5995345dd66a4",
+  "service_tier": "default"
 }

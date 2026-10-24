@@ -1,3 +1,16 @@
+# Active authorization update — 2026-10-23
+
+The study lead approved v0.3, the dated GPT-5.4 judge, and **USD 100 total** for
+all paid operations and retries. USD 200 references below describe the earlier
+proposal and are superseded. Google limits are user-verified 5 RPM / 250,000
+input TPM / 20 RPD, Free billing, no paid fallback. Use `FREEZE.json` explicitly
+for actual calibration/generation/scoring; candidate manifests cannot generate.
+`api_budget.py` enforces one durable shared reservation ledger under `.local/`.
+Retain unknown-outcome holds until reconciled; never reset a ledger to gain funds.
+A budget stop requires a progress/spending/needed-budget report, not new parameters.
+Earlier readiness notes below are historical preparation instructions; current
+approval and wire evidence are separate dated artifacts and final freeze pins.
+
 # Revised four-model candidate runbook 0.3
 
 Use the existing reference `.local/venv` for CPU-side orchestration/validation and

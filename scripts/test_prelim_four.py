@@ -12,6 +12,10 @@ import prelim_four as four
 
 
 class FourModelTests(unittest.TestCase):
+    def setUp(self):
+        budget_patch=patch("api_budget.BudgetLedger")
+        budget_patch.start();self.addCleanup(budget_patch.stop)
+
     @classmethod
     def setUpClass(cls):
         cls.config, cls.manifest, cls.freeze, cls.annotations, cls.prompts = four.verify_candidate()

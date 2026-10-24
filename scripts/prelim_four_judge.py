@@ -117,9 +117,17 @@ class ScoringContext:
         if not os.environ.get('OPENAI_API_KEY'): raise RuntimeError('OPENAI_API_KEY required for paid judging')
         used=sum(e['status']=='started' for e in own)
         if used>=4:raise RuntimeError('four-attempt judge budget exhausted; no automatic replay')
+        budget=None
+        if self.config['protocol_id'].endswith('0.3'):
+            from api_budget import BudgetLedger
+            budget=BudgetLedger(self.config,self.manifest,'judge_calibration' if tag.startswith('calibration:') else 'scoring')
         for attempt in range(used+1,5):
             start={**self.pins,'id':uuid.uuid4().hex,'tag':tag,'scoring_input_sha256':input_hash,
                    'attempt':attempt,'status':'started','at_utc':generation.utc_now()}
+            if budget:
+                budget.reserve(start["id"],self.judge["model_id"],prompt,
+                    "You are a blinded rubric-scoring engine. Return only the required structured JSON.",
+                    self.judge["max_output_tokens"],json.dumps(historical.SCHEMA,ensure_ascii=False))
             generation.append_jsonl(ledger,start)
             try:
                 result=historical.http_judge(prompt,self.judge,raw_dir=self.root/'judge_raw',
@@ -138,6 +146,7 @@ class ScoringContext:
                                                'at_utc':generation.utc_now()})
                 raise
             generation.append_jsonl(ledger,{**start,'status':'received','result':result,'at_utc':generation.utc_now()})
+            if budget:budget.settle(start['id'],result.get('_judge_meta',{}).get('usage'))
             return result
 
     def calibrate(self):

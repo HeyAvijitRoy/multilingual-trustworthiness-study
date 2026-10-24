@@ -251,6 +251,8 @@ def call_openai(model: dict[str, Any], prompt: str, system: str, timeout: int, m
         "reasoning": {"effort": "medium", "mode": "standard"},
         "max_output_tokens": max_tokens,
     }
+    if model.get("service_tier"):
+        body["service_tier"] = model["service_tier"]
     payload, status = http_json(
         "https://api.openai.com/v1/responses",
         {"Authorization": f"Bearer {key}", "Content-Type": "application/json"},

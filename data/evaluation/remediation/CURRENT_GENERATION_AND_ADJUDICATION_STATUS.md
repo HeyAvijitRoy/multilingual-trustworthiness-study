@@ -16,6 +16,14 @@ After valid independent judge validation, document readiness for the new generat
 
 The shared paid cap remains USD 100, including the prior USD 0.542045 and all in-progress holds/retries. Generation protects USD 80 for later evaluation. Gemini remains Free only at 5 RPM, 250,000 input TPM and 20 RPD, with no paid fallback. No full 500-task expansion is launched. Current objective counts and usage are reported in the [timestamped manuscript snapshot](../../../manuscript/acm_trust2027/GENERATION_STATUS.md).
 
+## Update — October 24, 2026, 07:10 UTC
+
+- **Generation:** GPT-6.1 Sol is complete at 471/471. Qwen3.5-9B is collecting at about 60 responses per hour. Gemma 4 12B is queued by the frozen single-GPU schedule and is not stalled. Gemini resumed after its Pacific-day quota reset. The diagnosis and guarded supervisor are recorded in [the operations note](../GENERATION_V04_OPERATIONS.md).
+- **Scoring:** [Scoring candidate 0.5](../amendments/scoring-candidate-0.5/CANDIDATE_SPEC.md) is hash-pinned and not approved. It maps all seven disagreements to judge-instruction or implementation gaps, and no key correction is indicated.
+- **Held-out set:** [Ninety held-out families](../amendments/scoring-candidate-0.5/HELDOUT_PREPARATION.md) are constructed as drafts. They have no reference labels, and no candidate or judge inference has been run.
+- **Annotations:** All 343 remaining tasks have AI-drafted annotations pending independent review.
+- **Unchanged:** the original failed gate, every frozen artifact, the blocked production scoring, and the reserved USD 80.
+
 ## Preserved second-stage packet and completed return
 
 The complete local seven-dispute packet remains unchanged at `data/evaluation/reviews/v03_calibration_R1/adjudication/`, ignored by Git and access-restricted. It includes complete original task/fixture evidence and exact historical judge-input texts recovered read-only and matched to their recorded hashes. Blank templates remain blank; R1's completed CSV is a separate file. Safe tracked templates, aggregate return status and the prospective independent-scoring plan are in [v03_R1_adjudication](v03_R1_adjudication/README.md). No new paid judge calibration or production scoring was performed by the return check.

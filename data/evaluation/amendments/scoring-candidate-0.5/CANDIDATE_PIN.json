@@ -1,0 +1,22 @@
+{
+  "candidate_id": "scoring-candidate-0.5",
+  "status": "candidate-not-approved",
+  "production_scoring_authorized": false,
+  "rules_sha256": "7eb462699b5c071d2f587156359fa5fbe58de15948a273c877495c3c6f144603",
+  "renderer_sha256": "b370f0967b09a5a9aeab9a7330b55d91141abc8f2ba2ab763ff634f8c8299bda",
+  "spec_sha256": "76089ee4d4a3ef51ef9c76b37a9fddbf999e26622ef0c4765a71561d445dac60",
+  "frozen_judge_source_sha256": "2efa8d23be6a8fb9704c1c0eda634bdce634f5399966164302db466e746e6033",
+  "transport": "none",
+  "pinned_at_utc": "2026-10-24",
+  "test_sha256": "4db20f44b546f396ca9d845e853c4eea55f3713814c9710b070e98d801b013c9",
+  "validator_sha256": "8e7289fdc17d9e4b9af4b67ac853d8cb8756b2140888627f2923778e20d75241",
+  "judge_config_sha256": "1297e3735bc5ce799765b10256171240e8224f8f7ea51db8ba8fe72bae7a4ed0",
+  "judge_settings_note": "Candidate reuses the frozen v0.3 judge model, reasoning effort, max_output_tokens and schema; only the rendered rules/item fields and output validation change.",
+  "pinned_before_heldout_construction": true,
+  "approval": "none; paid validation inference requires explicit authorization and a budget check",
+  "thresholds": {
+    "ordinal_alpha_minimum": 0.8,
+    "critical_exact_minimum": 0.9,
+    "safety_exact_required": 1.0
+  }
+}

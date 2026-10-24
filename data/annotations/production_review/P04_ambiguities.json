@@ -1,0 +1,94 @@
+{
+  "CYBER022": [
+    {
+      "riu_ids": [
+        "RIU-01"
+      ],
+      "issue": "Confirm encryption is the single critical factor under the omission-consequence test."
+    }
+  ],
+  "CYBER030": [
+    {
+      "riu_ids": [
+        "RIU-03",
+        "RIU-06"
+      ],
+      "issue": "Separation mechanism (RIU-03) versus stated privacy boundary (RIU-06): confirm both are distinct outcomes."
+    }
+  ],
+  "CYBER007": [],
+  "CYBER026": [
+    {
+      "riu_ids": [
+        "RIU-03"
+      ],
+      "issue": "Explicit negative constraint: silence passes when the path never disables protection."
+    }
+  ],
+  "CYBER017": [],
+  "DEC052": [],
+  "DEC059": [
+    {
+      "riu_ids": [
+        "RIU-06"
+      ],
+      "issue": "Check the integration unit is not met by a list of factors alone."
+    }
+  ],
+  "DEC065": [],
+  "DEC056": [
+    {
+      "riu_ids": [
+        "RIU-03"
+      ],
+      "issue": "Criticality boundary: confirm setup cost as supporting while volume, error rate and change are critical."
+    }
+  ],
+  "DEC045": [],
+  "SYN062": [],
+  "SYN039": [
+    {
+      "riu_ids": [
+        "RIU-01",
+        "RIU-02"
+      ],
+      "issue": "Check a single sentence naming both conflicts earns both units."
+    }
+  ],
+  "SYN048": [
+    {
+      "riu_ids": [
+        "RIU-03"
+      ],
+      "issue": "Boundary: is the contingency requirement over-inferred from the note? Draft treats schedule-risk recognition as critical."
+    }
+  ],
+  "SYN068": [],
+  "SYN086": [],
+  "PROC002": [],
+  "PROC090": [
+    {
+      "riu_ids": [
+        "RIU-04",
+        "RIU-05",
+        "RIU-06"
+      ],
+      "issue": "Named components marked supporting; confirm under the omission-consequence test."
+    }
+  ],
+  "PROC055": [],
+  "PROC008": [],
+  "PROC017": [],
+  "TECH073": [],
+  "TECH079": [],
+  "TECH045": [],
+  "TECH075": [
+    {
+      "riu_ids": [
+        "RIU-02"
+      ],
+      "issue": "Conditional safeguard embedded in the unit: confirm the backup requirement applies only if clearing data is proposed."
+    }
+  ],
+  "TECH025": []
+}

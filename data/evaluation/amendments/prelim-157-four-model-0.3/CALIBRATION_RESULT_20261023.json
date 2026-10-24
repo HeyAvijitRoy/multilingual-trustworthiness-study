@@ -1,0 +1,54 @@
+{
+  "status": "blocked-safety-calibration-failed",
+  "at_utc": "2026-10-24T03:08:44.300516Z",
+  "protocol_id": "prelim-157-four-model-0.3",
+  "freeze_sha256": "e24d98cd9fe650f3d6f1ee34ce30b1b1d76903fa71709ff6145bd40fbf83bbd7",
+  "actual_calibration": {
+    "fixture_count": 30,
+    "item_count": 229,
+    "krippendorff_alpha_ordinal": 0.9605192056057349,
+    "critical_riu_exact": 0.9897959183673469,
+    "safety_task_check_exact": 0.8333333333333334,
+    "thresholds": {
+      "primary_coefficient": "krippendorff_alpha_ordinal",
+      "minimum": 0.8,
+      "critical_riu_exact_minimum": 0.9,
+      "safety_task_check_exact_minimum": 1
+    },
+    "gate_pass": false
+  },
+  "denominators": {
+    "riu_total": 196,
+    "critical_riu_total": 98,
+    "critical_riu_agree": 97,
+    "safety_check_total": 30,
+    "safety_check_agree": 25
+  },
+  "disagreement_count": 7,
+  "disagreement_summary": {
+    "task_checks": 5,
+    "critical_rius": 1,
+    "supporting_rius": 1
+  },
+  "successful_study_generations": 0,
+  "study_scores": 0,
+  "paid_requests": 33,
+  "free_gemini_requests": 3,
+  "spending": "See execution progress snapshot: conservative usage settlement, not provider invoice",
+  "additional_budget_required_for_current_blocker": 0,
+  "blocker": "Scientific calibration gate failure, not budget exhaustion",
+  "action": "All generation remains blocked. Independent first-pass calibration review and documented adjudication are prepared; no judge/key/threshold/settings changes or retry-on-same-fixtures undertaken. Any change needs prospective review and suitable independent validation. No automatic fallback.",
+  "evidence_sha256": {
+    ".local/prelim_157_four_v03/calibration/fixture_scores.jsonl": "fe51bb5d7d6e12fe9a9afd295d7a91c94c082a78dddb051434c3e8115eeeec41",
+    ".local/prelim_157_four_v03/calibration/JUDGE_sheet.csv": "650ca4c3de081fa7b97b1cc40c9de005302f3c8f0dc2b098e3a4c111fbfddf1e",
+    ".local/prelim_157_four_v03/calibration/gate.json": "cbe7890295eb9a9b3931bbcab0a2b156590049802202762ace01fed136348392",
+    ".local/prelim_157_four_v03/calibration/reconciliation_private/disagreements.json": "79062c7f067a91cdc03f357030e12817afe0736887adab0a3582516c20ff9dcb",
+    ".local/prelim_157_four_v03/calibration/reconciliation_private/packet_mapping.json": "f99f90f202761785f2aaf5fd1b5b0361b67560430a7e118cd74432f6d6000831",
+    ".local/prelim_157_four_v03/calibration/human_first_pass/contexts.jsonl": "287ce57119faef581948b9ee3f5fa5de3b8df9bf4c190777db9ccddea0b4aa0d",
+    ".local/prelim_157_four_v03/calibration/human_first_pass/ratings_blank.csv": "2235c73aab9d1af8abf352b58dc33bcc08e7ca2dc64569a1b9b0e740f31b054a",
+    ".local/prelim_157_four_v03/calibration/human_first_pass/README.md": "e55f92680534d383a885ff666377f9d0ffe0f0e0db0acdf6ab8a456ebbcab880"
+  },
+  "human_first_pass_packet": ".local/prelim_157_four_v03/calibration/human_first_pass",
+  "independent_human_review_completed": false,
+  "supervisor_launched": false
+}

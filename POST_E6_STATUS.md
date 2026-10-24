@@ -1,16 +1,15 @@
 # Post-E6 preparation status — 2026-10-23
 
-**Latest continuation: prospective cloud/judge amendment 0.3 is prepared and
-validated; actual account quota, approvals, final freeze and calibration remain
-blocking. Validated GPU work is preserved.** The
-historical checkpoint sections below are retained as an audit trail, including
-superseded credential/runtime observations. See the latest continuation section
-at the end and the concrete
-[0.3 review packet](data/evaluation/amendments/prelim-157-four-model-0.3/REVIEW_PACKET.md).
+**Latest continuation: v0.3 approved and hash-frozen, but actual judge calibration
+failed the mandatory safety check agreement gate. All study generation remains
+blocked. Paid usage is conservatively accounted at USD 0.542045 of the approved
+USD 100, with no outstanding holds; USD 99.457955 remains uncommitted.**
 
+The local GPU work, original three-model experiment and 0.2 candidate remain
+preserved. Historical checkpoint sections below retain their original observations;
+current approvals, quotas, freeze and execution results supersede earlier pending
+status descriptions. No study responses or study scores were generated.
 
-**Validated preparation milestone; evaluation and production-gold gates remain
-open. No study model responses or automated study scores were generated.**
 
 ## Baseline audit
 
@@ -396,3 +395,64 @@ Engineering commit: `ccbc553`. The following status/review-hash commit is report
 in `git log` and the task response. No push, history rewrite, Git identity change
 or co-author trailer. The unrelated untracked `.aws` path is untouched; no secret,
 private account identifier, model weight or raw response is included in commits.
+
+## Approved v0.3 execution checkpoint — 2026-10-23 local date
+
+The study lead explicitly approved the four-model v0.3 preliminary evaluation and
+`gpt-5.4-2026-03-05` primary judge, with **USD 100 total** for all paid smoke tests,
+calibration, generation, scoring and retries. The proposed USD 200 was rejected.
+The user directly verified Gemini 3.8 Flash Free billing, eligibility, 5 RPM,
+250,000 input TPM and 20 RPD in AI Studio, peak usage 0. This is user-reported
+account evidence, not independent authenticated browser verification by the agent.
+No paid Google fallback or final 500-task study is authorized.
+
+Three actual synthetic checks per cloud model passed across EN/BN/BNCS. The exact
+returned IDs were `gpt-6.1-sol` and `gemini-3.8-flash`. The final
+[freeze](data/evaluation/amendments/prelim-157-four-model-0.3/FREEZE.json)
+SHA256 is `e24d98cd9fe650f3d6f1ee34ce30b1b1d76903fa71709ff6145bd40fbf83bbd7`,
+with 55 scientific/source/evidence pins. Approval, account evidence and raw wire
+receipt hashes were finalized before actual calibration. Frozen prospective review
+text retains its original proposal-time wording; the dated approval record and
+final manifest establish the subsequent authorization. Commit `f4609e4` records
+this milestone. 118 regression tests passed; 5 additional operational supervisor
+tests passed. No benchmarking or annotation work was repeated.
+
+Actual calibration completed all 30 fixtures / 229 keyed items. Ordinal
+Krippendorff alpha **0.9605192056057349** passes >=0.80; critical RIU agreement
+**97/98 = 0.9897959183673469** passes >=0.90. Safety task-check agreement
+**25/30 = 0.8333333333333334** fails the required 1.00. There are seven total
+item disagreements: five task checks, one critical RIU and one supporting RIU.
+This is a failed readiness gate, not a scientific model comparison. No thresholds,
+keys, annotations, prompts, scientific settings or raw results were changed to
+obtain a pass. No calibration rerun, replacement judge or study generation was
+launched. `readiness` explicitly rejects generation on the failed gate.
+
+The [calibration result](data/evaluation/amendments/prelim-157-four-model-0.3/CALIBRATION_RESULT_20261023.json)
+and [execution/usage snapshot](data/evaluation/amendments/prelim-157-four-model-0.3/EXECUTION_PROGRESS_20261023.json)
+record exact metrics, denominators and preserved evidence hashes. Thirty-three
+paid calls used 51,640 input and 27,566 output tokens including reasoning.
+Published-rate estimated charge is USD 0.5419515; the conservative budget ledger
+accounts USD 0.542045, retaining a small Sol cache-write allowance. These are
+usage-derived estimates, not verified invoices. There are no outstanding holds,
+no retries and no additional budget needed to address the current scientific
+blocker. The three free Google calls used 1,306 total tokens and USD 0.
+
+Independent first-pass calibration review is prepared at
+`.local/prelim_157_four_v03/calibration/human_first_pass/` with 30 blinded contexts
+and 229 blank rating rows; answer-key/automated comparisons and mapping remain
+separate in `reconciliation_private/`. No human ratings were fabricated or accepted.
+Independent review and documented adjudication must resolve the disagreement;
+any scientific correction or replacement needs prospective review and suitable
+independent validation. Do not treat repeated evaluation on exposed fixtures as
+held-out validation or retroactively convert this failed gate to a pass.
+
+The operational supervisor and read-only progress reporter are committed in
+`2c36d44`; the supervisor was **not launched**, because calibration failed. It
+retains the frozen CLIs, shared USD 100 reservations, per-project quota waits and
+one-cell resume. All 471 Google study calls remain pending; at 20 RPD, the approved
+Google work including probes spans at least 24 quota days. Independent human QA
+of actual study responses is still mandatory before audited conclusions. The
+1,884-response preliminary evaluation and P03–P14 continuation remain pending.
+Credentials/raw outputs are ignored; `.env` and the local `.aws` path exclusions
+are committed. No push was performed; existing Git identity used, no co-author
+trailers.

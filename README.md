@@ -2,11 +2,13 @@
 
 Empirical study of language-conditioned trustworthiness failures in large language models, with an initial focus on semantically matched English, Bengali, and Bengali-English code-switched prompts.
 
-## Current preparation checkpoint
+## Current execution checkpoint — October 24, 2026
 
-The approved v0.3 calibration remains **on hold**: safety-related task-check agreement was 25/30 against the required 30/30. No study responses or study scores exist. The [Reviewer R1/remediation workflow](data/evaluation/remediation/V03_R1_WORKFLOW.md) consolidates packet delivery, first-pass return, comparison, adjudication and the independent validation path. R1 should receive only the four standalone packet files, rather than this repository or its other study records.
+[Prospective amendment 0.4](data/evaluation/amendments/prelim-generation-0.4/AMENDMENT.md) permits independent raw generation while preserving all v0.3 artifacts. The primary preliminary target is **157 tasks × three languages × Sol/Qwen/Gemma = 1,413 responses**. Gemini 3.8 Flash is a separate **20-task, 60-response exploratory comparison** and does not gate primary completion. The later three-model 500-task target is 4,500 responses, conditional on accepted annotations, resources and sufficient budget; expansion has not started.
 
-The working manuscript, *Structural Silence: Measuring Critical Information Omission in Multilingual Large Language Models*, and its [methodological companion](manuscript/acm_trust2027/README.md) distinguish completed calibration evidence from the planned experiment. The USD 100 cap and Gemini 3.8 Flash Free-tier limits remain unchanged; no additional paid API calls are authorized during this hold.
+Raw collection is running; see the [dated objective metadata checkpoint](manuscript/acm_trust2027/GENERATION_STATUS.md). **Production RIU/safety scoring remains blocked**: original safety-related calibration agreement was 25/30 against required 30/30. R1's returned first-pass file is preserved and compared privately; adjudication and independent judge validation are pending. The [current remediation status](data/evaluation/remediation/CURRENT_GENERATION_AND_ADJUDICATION_STATUS.md) distinguishes this authorization from historical hold wording. The original failed calibration has not been replaced or declared passed.
+
+The working manuscript, *Structural Silence: Measuring Critical Information Omission in Multilingual Large Language Models*, and its [methodological companion](manuscript/acm_trust2027/README.md) distinguish collected raw responses from validated scientific findings. The total paid API cap stays **USD 100**, including the prior USD 0.542045 and in-progress commitments; generation protects USD 80 for later evaluation. Gemini stays Free tier only at 5 RPM, 250,000 input TPM and 20 RPD. Credentials, raw API records and private R1 materials remain ignored.
 
 ## Research Objective
 
@@ -71,7 +73,7 @@ Current corpus QA verifies:
 - no Latin-script words in the natural-Bengali condition beyond single-letter labels
 - substantially expanded extended-context tasks for `SYN091`–`SYN100`
 
-No model evaluation has been run on any corpus version yet. R1 validated the v0.3 Bengali and code-switched prompts, and the study lead approved and froze them on 2026-10-18 (`data/annotations/review_logs/2026-10-18_R1_human_validation.md`). v0.3.1 is the frozen evaluation corpus.
+Raw preliminary generation has begun under amendment 0.4; production scoring and validated trustworthiness comparisons remain pending. R1 validated the v0.3 Bengali and code-switched prompts, and the study lead approved and froze them on 2026-10-18 (`data/annotations/review_logs/2026-10-18_R1_human_validation.md`). v0.3.1 is the frozen evaluation corpus.
 
 Corpus QA scripts are under `scripts/`:
 

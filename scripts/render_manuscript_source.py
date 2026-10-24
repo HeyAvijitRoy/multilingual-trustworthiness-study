@@ -64,7 +64,7 @@ def render():
          r'\settopmatter{printacmref=false}',r'\acmDOI{}',r'\acmISBN{}',
          r'\title{'+escape(title)+'}',r'\begin{document}',r'\begin{abstract}',body(abstract),r'\end{abstract}',
          r'\keywords{multilingual evaluation, critical omission, required information units, Bengali, calibration, assurance}',
-         r'\maketitle',r'\noindent\textbf{Preparation draft, October 23, 2026.} Calibration hold active; study generation, scoring and inferential findings pending.']
+         r'\maketitle',r'\noindent\textbf{Preparation draft, October 24, 2026.} Raw generation in progress; production scoring and inferential findings pending. Calibration gate not passed.']
     for name,content in blocks.items():
         if name.startswith('GenAI usage'):
             out.append(r'\section*{GenAI Usage Disclosure --- Preparation Draft}')

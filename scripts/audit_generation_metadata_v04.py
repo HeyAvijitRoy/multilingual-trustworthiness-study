@@ -28,6 +28,18 @@ def validate_request_record(row,cell,config,model):
     if row.get('request_parameters')!=expected:raise ValueError('stored inference settings differ from frozen configuration')
 
 
+def order_consistent(successes,expected,recorded_failures):
+    """Frozen per-model order, allowing only gaps for recorded failures without a success.
+
+    The frozen runner skips a cell whose four-attempt budget is exhausted, and a
+    quota deferral leaves a partial api_error record before the cell is retried
+    in place; those cells stay in the audit as explicit unresolved failures.
+    """
+    gaps=set(recorded_failures)-set(successes)
+    remaining=[c for c in expected if c not in gaps]
+    return list(successes)==remaining[:len(successes)]
+
+
 def triplets(keys):
     by_task={}
     for task,language in keys:by_task.setdefault(task,set()).add(language)
@@ -51,7 +63,8 @@ def audit():
         for row in rows:validate_request_record(row,expected[row['task_id'],row['language']],config,model)
         actual_order=[(r['task_id'],r['language']) for r in rows if r['status']=='success']
         expected_order=[(c['task_id'],c['language']) for c in selected]
-        if actual_order!=expected_order[:len(actual_order)]:raise ValueError('successful cells do not follow the frozen per-model order')
+        failed=sorted({(r['task_id'],r['language']) for r in rows if r['status']=='api_error'}-set(actual_order))
+        if not order_consistent(actual_order,expected_order,failed):raise ValueError('successful cells do not follow the frozen per-model order')
         keys=set(done);complete=triplets(keys);completed_sets[provider]=complete
         counts=Counter(language for _,language in keys)
         planned_domain=Counter(c['domain'] for c in selected);actual_domain=Counter(r['domain'] for r in done.values())
@@ -60,12 +73,12 @@ def audit():
           'paired_en_bn_tasks':len({t for t,l in keys if l=='en'}&{t for t,l in keys if l=='bn'}),
           'paired_bn_bn_cs_tasks':len({t for t,l in keys if l=='bn'}&{t for t,l in keys if l=='bn_cs'}),
           'by_domain':{d:{'success':actual_domain[d],'planned':planned_domain[d]} for d in sorted(planned_domain)},
-          'failed_response_records':errors,'truncated':sum(bool(r.get('truncated')) for r in done.values()),
+          'failed_response_records':errors,'unresolved_failed_cells':[list(c) for c in failed],'truncated':sum(bool(r.get('truncated')) for r in done.values()),
           'empty_visible_text':sum(not r['response_text'].strip() for r in done.values()),
           'finish_status_counts':dict(Counter(str(r.get('finish_status')) for r in done.values())),
           'prefix_acquired_at_utc':acquired,'prefix_file':str(saved.relative_to(gen.ROOT)),'prefix_sha256':hashlib.sha256(prefix).hexdigest(),
           'prefix_bytes':len(prefix),'prefix_records':len(rows),'incomplete_final_write_bytes_excluded':tail,
-          'checks_passed':['stored prompt/system text matches freeze','recorded inference settings match freeze','frozen seeded cell order','task/language membership','model identity and provenance','response SHA256','no duplicate successful cell']}
+          'checks_passed':['stored prompt/system text matches freeze','recorded inference settings match freeze','frozen seeded cell order (gaps only for recorded unresolved failures)','task/language membership','model identity and provenance','response SHA256','no duplicate successful cell']}
     matched=set.intersection(*(completed_sets[p] for p in PRIMARY))
     result={'status':'PASS','started_at_utc':started,'completed_at_utc':gen.four.historical.utc_now(),
       'execution_amendment_id':gen.AMENDMENT_ID,'manifest_sha256':gen.four.digest(gen.MANIFEST),'audit_script_sha256':gen.four.digest(Path(__file__)),

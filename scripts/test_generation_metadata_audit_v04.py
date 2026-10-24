@@ -28,4 +28,13 @@ class AuditTests(unittest.TestCase):
         keys={('SYNTHETIC-A','en'),('SYNTHETIC-A','bn'),('SYNTHETIC-B','en'),('SYNTHETIC-B','bn'),('SYNTHETIC-B','bn_cs')}
         self.assertEqual(audit.triplets(keys),{'SYNTHETIC-B'})
 
+    def test_order_allows_only_recorded_failure_gaps(self):
+        exp=[('A','en'),('B','en'),('C','en'),('D','en')]
+        self.assertTrue(audit.order_consistent([('A','en'),('B','en')],exp,[]))
+        self.assertFalse(audit.order_consistent([('A','en'),('C','en')],exp,[]))
+        self.assertTrue(audit.order_consistent([('A','en'),('C','en')],exp,[('B','en')]))
+        self.assertTrue(audit.order_consistent([('A','en'),('B','en'),('C','en')],exp,[('B','en')]))  # retried in place
+        self.assertFalse(audit.order_consistent([('A','en'),('D','en')],exp,[('B','en')]))
+        self.assertFalse(audit.order_consistent([('B','en'),('A','en')],exp,[]))
+
 if __name__=='__main__':unittest.main()

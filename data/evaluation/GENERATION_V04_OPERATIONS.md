@@ -52,3 +52,7 @@ It also reports lock holders and their liveness, Gemini reservations per Pacific
 - the partition is incomplete.
 
 It then calls the unchanged frozen `generation_only_v04.py run` **without** `--limit`, so exhausted cells are skipped rather than blocking, and it waits across quota deferrals. Local GPU phases are never resumed by the supervisor.
+
+### Incident — 2026-10-24 07:19 UTC
+
+The predicted starvation case occurred. Gemini SYN014/BN received four consecutive HTTP 503 "high demand" responses. Under the frozen four-attempt rule it is now a permanently recorded `api_error` cell, so it is missing, not replayed and not converted to an outcome. The controller then recorded its Gemini worker as paused. All resume preconditions held: no lock, no in-flight attempt, worker recorded as paused. `generation_supervisor_v04.py resume --provider google` was therefore started. It logged the cell as budget-exhausted and continued the remaining Gemini cells through the unchanged frozen entry point. The primary workers were unaffected.

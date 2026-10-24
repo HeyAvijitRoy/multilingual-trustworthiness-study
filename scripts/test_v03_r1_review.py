@@ -71,3 +71,21 @@ class PacketInventoryTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'unexpected file'):review.validate_packet_inventory(folder)
             (folder/'staff_mapping.json').unlink();(folder/review.FILES[0]).unlink()
             with self.assertRaisesRegex(ValueError,'incomplete'):review.validate_packet_inventory(folder)
+
+class SecondStageInventoryTests(unittest.TestCase):
+    def test_ignored_second_stage_is_excluded_from_first_pass_packet(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);folder=root/'packet';folder.mkdir()
+            for name in review.FILES:(folder/name).touch()
+            (folder/'adjudication').mkdir()
+            with patch.object(review.four,'ROOT',root),patch.object(review.subprocess,'run') as run:
+                run.side_effect=[type('Result',(),{'returncode':0})(),type('Result',(),{'returncode':1})()]
+                self.assertEqual(review.validate_packet_inventory(folder),0)
+    def test_unignored_second_stage_is_rejected(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);folder=root/'packet';folder.mkdir()
+            for name in review.FILES:(folder/name).touch()
+            (folder/'adjudication').mkdir()
+            with patch.object(review.four,'ROOT',root),patch.object(review.subprocess,'run') as run:
+                run.side_effect=[type('Result',(),{'returncode':1})(),type('Result',(),{'returncode':1})()]
+                with self.assertRaisesRegex(ValueError,'ignored and untracked'):review.validate_packet_inventory(folder)

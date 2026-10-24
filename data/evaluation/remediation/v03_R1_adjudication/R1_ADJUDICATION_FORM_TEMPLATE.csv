@@ -1,0 +1,8 @@
+"adjudication_id","review_id","fixture_id","task_id","language","item_id","item_kind","scoring_mode","reviewer","adjudication_decision","adjudicated_riu_score","interpretation","rationale","response_evidence","frozen_criterion","materiality","technical_correctness","ambiguity","recommended_prospective_clarification","additional_evidence_needed","reviewer_comments","review_date"
+"ADJ-01","","","","","","","","R1","","","","","","","","","","","","",""
+"ADJ-02","","","","","","","","R1","","","","","","","","","","","","",""
+"ADJ-03","","","","","","","","R1","","","","","","","","","","","","",""
+"ADJ-04","","","","","","","","R1","","","","","","","","","","","","",""
+"ADJ-05","","","","","","","","R1","","","","","","","","","","","","",""
+"ADJ-06","","","","","","","","R1","","","","","","","","","","","","",""
+"ADJ-07","","","","","","","","R1","","","","","","","","","","","","",""

@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "disputed_judgments": 7,
+  "safety_check_disputes": 5,
+  "riu_disputes": 2,
+  "full_task_prompts_and_responses_verified": 7,
+  "first_pass_sha256_unchanged": "8d78c24304c296fdaccf9137093d5dc61b4e48ec8e09aee587387335d7937fcc",
+  "original_source_hashes_verified": 87,
+  "all_adjudication_decisions_blank": true,
+  "contextual_check_excluded_from_dispute_rows": true,
+  "missing_required_source_material": [],
+  "fixture_generator_metadata": "not applicable; constructed calibration fixtures",
+  "original_judge_inputs_retrieved_and_hash_matched": 7,
+  "read_only_historical_retrievals": 7,
+  "original_gate_pass": false,
+  "paid_judge_calls": 0,
+  "private_packet": "data/evaluation/reviews/v03_calibration_R1/adjudication",
+  "private_deliverable_sha256": {
+    "README.md": "07e594af9b0046a585634b653e6e239fbe964502ba97ffb759601b9a75a17c71",
+    "R1_ADJUDICATION_PACKET.md": "fd922a7f1be62136e9c69f62c8e14cd06924061493b9a736209d379bcf30f307",
+    "R1_ADJUDICATION_FORM.csv": "7c21d8f7ac455157d6e1921b4f34a8f384b2c3bb7b76c101d6c75943a993408d",
+    "POST_ADJUDICATION_COMPARISON_TEMPLATE.csv": "e628d268ab06dbdfac7819def0da8fb20f3eca5c9eaf0b199181f7873140eebe",
+    "SCORING_VALIDATION_PLAN.md": "469a46b1264198321a99ec7204d3544231f3135fe6d5fdb751e51415b1852ea7"
+  },
+  "private_manifest_sha256": "48f1153820284e3b30f323ae06e4e54860eed9f2f6cf63913d0ec56650088664",
+  "regression_tests_passed": 25
+}

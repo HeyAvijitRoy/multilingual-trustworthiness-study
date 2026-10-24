@@ -10,3 +10,6 @@ __pycache__/
 # Returned first-pass assessments remain private; blank review forms are tracked.
 /data/evaluation/reviews/**/R1_REVIEW_FORM_COMPLETED*.csv
 /data/evaluation/reviews/**/returns/
+
+# Unblinded second-stage packet includes private first-pass reviewer comments.
+/data/evaluation/reviews/v03_calibration_R1/adjudication/

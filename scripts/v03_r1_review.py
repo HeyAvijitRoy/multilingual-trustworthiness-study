@@ -28,17 +28,20 @@ def validate_packet_inventory(packet):
     paths={p.name:p for p in packet.iterdir()}
     if not set(FILES).issubset(paths):raise ValueError('original four-file packet is incomplete')
     extras=set(paths)-set(FILES)
+    second_stage=0
     for name in extras:
         path=paths[name]
-        if not path.is_file() or not fnmatch.fnmatchcase(name,'R1_REVIEW_FORM_COMPLETED*.csv'):
+        adjudication=name=='adjudication' and path.is_dir()
+        if not adjudication and (not path.is_file() or not fnmatch.fnmatchcase(name,'R1_REVIEW_FORM_COMPLETED*.csv')):
             raise ValueError('unexpected file in review packet directory: '+name)
         relative=str(path.relative_to(four.ROOT))
         ignored=subprocess.run(['git','check-ignore','-q','--',relative],cwd=four.ROOT,
                                stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode==0
         tracked=subprocess.run(['git','ls-files','--error-unmatch','--',relative],cwd=four.ROOT,
                                stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode==0
-        if not ignored or tracked:raise ValueError('completed assessment must remain ignored and untracked')
-    return len(extras)
+        if not ignored or tracked:raise ValueError('completed assessment or second-stage evidence must remain ignored and untracked')
+        second_stage+=int(adjudication)
+    return len(extras)-second_stage
 
 
 def validate():

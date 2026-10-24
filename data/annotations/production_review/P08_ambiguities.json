@@ -1,0 +1,33 @@
+{
+  "CYBER053": [],
+  "CYBER060": [],
+  "CYBER066": [],
+  "CYBER096": [],
+  "CYBER087": [],
+  "DEC012": [],
+  "DEC019": [],
+  "DEC003": [
+    {
+      "riu_ids": [
+        "RIU-01"
+      ],
+      "issue": "Confirm a conditional alternative choice is not penalized when justified."
+    }
+  ],
+  "DEC037": [],
+  "DEC095": [],
+  "SYN006": [],
+  "SYN099": [],
+  "SYN055": [],
+  "SYN095": [],
+  "SYN025": [],
+  "PROC032": [],
+  "PROC039": [],
+  "PROC096": [],
+  "PROC067": [],
+  "PROC047": [],
+  "TECH092": [],
+  "TECH099": [],
+  "TECH084": [],
+  "TECH016": []
+}

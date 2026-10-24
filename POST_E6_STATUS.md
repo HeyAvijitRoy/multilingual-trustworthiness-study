@@ -1,11 +1,12 @@
 # Post-E6 preparation status — 2026-10-23
 
-**Latest continuation: GPU inference and four-model engineering are complete;
-study execution still awaits actual approvals and judge calibration.** The
+**Latest continuation: prospective cloud/judge amendment 0.3 is prepared and
+validated; actual account quota, approvals, final freeze and calibration remain
+blocking. Validated GPU work is preserved.** The
 historical checkpoint sections below are retained as an audit trail, including
 superseded credential/runtime observations. See the latest continuation section
 at the end and the concrete
-[review packet](data/evaluation/amendments/prelim-157-four-model-0.2/REVIEW_PACKET.md).
+[0.3 review packet](data/evaluation/amendments/prelim-157-four-model-0.3/REVIEW_PACKET.md).
 
 
 **Validated preparation milestone; evaluation and production-gold gates remain
@@ -306,3 +307,92 @@ New commits: `815dbbf` (CUDA runtime and reproducible numeric GPU evidence),
 following status/review-hash commit is identifiable in `git log`. The user's
 existing `.gitignore` `.env` addition is preserved unstaged. No push, merge,
 identity change, co-author trailer, committed secret, raw output or model weight.
+
+
+## Revised cloud panel and judge, 0.3 — 2026-10-23 EDT / 2026-10-24 UTC
+
+Continued from verified latest origin/main `b361477` on new branch
+`revise-cloud-free-tier-panel`. Historical three-model experiment, all frozen
+scientific inputs, accepted annotations, P01/P02 drafts, complete 0.2 amendment
+and GPU evidence remain unchanged. A new prospective scoring version is required
+for judge replacement, so 0.3 preserves the Astra/Argon/Sol-judge candidate rather
+than overwriting it. No new GPU benchmark, dependency install or local integration
+run was performed; local configs and inference-function ASTs match the baseline.
+
+Generation targets: **gpt-6.1-sol**, **gemini-3.8-flash**, **Qwen3.5-9B** and
+**Gemma-4-12B-it**. The user confirmed the 3.8 target. Authenticated read-only GET
+metadata returned exact Sol ID and dated judge-candidate IDs; the Google catalog
+includes 3.8 and the assessed 2.5/3.x alternatives. Public Google pricing lists
+3.8 free-tier text eligibility, and metadata gives 1,048,576 input / 65,536 output.
+Actual Free-tier entitlement, RPM/input TPM/RPD and wire compatibility are **not
+verified** by that GET. No gcloud, OAuth/ADC or authenticated browser is available
+for quota retrieval here. Required AI Studio verification and source-specific
+findings are in the new `CLOUD_MODEL_ASSESSMENT.md`. Null quota fields deliberately
+block execution rather than substituting a public limit. No paid Google fallback.
+
+Propose **gpt-5.4-2026-03-05** as primary RIU judge, medium, Responses API,
+8,192 output, concurrency 1, with an exact returned-ID check. Its dated identity
+is accessible in authenticated metadata and differs from every generator. This
+removes literal Sol self-scoring but does not certify independent human judgment
+or remove same-provider/style bias. Keep original 30 fixtures / 229 items and
+thresholds 0.80 ordinal alpha / 0.90 critical exact / 1.00 safety exact, with a
+new independently run calibration. No new judge approval or passing gate exists.
+
+The runner now enforces returned cloud identities and records every Google
+reservation in a shared project/model ledger across versions and restarts.
+Minute request/input budgets, midnight Pacific/DST reset, Retry-After/RetryInfo,
+day-quota pauses and conservative failure counting are implemented. Deferred
+work creates no new attempt/response and cannot be presented as final missingness
+while retry budget remains. CLI exit 75 exposes the next eligible time; optional
+`--wait-for-quota` resumes across days without rotating credentials/projects.
+Successful cells and ambiguous receipts remain protected against replay.
+
+The 0.3 human-QA first pass withholds AI labels as well as model IDs. A separate
+source/hash-validated agreement audit reports selected-stratum human/AI agreement
+and critical/safety disagreement escalation; adjudication stays a separate
+resolved layer. No synthetic rater is counted as a human. Statistical estimand,
+bootstrap principles, mandatory QA coverage and accepted gold are unchanged.
+
+| Revised planning scenario, conditional actual-free-tier Google | One attempt USD | Four billed attempts USD |
+| --- | ---: | ---: |
+| Optimistic | 24.38 | 97.54 |
+| Typical planning | 97.45 | 389.80 |
+| Conservative full-output/proxy envelope | 1,041.32 | 4,165.28 |
+
+Typical components: Sol generation $9.96, new judge calibration $1.22, 1,884 judge
+scores $86.26, three Sol synthetic probes $0.01, Google $0 only if the actual
+project qualifies. Local compute/energy, independent human review, taxes and
+regional premiums are excluded. Three free Google probes are included in quota
+planning. Previous $200 remains a **reference, not authorization**. Actual paid
+API expenditure remains **$0**. The old 0.2 cost report is intact and its estimator
+output remains reproducible with `--legacy-v02`.
+
+Full final validation: **111 tests pass**, plus all existing corpus/freeze,
+annotation, queue, expansion, calibration-fixture and whitespace checks. Source
+compilation passes. New tests cover quotas, day continuation, DST, 429 recovery,
+raw/visible response parsing, exact identities, new judge conflict/calibration
+pins, independent first-pass QA and agreement audits. Synthetic tests exercise the
+complete four-model analysis without generating real outcomes. Actual judge gate
+and readiness correctly exit 3. Structural integrity passes; each partition is
+0/471 generated/scored, total **0/1,884**. Known historical/0.2/0.3 output namespaces
+contain no model-response/score records; no other machine's inventory is claimed.
+
+The complete proposed packet and operational commands are in
+[data/evaluation/amendments/prelim-157-four-model-0.3/REVIEW_PACKET.md](data/evaluation/amendments/prelim-157-four-model-0.3/REVIEW_PACKET.md)
+and its runbook. Before execution: obtain real project quota/eligibility evidence,
+actual new judge and full scientific/final-freeze approval, and explicit paid cap;
+complete authorized cloud synthetic validation and pin returned versions; create
+an immutable 0.3 final freeze; pass the actual new judge calibration. No approval,
+quota, calibration result or outcome is fabricated. Approval questions are pending.
+Once all actual gates pass, continue directly into the preliminary evaluation
+without another handover prompt, respecting daily quotas and spending scope.
+
+Annotation counts remain 157 accepted, 50 P01/P02 AI drafts pending review,
+293 undrafted and all 343 production tasks still needing acceptance. P03–P14
+follow preliminary evaluation; the later full 500-task/6,000-response study needs
+separate approved gold, protocol and budget. No new human acceptance is claimed.
+
+Engineering commit: `ccbc553`. The following status/review-hash commit is reported
+in `git log` and the task response. No push, history rewrite, Git identity change
+or co-author trailer. The unrelated untracked `.aws` path is untouched; no secret,
+private account identifier, model weight or raw response is included in commits.

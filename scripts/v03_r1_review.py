@@ -2,13 +2,14 @@
 """Offline packet audit and post-return comparison. Never rates or calls models."""
 import argparse
 import csv
+import fnmatch
 from datetime import date
 import hashlib
-import io
 import json
 import os
 from pathlib import Path
 import re
+import subprocess
 
 import prelim_four as four
 from prelim_four_judge import ScoringContext
@@ -22,6 +23,24 @@ def read_csv(path):
         return reader.fieldnames,rows
 
 
+def validate_packet_inventory(packet):
+    """Permit private ignored returns without making them packet deliverables."""
+    paths={p.name:p for p in packet.iterdir()}
+    if not set(FILES).issubset(paths):raise ValueError('original four-file packet is incomplete')
+    extras=set(paths)-set(FILES)
+    for name in extras:
+        path=paths[name]
+        if not path.is_file() or not fnmatch.fnmatchcase(name,'R1_REVIEW_FORM_COMPLETED*.csv'):
+            raise ValueError('unexpected file in review packet directory: '+name)
+        relative=str(path.relative_to(four.ROOT))
+        ignored=subprocess.run(['git','check-ignore','-q','--',relative],cwd=four.ROOT,
+                               stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode==0
+        tracked=subprocess.run(['git','ls-files','--error-unmatch','--',relative],cwd=four.ROOT,
+                               stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode==0
+        if not ignored or tracked:raise ValueError('completed assessment must remain ignored and untracked')
+    return len(extras)
+
+
 def validate():
     ctx=ScoringContext(four.CONFIG,four.AMENDMENT/'FREEZE.json');ctx.frozen()
     gate=ctx.gate()
@@ -32,7 +51,7 @@ def validate():
     assert mapping['source_sheet_sha256']==four.digest(ctx.cal_sheet)
     assert (PRIVATE.stat().st_mode&0o777)==0o700
     assert ((PRIVATE/'mapping.json').stat().st_mode&0o777)==0o600
-    assert set(p.name for p in PACKET.iterdir())==set(FILES)
+    excluded_returns=validate_packet_inventory(PACKET)
     assert mapping['packet_sha256']=={n:four.digest(PACKET/n) for n in FILES}
     body=(PACKET/'R1_REVIEW_PACKET.md').read_text(encoding='utf-8')
     public_text='\n'.join((PACKET/n).read_text(encoding='utf-8') for n in FILES if n.endswith('.md'))
@@ -95,7 +114,8 @@ def validate():
     return {'status':'PASS','review_cases':5,'applicable_check_rows':6,'source_RIUs_included':riu_count,
             'prompts_responses_constraints_and_rubric_anchors':'exact source text verified',
             'case_selection_and_private_mapping':'all five source task-check cases, one-to-one; no public mapping',
-            'first_pass_and_adjudication_decisions':'all blank',
+            'packet_template_decisions':'all blank; completed assessments excluded',
+            'ignored_return_files_excluded':excluded_returns,
             'private_directory_permissions':'0700; mapping 0600; ignored by Git',
             'accessibility':'UTF-8, meaningful headings, case index links, spreadsheet CSV; no code required',
             'blinding_boundary':'standalone four-file packet only; no source IDs, judge identity/ratings, reference labels or selection details in its prose',

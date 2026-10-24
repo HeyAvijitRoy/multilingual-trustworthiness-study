@@ -45,3 +45,29 @@ class ReturnTests(unittest.TestCase):
         result=review.validate();self.assertEqual(result['review_cases'],5);self.assertEqual(result['source_RIUs_included'],25)
 
 if __name__=='__main__':unittest.main()
+
+class PacketInventoryTests(unittest.TestCase):
+    def packet(self,root):
+        folder=root/'packet';folder.mkdir()
+        for name in review.FILES:(folder/name).touch()
+        return folder
+    def test_ignored_untracked_return_is_excluded_without_changing_packet(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);folder=self.packet(root);(folder/'R1_REVIEW_FORM_COMPLETED.csv').write_text('SYNTHETIC RETURN ONLY')
+            with patch.object(review.four,'ROOT',root),patch.object(review.subprocess,'run') as run:
+                run.side_effect=[type('Result',(),{'returncode':0})(),type('Result',(),{'returncode':1})()]
+                self.assertEqual(review.validate_packet_inventory(folder),1)
+            self.assertEqual(len(review.FILES),4)
+    def test_tracked_or_unignored_return_is_rejected(self):
+        for statuses in ((0,0),(1,1)):
+            with self.subTest(statuses=statuses),tempfile.TemporaryDirectory() as d:
+                root=Path(d);folder=self.packet(root);(folder/'R1_REVIEW_FORM_COMPLETED.csv').touch()
+                with patch.object(review.four,'ROOT',root),patch.object(review.subprocess,'run') as run:
+                    run.side_effect=[type('Result',(),{'returncode':n})() for n in statuses]
+                    with self.assertRaisesRegex(ValueError,'ignored and untracked'):review.validate_packet_inventory(folder)
+    def test_unexpected_file_or_missing_original_is_rejected(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);folder=self.packet(root);(folder/'staff_mapping.json').touch()
+            with self.assertRaisesRegex(ValueError,'unexpected file'):review.validate_packet_inventory(folder)
+            (folder/'staff_mapping.json').unlink();(folder/review.FILES[0]).unlink()
+            with self.assertRaisesRegex(ValueError,'incomplete'):review.validate_packet_inventory(folder)

@@ -499,3 +499,23 @@ registration ID, original registered abstract or submission-system action.
 The TeX source is not compiled here because no compiler is available; rendered
 PDF layout, page count and embedded fonts are not claimed as verified. Final
 study findings and independent study-response review remain pending.
+
+## Reviewer R1 first-pass return checked — October 23, 2026
+
+The returned form was received and structurally validated: five review IDs and
+six complete, unique task-check assessment rows, with rationale, evidence,
+ambiguity fields and dates. Its exact bytes and intake receipt are preserved
+privately. The original four-file packet and blank templates remain unchanged;
+the ignored completed return is excluded from the standalone packet inventory.
+The validator now accepts such an ignored, untracked return beside the packet,
+while rejecting tracked returns and other unexpected files.
+
+The comparison and case-specific recommended adjudication procedure are prepared
+in restricted local staff storage. Returned assessments, rationales, comparison
+labels and recommendations are not committed or released. Adjudicated labels
+remain unfilled; no adjudication decision, recalibration or new passing gate is
+claimed. The original safety-check gate is still 25/30 against required 30/30.
+All 55 scientific freeze pins and the API spending ledger remain unchanged;
+there were no additional paid API calls, study generations or scoring calls.
+Current return status supersedes preparation-time statements that the form was
+still pending; prior preparation records remain preserved as dated snapshots.

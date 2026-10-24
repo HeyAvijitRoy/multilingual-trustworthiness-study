@@ -10,11 +10,31 @@ The separate [`../PRODUCTION_BATCHES_v0.1.json`](../PRODUCTION_BATCHES_v0.1.json
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | P01 | 25 | 25 | 100 | 39 | 61 | 96 | 4 | 18 | 86 | 0 | 0 |
 | P02 | 25 | 25 | 109 | 45 | 64 | 106 | 3 | 18 | 87 | 0 | 0 |
-| Total | 50 | 50 | 209 | 84 | 125 | 202 | 7 | 36 | 173 | 0 | 0 |
+| P03 | 25 | 25 | 129 | 57 | 72 | 122 | 7 | 22 | 89 | 0 | 0 |
+| P04 | 25 | 25 | 125 | 51 | 74 | 119 | 6 | 22 | 77 | 0 | 0 |
+| P05 | 25 | 25 | 133 | 59 | 74 | 128 | 5 | 21 | 82 | 0 | 0 |
+| P06 | 25 | 25 | 124 | 50 | 74 | 116 | 8 | 21 | 72 | 0 | 0 |
+| P07 | 25 | 25 | 132 | 56 | 76 | 125 | 7 | 21 | 78 | 0 | 0 |
+| P08 | 24 | 24 | 122 | 54 | 68 | 118 | 4 | 21 | 75 | 0 | 0 |
+| P09 | 24 | 24 | 119 | 55 | 64 | 116 | 3 | 21 | 76 | 0 | 0 |
+| P10 | 24 | 24 | 113 | 52 | 61 | 112 | 1 | 20 | 72 | 0 | 0 |
+| P11 | 24 | 24 | 118 | 55 | 63 | 111 | 7 | 20 | 75 | 0 | 0 |
+| P12 | 24 | 24 | 111 | 50 | 61 | 109 | 2 | 19 | 69 | 0 | 0 |
+| P13 | 24 | 24 | 115 | 51 | 64 | 110 | 5 | 20 | 71 | 0 | 0 |
+| P14 | 24 | 24 | 109 | 47 | 62 | 103 | 6 | 20 | 67 | 0 | 0 |
+| Total | 343 | 343 | 1659 | 721 | 938 | 1591 | 68 | 284 | 1076 | 0 | 0 |
 
-The remaining 293 tasks (P03–P14) have planned membership only and are **not drafted**. All 343 production tasks remain pending independent review and acceptance. The historical accepted count remains 157. No `full/` annotations or production-gold freeze have been assembled.
+**Updated 2026-10-24:** All 343 production tasks (P01–P14) now have AI-drafted, machine-validated records and v0.3 review packets. The P03–P14 drafts were added on 2026-10-24 without reading any study response, judge score or model outcome. Every record remains `draft`, with `agent-internal` method review and pending independent human and language-equivalence review. **No production annotation is accepted or promoted to gold.** The historical accepted count remains 157, and their records are unchanged. Together, the 157 accepted and 343 drafted tasks cover the 500-task corpus exactly, with no overlap. No `full/` annotations or production-gold freeze have been assembled.
 
-All 150 frozen prompt strings for P01/P02 (EN, BN, BN-CS) were inspected during drafting. Each record contains its three prompt hashes, task-specific units, omission-consequence rationales, full/zero anchors, concrete half anchors where applicable and language/boundary notes. This is an AI interpretation, not a completed independent equivalence review.
+P03–P14 follow conventions already present in the accepted records:
+- technical differential-diagnosis tasks have supporting cause-area checks plus one critical ordinal result-interpretation unit;
+- extraction tasks treat each explicitly listed item as critical;
+- prompt-named decision factors are supporting, with one critical unit for combining them;
+- the extended-context tasks (SYN092–SYN099) receive fine-grained relational units.
+
+Task-level language-equivalence observations, such as DEC039's BN versus BN-CS "repeatedly" versus "progressively failing", are recorded in the ambiguity files for the reviewer.
+
+All 1,029 frozen prompt strings for P01–P14 (EN, BN, BN-CS) were inspected during drafting. Each record contains its three prompt hashes, task-specific units, omission-consequence rationales, full/zero anchors, concrete half anchors where applicable and language/boundary notes. This is an AI interpretation, not a completed independent equivalence review.
 
 Current review snapshots are:
 

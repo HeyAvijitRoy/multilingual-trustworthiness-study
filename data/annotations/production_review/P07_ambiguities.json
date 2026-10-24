@@ -1,0 +1,54 @@
+{
+  "CYBER052": [],
+  "CYBER059": [
+    {
+      "riu_ids": [
+        "RIU-06"
+      ],
+      "issue": "Conditional containment; confirm required only when compromise is not excluded."
+    }
+  ],
+  "CYBER065": [],
+  "CYBER095": [],
+  "CYBER086": [],
+  "DEC033": [],
+  "DEC040": [],
+  "DEC068": [],
+  "DEC036": [],
+  "DEC048": [],
+  "SYN005": [],
+  "SYN098": [
+    {
+      "riu_ids": [
+        "RIU-04"
+      ],
+      "issue": "Bundled timing-dependency unit: confirm one relational outcome."
+    },
+    {
+      "riu_ids": [
+        "RIU-09"
+      ],
+      "issue": "Suggesting that a threshold be set now is not inventing one; confirm boundary with RIU-05."
+    }
+  ],
+  "SYN017": [],
+  "SYN094": [
+    {
+      "riu_ids": [
+        "RIU-03"
+      ],
+      "issue": "Check that statements like \"may extend the migration\" pass while \"will delay\" fails."
+    }
+  ],
+  "SYN024": [],
+  "PROC073": [],
+  "PROC080": [],
+  "PROC095": [],
+  "PROC066": [],
+  "PROC046": [],
+  "TECH002": [],
+  "TECH020": [],
+  "TECH048": [],
+  "TECH015": [],
+  "TECH028": []
+}

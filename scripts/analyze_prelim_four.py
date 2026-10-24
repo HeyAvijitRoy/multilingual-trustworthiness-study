@@ -16,6 +16,20 @@ import prelim_eval_157 as generation
 from prelim_four_judge import ScoringContext
 
 
+def pending_quota_cells(ctx,score_keys):
+    """A deferred cell with retry budget left is pending, not final missingness."""
+    google=next(m['model_id'] for m in ctx.config['models'] if m['partition']=='google')
+    attempts={}
+    for event in generation.read_jsonl_records(ctx.root/'attempts/google.jsonl'):
+        key=(google,event['task_id'],event['language'],int(event['run_index']))
+        if event['status']=='started':attempts[key]=attempts.get(key,0)+1
+    pending=set()
+    for event in generation.read_jsonl_records(ctx.root/'quota_deferrals.jsonl'):
+        key=(google,event['task_id'],event['language'],1)
+        if key not in score_keys and attempts.get(key,0)<4:pending.add(key)
+    return sorted(pending)
+
+
 def apply_adjudications(path,scores,annotations):
     result=dict(scores);last={};applied=0
     for row in generation.read_jsonl_records(path):
@@ -51,6 +65,8 @@ def analyze(ctx,out_dir,allow_missing=False,adjudications=None):
             raw[(row['requested_model'],row['task_id'],row['language'],int(row['run_index']))]=row
     expected=157*3*4
     if not raw: raise RuntimeError('no four-model scores; no results produced')
+    quota_pending=pending_quota_cells(ctx,raw)
+    if quota_pending:raise RuntimeError('quota-deferred cells remain pending; do not report them as final API missingness')
     if not allow_missing and len(raw)!=expected: raise RuntimeError('expected 1884 scores; report API missingness explicitly')
     scores=raw;adjudication_status={'applied_records':0,'resolved_cells':0,'independent_human_authenticity_certified':False}
     if adjudications: scores,adjudication_status=apply_adjudications(adjudications,raw,ctx.annotations)
@@ -67,6 +83,7 @@ def analyze(ctx,out_dir,allow_missing=False,adjudications=None):
             'score_status':'provisional_pending_independent_human_QA',
             'primary_estimand':'critical_omission_rate:bn-en','adjudication_status':adjudication_status,
             'generation_status':status,'outcome_summary':shared.outcome_summary(task_metrics,models),
+            'quota_deferral_events':len(generation.read_jsonl_records(ctx.root/'quota_deferrals.jsonl')),
             'counts_by_model_language':{f'{model}:{lang}':sum(m==model and l==lang for m,_,l in task_metrics)
                                         for model in models for lang in shared.LANGS},
             'outcome_summary_weighting':'Descriptive response means; effects use five equal domain weights and four equal model weights.',
@@ -80,7 +97,7 @@ def analyze(ctx,out_dir,allow_missing=False,adjudications=None):
             **shared.reporting_tables(task_metrics,ctx.annotations,models,truncated),
             'source_output_files_sha256':{p.relative_to(ctx.root).as_posix():four.digest(p)
                   for partition in four.PARTITIONS for p in [ctx.root/(partition+'.jsonl'),ctx.root/'scores'/(partition+'.jsonl')]
-                  if p.exists()},'analysis_plan_sha256':four.digest(four.AMENDMENT/'ANALYSIS_PLAN.md'),
+                  if p.exists()},'analysis_plan_sha256':four.digest(ctx.plan_path.parent/'ANALYSIS_PLAN.md'),
             'analysis_script_sha256':four.digest(Path(__file__))}
     # Exclusive derived snapshot: preserve earlier reports when data/reviews grow.
     out_dir.mkdir(parents=True,exist_ok=False)

@@ -1,0 +1,47 @@
+{
+  "protocol_id": "prelim-157-four-model-0.3",
+  "snapshot_id": "prelim-157-four-model-0.3-candidate",
+  "status": "candidate-not-frozen",
+  "prepared_date": "2026-10-23",
+  "historical_snapshot_sha256": "15c383838a02459c78a92ccbc997dcb73bd9c1e147a785eadf15dad3c945f0b6",
+  "task_count": 157,
+  "prompt_instances_per_model": 471,
+  "planned_model_count": 4,
+  "planned_response_count": 1884,
+  "full_study_planned_response_count": 6000,
+  "study_lead_approval_record": null,
+  "artifact_sha256": {},
+  "pending_decisions": [
+    "Verify project free-tier billing/eligibility and exact Gemini RPM/input TPM/RPD with dated account evidence",
+    "Approve revised panel, distinct dated primary judge, scientific plans and unchanged local settings before final freeze",
+    "Explicitly authorize paid cloud validation, actual judge calibration, OpenAI generation and scoring; USD 200 remains only a reference",
+    "Validate cloud wire settings and exact returned model IDs with synthetic prompts under authorized billing conditions",
+    "Create new immutable final 0.3 freeze with actual approval records and complete hashes"
+  ],
+  "observed_historical_outputs": {
+    "scope": "working checkout including ignored .local and data/outputs, not remote user machines",
+    "successful_generations": 0,
+    "judge_calibration_report_present": false,
+    "successful_study_scores": 0,
+    "account_api_access_verified": "metadata-only HTTP 200; paid wire compatibility and quota not yet verified"
+  },
+  "execution_gates": {
+    "actual_automated_judge_calibration": "new GPT-5.4 calibration absent; no prior gate may be reused",
+    "full_validation": "see VALIDATION.md",
+    "required_credentials": "present for metadata; load explicitly; endpoint settings supplied per runtime"
+  },
+  "reporting_gates": {
+    "independent_human_QA_adjudication": "pending, with independently collected first-pass ratings, agreement audit and separate adjudication"
+  },
+  "supersedes_candidate": "prelim-157-four-model-0.2",
+  "spending_approval_record": null,
+  "judge_approval_record": null,
+  "observed_revised_outputs": {
+    "scope": "this checkout and known ignored output namespaces only",
+    "successful_generations": 0,
+    "successful_scores": 0,
+    "actual_new_judge_calibration": false,
+    "paid_inference_calls": 0,
+    "model_choice_confirmed": "User confirmed Gemini 3.8 Flash in this conversation; final protocol/judge approval and quota evidence remain pending"
+  }
+}

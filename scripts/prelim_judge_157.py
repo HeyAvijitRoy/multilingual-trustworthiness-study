@@ -195,7 +195,7 @@ def http_judge(prompt: str, judge: dict[str, Any], *, raw_dir: Path | None = Non
         "model": judge["model_id"],
         "instructions": "You are a blinded rubric-scoring engine. Return only the required structured JSON.",
         "input": prompt,
-        "reasoning": {"effort": "medium", "mode": "standard"},
+        "reasoning": dict(judge["reasoning"]),
         "max_output_tokens": int(judge["max_output_tokens"]),
         "text": {
             "format": {

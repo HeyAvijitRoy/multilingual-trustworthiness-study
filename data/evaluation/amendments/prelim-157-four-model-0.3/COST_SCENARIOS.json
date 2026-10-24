@@ -1,0 +1,152 @@
+{
+  "status": "planning-only-not-spending-authorization",
+  "protocol_id": "prelim-157-four-model-0.3",
+  "pricing_checked_date": "2026-10-23",
+  "openai_model": "gpt-6.1-sol",
+  "google_model": "gemini-3.8-flash",
+  "primary_judge": "gpt-5.4-2026-03-05",
+  "openai_generation_calls": 471,
+  "google_generation_calls": 471,
+  "local_generation_calls": 942,
+  "calibration_calls": 30,
+  "scoring_calls": 1884,
+  "synthetic_cloud_calls": {
+    "openai": 3,
+    "google": 3
+  },
+  "prior_200_usd_cap": "reference only; no authorization recorded",
+  "actual_paid_calls": 0,
+  "actual_paid_api_expenditure_usd": 0,
+  "standard_prices_per_million_tokens": {
+    "gpt-6.1-sol": {
+      "input": 2,
+      "output": 10
+    },
+    "gpt-5.4-2026-03-05": {
+      "input": 2.5,
+      "output": 15,
+      "long_input_threshold": 272000,
+      "long_input_multiplier": 2,
+      "long_output_multiplier": 1.5
+    },
+    "gemini-3.8-flash": {
+      "free_input": 0,
+      "free_output": 0,
+      "conditional_on_actual_project_free_tier": true,
+      "paid_input_through_2026_12_31": 0.75,
+      "paid_output_through_2026_12_31": 3.75,
+      "paid_fallback_authorized": false
+    }
+  },
+  "measured_prompt_system_utf8_bytes": 197247,
+  "largest_prompt_system_utf8_bytes": 5250,
+  "snapshot_sha256": "15c383838a02459c78a92ccbc997dcb73bd9c1e147a785eadf15dad3c945f0b6",
+  "quota_days_examples_not_account_limits": [
+    {
+      "hypothetical_rpd": 20,
+      "minimum_days_471_plus_3_smokes": 24,
+      "four_attempt_envelope_days": 95
+    },
+    {
+      "hypothetical_rpd": 50,
+      "minimum_days_471_plus_3_smokes": 10,
+      "four_attempt_envelope_days": 38
+    },
+    {
+      "hypothetical_rpd": 100,
+      "minimum_days_471_plus_3_smokes": 5,
+      "four_attempt_envelope_days": 19
+    },
+    {
+      "hypothetical_rpd": 250,
+      "minimum_days_471_plus_3_smokes": 2,
+      "four_attempt_envelope_days": 8
+    },
+    {
+      "hypothetical_rpd": 500,
+      "minimum_days_471_plus_3_smokes": 1,
+      "four_attempt_envelope_days": 4
+    }
+  ],
+  "local_compute": {
+    "paid_api_usd": 0,
+    "hourly_hardware_energy_rate_usd": null,
+    "projected_decode_hours_at_2048_tokens_per_response": {
+      "Qwen/Qwen3.5-9B": 13.43358666463189,
+      "google/gemma-4-12B-it": 20.65457714670527
+    },
+    "note": "Measured rates, projected resource use. Excludes prefill, startup, I/O, retries and long-context slowdown; local cost not valued."
+  },
+  "assumptions": [
+    "UTF-8/token proxies are planning assumptions, not cloud-tokenizer measurements.",
+    "All billed output includes hidden reasoning; judge retokenization is a conservative visible-response proxy.",
+    "Google zero cost depends on actual project free-tier eligibility; unknown limits never become assumed quotas.",
+    "Free tier may require multiple days; other project traffic and failed attempts consume headroom.",
+    "Four-attempt envelopes assume every attempt is billed; no lowering output limits to meet budget.",
+    "Taxes, regional pricing, independent human review and local compute fees excluded.",
+    "No costs here authorize execution or guarantee an invoice ceiling."
+  ],
+  "sources": [
+    "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+    "https://developers.openai.com/api/docs/models/gpt-5.4",
+    "https://developers.openai.com/api/docs/pricing",
+    "https://ai.google.dev/gemini-api/docs/pricing",
+    "https://ai.google.dev/gemini-api/docs/rate-limits"
+  ],
+  "scenarios": [
+    {
+      "scenario": "optimistic",
+      "input_proxy_bytes_per_token": 4,
+      "overhead_tokens_per_call": 64,
+      "generation_billed_output_tokens_per_cell": 256,
+      "judge_billed_output_tokens_per_call": 512,
+      "judge_response_retokenization_factor": 1,
+      "generation_input_tokens_proxy": 79628,
+      "openai_generation_usd": 1.37,
+      "google_generation_usd_if_actual_free_tier": 0,
+      "judge_calibration_30_usd": 0.38,
+      "judge_scoring_1884_usd": 22.63,
+      "openai_three_synthetic_smokes_usd": 0.01,
+      "google_three_smokes_usd_if_free_tier": 0,
+      "total_paid_one_attempt_usd_if_google_free": 24.38,
+      "four_billed_attempts_envelope_usd_if_google_free": 97.54,
+      "hypothetical_paid_google_generation_usd_not_authorized": 0.51
+    },
+    {
+      "scenario": "typical_planning",
+      "input_proxy_bytes_per_token": 2,
+      "overhead_tokens_per_call": 128,
+      "generation_billed_output_tokens_per_cell": 2048,
+      "judge_billed_output_tokens_per_call": 2048,
+      "judge_response_retokenization_factor": 1.5,
+      "generation_input_tokens_proxy": 159030,
+      "openai_generation_usd": 9.96,
+      "google_generation_usd_if_actual_free_tier": 0,
+      "judge_calibration_30_usd": 1.22,
+      "judge_scoring_1884_usd": 86.26,
+      "openai_three_synthetic_smokes_usd": 0.01,
+      "google_three_smokes_usd_if_free_tier": 0,
+      "total_paid_one_attempt_usd_if_google_free": 97.45,
+      "four_billed_attempts_envelope_usd_if_google_free": 389.8,
+      "hypothetical_paid_google_generation_usd_not_authorized": 3.74
+    },
+    {
+      "scenario": "conservative_envelope",
+      "input_proxy_bytes_per_token": 1,
+      "overhead_tokens_per_call": 1024,
+      "generation_billed_output_tokens_per_cell": 32768,
+      "judge_billed_output_tokens_per_call": 8192,
+      "judge_response_retokenization_factor": 4,
+      "generation_input_tokens_proxy": 679551,
+      "openai_generation_usd": 155.7,
+      "google_generation_usd_if_actual_free_tier": 0,
+      "judge_calibration_30_usd": 4.34,
+      "judge_scoring_1884_usd": 880.29,
+      "openai_three_synthetic_smokes_usd": 0.99,
+      "google_three_smokes_usd_if_free_tier": 0,
+      "total_paid_one_attempt_usd_if_google_free": 1041.32,
+      "four_billed_attempts_envelope_usd_if_google_free": 4165.28,
+      "hypothetical_paid_google_generation_usd_not_authorized": 58.39
+    }
+  ]
+}

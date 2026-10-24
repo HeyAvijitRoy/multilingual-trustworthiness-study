@@ -1,0 +1,17 @@
+{
+  "scope": "this checkout and known ignored output directories only; no remote machine claim",
+  "model_responses": {
+    "data/outputs/prelim_157": {},
+    ".local/prelim_157": {},
+    ".local/prelim_157_four_v02": {},
+    ".local/prelim_157_four_v03": {}
+  },
+  "study_scores": {
+    "data/outputs/prelim_157": {},
+    ".local/prelim_157": {},
+    ".local/prelim_157_four_v02": {},
+    ".local/prelim_157_four_v03": {}
+  },
+  "actual_new_judge_calibration": false,
+  "paid_inference_calls": 0
+}

@@ -22,9 +22,17 @@ class ScoringContext:
         self.config_path,self.manifest_path=Path(config_path).resolve(),Path(manifest_path).resolve()
         self.config,self.manifest,self.freeze,self.annotations,self.prompts=four.verify_candidate(self.config_path,self.manifest_path)
         self.root=four.output_root(self.config)
-        self.judge_path=four.AMENDMENT/'JUDGE.json'
-        self.plan_path=four.AMENDMENT/'SCORING_PLAN.md'
+        self.amendment=self.config_path.parent
+        self.judge_path=self.amendment/'JUDGE.json'
+        self.plan_path=self.amendment/'SCORING_PLAN.md'
         self.judge=four.read(self.judge_path)
+        if self.config['protocol_id'].endswith('0.3'):
+            generators={m['model_id'] for m in self.config['models']}
+            for m in self.config['models']:generators.update(m.get('allowed_returned_model_ids',[]))
+            if self.judge['model_id'] in generators:
+                raise RuntimeError('primary judge must differ from every generation model; self-evaluation is blocked')
+            if (self.judge['model_id']!='gpt-5.4-2026-03-05' or self.judge['reasoning']!={'effort':'medium'}):
+                raise RuntimeError('proposed primary judge/settings changed; a new prospective review is required')
         self.pins={**four.provenance(self.config_path,self.manifest_path),
                    'judge_config_sha256':four.digest(self.judge_path),'scoring_plan_sha256':four.digest(self.plan_path),
                    'scoring_script_sha256':four.digest(Path(__file__))}
@@ -39,6 +47,8 @@ class ScoringContext:
         for path in (self.judge_path,Path(__file__).resolve(),Path(historical.__file__).resolve()):
             if pins.get(path.relative_to(four.ROOT).as_posix())!=four.digest(path):
                 raise RuntimeError('judge configuration and scoring code must be frozen')
+        for name,expected in self.calibration_input_pins().items():
+            if pins.get(name)!=expected:raise RuntimeError('all original calibration inputs must be hash-pinned before calibration')
 
     def calibration_input_pins(self):
         return {p.relative_to(four.ROOT).as_posix():four.digest(p) for p in
@@ -114,6 +124,8 @@ class ScoringContext:
             try:
                 result=historical.http_judge(prompt,self.judge,raw_dir=self.root/'judge_raw',
                                             judge_config_path=self.judge_path,max_attempts=1)
+                if self.config['protocol_id'].endswith('0.3') and result.get('_judge_meta',{}).get('returned_model') not in self.judge['allowed_returned_model_ids']:
+                    raise RuntimeError('returned judge identity differs from pinned primary judge')
             except (urllib.error.URLError,TimeoutError) as exc:
                 retryable=not isinstance(exc,urllib.error.HTTPError) or generation.should_retry(exc.code)
                 generation.append_jsonl(ledger,{**start,'status':'transport_failed' if retryable else 'invalid_response',
@@ -151,7 +163,7 @@ class ScoringContext:
             for order,ctx in enumerate(contexts,1):
                 for rating in done[ctx['fixture_id']]['result']['ratings']:
                     spec=next(s for s in historical.item_specs(ctx['rec']) if s['item_id']==rating['item_id'])
-                    rows.append({'rater_id':'AUTO_GPT6_1_SOL','rating_date':generation.utc_now()[:10],
+                    rows.append({'rater_id':'AUTO_'+self.judge['model_id'].upper(),'rating_date':generation.utc_now()[:10],
                         'order':str(order),'fixture_id':ctx['fixture_id'],'task_id':ctx['task_id'],'language':ctx['language'],
                         'item_id':rating['item_id'],'scoring_mode':spec.get('scoring_mode','check'),
                         'score':str(rating['score']),'reason':rating['reason'] if spec['kind']=='riu' else '',
@@ -217,6 +229,16 @@ class ScoringContext:
         packet,manifest=historical.build_qa_records({**self.freeze,'snapshot_id':self.manifest['snapshot_id']},
                                                    self.annotations,self.prompts,sources,scores)
         out_dir.mkdir(parents=True,exist_ok=False)
+        if self.config['protocol_id'].endswith('0.3'):
+            # Independent first-pass ratings must precede seeing AI labels.
+            for row in packet:
+                ratings=row.pop('automated_ratings')
+                generation.append_jsonl(out_dir/'qa_automated_ratings_private.jsonl',
+                                        {'qa_id':row['qa_id'],'ratings':ratings})
+                row['human_ratings']=[]
+                row['independent_before_unblinding']=''
+            manifest['first_pass_procedure']='Rate independently before viewing private automated labels; adjudicate disagreements afterward.'
+            manifest['private_automated_ratings_sha256']=four.digest(out_dir/'qa_automated_ratings_private.jsonl')
         for row in packet: generation.append_jsonl(out_dir/'qa_packet.jsonl',row)
         manifest.update(self.pins)
         manifest['packet_sha256']=four.digest(out_dir/'qa_packet.jsonl')
@@ -241,7 +263,9 @@ def main():
         for partition in four.PARTITIONS:
             print(partition,'generated',len(ctx.generations(partition)),'scored',len(ctx.scores(partition)))
         return 0
-    if args.command=='qa':ctx.qa(four.PARTITIONS,args.out_dir);return 0
+    if args.command=='qa':
+        if not args.out_dir.resolve().is_relative_to(ctx.root/'qa'):p.error('QA packets belong under the amended ignored qa directory')
+        ctx.qa(four.PARTITIONS,args.out_dir);return 0
     if args.limit is not None and args.limit<=0:p.error('positive --limit required')
     for partition in (four.PARTITIONS if args.provider=='all' else [args.provider]):ctx.score(partition,args.limit)
     return 0

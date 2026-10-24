@@ -36,9 +36,10 @@ class FourModelTests(unittest.TestCase):
     def test_no_foreign_or_duplicate_successes_on_resume(self):
         config = deepcopy(self.config)
         config["models"][0]["model_id"] = "test-model"
+        config["models"][0]["allowed_returned_model_ids"] = ["test-model"]
         cell = four.cells_for(config, self.freeze, self.annotations, self.prompts, "openai")[0]
         pins = four.provenance()
-        row = {**cell, **pins, "protocol_id": config["protocol_id"], "requested_model": "test-model",
+        row = {**cell, **pins, "protocol_id": config["protocol_id"], "requested_model": "test-model", "returned_model":"test-model",
                "response_text": "বাংলা\u2028পাঠ", "status": "success",
                "response_sha256": hashlib.sha256("বাংলা\u2028পাঠ".encode()).hexdigest()}
         with tempfile.TemporaryDirectory() as tmp:
@@ -57,7 +58,7 @@ class FourModelTests(unittest.TestCase):
     def test_response_bytes_cannot_change_after_hashing(self):
         cells = four.cells_for(self.config, self.freeze, self.annotations, self.prompts, "openai")
         row = {**cells[0], **four.provenance(), "protocol_id": self.config["protocol_id"],
-               "requested_model": self.config["models"][0]["model_id"], "status": "success",
+               "requested_model": self.config["models"][0]["model_id"], "returned_model":self.config["models"][0]["model_id"], "status": "success",
                "response_text": "altered", "response_sha256": "0" * 64}
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "openai.jsonl"
@@ -115,7 +116,7 @@ class FourModelTests(unittest.TestCase):
     def test_mocked_run_records_retry_then_resumes_without_regenerating(self):
         cell = four.cells_for(self.config, self.freeze, self.annotations, self.prompts, "openai")[0]
         result = {"response_text": "valid outcome", "finish_status": "completed",
-                  "provider_raw_meta": {}, "returned_model": "gpt-6-astra"}
+                  "provider_raw_meta": {}, "returned_model": self.config["models"][0]["model_id"]}
         with tempfile.TemporaryDirectory() as tmp, patch.dict(os.environ, {"OPENAI_API_KEY": "test-only"}):
             root = Path(tmp)
             with patch.object(four, "require_frozen"), patch.object(four, 'require_execution_gates'), patch.object(four, "output_root", return_value=root), \
@@ -149,7 +150,7 @@ class FourModelTests(unittest.TestCase):
 
     def test_crash_after_success_event_never_regenerates_cell(self):
         cell = four.cells_for(self.config, self.freeze, self.annotations, self.prompts, "openai")[0]
-        result = {"response_text": "received outcome", "finish_status": "completed", "provider_raw_meta": {}}
+        result = {"response_text": "received outcome", "finish_status": "completed", "provider_raw_meta": {}, "returned_model":self.config["models"][0]["model_id"]}
         real_append = four.historical.append_jsonl
         def interrupted(path, row):
             real_append(path, row)

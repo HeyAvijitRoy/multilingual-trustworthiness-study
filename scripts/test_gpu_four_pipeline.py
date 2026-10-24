@@ -173,7 +173,7 @@ class FourJudgeTests(unittest.TestCase):
     def test_judge_receipt_recovered_without_duplicate_request_or_identity_leak(self):
         with tempfile.TemporaryDirectory() as folder,patch.dict(os.environ,{'OPENAI_API_KEY':'synthetic'}):
             ctx=ScoringContext();ctx.root=Path(folder)
-            response={'ratings':[],'_judge_meta':{'response_id':'synthetic'}}
+            response={'ratings':[],'_judge_meta':{'response_id':'synthetic','returned_model':ctx.judge['model_id']}}
             with patch.object(judge,'http_judge',return_value=response) as http:
                 a=ctx.call('identical blinded input','study:local_a:T:en:1')
                 b=ctx.call('identical blinded input','study:local_a:T:en:1')
@@ -192,9 +192,10 @@ class FourJudgeTests(unittest.TestCase):
     def test_documented_transport_failure_can_retry_same_judge(self):
         with tempfile.TemporaryDirectory() as folder,patch.dict(os.environ,{'OPENAI_API_KEY':'synthetic'}):
             ctx=ScoringContext();ctx.root=Path(folder)
-            with patch.object(judge,'http_judge',side_effect=[urllib.error.URLError('synthetic'),{'ratings':[]}]) as http, \
+            response={'ratings':[],'_judge_meta':{'returned_model':ctx.judge['model_id']}}
+            with patch.object(judge,'http_judge',side_effect=[urllib.error.URLError('synthetic'),response]) as http, \
                  patch('prelim_four_judge.time.sleep'):
-                self.assertEqual(ctx.call('input','fixture:F01'),{'ratings':[]})
+                self.assertEqual(ctx.call('input','fixture:F01'),response)
                 self.assertEqual(http.call_count,2)
 
     def test_judge_retry_budget_is_not_reset_by_resume(self):

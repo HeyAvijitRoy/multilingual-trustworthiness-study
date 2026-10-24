@@ -23,12 +23,16 @@ import uuid
 import prelim_eval_157 as historical
 
 ROOT = Path(__file__).resolve().parents[1]
-AMENDMENT = ROOT / "data/evaluation/amendments/prelim-157-four-model-0.2"
+AMENDMENT = ROOT / "data/evaluation/amendments/prelim-157-four-model-0.3"
 CONFIG = AMENDMENT / "MODELS.json"
 MANIFEST = AMENDMENT / "FREEZE_CANDIDATE.json"
 PARTITIONS = ("openai", "google", "local_a", "local_b")
 ORDER_OFFSETS = dict(zip(PARTITIONS, (1, 3, 4, 5)))
-EXACT_CLOUD_IDS = {"openai": "gpt-6-astra", "google": "gemini-4-argon"}
+PANELS = {
+    'prelim-157-four-model-0.2': {'openai':'gpt-6-astra','google':'gemini-4-argon'},
+    'prelim-157-four-model-0.3': {'openai':'gpt-6.1-sol','google':'gemini-3.8-flash'},
+}
+EXACT_CLOUD_IDS = PANELS['prelim-157-four-model-0.3']
 
 
 def digest(path: Path) -> str:
@@ -52,7 +56,7 @@ def output_root(config: dict[str, Any]) -> Path:
 def verify_candidate(config_path: Path = CONFIG, manifest_path: Path = MANIFEST):
     freeze, _, annotations, prompts = historical.verify_freeze()
     config, manifest = read(config_path), read(manifest_path)
-    if config["protocol_id"] != "prelim-157-four-model-0.2":
+    if config["protocol_id"] not in PANELS:
         raise RuntimeError("unexpected amendment protocol ID")
     if manifest["protocol_id"] != config["protocol_id"]:
         raise RuntimeError("manifest/config protocol mismatch")
@@ -63,9 +67,10 @@ def verify_candidate(config_path: Path = CONFIG, manifest_path: Path = MANIFEST)
         raise RuntimeError("unexpected amended study dimensions")
     if [m["partition"] for m in config["models"]] != list(PARTITIONS):
         raise RuntimeError("exactly four ordered partitions required")
+    panel=PANELS[config['protocol_id']]
     for model in config["models"]:
         p = model["partition"]
-        if p in EXACT_CLOUD_IDS and model["model_id"] != EXACT_CLOUD_IDS[p]:
+        if p in panel and model["model_id"] != panel[p]:
             raise RuntimeError(f"requested cloud model may not be substituted: {p}")
         if p in EXACT_CLOUD_IDS:
             expected_reasoning = ({"effort": "medium", "mode": "standard"} if p == "openai"
@@ -91,10 +96,21 @@ def readiness(config: dict[str, Any], manifest: dict[str, Any]) -> list[str]:
     # A human-authored approval record is evidence, not an automatic acceptance.
     if not manifest.get("study_lead_approval_record"):
         blockers.append("study-lead protocol approval is not recorded")
+    if config['protocol_id'].endswith('0.3') and not manifest.get('judge_approval_record'):
+        blockers.append('explicit approval of the new primary judge is not recorded')
     for model in config["models"]:
         p = model["partition"]
         if not model.get("availability_evidence"):
             blockers.append(f"{p}: account/runtime model availability not verified")
+        if config['protocol_id'].endswith('0.3') and p in EXACT_CLOUD_IDS:
+            if not model.get('allowed_returned_model_ids') or not model.get('wire_validation_evidence'):
+                blockers.append(f'{p}: synthetic wire validation and exact returned model versions not pinned')
+            if p=='google':
+                try:
+                    if model.get('billing_policy')!='free-tier-only-no-paid-fallback':raise RuntimeError('free-tier-only policy required')
+                    from gemini_quota import QuotaLedger
+                    QuotaLedger(ROOT/model['quota_config'])
+                except (RuntimeError,ValueError,KeyError,OSError) as exc:blockers.append('google: '+str(exc))
         if p.startswith("local_"):
             for field in ("model_id", "weights_revision", "tokenizer_revision", "quantization",
                           "engine", "engine_version", "context_tokens", "chat_template_sha256",
@@ -111,20 +127,29 @@ def require_frozen(config, manifest, config_path=CONFIG, manifest_path=MANIFEST)
     blockers = readiness(config, manifest)
     if blockers:
         raise RuntimeError("study generation blocked: " + "; ".join(blockers))
+    amendment=config_path.parent
     required = {str(config_path.relative_to(ROOT)),
-                str((AMENDMENT / "PROTOCOL.md").relative_to(ROOT)),
-                str((AMENDMENT / "ANALYSIS_PLAN.md").relative_to(ROOT)),
-                str((AMENDMENT / "SCORING_PLAN.md").relative_to(ROOT)),
+                str((amendment / "PROTOCOL.md").relative_to(ROOT)),
+                str((amendment / "ANALYSIS_PLAN.md").relative_to(ROOT)),
+                str((amendment / "SCORING_PLAN.md").relative_to(ROOT)),
                 str(Path(__file__).resolve().relative_to(ROOT)),
                 str(Path(historical.__file__).resolve().relative_to(ROOT))}
     for name in ('prelim_four_judge.py','analyze_prelim_four.py','research_approvals.py',
                  'local_gpu_runtime.py','local_gpu_server.py','prelim_judge_157.py','analyze_prelim_157.py'):
         required.add('scripts/'+name)
-    required.add(str((AMENDMENT/'JUDGE.json').relative_to(ROOT)))
+    required.add(str((amendment/'JUDGE.json').relative_to(ROOT)))
+    if config['protocol_id'].endswith('0.3'):
+        required.update({'scripts/cloud_four_adapters.py','scripts/gemini_quota.py','scripts/plot_prelim_four.py','scripts/audit_four_qa.py'})
+        from prelim_judge_157 import FIXTURE_PLAN,FIXTURES,ANSWER_KEY
+        required.update(str(p.relative_to(ROOT)) for p in (FIXTURE_PLAN,FIXTURES,ANSWER_KEY,historical.FREEZE_PATH))
+        if not manifest.get('judge_approval_record'):raise RuntimeError('explicit primary-judge approval evidence missing')
+        required.add(manifest['judge_approval_record'])
     for model in config["models"]:
-        for field in ("availability_evidence", "feasibility_evidence", "context_fit_evidence", "adapter_smoke_evidence"):
+        for field in ("availability_evidence", "feasibility_evidence", "context_fit_evidence", "adapter_smoke_evidence",'wire_validation_evidence','quota_config'):
             if model.get(field):
                 required.add(model[field])
+        if model.get('quota_config'):
+            required.add(read(ROOT/model['quota_config'])['evidence_path'])
     pins = manifest.get("artifact_sha256", {})
     if not required.issubset(pins):
         raise RuntimeError("freeze does not pin the config and all scientific plans")
@@ -154,6 +179,9 @@ def require_execution_gates(config,manifest,config_path=CONFIG,manifest_path=MAN
     from research_approvals import require_spending_approval
     from prelim_four_judge import ScoringContext
     require_spending_approval(config,manifest,'generation')
+    if config['protocol_id'].endswith('0.3'):
+        from gemini_quota import QuotaLedger
+        QuotaLedger(ROOT/next(m for m in config['models'] if m['partition']=='google')['quota_config'])
     if not ScoringContext(config_path,manifest_path).gate()['gate_pass']:
         raise RuntimeError('all study generation requires the passing four-model automated-judge gate')
     for model in config['models']:
@@ -173,12 +201,16 @@ def cells_for(config, freeze, annotations, prompts, partition, language=None):
 
 
 def provenance(config_path=CONFIG, manifest_path=MANIFEST):
-    return {"amendment_config_sha256": digest(config_path),
+    result={"amendment_config_sha256": digest(config_path),
             "amendment_manifest_sha256": digest(manifest_path),
             "snapshot_sha256": digest(historical.FREEZE_PATH),
             "runner_sha256": digest(Path(__file__)),
             "adapter_sha256": digest(Path(historical.__file__)),
             "snapshot_id": read(manifest_path)["snapshot_id"]}
+    if read(config_path)['protocol_id'].endswith('0.3'):
+        result['cloud_adapter_sha256']=digest(ROOT/'scripts/cloud_four_adapters.py')
+        result['quota_script_sha256']=digest(ROOT/'scripts/gemini_quota.py')
+    return result
 
 
 def validated_records(path, config, partition, expected_cells, pins):
@@ -196,6 +228,9 @@ def validated_records(path, config, partition, expected_cells, pins):
                 or key not in expected or row.get("prompt_sha256") != expected[key]["prompt_sha256"]):
             raise RuntimeError(f"foreign/stale generation record in {path.name}")
         if row["status"] == "success":
+            if config['protocol_id'].endswith('0.3') and partition in EXACT_CLOUD_IDS:
+                from cloud_four_adapters import validate_identity
+                validate_identity(model,row)
             text = row.get("response_text")
             if not isinstance(text, str) or row.get("response_sha256") != hashlib.sha256(text.encode("utf-8")).hexdigest():
                 raise RuntimeError(f"response integrity mismatch in {path.name}")
@@ -367,6 +402,11 @@ def run_partition(config, manifest, freeze, annotations, prompts, partition, lim
         raise RuntimeError(f"required API key not set: {model['env_key']}")
     root = output_root(config)
     pins = provenance(config_path, manifest_path)
+    revised=config['protocol_id'].endswith('0.3')
+    quota=None
+    if revised and partition=='google':
+        from gemini_quota import QuotaLedger
+        quota=QuotaLedger(ROOT/model['quota_config'])
     with partition_lock(root, "local_runtime" if partition.startswith("local_") else partition):
         done, _ = validated_records(root / f"{partition}.jsonl", config, partition, selected, pins)
         validate_attempt_history(root / "attempts" / f"{partition}.jsonl",
@@ -380,6 +420,9 @@ def run_partition(config, manifest, freeze, annotations, prompts, partition, lim
         if limit is not None:
             pending = pending[:limit]
         caller = historical.CALLERS[partition] if partition in EXACT_CLOUD_IDS else local_chat
+        if revised and partition=='google':
+            from cloud_four_adapters import call_google
+            caller=call_google
         # Intentionally sequential. Local models share memory; cloud concurrency
         # can be added after a separate throughput check without changing cells.
         for cell in pending:
@@ -399,12 +442,31 @@ def run_partition(config, manifest, freeze, annotations, prompts, partition, lim
             for attempt in range(used+1, 5):
                 attempt_start = historical.utc_now()
                 attempt_id = uuid.uuid4().hex
+                if quota:
+                    from gemini_quota import QuotaDeferred,input_reservation
+                    try:quota.reserve(attempt_id,input_reservation(cell['prompt_text'],config['system_prompt']),
+                                      config['protocol_id'],cell['prompt_sha256'])
+                    except QuotaDeferred as exc:
+                        pause={**pins,'task_id':cell['task_id'],'language':cell['language'],
+                               'state':'quota_deferred','reason':exc.reason,'retry_at_utc':exc.retry_at_utc,
+                               'retry_at_epoch':exc.retry_at,'at_utc':historical.utc_now()}
+                        historical.append_jsonl(root/'quota_deferrals.jsonl',pause)
+                        if attempts:
+                            historical.append_jsonl(root/f'{partition}.jsonl',
+                                {**base,'generated_at_utc':historical.utc_now(),'attempts':attempts,
+                                 'latency_seconds':time.monotonic()-started,'status':'api_error'})
+                        print(f"google {cell['task_id']} {cell['language']}: {exc}",flush=True)
+                        return pause
                 historical.append_jsonl(root / "attempts" / f"{partition}.jsonl",
                     {**base, "attempt": attempt, "attempt_id": attempt_id,
                      "started_at_utc": attempt_start, "status": "started"})
                 try:
-                    result = caller(model, cell["prompt_text"], config["system_prompt"],
+                    received = caller(model, cell["prompt_text"], config["system_prompt"],
                                     model.get('timeout_seconds',config["timeout_seconds"]), config["max_output_tokens"])
+                    if revised and partition in EXACT_CLOUD_IDS:
+                        from cloud_four_adapters import validate_identity
+                        validate_identity(model,received)
+                    result=received
                     outcome = {"attempt": attempt, "started_at_utc": attempt_start, "status": "success"}
                 except historical.ProviderHTTPError as exc:
                     outcome = {"attempt": attempt, "started_at_utc": attempt_start,
@@ -420,6 +482,10 @@ def run_partition(config, manifest, freeze, annotations, prompts, partition, lim
                 historical.append_jsonl(root / "attempts" / f"{partition}.jsonl",
                     {**base, **outcome, "attempt_id": attempt_id, "finished_at_utc": historical.utc_now(),
                      **({"received_response": result} if result is not None else {})})
+                if quota:
+                    quota.finish(attempt_id,usage=result.get('usage') if result else None,
+                                 error_status=outcome.get('http_status'),error_payload=outcome.get('provider_error'),
+                                 backoff_seconds=2**attempt)
                 if result is not None:
                     break
                 retryable = outcome["status"] == "transport_error" or (
@@ -461,6 +527,7 @@ def main():
     p.add_argument("--provider", choices=PARTITIONS, required=True)
     p.add_argument("--limit", type=int)
     p.add_argument("--dry-run", action="store_true")
+    p.add_argument('--wait-for-quota',action='store_true',help='Resume Google across quota windows/days with persistent accounting')
     args = parser.parse_args()
     from research_approvals import load_api_environment
     load_api_environment(args.env_file)
@@ -483,9 +550,16 @@ def main():
         return 0
     if args.limit is not None and args.limit <= 0:
         parser.error("--limit must be positive")
-    run_partition(config, manifest, freeze, annotations, prompts, args.provider, args.limit, args.dry_run,
-                  args.config, args.manifest)
-    return 0
+    if args.wait_for_quota and (args.provider!='google' or args.limit is not None or args.dry_run):
+        parser.error('--wait-for-quota requires Google, no --limit and no --dry-run')
+    while True:
+        state=run_partition(config, manifest, freeze, annotations, prompts, args.provider, args.limit, args.dry_run,
+                            args.config, args.manifest)
+        if not state:return 0
+        if not args.wait_for_quota:return 75
+        while time.time()<state['retry_at_epoch']:
+            print('Google quota continuation waiting until '+state['retry_at_utc'],flush=True)
+            time.sleep(max(0,min(60,state['retry_at_epoch']-time.time())))
 
 
 if __name__ == "__main__":

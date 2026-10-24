@@ -2,6 +2,12 @@
 
 Empirical study of language-conditioned trustworthiness failures in large language models, with an initial focus on semantically matched English, Bengali, and Bengali-English code-switched prompts.
 
+## Current preparation checkpoint
+
+The approved v0.3 calibration remains **on hold**: safety-related task-check agreement was 25/30 against the required 30/30. No study responses or study scores exist. The [Reviewer R1/remediation workflow](data/evaluation/remediation/V03_R1_WORKFLOW.md) consolidates packet delivery, first-pass return, comparison, adjudication and the independent validation path. R1 should receive only the four standalone packet files, rather than this repository or its other study records.
+
+The working manuscript, *Structural Silence: Measuring Critical Information Omission in Multilingual Large Language Models*, and its [methodological companion](manuscript/acm_trust2027/README.md) distinguish completed calibration evidence from the planned experiment. The USD 100 cap and Gemini 3.8 Flash Free-tier limits remain unchanged; no additional paid API calls are authorized during this hold.
+
 ## Research Objective
 
 This project investigates whether language choice systematically affects response completeness, critical-information retention, instruction adherence, correctness, and actionability in LLM outputs.

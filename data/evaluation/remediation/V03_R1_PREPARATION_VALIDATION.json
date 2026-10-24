@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "prepared_date": "2026-10-23",
+  "packet": {
+    "status": "PASS",
+    "review_cases": 5,
+    "applicable_check_rows": 6,
+    "source_RIUs_included": 25,
+    "prompts_responses_constraints_and_rubric_anchors": "exact source text verified",
+    "case_selection_and_private_mapping": "all five source task-check cases, one-to-one; no public mapping",
+    "first_pass_and_adjudication_decisions": "all blank",
+    "private_directory_permissions": "0700; mapping 0600; ignored by Git",
+    "accessibility": "UTF-8, meaningful headings, case index links, spreadsheet CSV; no code required",
+    "blinding_boundary": "standalone four-file packet only; no source IDs, judge identity/ratings, reference labels or selection details in its prose",
+    "limitation": "full-repository/history access can reveal source material; distribute only these four files for first-pass assessment",
+    "packet_sha256": {
+      "README.md": "28642e871abc5b815f010b087452e7a536ae72398d808dbbd4134ca33dcca8a9",
+      "R1_REVIEW_PACKET.md": "29e0da9cc234b5640f90ae88120ab73c26a8ad054e8a8c0eea53172663c86e2f",
+      "R1_REVIEW_FORM.csv": "a2debc6fc36bebaed542af38a20206697e37251a3210f89537e7dc999c545047",
+      "POST_REVIEW_COMPARISON_TEMPLATE.csv": "4e6f107b9eebd02d318db50ebec87346dd274f7fee723521ac3491c6ab5de78d"
+    }
+  },
+  "frozen_artifact_pins": "all 55 unchanged",
+  "actual_gate": "failed, unchanged",
+  "api_usage": "budget ledger byte-identical; no paid/model calls in preparation",
+  "human_decisions": "no first-pass assessments or adjudication supplied",
+  "manuscript": "completed observations separated from planned experiment; supporting ledger verified",
+  "TeX": "source export only; compiler unavailable; PDF layout/page count/fonts not verified",
+  "tests": {
+    "full_offline_suite": "128 tests passed",
+    "new_R1_tests": 5,
+    "synthetic_return_tests": "temporary synthetic forms only; no real R1 decisions",
+    "new_operational_or_model_requests": 0
+  },
+  "manuscript_checks": "canonical Markdown/TeX hash synchronized; LaTeX environments/display math and 5 BibTeX citations checked; 25 local links resolved; no PDF compiler/rendering available"
+}

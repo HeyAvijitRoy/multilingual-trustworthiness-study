@@ -456,3 +456,46 @@ of actual study responses is still mandatory before audited conclusions. The
 Credentials/raw outputs are ignored; `.env` and the local `.aws` path exclusions
 are committed. No push was performed; existing Git identity used, no co-author
 trailers.
+
+## Reviewer R1 packet and manuscript preparation — 2026-10-23
+
+The [consolidated remediation workflow](data/evaluation/remediation/V03_R1_WORKFLOW.md)
+now covers the full sequence from packet preparation to returned first-pass
+assessment, separate comparison, adjudication and defensible independent
+validation. The hold remains active, with no generation, scoring, recalibration
+or further paid API requests. The budget ledger is byte-identical to the prior
+checkpoint: USD 0.542045 conservatively accounted, no outstanding holds, and
+USD 99.457955 remaining under the unchanged USD 100 cap. Google remains Free tier
+only at 5 RPM / 250,000 input TPM / 20 RPD; no fallback is authorized.
+
+The four requested files are in `data/evaluation/reviews/v03_calibration_R1/`.
+Five opaque case IDs cover all five task-check cases, with exact original
+prompts/full responses, all 25 relevant RIUs and criticality/anchors. The first-pass
+CSV contains six blank applicable-check rows; one additional applicable check is
+included without revealing which check drove selection. No R1 assessment,
+rationale, comment, ambiguity decision or adjudication has been filled.
+Mappings, reference labels and judge records are restricted to an ignored local
+staff directory (0700; mapping 0600). Give R1 only the four packet files: other
+repository/history records can reveal source material and compromise blinding.
+An optional standalone ZIP containing only those four files is preserved locally
+for handoff. R1 can use a Markdown preview/text editor and UTF-8 spreadsheet
+application; no code is needed.
+
+Offline validation checks exact text and anchors, complete one-to-one mappings,
+blank decisions, source-ID/label exclusions, UTF-8, internal case links and public
+LF bytes matching Git attributes. Source fixtures, original labels, all 55 freeze
+pins and actual calibration results remain unchanged. The optional post-return
+comparison command rejects incomplete forms, preserves returned bytes/hash and
+writes comparisons privately, leaving substantive recommendations/adjudication
+for after actual R1 assessments arrive. No returned assessment is present now.
+
+`manuscript/acm_trust2027/` contains a full readable preparation draft, matching
+anonymous ACM sigconf source and bibliography, registered-paper methodological
+companion, verified-findings ledger and submission-preparation status. The working
+title is *Structural Silence: Measuring Critical Information Omission in
+Multilingual Large Language Models*. The draft reports the failed calibration
+and no empirical language/model effect. It does not invent an external
+registration ID, original registered abstract or submission-system action.
+The TeX source is not compiled here because no compiler is available; rendered
+PDF layout, page count and embedded fonts are not claimed as verified. Final
+study findings and independent study-response review remain pending.

@@ -2,3 +2,6 @@
 # Force LF everywhere so a Windows checkout with core.autocrlf=true does not change the hashed bytes.
 data/** text eol=lf
 scripts/** text eol=lf
+
+# Preserve manuscript/source export hashes across checkouts.
+manuscript/** text eol=lf

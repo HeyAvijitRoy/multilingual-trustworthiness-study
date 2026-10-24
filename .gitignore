@@ -6,3 +6,7 @@ __pycache__/
 
 # Local cloud credential path (file or directory)
 /.aws
+
+# Returned first-pass assessments remain private; blank review forms are tracked.
+/data/evaluation/reviews/**/R1_REVIEW_FORM_COMPLETED*.csv
+/data/evaluation/reviews/**/returns/

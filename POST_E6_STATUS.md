@@ -1,5 +1,13 @@
 # Post-E6 preparation status — 2026-10-23
 
+**Latest continuation: GPU inference and four-model engineering are complete;
+study execution still awaits actual approvals and judge calibration.** The
+historical checkpoint sections below are retained as an audit trail, including
+superseded credential/runtime observations. See the latest continuation section
+at the end and the concrete
+[review packet](data/evaluation/amendments/prelim-157-four-model-0.2/REVIEW_PACKET.md).
+
+
 **Validated preparation milestone; evaluation and production-gold gates remain
 open. No study model responses or automated study scores were generated.**
 
@@ -208,3 +216,93 @@ Local commits: `99f71ef` (evaluation integrity/reporting), `f8cd255`
 candidate and measured local feasibility). The final status-document commit
 ID is reported in the task's final message and `git log`. No push, PR creation,
 remote merge, history rewrite or Git identity change was performed.
+
+
+## A100 continuation — 2026-10-23 EDT / 2026-10-24 UTC
+
+The CUDA-enabled environment is working: isolated Python 3.12.3,
+torch 2.14.1+cu130, Transformers 5.20.2, 55 compatible pinned packages. CUDA BF16
+matrix execution and actual model generation pass. Reference Python 3.11.17 and
+the prior CPU environment are preserved. No GPU-unavailable conclusion remains.
+
+Recommend local A **Qwen/Qwen3.5-9B**, revision
+`c202236235762e1c871ad0ccb60c8ee5ba337b9a`, and local B
+**google/gemma-4-12B-it**, revision
+`707f0a3b8a3c7ad586ed01e27eafbad8a27dd0f7`. Both are BF16, unquantized, fully GPU
+resident, native template/thinking-off/greedy, configured context 40,960, SDPA,
+1,024-token native chunked prefill and expandable allocator segments. Full
+artifact integrity matches upstream exact revisions. Exact settings, limitations
+and qualitative AI-only review are in the
+[selection report](data/evaluation/amendments/prelim-157-four-model-0.2/GPU_MODEL_SELECTION.md).
+
+| Final measured diagnostic | Qwen 9B | Gemma 12B |
+| --- | ---: | ---: |
+| Loaded parameters | 9,409,813,744 | 11,959,730,176 |
+| Short median decode tokens/s | 19.95 | 12.97 |
+| Longest rendered frozen input, count only | 958 | 512 |
+| Input + full output context needed | 33,726 | 33,280 |
+| Synthetic capacity input + output | 40,853 + 64 | 40,858 + 64 |
+| Capacity peak allocated VRAM GiB | 19.67 | 23.73 |
+| 471 x 2,048 output-token decode-only projection | 13.43 h | 20.65 h |
+
+The projections exclude prefill, startup, I/O, retries and long-context slowdown.
+Neither a full 32,768-token decode nor 262k deployment was measured. Each final
+suite includes two warmups and two repeats of all four synthetic scenarios;
+ordinary responses stopped naturally and repeated token IDs matched. Both
+preserve six extended-context constraints, while Bengali/EN/BN-CS recovery probes
+still show substantive content/instruction errors documented in the report.
+This is not independent human Bengali validation or a study result.
+
+Gemma's earlier unchunked capacity OOMs and the forced-after-READY channel failure
+remain raw preserved evidence. Native chunked prefill resolved the memory issue;
+a substantive final capacity prompt avoids forcing continuation after a one-word
+answer. The production parser still refuses unexpected reasoning-channel output.
+No prompt shortening, output-limit reduction, quantization or evidence deletion
+was used. Both real local server-adapter smoke tests pass model routing, exact
+request reuse, provenance and frozen-prompt refusal in diagnostic mode.
+
+Four-model engineering now includes isolated calibration/scoring ledgers and raw
+artifacts, provenance-bound resume, four-attempt budgets across restarts, a shared
+sequential judge lock, blinded QA packets, source-linked resolved adjudication
+layers, fixed-four-model statistics and standalone plots. Shared historical
+functions retain their defaults; frozen historical scientific data is unchanged.
+Reports remain provisional pending independent human QA. Synthetic full-panel
+analysis tests do not count as actual results or calibration.
+
+Full validation passes **90 tests** plus corpus, freeze, annotation, queue,
+calibration-fixture and whitespace checks. New scripts compile. Both actual
+judge gates exit 3 with absent reports, and candidate readiness exits 3 as
+intended. Historical three-model plan is still 0/1,413; amended plan is
+**0/1,884 generated and 0/1,884 scored**. No outcome analysis was computed from
+actual study data. No paid call occurred; expenditure remains **$0**.
+
+Both intended cloud credentials are available through the explicit local `.env`
+loader; values were not printed or committed. Intended-account GET metadata
+returned HTTP 200 for gpt-6-astra, gemini-4-argon and gpt-6.1-sol. Paid synthetic
+wire settings and quota remain unverified. Google account metadata gives 32,768
+output tokens, despite a larger advertised public-page limit. This matches the
+unchanged study allowance and does not authorize paid execution.
+
+The candidate now proposes the exact local pair and a 5,400-second local timeout
+(cloud stays 900), sequential judge concurrency 1 and the unchanged scientific
+metrics/calibration thresholds. Actual study-lead approval, paid authorization,
+cloud synthetic validation and a new immutable final freeze are still required.
+Then actual judge calibration must pass before any study generation. The
+[review packet](data/evaluation/amendments/prelim-157-four-model-0.2/REVIEW_PACKET.md)
+proposes a **USD 200 cap** for this preliminary workflow, against $121.93 typical
+planning and much larger conservative scenarios; it is not approval or a promise
+to finish within that cap. Scope/hash checks do not track invoices. Monitor usage
+and stop before the authorized amount is exceeded. The 500-task study requires
+its own later approval and budget. No final freeze or approval was fabricated.
+
+Annotation state is preserved: 157 accepted, 50 P01/P02 AI drafts pending human
+review (209 RIUs / 84 critical), 293 still undrafted and all 343 production tasks
+still requiring acceptance. P03–P14 follow preliminary evaluation under the user's
+continuation sequence. No new human acceptance or independent adjudication is
+claimed. The full 6,000-response study remains gated on all 500 accepted gold tasks.
+
+New commits: `815dbbf` (CUDA runtime and reproducible numeric GPU evidence),
+`8938f33` (complete isolated pipeline, proposed panel and review packet). The
+following status/review-hash commit is identifiable in `git log`. The user's
+existing `.gitignore` `.env` addition is preserved unstaged. No push, merge,
+identity change, co-author trailer, committed secret, raw output or model weight.

@@ -1,0 +1,59 @@
+{
+  "failed_runs": [
+    {
+      "local_source": ".local/gpu_benchmarks/gemma12-bf16-01.jsonl",
+      "source_sha256": "e5a20ab5e43e9716c6b5a21ea86ff210048f77d9a98cf39ba4c8f2c15badc07a",
+      "terminal_error_type": "OutOfMemoryError",
+      "terminal_error": "CUDA out of memory. Tried to allocate 3.11 GiB. GPU 0 has a total capacity of 39.49 GiB of which 1.36 GiB is free. Including non-PyTorch memory, this process has 38.12 GiB memory in use. Of the allocated memory 33.62 GiB is allocated by PyTorch, and 4.00 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)",
+      "completed_diagnostic_repeats": 8,
+      "provenance": {
+        "model_id": "google/gemma-4-12B-it",
+        "revision": "707f0a3b8a3c7ad586ed01e27eafbad8a27dd0f7",
+        "context_tokens": 40960,
+        "runtime_script_sha256": "a92a9548ccf23b5040885b659ee04caeffd970bb162ac0aaff8d2827d20d2c6d"
+      },
+      "raw_output_preserved_locally": false
+    },
+    {
+      "local_source": ".local/gpu_benchmarks/gemma12-bf16-02.jsonl",
+      "source_sha256": "1d39742d94e59aa093d8273501b444f2b261b1a5410d99c30aeda0a038b52966",
+      "terminal_error_type": "OutOfMemoryError",
+      "terminal_error": "CUDA out of memory. Tried to allocate 2.24 GiB. GPU 0 has a total capacity of 39.49 GiB of which 2.05 GiB is free. Including non-PyTorch memory, this process has 37.44 GiB memory in use. Of the allocated memory 36.69 GiB is allocated by PyTorch, and 257.08 MiB is reserved by PyTorch but unallocated.",
+      "completed_diagnostic_repeats": 8,
+      "provenance": {
+        "model_id": "google/gemma-4-12B-it",
+        "revision": "707f0a3b8a3c7ad586ed01e27eafbad8a27dd0f7",
+        "context_tokens": 34816,
+        "cuda_allocator_config": "expandable_segments:True",
+        "runtime_script_sha256": "433d2277fa875d8d22e3c947419bcfb0c8e07ce1b9e98ff72bb6a3731d592a25"
+      },
+      "raw_output_preserved_locally": false
+    },
+    {
+      "local_source": ".local/gpu_benchmarks/gemma12-bf16-03.jsonl",
+      "source_sha256": "b2d2e1d57b25c60652f73c084376de8eae5200ae90e765c9b567175b9dcf3cb0",
+      "terminal_error_type": "VisibleExtractionError",
+      "terminal_error": "unexpected generated reasoning channel; visible parser refuses it",
+      "completed_diagnostic_repeats": 8,
+      "provenance": {
+        "model_id": "google/gemma-4-12B-it",
+        "revision": "707f0a3b8a3c7ad586ed01e27eafbad8a27dd0f7",
+        "context_tokens": 40960,
+        "prefill_chunk_size": 1024,
+        "cuda_allocator_config": "expandable_segments:True",
+        "runtime_script_sha256": "f25b7d7a35de0b17e12f1523602c5bf0e2bc8974c6492f6e33cdd2bdb30c276f"
+      },
+      "raw_output_preserved_locally": true
+    },
+    {
+      "local_source": ".local/gpu_benchmarks/qwen9-bf16-01.jsonl",
+      "source_sha256": "8c0b56e174ce16f8dcc63d0385b8f5c722d6dc63f387b5b350426e6a82f87044",
+      "terminal_error_type": "RuntimeError",
+      "terminal_error": "weight SHA-256 differs from content-addressed cache blob",
+      "completed_diagnostic_repeats": 0,
+      "provenance": null,
+      "raw_output_preserved_locally": false
+    }
+  ],
+  "study_generations": 0
+}

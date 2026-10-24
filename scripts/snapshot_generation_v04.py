@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Export objective, dated collection metadata; never read labels or call APIs."""
+"""Export collection metadata and validated aggregate review status; no API calls."""
 import hashlib
 from datetime import datetime, timezone
 import gemini_quota
@@ -11,8 +11,26 @@ import generation_only_v04 as gen
 D=gen.ROOT/'manuscript/acm_trust2027'
 
 
+def current_adjudication_status():
+    path=gen.ROOT/'data/evaluation/remediation/v03_R1_adjudication/RETURN_STATUS.json'
+    source=gen.ROOT/'data/evaluation/reviews/v03_calibration_R1/adjudication/R1_ADJUDICATION_FORM_COMPLETED.csv'
+    if not path.exists() or not source.exists():return None
+    status=json.loads(path.read_text())
+    if status.get('status')!='returned-validated-comparison-prepared' or status.get('returned_form_sha256')!=gen.four.digest(source):
+        raise RuntimeError('adjudication return changed or is not validated; inspect before reporting current review state')
+    if status.get('production_scoring_authorized') is not False:raise RuntimeError('review return cannot authorize production scoring')
+    return status
+
+
 def export():
     snapshot=gen.report()
+    adjudication=current_adjudication_status()
+    if adjudication:
+        complete=adjudication['resolved_rows']==adjudication['disputed_judgments']==7 and adjudication['unresolved_rows']==0
+        snapshot['r1_adjudication_return']={k:adjudication[k] for k in ('returned_form_sha256','resolved_rows','unresolved_rows','reference_matches','revisions_from_first_pass')}
+        if complete:
+            snapshot['scoring_blockers']=['original safety-check calibration 25/30 versus 30/30','prospective scoring procedure and independent judge validation pending','validated scoring integration and subsequent independent study-response QA pending']
+            snapshot['review_status_note']='Current adjudication status comes from the separately validated return; frozen controller blocker text retains historical wording. No scoring gate has been changed.'
     root=gen.four.output_root(gen.four.read(gen.BASE_CONFIG))
     for partition,model in snapshot['models'].items():
         rows=gen.four.historical.read_jsonl_records(root/(partition+'.jsonl'))
@@ -45,13 +63,18 @@ def export():
     budget=snapshot['budget']
     lines += ['',f"Paid cap: USD {budget['cap_usd']:.2f}. Conservative usage-derived settled estimate: USD {budget['settled_usage_estimate_usd']:.9f}; outstanding maximum-cost holds: USD {budget['reserved_or_uncertain_usd']:.9f}; uncommitted: USD {budget['remaining_uncommitted_usd']:.9f}. The prior USD 0.542045 is included. USD 80 is protected for later validation and scoring. These are estimates, not invoices.",'',
               'Gemini remains Free tier only (5 RPM, 250,000 input TPM, 20 RPD); its multi-day schedule does not gate primary completion. The conditional 4,500-response full benchmark has not started.', '',
-              '**Production RIU/safety scoring is blocked.** The original safety-check calibration remains 25/30 against 30/30. R1 adjudication, independent judge validation after fixture exposure and later independent study-response QA remain outstanding. No language effects, model rankings, omission rates or validated trustworthiness findings are reported.', '',
+              '**Production RIU/safety scoring is blocked.** The original safety-check calibration remains 25/30 against 30/30. Independent judge validation after fixture exposure, versioned scoring integration and later independent study-response QA remain outstanding. No language effects, model rankings, omission rates or validated trustworthiness findings are reported.', '',
               'The JSON companion includes finish-status counts, truncation and empty-text flags, visible character counts, token usage, latency and source hashes. These characterize collection only. Raw outputs, detailed attempts and provider payloads remain preserved locally under `.local/prelim_157_four_v03/`; credentials and private R1 materials are excluded from this public summary.', '',
               'Staff can refresh this checkpoint without API requests using `python3 scripts/snapshot_generation_v04.py`. A final submission must retain its exact evidence cutoff and reconcile incomplete cells.']
+    if adjudication:
+        lines += ['',f"R1's second-stage return has {adjudication['resolved_rows']} resolved decisions and {adjudication['unresolved_rows']} unresolved decisions. All seven returned scores support the original references; two revise first-pass decisions. This exposed, selected-case adjudication is not a new calibration estimate or scoring release."]
     (D/'GENERATION_STATUS.md').write_text('\n'.join(lines)+'\n')
     claims=json.loads((D/'VERIFIED_FINDINGS.json').read_text())
     claims['as_of_local_date']='2026-10-24';claims['status']='raw-generation-active-production-scoring-blocked'
     claims['r1_review'].update(status='returned-preserved-compared-adjudication-pending',returned_assessment_rows=6,adjudication_completed=False)
+    if adjudication:
+        complete=adjudication['resolved_rows']==adjudication['disputed_judgments']==7 and adjudication['unresolved_rows']==0
+        claims['r1_review'].update(status='second-stage-return-validated',first_pass_status='preserved-compared',second_stage_status='returned-validated',second_stage_status_source='validated returned CSV and source hash',adjudication_return_received=True,adjudication_completed=complete,new_adjudication_decisions=adjudication['resolved_rows'],adjudication_return_sha256=adjudication['returned_form_sha256'],reference_matches=adjudication['reference_matches'],first_pass_decision_revisions=adjudication['revisions_from_first_pass'])
     claims['r1_review'].pop('decisions_filled',None);claims['r1_review'].pop('blank_assessment_rows',None)
     claims['planned_study'].update(models=3,responses=1413,completed_generations=snapshot['primary_completed'],exploratory_model='gemini-3.8-flash',exploratory_tasks=20,exploratory_responses=60,completed_exploratory_generations=snapshot['exploratory_completed'],full_study_responses=4500,full_study_authorized=False,completed_scoring_records=0)
     claims['operational_limits'].update(conservative_accounted_usd=budget['settled_usage_estimate_usd'],outstanding_holds_usd=budget['reserved_or_uncertain_usd'],remaining_uncommitted_usd=budget['remaining_uncommitted_usd'],generation_phase_ceiling_usd=20,protected_evaluation_usd=80,budget_ledger_unchanged=False,additional_paid_API_calls_this_workflow=budget['settled_requests']+budget['held_requests']-33)

@@ -1,0 +1,1418 @@
+{
+  "version": "production-review-packet-0.3",
+  "batch_id": "P09",
+  "production_plan_sha256": "52817945c82f514b0ea921fc5857de15da5c161aad4d1c63497e7608daacf7f8",
+  "ambiguity_input_sha256": "7e3b72e2ff9eaa6f5ec947fefbd308d63bae9651d1d40245cbc970f9664f7277",
+  "status": "pending-independent-human-and-language-review",
+  "draft_sha256": {
+    "data/annotations/production/P09/cybersecurity_digital_safety.jsonl": "33921e8f88e34898f43ffd088b8a444cfd5e5b79887a23d982eec44c5effb69a",
+    "data/annotations/production/P09/decision_support.jsonl": "de5c87cc622e29da87d6f038fe54f72380de92efcc9b4af34a467b78ba7610c1",
+    "data/annotations/production/P09/information_synthesis.jsonl": "3d3979929623d63a100a79e3e52166f540d895b3e5207fbeda27b9da62b2847a",
+    "data/annotations/production/P09/procedural_instructional.jsonl": "d53c38e12f0a6c85b73a967c14f73f014e197d373cf0f1ea6b820357e9fc4173",
+    "data/annotations/production/P09/technical_troubleshooting.jsonl": "0eca6072dfc6d1be5eb9f092ebe1a530bcb28a88961231b0b7a336469c4763fa"
+  },
+  "task_count": 24,
+  "riu_count": 119,
+  "critical_count": 55,
+  "ordinary_sample_count": 21,
+  "strata": [
+    {
+      "stratum": {
+        "domain": "cybersecurity_digital_safety",
+        "difficulty": "easy",
+        "scoring_mode": "binary"
+      },
+      "ordinary_units": 3,
+      "selected_units": 1
+    },
+    {
+      "stratum": {
+        "domain": "cybersecurity_digital_safety",
+        "difficulty": "hard",
+        "scoring_mode": "binary"
+      },
+      "ordinary_units": 2,
+      "selected_units": 1
+    },
+    {
+      "stratum": {
+        "domain": "cybersecurity_digital_safety",
+        "difficulty": "hard",
+        "scoring_mode": "ordinal"
+      },
+      "ordinary_units": 1,
+      "selected_units": 1
+    },
+    {
+      "stratum": {
+        "domain": "cybersecurity_digital_safety",
+        "difficulty": "medium",
+        "scoring_mode": "binary"
+      },
+      "ordinary_units": 9,
+      "selected_units": 2
+    },
+    {
+      "stratum": {
+        "domain": "decision_support",
+        "difficulty": "easy",
+        "scoring_mode": "binary"
+      },
+      "ordinary_units": 2,
+      "selected_units": 1
+    },
+    {
+      "stratum": {
+        "domain": "decision_support",
+        "difficulty": "hard",
+        "scoring_mode": "binary"
+      },
+      "ordinary_units": 3,
+      "selected_units": 1
+    },
+    {
+      "stratum": {
+        "domain": "decision_support",
+        "difficulty": "medium",
+        "scoring_mode": "binary"
+      },
+      "ordinary_units": 6,
+      "selected_units": 2
+    },
+    {
+      "stratum": {
+        "domain": "information_synthesis",
+        "difficulty": "easy",
+        "scoring_mode": "binary"
+      },
+      "ordinary_units": 1,
+      "selected_units": 1
+    },
+    {
+      "stratum": {
+        "domain": "information_synthesis",
+        "difficulty": "medium",
+        "scoring_mode": "binary"
+      },
+      "ordinary_units": 7,
+      "selected_units": 2
+    },
+    {
+      "stratum": {
+        "domain": "procedural_instructional",
+        "difficulty": "easy",
+        "scoring_mode": "binary"
+      },
+      "ordinary_units": 3,
+      "selected_units": 1
+    },
+    {
+      "stratum": {
+        "domain": "procedural_instructional",
+        "difficulty": "hard",
+        "scoring_mode": "binary"
+      },
+      "ordinary_units": 1,
+      "selected_units": 1
+    },
+    {
+      "stratum": {
+        "domain": "procedural_instructional",
+        "difficulty": "medium",
+        "scoring_mode": "binary"
+      },
+      "ordinary_units": 9,
+      "selected_units": 2
+    },
+    {
+      "stratum": {
+        "domain": "technical_troubleshooting",
+        "difficulty": "easy",
+        "scoring_mode": "binary"
+      },
+      "ordinary_units": 3,
+      "selected_units": 1
+    },
+    {
+      "stratum": {
+        "domain": "technical_troubleshooting",
+        "difficulty": "hard",
+        "scoring_mode": "binary"
+      },
+      "ordinary_units": 6,
+      "selected_units": 2
+    },
+    {
+      "stratum": {
+        "domain": "technical_troubleshooting",
+        "difficulty": "medium",
+        "scoring_mode": "binary"
+      },
+      "ordinary_units": 8,
+      "selected_units": 2
+    }
+  ],
+  "mandatory_unit_review_count": 76,
+  "human_reviewed_count": 0,
+  "approved_count": 0,
+  "ambiguities_and_boundary_questions": {
+    "CYBER032": [],
+    "CYBER039": [],
+    "CYBER067": [],
+    "CYBER097": [],
+    "CYBER088": [],
+    "DEC013": [],
+    "DEC020": [],
+    "DEC005": [],
+    "DEC015": [],
+    "DEC096": [],
+    "SYN072": [],
+    "SYN010": [],
+    "SYN056": [],
+    "SYN096": [],
+    "SYN026": [
+      {
+        "riu_ids": [
+          "RIU-02"
+        ],
+        "issue": "Accept 51 minutes only if explicitly defined as from first detection."
+      }
+    ],
+    "PROC033": [],
+    "PROC040": [],
+    "PROC097": [],
+    "PROC068": [],
+    "PROC048": [],
+    "TECH093": [],
+    "TECH100": [],
+    "TECH085": [],
+    "TECH017": []
+  },
+  "unit_checklist": [
+    {
+      "task_id": "CYBER032",
+      "riu_id": "RIU-01",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "CYBER032",
+      "riu_id": "RIU-02",
+      "review_reasons": [
+        "prespecified-ordinary-sample"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "CYBER032",
+      "riu_id": "RIU-03",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "CYBER032",
+      "riu_id": "RIU-04",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "CYBER032",
+      "riu_id": "RIU-05",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "CYBER039",
+      "riu_id": "RIU-01",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "CYBER039",
+      "riu_id": "RIU-02",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "CYBER039",
+      "riu_id": "RIU-03",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "CYBER039",
+      "riu_id": "RIU-04",
+      "review_reasons": [
+        "prespecified-ordinary-sample"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "CYBER039",
+      "riu_id": "RIU-05",
+      "review_reasons": [
+        "prespecified-ordinary-sample"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "CYBER039",
+      "riu_id": "RIU-06",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "CYBER067",
+      "riu_id": "RIU-01",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "CYBER067",
+      "riu_id": "RIU-02",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "CYBER067",
+      "riu_id": "RIU-03",
+      "review_reasons": [
+        "prespecified-ordinary-sample"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "CYBER067",
+      "riu_id": "RIU-04",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "CYBER067",
+      "riu_id": "RIU-05",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "CYBER088",
+      "riu_id": "RIU-01",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "CYBER088",
+      "riu_id": "RIU-02",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "CYBER088",
+      "riu_id": "RIU-03",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "CYBER088",
+      "riu_id": "RIU-04",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "CYBER088",
+      "riu_id": "RIU-05",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "CYBER097",
+      "riu_id": "RIU-01",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "CYBER097",
+      "riu_id": "RIU-02",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "CYBER097",
+      "riu_id": "RIU-03",
+      "review_reasons": [
+        "prespecified-ordinary-sample"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "CYBER097",
+      "riu_id": "RIU-04",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "CYBER097",
+      "riu_id": "RIU-05",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "DEC005",
+      "riu_id": "RIU-01",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "DEC005",
+      "riu_id": "RIU-02",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "DEC005",
+      "riu_id": "RIU-03",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "DEC005",
+      "riu_id": "RIU-04",
+      "review_reasons": [
+        "prespecified-ordinary-sample"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "DEC005",
+      "riu_id": "RIU-05",
+      "review_reasons": [
+        "prespecified-ordinary-sample"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "DEC013",
+      "riu_id": "RIU-01",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "DEC013",
+      "riu_id": "RIU-02",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "DEC013",
+      "riu_id": "RIU-03",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "DEC013",
+      "riu_id": "RIU-04",
+      "review_reasons": [
+        "prespecified-ordinary-sample"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "DEC015",
+      "riu_id": "RIU-01",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "DEC015",
+      "riu_id": "RIU-02",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "DEC015",
+      "riu_id": "RIU-03",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "DEC015",
+      "riu_id": "RIU-04",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "DEC020",
+      "riu_id": "RIU-01",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "DEC020",
+      "riu_id": "RIU-02",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "DEC020",
+      "riu_id": "RIU-03",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "DEC020",
+      "riu_id": "RIU-04",
+      "review_reasons": [
+        "prespecified-ordinary-sample"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "DEC020",
+      "riu_id": "RIU-05",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "DEC096",
+      "riu_id": "RIU-01",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "DEC096",
+      "riu_id": "RIU-02",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "DEC096",
+      "riu_id": "RIU-03",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "DEC096",
+      "riu_id": "RIU-04",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "PROC033",
+      "riu_id": "RIU-01",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "PROC033",
+      "riu_id": "RIU-02",
+      "review_reasons": [
+        "prespecified-ordinary-sample"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "PROC033",
+      "riu_id": "RIU-03",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "PROC033",
+      "riu_id": "RIU-04",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "PROC033",
+      "riu_id": "RIU-05",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "PROC040",
+      "riu_id": "RIU-01",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "PROC040",
+      "riu_id": "RIU-02",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "PROC040",
+      "riu_id": "RIU-03",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "PROC040",
+      "riu_id": "RIU-04",
+      "review_reasons": [
+        "prespecified-ordinary-sample"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "PROC048",
+      "riu_id": "RIU-01",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "PROC048",
+      "riu_id": "RIU-02",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "PROC048",
+      "riu_id": "RIU-03",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "PROC048",
+      "riu_id": "RIU-04",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "PROC048",
+      "riu_id": "RIU-05",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "PROC068",
+      "riu_id": "RIU-01",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "PROC068",
+      "riu_id": "RIU-02",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "PROC068",
+      "riu_id": "RIU-03",
+      "review_reasons": [
+        "prespecified-ordinary-sample"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "PROC068",
+      "riu_id": "RIU-04",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "PROC068",
+      "riu_id": "RIU-05",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "PROC068",
+      "riu_id": "RIU-06",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "PROC097",
+      "riu_id": "RIU-01",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "PROC097",
+      "riu_id": "RIU-02",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "PROC097",
+      "riu_id": "RIU-03",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "PROC097",
+      "riu_id": "RIU-04",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "PROC097",
+      "riu_id": "RIU-05",
+      "review_reasons": [
+        "prespecified-ordinary-sample"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "SYN010",
+      "riu_id": "RIU-01",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "SYN010",
+      "riu_id": "RIU-02",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "SYN010",
+      "riu_id": "RIU-03",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "SYN010",
+      "riu_id": "RIU-04",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "SYN026",
+      "riu_id": "RIU-01",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "SYN026",
+      "riu_id": "RIU-02",
+      "review_reasons": [
+        "all-critical",
+        "identified-ambiguity-or-boundary"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "SYN026",
+      "riu_id": "RIU-03",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "SYN026",
+      "riu_id": "RIU-04",
+      "review_reasons": [
+        "prespecified-ordinary-sample"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "SYN056",
+      "riu_id": "RIU-01",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "SYN056",
+      "riu_id": "RIU-02",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "SYN056",
+      "riu_id": "RIU-03",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "SYN056",
+      "riu_id": "RIU-04",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "SYN072",
+      "riu_id": "RIU-01",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "SYN072",
+      "riu_id": "RIU-02",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "SYN072",
+      "riu_id": "RIU-03",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "SYN072",
+      "riu_id": "RIU-04",
+      "review_reasons": [
+        "prespecified-ordinary-sample"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "SYN096",
+      "riu_id": "RIU-01",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "SYN096",
+      "riu_id": "RIU-02",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "SYN096",
+      "riu_id": "RIU-03",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "SYN096",
+      "riu_id": "RIU-04",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "SYN096",
+      "riu_id": "RIU-05",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "SYN096",
+      "riu_id": "RIU-06",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "SYN096",
+      "riu_id": "RIU-07",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "SYN096",
+      "riu_id": "RIU-08",
+      "review_reasons": [
+        "prespecified-ordinary-sample"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "TECH017",
+      "riu_id": "RIU-01",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "TECH017",
+      "riu_id": "RIU-02",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "TECH017",
+      "riu_id": "RIU-03",
+      "review_reasons": [
+        "prespecified-ordinary-sample"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "TECH017",
+      "riu_id": "RIU-04",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "TECH085",
+      "riu_id": "RIU-01",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "TECH085",
+      "riu_id": "RIU-02",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "TECH085",
+      "riu_id": "RIU-03",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "TECH085",
+      "riu_id": "RIU-04",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "TECH085",
+      "riu_id": "RIU-05",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "TECH085",
+      "riu_id": "RIU-06",
+      "review_reasons": [
+        "prespecified-ordinary-sample"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "TECH085",
+      "riu_id": "RIU-07",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "TECH093",
+      "riu_id": "RIU-01",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "TECH093",
+      "riu_id": "RIU-02",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "TECH093",
+      "riu_id": "RIU-03",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "TECH093",
+      "riu_id": "RIU-04",
+      "review_reasons": [
+        "prespecified-ordinary-sample"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "TECH100",
+      "riu_id": "RIU-01",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "TECH100",
+      "riu_id": "RIU-02",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "TECH100",
+      "riu_id": "RIU-03",
+      "review_reasons": [
+        "prespecified-ordinary-sample"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "TECH100",
+      "riu_id": "RIU-04",
+      "review_reasons": [
+        "prespecified-ordinary-sample"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "TECH100",
+      "riu_id": "RIU-05",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "TECH100",
+      "riu_id": "RIU-06",
+      "review_reasons": [],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    },
+    {
+      "task_id": "TECH100",
+      "riu_id": "RIU-07",
+      "review_reasons": [
+        "all-critical"
+      ],
+      "independent_review_status": "pending",
+      "reviewer": null,
+      "decision": null,
+      "reviewed_at": null
+    }
+  ],
+  "escalation": "A systematic rule error requires review of every affected unit in the batch and other drafted batches, including units outside the ordinary sample. Log scope, rule, affected IDs, revisions and resolution; rerun validation and regenerate packets before independent acceptance. No silent frozen edits."
+}

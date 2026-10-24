@@ -1,0 +1,33 @@
+{
+  "CYBER032": [],
+  "CYBER039": [],
+  "CYBER067": [],
+  "CYBER097": [],
+  "CYBER088": [],
+  "DEC013": [],
+  "DEC020": [],
+  "DEC005": [],
+  "DEC015": [],
+  "DEC096": [],
+  "SYN072": [],
+  "SYN010": [],
+  "SYN056": [],
+  "SYN096": [],
+  "SYN026": [
+    {
+      "riu_ids": [
+        "RIU-02"
+      ],
+      "issue": "Accept 51 minutes only if explicitly defined as from first detection."
+    }
+  ],
+  "PROC033": [],
+  "PROC040": [],
+  "PROC097": [],
+  "PROC068": [],
+  "PROC048": [],
+  "TECH093": [],
+  "TECH100": [],
+  "TECH085": [],
+  "TECH017": []
+}

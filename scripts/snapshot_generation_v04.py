@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Export objective, dated collection metadata; never read labels or call APIs."""
 import hashlib
+from datetime import datetime, timezone
+import gemini_quota
 import json
 from pathlib import Path
 import statistics
@@ -24,6 +26,13 @@ def export():
         current=json.loads(progress.read_text())
         snapshot['controller_workers_last_observed']=current.get('workers',{})
         snapshot['controller_workers_observed_at_utc']=current['at_utc']
+    config=gen.four.read(gen.BASE_CONFIG)
+    google=next(m for m in config['models'] if m['partition']=='google')
+    quota=gemini_quota.QuotaLedger(gen.ROOT/google['quota_config'])
+    events=quota.own(gen.four.historical.read_jsonl_records(quota.path))
+    now=quota.clock();day=datetime.fromtimestamp(now,gemini_quota.PACIFIC).date().isoformat()
+    used=sum(r['type']=='reserved' and r['pacific_day']==day for r in events)
+    snapshot['gemini_project_quota']={'pacific_day':day,'requests_reserved_today':used,'daily_limit':20,'remaining_daily_request_capacity':max(0,20-used),'next_daily_reset_utc':datetime.fromtimestamp(gemini_quota.next_day(now),timezone.utc).isoformat(),'includes_prior_probes_and_failed_attempts':True,'external_usage_beyond_this_shared_ledger_observable':False}
     snapshot['raw_file_hash_note']='Non-atomic live-file hashes identify bytes read at export; files remain append-only and continue growing. Cell counts use validated complete records read earlier during this snapshot.'
     snapshot['manuscript_status']='partial collection metadata only; production scoring and independent study-response QA pending'
     (D/'GENERATION_SNAPSHOT.json').write_text(json.dumps(snapshot,indent=2)+'\n')

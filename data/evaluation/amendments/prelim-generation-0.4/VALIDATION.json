@@ -1,0 +1,18 @@
+{
+  "validated_at_utc": "2026-10-24T04:13:12.700314+00:00",
+  "tests": "python -m unittest discover -s scripts -p test_generation_v04.py",
+  "tests_passed": 7,
+  "api_requests_during_validation": 0,
+  "generation_ready": true,
+  "scoring_ready": false,
+  "scope_change_completed_responses": 0,
+  "checks": [
+    "unchanged parent freeze",
+    "exact primary and exploratory cells",
+    "independent scoring blocked",
+    "USD80 protected reserve",
+    "no scoring CLI",
+    "local sequential schedule",
+    "worker failure isolation"
+  ]
+}

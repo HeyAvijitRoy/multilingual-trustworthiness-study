@@ -1,0 +1,18 @@
+{
+  "status": "approved-by-user",
+  "approved_date": "2026-10-24",
+  "timezone": "America/New_York",
+  "execution_amendment_id": "prelim-generation-0.4-20261024",
+  "generation_authorized": true,
+  "scoring_authorized": false,
+  "authorization_source": "two consecutive explicit user instructions in this conversation: generation decoupled from judge readiness, then primary three-model and exploratory Gemini scope",
+  "primary": "157 tasks, three languages, Sol/Qwen/Gemma, 1413 responses",
+  "gemini": "20 matched tasks, three languages, 60 exploratory responses, verified Free-tier limits",
+  "preserve": "all frozen tasks/prompts/configurations/accepted annotations/historical artifacts/outputs/calibration records",
+  "paid_total_cap_usd": 100,
+  "previous_paid_amount_counts": 0.542045,
+  "protected_evaluation_usd": 80,
+  "full_paid_expansion_authorized": false,
+  "no_unnecessary_approval_checkpoint": true,
+  "no_coauthor_trailers": true
+}

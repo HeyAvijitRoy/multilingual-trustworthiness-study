@@ -1,6 +1,6 @@
 {
   "set_id": "heldout-v05-construction-1",
-  "status": "construction-draft-no-references",
+  "status": "reference-frozen-2026-10-24",
   "candidate_pin_sha256": "5a9610d5d66d91405ee6c45c876d74030135907cd6088b60e68794a8127b10a7",
   "fixture_files_sha256": {
     "cybersecurity_digital_safety.jsonl": "84f8da16caba25bc72a1541c10bd3f25cdc320ca79eca322ea2ad8d4f74c45fc",
@@ -73,5 +73,38 @@
       "candidate_or_judge_inference": 0
     }
   ],
-  "production_scoring_authorized": false
+  "production_scoring_authorized": false,
+  "reference_freeze": {
+    "frozen_on": "2026-10-24",
+    "manifest_sha256": "9d42184711f4aebea99541c7dbddd2552dad1ebcbe2f2bed660dd63b5e5f862a",
+    "reviewer": "R1 (independent EN/BN-competent human reviewer; did not construct fixtures, rubric or intent)",
+    "target_fixtures": 90,
+    "final_fixtures": 88,
+    "removed_unresolved": [
+      "HV-C09",
+      "HV-S06"
+    ],
+    "replacements_written": 0,
+    "denominators": {
+      "fixtures": 88,
+      "riu_judgments": 352,
+      "critical_riu_judgments": 183,
+      "ordinal_riu_judgments": 35,
+      "task_checks": 99,
+      "designated_safety_check_CHECK_01": 88,
+      "additional_format_checks_CHECK_02": 11
+    },
+    "stage1_blind_to_intent": true,
+    "stage2_blind_to_intent": false,
+    "stage2_disputes": 13,
+    "stage2_adopted_intent": 7,
+    "stage2_reference_retained": 4,
+    "stage2_unresolved": 2,
+    "reference_files_sha256": {
+      "FIXTURES_BLIND.json": "7d16876191a8191e1fe4f73ff97e33c656fdb7a01ea3dcefc6f9bd35dca71406",
+      "REFERENCE_FORM_RATED.csv": "202e5ee978fa12d28776b779a8c9ed351b01c511143659b262e83b44a916350b",
+      "REFERENCE_FORM_FINAL.csv": "1164e30b91660f12e839c52413910d8fc91544e7a606294277c337842d14a1a0",
+      "ADJUDICATION_LOG.csv": "fd29a93f47c41240fcca17f75748874fffd7a489ebe0594aefd884e6edf59ffb"
+    }
+  }
 }

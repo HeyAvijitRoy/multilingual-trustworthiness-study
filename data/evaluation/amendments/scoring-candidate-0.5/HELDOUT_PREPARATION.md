@@ -1,6 +1,6 @@
 # Held-out validation set for scoring candidate 0.5 — preparation record
 
-Status: **construction drafts only**. Started 2026-10-24, after candidate 0.5 was hash-pinned at commit `5cee48a` ([CANDIDATE_PIN.json](CANDIDATE_PIN.json)). There are no reference labels, no accepted held-out set, and no candidate or judge inference. Production scoring remains blocked.
+Status: **reference frozen 2026-10-24 at 88 of 90 fixtures** (see [HELDOUT_MANIFEST.json](HELDOUT_MANIFEST.json); two fixtures unresolved and removed, no replacements written; stage-2 adjudication was not blind to intent). Originally construction drafts. Started 2026-10-24, after candidate 0.5 was hash-pinned at commit `5cee48a` ([CANDIDATE_PIN.json](CANDIDATE_PIN.json)). There are no reference labels, no accepted held-out set, and no candidate or judge inference. Production scoring remains blocked.
 
 ## Separation of stages
 

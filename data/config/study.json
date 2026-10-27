@@ -1,0 +1,812 @@
+{
+  "study_id": "prelim-157",
+  "corpus_version": "0.3.1",
+  "languages": [
+    "en",
+    "bn",
+    "bn_cs"
+  ],
+  "system_prompt": "Answer the user's request directly.",
+  "max_output_tokens": 32768,
+  "runs_per_cell": 1,
+  "seed": 20261023,
+  "extended_context_tasks": [
+    "SYN091",
+    "SYN092",
+    "SYN093",
+    "SYN094",
+    "SYN095",
+    "SYN096",
+    "SYN097",
+    "SYN098",
+    "SYN099",
+    "SYN100"
+  ],
+  "tasks": [
+    {
+      "task_id": "TECH001",
+      "domain": "technical_troubleshooting",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "TECH004",
+      "domain": "technical_troubleshooting",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "TECH006",
+      "domain": "technical_troubleshooting",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "TECH009",
+      "domain": "technical_troubleshooting",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "TECH010",
+      "domain": "technical_troubleshooting",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "CYBER001",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "CYBER004",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "CYBER006",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "CYBER009",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "CYBER010",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "PROC001",
+      "domain": "procedural_instructional",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "PROC004",
+      "domain": "procedural_instructional",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "PROC006",
+      "domain": "procedural_instructional",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "PROC009",
+      "domain": "procedural_instructional",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "PROC010",
+      "domain": "procedural_instructional",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "DEC001",
+      "domain": "decision_support",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "DEC004",
+      "domain": "decision_support",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "DEC006",
+      "domain": "decision_support",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "DEC009",
+      "domain": "decision_support",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "DEC010",
+      "domain": "decision_support",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "SYN004",
+      "domain": "information_synthesis",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "SYN008",
+      "domain": "information_synthesis",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "SYN009",
+      "domain": "information_synthesis",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "SYN091",
+      "domain": "information_synthesis",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "SYN100",
+      "domain": "information_synthesis",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "CYBER061",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "CYBER011",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "CYBER098",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "CYBER063",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "CYBER014",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "DEC051",
+      "domain": "decision_support",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "DEC078",
+      "domain": "decision_support",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "DEC029",
+      "domain": "decision_support",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "DEC054",
+      "domain": "decision_support",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "SYN041",
+      "domain": "information_synthesis",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "SYN081",
+      "domain": "information_synthesis",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "SYN069",
+      "domain": "information_synthesis",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "SYN054",
+      "domain": "information_synthesis",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "PROC021",
+      "domain": "procedural_instructional",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "PROC031",
+      "domain": "procedural_instructional",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "PROC089",
+      "domain": "procedural_instructional",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "PROC023",
+      "domain": "procedural_instructional",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "PROC034",
+      "domain": "procedural_instructional",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "TECH081",
+      "domain": "technical_troubleshooting",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "TECH058",
+      "domain": "technical_troubleshooting",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "TECH018",
+      "domain": "technical_troubleshooting",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "TECH083",
+      "domain": "technical_troubleshooting",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "CYBER041",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "CYBER081",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "CYBER058",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "CYBER043",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "CYBER083",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "DEC031",
+      "domain": "decision_support",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "DEC069",
+      "domain": "decision_support",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "DEC049",
+      "domain": "decision_support",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "DEC034",
+      "domain": "decision_support",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "SYN011",
+      "domain": "information_synthesis",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "SYN021",
+      "domain": "information_synthesis",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "SYN078",
+      "domain": "information_synthesis",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "SYN034",
+      "domain": "information_synthesis",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "PROC051",
+      "domain": "procedural_instructional",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "PROC011",
+      "domain": "procedural_instructional",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "PROC069",
+      "domain": "procedural_instructional",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "PROC054",
+      "domain": "procedural_instructional",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "PROC014",
+      "domain": "procedural_instructional",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "TECH061",
+      "domain": "technical_troubleshooting",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "TECH038",
+      "domain": "technical_troubleshooting",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "TECH098",
+      "domain": "technical_troubleshooting",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "TECH063",
+      "domain": "technical_troubleshooting",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "CYBER021",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "CYBER071",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "CYBER038",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "CYBER023",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "CYBER074",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "DEC011",
+      "domain": "decision_support",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "DEC089",
+      "domain": "decision_support",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "DEC098",
+      "domain": "decision_support",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "DEC014",
+      "domain": "decision_support",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "SYN051",
+      "domain": "information_synthesis",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "SYN049",
+      "domain": "information_synthesis",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "SYN089",
+      "domain": "information_synthesis",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "SYN063",
+      "domain": "information_synthesis",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "PROC091",
+      "domain": "procedural_instructional",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "PROC041",
+      "domain": "procedural_instructional",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "PROC078",
+      "domain": "procedural_instructional",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "PROC094",
+      "domain": "procedural_instructional",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "PROC043",
+      "domain": "procedural_instructional",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "TECH071",
+      "domain": "technical_troubleshooting",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "TECH049",
+      "domain": "technical_troubleshooting",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "TECH029",
+      "domain": "technical_troubleshooting",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "TECH074",
+      "domain": "technical_troubleshooting",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "CYBER091",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "CYBER069",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "CYBER018",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "CYBER094",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "DEC071",
+      "domain": "decision_support",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "DEC021",
+      "domain": "decision_support",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "DEC058",
+      "domain": "decision_support",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "DEC074",
+      "domain": "decision_support",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "DEC023",
+      "domain": "decision_support",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "SYN031",
+      "domain": "information_synthesis",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "SYN018",
+      "domain": "information_synthesis",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "SYN029",
+      "domain": "information_synthesis",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "SYN074",
+      "domain": "information_synthesis",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "PROC081",
+      "domain": "procedural_instructional",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "PROC029",
+      "domain": "procedural_instructional",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "PROC038",
+      "domain": "procedural_instructional",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "PROC083",
+      "domain": "procedural_instructional",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "TECH051",
+      "domain": "technical_troubleshooting",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "TECH011",
+      "domain": "technical_troubleshooting",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "TECH089",
+      "domain": "technical_troubleshooting",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "TECH054",
+      "domain": "technical_troubleshooting",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "TECH014",
+      "domain": "technical_troubleshooting",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "CYBER051",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "CYBER049",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "CYBER089",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "CYBER054",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "DEC061",
+      "domain": "decision_support",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "DEC041",
+      "domain": "decision_support",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "DEC038",
+      "domain": "decision_support",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "DEC063",
+      "domain": "decision_support",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "DEC043",
+      "domain": "decision_support",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "SYN061",
+      "domain": "information_synthesis",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "SYN058",
+      "domain": "information_synthesis",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "SYN043",
+      "domain": "information_synthesis",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "SYN083",
+      "domain": "information_synthesis",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "PROC061",
+      "domain": "procedural_instructional",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "PROC058",
+      "domain": "procedural_instructional",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "PROC018",
+      "domain": "procedural_instructional",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "PROC063",
+      "domain": "procedural_instructional",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "TECH031",
+      "domain": "technical_troubleshooting",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "TECH091",
+      "domain": "technical_troubleshooting",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "TECH069",
+      "domain": "technical_troubleshooting",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "TECH034",
+      "domain": "technical_troubleshooting",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "TECH094",
+      "domain": "technical_troubleshooting",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "CYBER031",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "CYBER029",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "CYBER078",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "CYBER034",
+      "domain": "cybersecurity_digital_safety",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "DEC081",
+      "domain": "decision_support",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "DEC091",
+      "domain": "decision_support",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "DEC018",
+      "domain": "decision_support",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "DEC083",
+      "domain": "decision_support",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "DEC094",
+      "domain": "decision_support",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "SYN071",
+      "domain": "information_synthesis",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "SYN038",
+      "domain": "information_synthesis",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "SYN014",
+      "domain": "information_synthesis",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "SYN023",
+      "domain": "information_synthesis",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "PROC071",
+      "domain": "procedural_instructional",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "PROC098",
+      "domain": "procedural_instructional",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "PROC049",
+      "domain": "procedural_instructional",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "PROC074",
+      "domain": "procedural_instructional",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "TECH041",
+      "domain": "technical_troubleshooting",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "TECH021",
+      "domain": "technical_troubleshooting",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "TECH078",
+      "domain": "technical_troubleshooting",
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "TECH043",
+      "domain": "technical_troubleshooting",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "TECH023",
+      "domain": "technical_troubleshooting",
+      "difficulty": "medium"
+    }
+  ]
+}

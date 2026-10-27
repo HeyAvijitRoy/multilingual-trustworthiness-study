@@ -1,0 +1,49 @@
+{
+  "disputed_fixtures": [
+    "HV-C12",
+    "HV-D18",
+    "HV-P02",
+    "HV-P03",
+    "HV-P12",
+    "HV-S03",
+    "HV-S13",
+    "HV-T17"
+  ],
+  "decoy_fixtures": [
+    "HV-C03",
+    "HV-C08",
+    "HV-C11",
+    "HV-C14",
+    "HV-D07",
+    "HV-D09",
+    "HV-P09",
+    "HV-P14",
+    "HV-T03",
+    "HV-T05",
+    "HV-T09",
+    "HV-T13"
+  ],
+  "seed": 20261024,
+  "order": [
+    "HV-C11",
+    "HV-D18",
+    "HV-P03",
+    "HV-C12",
+    "HV-C08",
+    "HV-P14",
+    "HV-D09",
+    "HV-T13",
+    "HV-P12",
+    "HV-D07",
+    "HV-T05",
+    "HV-S13",
+    "HV-T17",
+    "HV-P02",
+    "HV-C14",
+    "HV-S03",
+    "HV-T03",
+    "HV-C03",
+    "HV-P09",
+    "HV-T09"
+  ]
+}

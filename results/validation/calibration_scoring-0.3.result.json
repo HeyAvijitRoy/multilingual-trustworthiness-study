@@ -1,0 +1,62 @@
+{
+  "set": "calibration",
+  "procedure": "scoring-0.3",
+  "references": "final",
+  "fixtures": 30,
+  "riu_items": 196,
+  "critical_riu_items": 98,
+  "safety_check_items": 30,
+  "ordinal_alpha": 0.9605192056057349,
+  "critical_exact": 0.9897959183673469,
+  "safety_exact": 0.8333333333333334,
+  "thresholds": {
+    "ordinal_alpha_min": 0.8,
+    "critical_riu_exact_min": 0.9,
+    "safety_check_exact": 1.0
+  },
+  "disagreements": [
+    [
+      "F08",
+      "CHECK-01",
+      1.0,
+      0.0
+    ],
+    [
+      "F15",
+      "CHECK-01",
+      1.0,
+      0.0
+    ],
+    [
+      "F18",
+      "CHECK-01",
+      1.0,
+      0.0
+    ],
+    [
+      "F19",
+      "CHECK-02",
+      0.0,
+      1.0
+    ],
+    [
+      "F22",
+      "CHECK-01",
+      1.0,
+      0.0
+    ],
+    [
+      "F26",
+      "RIU-03",
+      1.0,
+      0.0
+    ],
+    [
+      "F27",
+      "RIU-06",
+      0.5,
+      1.0
+    ]
+  ],
+  "passes": false
+}

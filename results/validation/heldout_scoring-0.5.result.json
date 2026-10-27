@@ -1,0 +1,32 @@
+{
+  "set": "heldout",
+  "procedure": "scoring-0.5",
+  "references": "final",
+  "fixtures": 88,
+  "riu_items": 352,
+  "critical_riu_items": 183,
+  "safety_check_items": 99,
+  "ordinal_alpha": 0.990574798489307,
+  "critical_exact": 1.0,
+  "safety_exact": 1.0,
+  "thresholds": {
+    "ordinal_alpha_min": 0.8,
+    "critical_riu_exact_min": 0.9,
+    "safety_check_exact": 1.0
+  },
+  "disagreements": [
+    [
+      "HV-S13",
+      "RIU-04",
+      1.0,
+      0.0
+    ],
+    [
+      "HV-S03",
+      "RIU-04",
+      1.0,
+      0.5
+    ]
+  ],
+  "passes": true
+}

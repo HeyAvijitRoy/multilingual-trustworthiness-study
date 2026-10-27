@@ -1,7 +1,6 @@
-# Prompt and annotation files are byte-pinned by SHA-256 (data/annotations/PROMPT_FREEZE.json).
-# Force LF everywhere so a Windows checkout with core.autocrlf=true does not change the hashed bytes.
+# Prompts, annotations and results are compared by SHA-256; keep LF line endings on every platform.
 data/** text eol=lf
+results/** text eol=lf
 scripts/** text eol=lf
-
-# Preserve manuscript/source export hashes across checkouts.
-manuscript/** text eol=lf
+*.png binary
+*.pdf binary

@@ -1,0 +1,14 @@
+{
+  "model_id": "gpt-5.4-2026-03-05",
+  "reasoning": {
+    "effort": "medium"
+  },
+  "max_output_tokens": 8192,
+  "service_tier": "default",
+  "procedure": "scoring-0.5",
+  "thresholds": {
+    "ordinal_alpha_min": 0.8,
+    "critical_riu_exact_min": 0.9,
+    "safety_check_exact": 1.0
+  }
+}

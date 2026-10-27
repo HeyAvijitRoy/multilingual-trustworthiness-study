@@ -1,0 +1,98 @@
+{
+  "generated_at_utc": "2026-10-25T10:24:28.165102Z",
+  "models": {
+    "sol": {
+      "model_id": "gpt-6.1-sol",
+      "role": "primary",
+      "responses": 471,
+      "scored": 471,
+      "by_language": {
+        "en": 157,
+        "bn": 157,
+        "bn_cs": 157
+      },
+      "truncated": 0,
+      "generation_errors": 0,
+      "scoring_errors_open": 0,
+      "generation_cost_usd": 3.17,
+      "scoring_cost_usd": 8.31
+    },
+    "gemini": {
+      "model_id": "gemini-3.8-flash",
+      "role": "exploratory",
+      "responses": 20,
+      "scored": 20,
+      "by_language": {
+        "en": 5,
+        "bn": 7,
+        "bn_cs": 8
+      },
+      "truncated": 0,
+      "generation_errors": 0,
+      "scoring_errors_open": 0,
+      "generation_cost_usd": 0.0,
+      "scoring_cost_usd": 0.48
+    },
+    "qwen": {
+      "model_id": "Qwen/Qwen3.5-9B",
+      "role": "primary",
+      "responses": 471,
+      "scored": 471,
+      "by_language": {
+        "en": 157,
+        "bn": 157,
+        "bn_cs": 157
+      },
+      "truncated": 2,
+      "generation_errors": 0,
+      "scoring_errors_open": 0,
+      "generation_cost_usd": 0.0,
+      "scoring_cost_usd": 12.88
+    },
+    "gemma": {
+      "model_id": "google/gemma-4-12B-it",
+      "role": "primary",
+      "responses": 471,
+      "scored": 471,
+      "by_language": {
+        "en": 157,
+        "bn": 157,
+        "bn_cs": 157
+      },
+      "truncated": 0,
+      "generation_errors": 0,
+      "scoring_errors_open": 0,
+      "generation_cost_usd": 0.0,
+      "scoring_cost_usd": 11.38
+    }
+  },
+  "problems": [],
+  "validation": {
+    "calibration_scoring-0.3": {
+      "fixtures": 30,
+      "ordinal_alpha": 0.9605192056057349,
+      "critical_exact": 0.9897959183673469,
+      "safety_exact": 0.8333333333333334,
+      "passes": false
+    },
+    "heldout_scoring-0.5.before-rerate": {
+      "fixtures": 88,
+      "ordinal_alpha": 0.977420720713342,
+      "critical_exact": 0.994535519125683,
+      "safety_exact": 0.9595959595959596,
+      "passes": false
+    },
+    "heldout_scoring-0.5": {
+      "fixtures": 88,
+      "ordinal_alpha": 0.990574798489307,
+      "critical_exact": 1.0,
+      "safety_exact": 1.0,
+      "passes": true
+    }
+  },
+  "total_cost_usd": 38.05,
+  "notes": [
+    "Gemini is exploratory: 20 of 60 planned responses (20 matched tasks x 3 languages); collection stopped and Gemini is excluded from the primary analysis.",
+    "QA sample study (independent human check of a sample of study scores): pending."
+  ]
+}

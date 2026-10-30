@@ -10,7 +10,7 @@ What happened, by date. Methods are in `PROTOCOL.md`; current numbers are in `re
 | 2026-10-18 | Corpus v0.3: BN and BN-CS hand-rewritten for all 500 tasks after review found grammar, meaning and calque problems in v0.2. Validated by the independent reviewer. |
 | 2026-10-18 | Corpus v0.3.1: SYN079 English deadline clarified. Corpus frozen. Single-reviewer protocol for rubric review adopted. Pilot rubric revision 2 applied. |
 | 2026-10-19 | Pilot frozen as gold (`pilot-gold-0.2`). Scoring-agreement threshold pre-registered (ordinal alpha ≥ 0.80). 30 calibration fixtures written. |
-| 2026-10-20 | Human scoring calibration round 1: alpha 0.959 (two independent raters). |
+| 2026-10-20 | Scoring calibration round 1: alpha 0.959 (two independent raters). |
 | 2026-10-22 | `CHECK-01` clarified as orthogonal to RIU scores (protocol 0.3). Targeted round 2 resolved the disputed items. Scoring calibration signed off. Expansion batches E1 and E2 accepted. |
 | 2026-10-23 | Expansion batches E3–E6 accepted: 157 gold tasks, 743 RIUs, 348 critical. Task snapshot, analysis plan and model panel frozen. USD 100 budget set. |
 | 2026-10-23 | Panel set to Sol, Gemini 3.8 Flash, Qwen3.5-9B and Gemma 4 12B; judge set to GPT-5.4. Local GPU (A100 40 GB) verified. Draft rubrics prepared for the remaining 343 tasks. |

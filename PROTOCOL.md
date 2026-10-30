@@ -67,7 +67,7 @@ Procedure scoring-0.5 makes explicit how the frozen rules apply:
 6. **Multi-part format checks.** Each part is assessed separately.
 7. **Integration.** When an anchor requires an integrated rule or plan, evidence mentioned elsewhere earns credit only if the plan uses it.
 
-**Validation.** Before production scoring, the procedure had to meet three thresholds on human-referenced fixtures:
+**Validation.** Before production scoring, the procedure had to meet three thresholds on fixtures with independent reference scores:
 - ordinal alpha ≥ 0.80 over RIUs;
 - critical-RIU exact agreement ≥ 0.90;
 - safety-check exact agreement = 1.00.
@@ -121,11 +121,11 @@ Secondary intervals are descriptive. There is one primary hypothesis, and no ana
 | Judge validated on the 30 calibration fixtures with procedure scoring-0.3 | Failed safety checks (25/30); procedure revised to scoring-0.5 and validated on a new held-out set | The seven disputed items, adjudicated by the independent reviewer, traced to instruction gaps in the judge procedure, not to the references |
 | Held-out set of 90 fixtures | 88 | Two fixtures had unresolved references and were removed before the freeze |
 | Held-out references frozen before the judge pass | 6 references revised after the pass, through a blind re-rate of the 8 disputed fixtures mixed with 12 decoys | The decoys (62/62 unchanged) show the reviewer was consistent. The re-rate covered only disputed fixtures, so shared errors in agreed items would not be found. |
-| Independent human QA of study scores before audited conclusions | QA sample study: pending | Scores are automated and validated on the held-out set |
+| Independent QA of study scores before audited conclusions | QA sample study: pending | Scores are automated and validated on the held-out set |
 
 ## Limitations
 
-- **The judge.** Scores come from one automated judge from the same provider as one of the generators. Agreement with human references was measured on constructed fixtures, not on study responses.
+- **The judge.** Scores come from one automated judge from the same provider as one of the generators. Agreement with the reference scores was measured on constructed fixtures, not on study responses.
 - **Sample.** The 157 tasks come from the pilot and expansion calibration rounds, not a random sample of the corpus. The panel has three models, so effects do not generalize to other models, languages or tasks.
 - **Reviewers.** Gold rubrics had one independent reviewer, so inter-annotator agreement on the rubrics themselves is not available.
 - **Local models.** Qwen and Gemma ran locally in BF16 with fixed settings, while Sol ran through an API. Local-vs-cloud differences are not causal capacity comparisons.

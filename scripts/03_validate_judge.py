@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Step 03: validate the automated judge against human reference scores.
+"""Step 03: validate the automated judge against independent reference scores.
 
 Two validation sets live under data/validation/:
   heldout      88 fixtures built for scoring-0.5; references include the blind re-rate

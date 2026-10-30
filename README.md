@@ -6,7 +6,7 @@ Do large language models drop trustworthiness-critical information when the same
 
 - **Tasks:** 157 with accepted gold rubrics (743 RIUs, 348 critical).
 - **Responses:** 157 tasks × 3 languages × 3 models = 1,413.
-- **Scoring:** an automated judge whose procedure was validated against independent human references (alpha 0.99; critical and safety-check agreement 100% on 88 held-out fixtures).
+- **Scoring:** an automated judge whose procedure was validated against independent reference scores (alpha 0.99; critical and safety-check agreement 100% on 88 held-out fixtures).
 
 | Model | Critical coverage EN / BN / BN-CS | Critical omission EN / BN / BN-CS |
 |---|---|---|
@@ -32,7 +32,7 @@ data/
   prompts/             500-task corpus, EN / BN / BN-CS (v0.3.1, frozen)
   annotations/         gold/ (157 accepted rubrics), drafts/ (343)
   config/              study, model and judge settings
-  validation/          judge validation sets with human references
+  validation/          judge validation sets with reference scores
 results/
   responses/           one JSONL per model
   scores/              judge ratings per response
@@ -49,7 +49,7 @@ notebooks/analysis.ipynb   walkthrough of the results
 |---|---|---|---|
 | 01 | `python3 scripts/01_validate_inputs.py` | Validates corpus, annotations, config and validation sets | free |
 | 02 | `python3 scripts/02_generate.py run --model sol\|qwen\|gemma` | Generates missing responses (`plan` lists them) | Sol paid; Qwen/Gemma need a CUDA GPU |
-| 03 | `python3 scripts/03_validate_judge.py assess --set heldout` | Judge agreement with human references (`run` scores fixtures) | `run` paid |
+| 03 | `python3 scripts/03_validate_judge.py assess --set heldout` | Judge agreement with reference scores (`run` scores fixtures) | `run` paid |
 | 04 | `python3 scripts/04_score.py run` | Scores unscored responses with the validated judge (`plan` lists them) | paid |
 | 05 | `python3 scripts/05_status.py` | Integrity checks; writes `results/STATUS.md` | free |
 | 06 | `python3 scripts/06_analyze.py` | Pre-registered analysis; writes `results/analysis/` | free |

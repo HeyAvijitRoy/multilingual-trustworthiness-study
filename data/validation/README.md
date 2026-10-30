@@ -1,6 +1,6 @@
 # Judge validation sets
 
-Both sets pair a prompt and a constructed response with a rubric and human reference scores. `scripts/03_validate_judge.py` compares the automated judge with the references.
+Both sets pair a prompt and a constructed response with a rubric and reference scores. `scripts/03_validate_judge.py` compares the automated judge with the references.
 
 Acceptance thresholds, all required:
 - ordinal Krippendorff's alpha ≥ 0.80 over RIUs;
@@ -24,7 +24,7 @@ Acceptance thresholds, all required:
 
 ## `calibration/`: the original 30 fixtures
 
-These 30 controlled responses are built on study tasks, covering partial reasoning, conditional safeguards, contradictions, wrong numbers and format failures in all three languages. The references are the answer key used for the human scoring calibration.
+These 30 controlled responses are built on study tasks, covering partial reasoning, conditional safeguards, contradictions, wrong numbers and format failures in all three languages. The references are the answer key used for the scoring calibration.
 
 The automated judge with the earlier procedure (`scoring-0.3`) was assessed on this set on 2026-10-24 and failed the safety-check threshold (25/30). The set is now exposed to procedure development and is kept for transparency, not as held-out evidence.
 

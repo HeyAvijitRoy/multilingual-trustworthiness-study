@@ -1,6 +1,6 @@
 # Study status
 
-Generated 2026-10-31 07:25 UTC by `scripts/05_status.py`.
+Generated 2026-10-31 07:50 UTC by `scripts/05_status.py`.
 
 ## Responses and scores
 
@@ -29,3 +29,4 @@ All checks pass.
 
 - Gemini is exploratory: 20 of 60 planned responses (20 matched tasks x 3 languages); collection stopped and Gemini is excluded from the primary analysis.
 - QA sample study (independent check of a sample of study scores): done, see results/qa/summary.md.
+- Score review: 7 corrected items; original ratings are retained within each score record. Human QA compares the initial judge scores.

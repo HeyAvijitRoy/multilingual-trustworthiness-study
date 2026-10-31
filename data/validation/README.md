@@ -1,6 +1,6 @@
 # Judge validation sets
 
-Both sets pair a prompt and a constructed response with a rubric and reference scores. `scripts/03_validate_judge.py` compares the automated judge with the references.
+Both sets pair a prompt and a constructed response with a rubric and reference scores. Initial references were drafted with AI assistance and validated by humans. `scripts/03_validate_judge.py` compares the automated judge with the references.
 
 Acceptance thresholds, all required:
 - ordinal Krippendorff's alpha ≥ 0.80 over RIUs;

@@ -13,7 +13,7 @@ import sys
 from collections import Counter
 
 from common import (LANGS, RESULTS, SCORING_PROCEDURE, load_annotations, load_models, load_prompts, read_json, read_jsonl,
-                    sha256_text, study_cells, utc_now, validate_ratings, write_json)
+                    sha256_text, study_cells, utc_now, validate_ratings, write_json, initial_ratings)
 
 
 def check_model(model, cells, annotations, prompts):
@@ -46,11 +46,13 @@ def check_model(model, cells, annotations, prompts):
             errors.append(f'{key}: score from procedure {s["procedure"]} {cell}')
         try:
             validate_ratings(annotations[s['task_id']], s['ratings'])
+            validate_ratings(annotations[s['task_id']], initial_ratings(s))
         except ValueError as exc:
             errors.append(f'{key}: invalid ratings {cell}: {exc}')
     summary = {'model_id': model['model_id'], 'role': model['role'], 'responses': len(responses), 'scored': len(scores),
                'by_language': {lang: sum(r['language'] == lang for r in responses) for lang in LANGS},
                'truncated': sum(r['truncated'] for r in responses),
+               'reviewed_items': sum(len(v['changes']) for s in scores for v in s.get('reviews', [])),
                'generation_errors': len(read_jsonl(RESULTS / f'responses/{key}.errors.jsonl')),
                'scoring_errors_open': len(read_jsonl(RESULTS / f'scores/{key}.errors.jsonl')),
                'generation_cost_usd': round(sum(r['cost_usd'] for r in responses), 2),
@@ -103,6 +105,8 @@ def main():
         'collection stopped and Gemini is excluded from the primary analysis.',
         'QA sample study (independent check of a sample of study scores): '
         + ('done, see results/qa/summary.md.' if (RESULTS / 'qa').exists() else 'pending.'),
+        f"Score review: {sum(m['reviewed_items'] for m in status['models'].values())} corrected items; "
+        'original ratings are retained within each score record. Human QA compares the initial judge scores.',
     ]
     write_json(RESULTS / 'status.json', status)
     (RESULTS / 'STATUS.md').write_text(render(status), encoding='utf-8')

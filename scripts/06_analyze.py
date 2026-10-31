@@ -21,7 +21,7 @@ from collections import defaultdict
 
 import numpy as np
 
-from common import LANGS, RESULTS, load_annotations, load_models, load_study, read_jsonl, utc_now, validate_ratings, write_json
+from common import LANGS, RESULTS, load_annotations, load_models, load_study, read_jsonl, utc_now, validate_ratings, write_json, initial_ratings
 
 METRICS = ('critical_omission_rate', 'critical_coverage', 'riu_coverage', 'strict_complete_task_success',
            'strict_riu_coverage', 'critical_unmet_rate', 'critical_zero_rate', 'core_task_success')
@@ -54,13 +54,14 @@ def response_metrics(rec, ratings):
     return out
 
 
-def load_rows():
+def load_rows(before_review=False):
     """{(model, task_id, language): metrics} for every scored response, plus truncated cells."""
     annotations, rows, truncated = load_annotations('gold'), {}, set()
     for key in load_models():
         trunc = {(r['task_id'], r['language']) for r in read_jsonl(RESULTS / f'responses/{key}.jsonl') if r['truncated']}
         for s in read_jsonl(RESULTS / f'scores/{key}.jsonl'):
-            rows[key, s['task_id'], s['language']] = response_metrics(annotations[s['task_id']], s['ratings'])
+            ratings = initial_ratings(s) if before_review else s['ratings']
+            rows[key, s['task_id'], s['language']] = response_metrics(annotations[s['task_id']], ratings)
             if (s['task_id'], s['language']) in trunc:
                 truncated.add((key, s['task_id'], s['language']))
     return rows, truncated
@@ -146,6 +147,11 @@ def analyze(replicates=10_000):
         'excluding_truncated': full.table(no_trunc, primary),
     }
     report['primary'] = report['effects']['critical_omission_rate:bn-en']
+    review_count = sum(len(v['changes']) for m in models for s in read_jsonl(RESULTS / f'scores/{m}.jsonl')
+                       for v in s.get('reviews', []))
+    if review_count:
+        initial, _ = load_rows(before_review=True)
+        report['review'] = {'corrected_items': review_count, 'initial_effects': full.table(initial, primary)}
     return report
 
 
@@ -200,8 +206,20 @@ def summary(report, models):
     for key, d in report['exploratory_descriptive'].items():
         if d['n']:
             lines.append(f"| {key.split(':')[1]} | {d['n']} | {d['critical_omission_rate']:.3f} | {d['critical_coverage']:.3f} | {d['riu_coverage']:.3f} |")
+    if report.get('review'):
+        lines += ['', '## Score review', '',
+                  f"{report['review']['corrected_items']} item ratings were corrected after review of the 17 QA disagreements. "
+                  'These tables use corrected ratings; original ratings and review reasons remain in the score records. '
+                  'This targeted review is not a full revalidation of the judge. Human QA agreement in results/qa/ uses the initial judge ratings.', '',
+                  '| Outcome / contrast | Initial [95% CI] | After review [95% CI] |', '|---|---|---|']
+        for key in ('critical_omission_rate:bn-en', 'critical_coverage:bn-en',
+                    'strict_complete_task_success:bn-en', 'riu_coverage:bn_cs-bn'):
+            before, after = report['review']['initial_effects'][key], report['effects'][key]
+            lines.append(f"| {key} | {fmt(before['estimate'])} {fmt_ci(before['ci95'])} | "
+                         f"{fmt(after['estimate'])} {fmt_ci(after['ci95'])} |")
     lines += ['', f"Truncated responses retained in the primary analysis: {', '.join(report['truncated_cells']) or 'none'}.",
-              'Scores are automated (judge validated on the held-out set); the QA sample study of study scores is in results/qa/.']
+              'Scores originate from the automated judge, with recorded review corrections where present; '
+              'the QA sample study is in results/qa/.']
     return '\n'.join(lines) + '\n'
 
 

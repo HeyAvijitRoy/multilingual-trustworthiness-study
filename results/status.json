@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-10-31T07:25:57.711822Z",
+  "generated_at_utc": "2026-10-31T07:50:07.765880Z",
   "models": {
     "sol": {
       "model_id": "gpt-6.1-sol",
@@ -12,6 +12,7 @@
         "bn_cs": 157
       },
       "truncated": 0,
+      "reviewed_items": 0,
       "generation_errors": 0,
       "scoring_errors_open": 0,
       "generation_cost_usd": 3.17,
@@ -28,6 +29,7 @@
         "bn_cs": 8
       },
       "truncated": 0,
+      "reviewed_items": 0,
       "generation_errors": 0,
       "scoring_errors_open": 0,
       "generation_cost_usd": 0.0,
@@ -44,6 +46,7 @@
         "bn_cs": 157
       },
       "truncated": 2,
+      "reviewed_items": 3,
       "generation_errors": 0,
       "scoring_errors_open": 0,
       "generation_cost_usd": 0.0,
@@ -60,6 +63,7 @@
         "bn_cs": 157
       },
       "truncated": 0,
+      "reviewed_items": 4,
       "generation_errors": 0,
       "scoring_errors_open": 0,
       "generation_cost_usd": 0.0,
@@ -93,6 +97,7 @@
   "total_cost_usd": 38.05,
   "notes": [
     "Gemini is exploratory: 20 of 60 planned responses (20 matched tasks x 3 languages); collection stopped and Gemini is excluded from the primary analysis.",
-    "QA sample study (independent check of a sample of study scores): done, see results/qa/summary.md."
+    "QA sample study (independent check of a sample of study scores): done, see results/qa/summary.md.",
+    "Score review: 7 corrected items; original ratings are retained within each score record. Human QA compares the initial judge scores."
   ]
 }

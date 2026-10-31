@@ -1,5 +1,6 @@
 """Shared paths, loaders, judge procedure and HTTP helpers for the numbered pipeline scripts."""
 import csv
+import copy
 import hashlib
 import json
 import math
@@ -242,6 +243,28 @@ def validate_ratings(rec, ratings):
         elif score not in CHECK_REASONS or r['reason'] not in CHECK_REASONS[score]:
             raise ValueError(f'{item_id}: invalid check score/reason')
     return {k: float(v['score']) for k, v in got.items()}
+
+
+def initial_ratings(score):
+    """Recover initial judge ratings while checking the chain of recorded reviews."""
+    ratings = copy.deepcopy(score['ratings'])
+    by_id = {r['item_id']: r for r in ratings}
+    for review in reversed(score.get('reviews', [])):
+        if review['response_sha256'] != score['response_sha256']:
+            raise ValueError('review response hash differs from score')
+        if not review.get('reviewer') or not review.get('reviewed_at_utc'):
+            raise ValueError('review provenance missing')
+        seen = set()
+        for change in review['changes']:
+            before, after = change['original_rating'], change['corrected_rating']
+            item_id = before['item_id']
+            if item_id in seen or item_id != after['item_id'] or by_id.get(item_id) != after:
+                raise ValueError('review does not match current rating: ' + item_id)
+            if not change.get('rationale'):
+                raise ValueError('review rationale missing: ' + item_id)
+            seen.add(item_id)
+            by_id[item_id] = copy.deepcopy(before)
+    return [by_id[r['item_id']] for r in ratings]
 
 
 # ---------------------------------------------------------------- OpenAI Responses API

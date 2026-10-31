@@ -6,22 +6,24 @@ Do large language models drop trustworthiness-critical information when the same
 
 - **Tasks:** 157 with accepted gold rubrics (743 RIUs, 348 critical).
 - **Responses:** 157 tasks × 3 languages × 3 models = 1,413.
-- **Scoring:** an automated judge whose procedure was validated against independent reference scores (alpha 0.99; critical and safety-check agreement 100% on 88 held-out fixtures).
+- **Scoring:** an automated judge assessed against reference scores initially drafted with AI assistance and validated by humans. On 88 held-out fixtures, original-reference agreement was alpha 0.9774, critical 182/183 and task checks 95/99; after blinded selective reference re-rating, agreement was alpha 0.9906, critical 183/183 and task checks 99/99.
 
 | Model | Critical coverage EN / BN / BN-CS | Critical omission EN / BN / BN-CS |
 |---|---|---|
 | gpt-6.1-sol | 0.981 / 0.978 / 0.994 | 0.000 / 0.000 / 0.004 |
-| Qwen3.5-9B | 0.885 / 0.799 / 0.829 | 0.007 / 0.018 / 0.030 |
+| Qwen3.5-9B | 0.888 / 0.799 / 0.829 | 0.007 / 0.018 / 0.030 |
 | Gemma 4 12B | 0.859 / 0.792 / 0.835 | 0.019 / 0.022 / 0.019 |
 
 Paired, domain-equal language effects across the three models, with 95% CIs:
 
 - **Primary (critical omission rate, BN − EN): +0.003 [−0.014, +0.015].** Critical information is rarely left out entirely, in any language.
-- **Critical coverage, BN − EN: −0.050 [−0.078, −0.021].** In Bengali, critical content is more often present but wrong or insufficient. The effect comes from Qwen (−0.080) and Gemma (−0.068); Sol shows no gap (−0.002).
+- **Critical coverage, BN − EN: −0.050 [−0.079, −0.022].** In Bengali, critical content is more often present but wrong or insufficient. The effect comes from Qwen (−0.082) and Gemma (−0.068); Sol shows little difference (−0.002).
 - **Strict complete-task success, BN − EN: −0.093 [−0.131, −0.055].**
-- **RIU coverage, BN-CS − BN: +0.027 [+0.011, +0.044].** Code-switching recovers part of the Bengali loss.
+- **RIU coverage, BN-CS − BN: +0.028 [+0.012, +0.045].** Code-switching recovers part of the Bengali loss in overall coverage.
 
-Full tables and figures: `results/analysis/summary.md`. Status and integrity checks: `results/STATUS.md`. QA sample study (60 responses, 352 items): `results/qa/summary.md`. Agreement with the judge: alpha 0.843, critical exact 0.979, CHECK-01 exact 0.935. The CHECK-01 threshold of 1.00 was not met; see `PROTOCOL.md`.
+These results include seven item corrections from review of the 17 QA disagreements. Each corrected score retains its original rating, evidence and review rationale. Initial-versus-reviewed effects are in `results/analysis/summary.md`; human QA agreement below remains a comparison with the initial judge scores.
+
+Full tables and figures: `results/analysis/summary.md`. Status and integrity checks: `results/STATUS.md`. Human QA sample study (60 responses, 352 items): `results/qa/summary.md`. Agreement with the judge: alpha 0.843, critical exact 0.979, CHECK-01 exact 0.933 (56/60); all task checks combined 0.935 (58/62). The task-check threshold of 1.00 was not met; see `PROTOCOL.md`.
 
 ## Repository
 
@@ -53,6 +55,7 @@ notebooks/analysis.ipynb   walkthrough of the results
 | 04 | `python3 scripts/04_score.py run` | Scores unscored responses with the validated judge (`plan` lists them) | paid |
 | 05 | `python3 scripts/05_status.py` | Integrity checks; writes `results/STATUS.md` | free |
 | 06 | `python3 scripts/06_analyze.py` | Pre-registered analysis; writes `results/analysis/` | free |
+| 07 | `python3 scripts/07_qa.py` | Compares recorded human QA ratings with judge scores; writes `results/qa/` | free |
 | tests | `python3 -m unittest discover -s scripts/tests` | Tests for every step and the notebook | free |
 
 Each step resumes where it stopped. Paid steps take a `--max-usd` cap per run.

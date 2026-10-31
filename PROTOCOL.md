@@ -52,11 +52,13 @@ The remaining 343 tasks have draft rubrics for the full study.
 
 ## Scoring
 
-Each response is scored by an automated judge, **gpt-5.4-2026-03-05** (reasoning effort medium), under procedure **scoring-0.5**.
+Each response is scored by an automated judge, **gpt-5.4-2026-03-05** (reasoning effort medium), under procedure **scoring-0.5**. Initial reference scores were drafted with AI assistance and validated by humans; the study-response QA ratings are human ratings. These roles are distinct from the automated production judge.
 - The judge sees the task objective, constraints, prompt, response and rubric.
 - It never sees the model identity.
 - It returns a score, reason, evidence quote and note for every RIU and task check.
 - Output is schema-constrained and validated: complete item coverage, allowed scale values, and reasons consistent with scores.
+
+**Score review (2026-10-31).** A targeted review of the 17 human-QA disagreements corrected seven item ratings across six responses. Review used the existing prompts, rubric anchors and response evidence, retaining ten disputed ratings where the full anchor was not met or the initial rating remained defensible. Each correction is labeled `Review` and records reviewer, date, original rating, corrected rating and rationale within the score record. The review was performed with Codex, separately from human QA; it is not additional independent human validation. No responses, thresholds, RIU anchors or automated judge instructions changed. For SYN100, the review applied the local unsupported-content rubric to the fabricated uptime metric; this is disclosed rather than described as a universally contradiction-only standard. Current analysis uses reviewed ratings and reports initial effects alongside them. Human QA agreement remains calculated against the initial judge ratings, so inspecting and correcting disputes cannot inflate that agreement.
 
 Procedure scoring-0.5 makes explicit how the frozen rules apply:
 1. **Requirement form.** Each RIU is marked `affirmative` (silence fails) or `negative_or_conditional`. For the latter the item's own anchor governs, and a compliant path meets it without restating the prohibition.
@@ -72,7 +74,7 @@ Procedure scoring-0.5 makes explicit how the frozen rules apply:
 - critical-RIU exact agreement ≥ 0.90;
 - safety-check exact agreement = 1.00.
 
-The sets and results are in `data/validation/README.md`. Procedure scoring-0.5 met all three on the 88-fixture held-out set (alpha 0.9906, critical 183/183, safety 99/99).
+The sets and results are in `data/validation/README.md`. On the 88-fixture held-out set, agreement against the original references was alpha 0.9774, critical 182/183 and task checks 95/99, missing the task-check threshold. Following blinded selective re-rating and six revised references, agreement was alpha 0.9906, critical 183/183 and task checks 99/99. The latter measures agreement against revised references, rather than an untouched held-out pass.
 
 ## Analysis (pre-registered)
 
@@ -121,11 +123,11 @@ Secondary intervals are descriptive. There is one primary hypothesis, and no ana
 | Judge validated on the 30 calibration fixtures with procedure scoring-0.3 | Failed safety checks (25/30); procedure revised to scoring-0.5 and validated on a new held-out set | The seven disputed items, adjudicated by the independent reviewer, traced to instruction gaps in the judge procedure, not to the references |
 | Held-out set of 90 fixtures | 88 | Two fixtures had unresolved references and were removed before the freeze |
 | Held-out references frozen before the judge pass | 6 references revised after the pass, through a blind re-rate of the 8 disputed fixtures mixed with 12 decoys | The decoys (62/62 unchanged) show the reviewer was consistent. The re-rate covered only disputed fixtures, so shared errors in agreed items would not be found. |
-| Independent QA of study scores before audited conclusions | QA sample study on 60 responses (352 items), `results/qa/summary.md`. Alpha 0.843 and critical exact 0.979 met the held-out thresholds; CHECK-01 exact was 0.935 (58/62) against the 1.00 threshold, which was not met. The judge configuration was kept unchanged | The 17 disagreements (4.8%) were read against the rubrics: 3 judge errors (0.9% of items), 7 judgement calls and 7 items where the QA rating was more lenient than the anchor. None involves `omitted` or `non_answer`, so the primary estimand is unaffected. Matching the threshold would have meant revising the judge after seeing study responses and re-scoring; the item-level review was judged more informative than the threshold. The 3 judge errors include a CHECK-01 standard narrower than the rubric wording ("unsupported" in the rubric, "contradicted" in the judge instructions), so CHECK-01 pass rates are reported with this caveat |
+| Independent QA of study scores before audited conclusions | Human QA on 60 responses (352 items), `results/qa/summary.md`. Alpha 0.843 and critical exact 0.979 met the point-estimate thresholds; CHECK-01 exact was 0.933 (56/60), and all task checks combined were 0.935 (58/62), against the 1.00 threshold, which was not met. The judge configuration was kept unchanged | The 17 disagreements (4.8%) have recorded review dispositions: 3 classified as judge errors, 7 judgement calls and 7 more lenient QA ratings. These classifications are sample-specific and remain provisional where CHECK-01 wording is inconsistent. The sampled dispositions do not require changing omission counts, but QA did not independently record omission reasons. The 2026-10-22 protocol used a contradiction-based standard, while some task rubrics say unsupported; this conflict remains to be adjudicated before changing the judge. CHECK-01 and composite task-success rates carry this caveat. |
 
 ## Limitations
 
-- **The judge.** Scores come from one automated judge from the same provider as one of the generators. Agreement with the reference scores was measured on constructed fixtures, not on study responses.
+- **The judge.** Scores come from one automated judge from the same provider as one of the generators. Reference agreement was measured on constructed fixtures; human QA separately assessed 60 study responses. The QA sample includes 15 responses selected for low critical scores, so pooled agreement and review dispositions are sample-specific. Human QA did not independently record omission/non-answer reason codes. Composite task-success outcomes depend on CHECK-01 and inherit its operational-definition limitation.
 - **Sample.** The 157 tasks come from the pilot and expansion calibration rounds, not a random sample of the corpus. The panel has three models, so effects do not generalize to other models, languages or tasks.
 - **Reviewers.** Gold rubrics had one independent reviewer, so inter-annotator agreement on the rubrics themselves is not available.
 - **Local models.** Qwen and Gemma ran locally in BF16 with fixed settings, while Sol ran through an API. Local-vs-cloud differences are not causal capacity comparisons.

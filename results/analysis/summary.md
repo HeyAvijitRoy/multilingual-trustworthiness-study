@@ -20,12 +20,12 @@ Critical omission rate, BN minus EN (positive = more critical omission in Bengal
 | gpt-6.1-sol | en | 0.000 | 0.981 | 0.982 | 0.917 | 1.000 |
 | gpt-6.1-sol | bn | 0.000 | 0.978 | 0.979 | 0.917 | 1.000 |
 | gpt-6.1-sol | bn_cs | 0.004 | 0.994 | 0.990 | 0.962 | 1.000 |
-| Qwen/Qwen3.5-9B | en | 0.007 | 0.885 | 0.904 | 0.561 | 0.841 |
-| Qwen/Qwen3.5-9B | bn | 0.018 | 0.799 | 0.804 | 0.414 | 0.796 |
+| Qwen/Qwen3.5-9B | en | 0.007 | 0.888 | 0.905 | 0.561 | 0.834 |
+| Qwen/Qwen3.5-9B | bn | 0.018 | 0.799 | 0.802 | 0.414 | 0.796 |
 | Qwen/Qwen3.5-9B | bn_cs | 0.030 | 0.829 | 0.843 | 0.446 | 0.732 |
-| google/gemma-4-12B-it | en | 0.019 | 0.859 | 0.880 | 0.586 | 0.911 |
-| google/gemma-4-12B-it | bn | 0.022 | 0.792 | 0.820 | 0.452 | 0.911 |
-| google/gemma-4-12B-it | bn_cs | 0.019 | 0.835 | 0.853 | 0.484 | 0.873 |
+| google/gemma-4-12B-it | en | 0.019 | 0.859 | 0.880 | 0.586 | 0.904 |
+| google/gemma-4-12B-it | bn | 0.022 | 0.792 | 0.819 | 0.452 | 0.904 |
+| google/gemma-4-12B-it | bn_cs | 0.019 | 0.835 | 0.854 | 0.484 | 0.873 |
 
 ## Secondary contrasts (panel and by model)
 
@@ -34,12 +34,12 @@ Critical omission rate, BN minus EN (positive = more critical omission in Bengal
 | critical omission rate | bn − en | +0.003 [-0.014, +0.015] | +0.000 | +0.007 | +0.001 |
 | critical omission rate | bn_cs − bn | +0.005 [-0.005, +0.016] | +0.003 | +0.015 | -0.003 |
 | critical omission rate | bn_cs − en | +0.008 [-0.002, +0.017] | +0.003 | +0.021 | -0.001 |
-| critical coverage | bn − en | -0.050 [-0.078, -0.021] | -0.002 | -0.080 | -0.068 |
+| critical coverage | bn − en | -0.050 [-0.079, -0.022] | -0.002 | -0.082 | -0.068 |
 | critical coverage | bn_cs − bn | +0.026 [-0.001, +0.054] | +0.016 | +0.020 | +0.042 |
-| critical coverage | bn_cs − en | -0.024 [-0.048, +0.000] | +0.014 | -0.060 | -0.025 |
-| riu coverage | bn − en | -0.053 [-0.070, -0.038] | -0.003 | -0.099 | -0.058 |
-| riu coverage | bn_cs − bn | +0.027 [+0.011, +0.044] | +0.011 | +0.039 | +0.032 |
-| riu coverage | bn_cs − en | -0.026 [-0.040, -0.013] | +0.008 | -0.060 | -0.026 |
+| critical coverage | bn_cs − en | -0.025 [-0.049, -0.000] | +0.014 | -0.062 | -0.025 |
+| riu coverage | bn − en | -0.055 [-0.071, -0.039] | -0.003 | -0.102 | -0.059 |
+| riu coverage | bn_cs − bn | +0.028 [+0.012, +0.045] | +0.011 | +0.040 | +0.034 |
+| riu coverage | bn_cs − en | -0.026 [-0.040, -0.013] | +0.008 | -0.061 | -0.025 |
 | strict complete task success | bn − en | -0.093 [-0.131, -0.055] | +0.000 | -0.146 | -0.132 |
 | strict complete task success | bn_cs − bn | +0.036 [-0.007, +0.081] | +0.045 | +0.032 | +0.031 |
 | strict complete task success | bn_cs − en | -0.057 [-0.098, -0.016] | +0.045 | -0.114 | -0.101 |
@@ -68,5 +68,16 @@ Critical omission rate, BN minus EN (positive = more critical omission in Bengal
 | bn | 7 | 0.000 | 0.828 | 0.893 |
 | bn_cs | 8 | 0.000 | 0.800 | 0.902 |
 
+## Score review
+
+7 item ratings were corrected after review of the 17 QA disagreements. These tables use corrected ratings; original ratings and review reasons remain in the score records. This targeted review is not a full revalidation of the judge. Human QA agreement in results/qa/ uses the initial judge ratings.
+
+| Outcome / contrast | Initial [95% CI] | After review [95% CI] |
+|---|---|---|
+| critical_omission_rate:bn-en | +0.003 [-0.014, +0.015] | +0.003 [-0.014, +0.015] |
+| critical_coverage:bn-en | -0.050 [-0.078, -0.021] | -0.050 [-0.079, -0.022] |
+| strict_complete_task_success:bn-en | -0.093 [-0.131, -0.055] | -0.093 [-0.131, -0.055] |
+| riu_coverage:bn_cs-bn | +0.027 [+0.011, +0.044] | +0.028 [+0.012, +0.045] |
+
 Truncated responses retained in the primary analysis: qwen/PROC089/bn, qwen/TECH098/bn.
-Scores are automated (judge validated on the held-out set); the QA sample study of study scores is in results/qa/.
+Scores originate from the automated judge, with recorded review corrections where present; the QA sample study is in results/qa/.

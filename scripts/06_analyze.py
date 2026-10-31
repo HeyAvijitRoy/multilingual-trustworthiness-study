@@ -201,7 +201,7 @@ def summary(report, models):
         if d['n']:
             lines.append(f"| {key.split(':')[1]} | {d['n']} | {d['critical_omission_rate']:.3f} | {d['critical_coverage']:.3f} | {d['riu_coverage']:.3f} |")
     lines += ['', f"Truncated responses retained in the primary analysis: {', '.join(report['truncated_cells']) or 'none'}.",
-              'Scores are automated (judge validated on the held-out set); the QA sample study of study scores is pending.']
+              'Scores are automated (judge validated on the held-out set); the QA sample study of study scores is in results/qa/.']
     return '\n'.join(lines) + '\n'
 
 

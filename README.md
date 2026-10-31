@@ -21,7 +21,7 @@ Paired, domain-equal language effects across the three models, with 95% CIs:
 - **Strict complete-task success, BN − EN: −0.093 [−0.131, −0.055].**
 - **RIU coverage, BN-CS − BN: +0.027 [+0.011, +0.044].** Code-switching recovers part of the Bengali loss.
 
-Full tables and figures: `results/analysis/summary.md`. Status and integrity checks: `results/STATUS.md`. QA sample study: pending.
+Full tables and figures: `results/analysis/summary.md`. Status and integrity checks: `results/STATUS.md`. QA sample study (60 responses, 352 items): `results/qa/summary.md`. Agreement with the judge: alpha 0.843, critical exact 0.979, CHECK-01 exact 0.935. The CHECK-01 threshold of 1.00 was not met; see `PROTOCOL.md`.
 
 ## Repository
 

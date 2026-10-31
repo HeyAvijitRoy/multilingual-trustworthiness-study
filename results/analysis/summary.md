@@ -1,6 +1,6 @@
 # Results: preliminary 157-task study
 
-Generated 2026-10-25 by `scripts/06_analyze.py` (10,000 bootstrap replicates, seed 20261023).
+Generated 2026-10-31 by `scripts/06_analyze.py` (10,000 bootstrap replicates, seed 20261023).
 
 ## Primary estimand
 
@@ -69,4 +69,4 @@ Critical omission rate, BN minus EN (positive = more critical omission in Bengal
 | bn_cs | 8 | 0.000 | 0.800 | 0.902 |
 
 Truncated responses retained in the primary analysis: qwen/PROC089/bn, qwen/TECH098/bn.
-Scores are automated (judge validated on the held-out set); the QA sample study of study scores is pending.
+Scores are automated (judge validated on the held-out set); the QA sample study of study scores is in results/qa/.

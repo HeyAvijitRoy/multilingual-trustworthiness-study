@@ -102,7 +102,7 @@ def main():
         f"Gemini is exploratory: {gemini.get('responses', 0)} of 60 planned responses (20 matched tasks x 3 languages); "
         'collection stopped and Gemini is excluded from the primary analysis.',
         'QA sample study (independent check of a sample of study scores): '
-        + ('done, see results/qa/.' if (RESULTS / 'qa').exists() else 'pending.'),
+        + ('done, see results/qa/summary.md.' if (RESULTS / 'qa').exists() else 'pending.'),
     ]
     write_json(RESULTS / 'status.json', status)
     (RESULTS / 'STATUS.md').write_text(render(status), encoding='utf-8')

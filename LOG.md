@@ -25,4 +25,4 @@ What happened, by date. Methods are in `PROTOCOL.md`; current numbers are in `re
 | 2026-10-25 | Gemini collection stopped at 20 of 60 responses; Gemini kept as exploratory. |
 | 2026-10-25 | Pre-registered analysis run. Primary estimand (critical omission rate, BN − EN): +0.003 [−0.014, +0.015]. Critical coverage BN − EN: −0.050 [−0.078, −0.021]. |
 | 2026-10-25 | Repository consolidated: one protocol, one log, a numbered six-step pipeline with tests, and results stored in `results/`. |
-| Pending | QA sample study of study scores. |
+| 2026-10-31 | QA sample study: 60 responses, 352 items. Alpha 0.843, critical exact 0.979 (thresholds met); CHECK-01 exact 0.935 against 1.00 (not met). Disagreements 17 of 352, of which 3 judge errors; none touches the primary estimand. Judge kept unchanged. |

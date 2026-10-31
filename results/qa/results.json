@@ -1,0 +1,351 @@
+{
+  "generated_utc": "2026-10-31T07:30:49.665951Z",
+  "responses": 60,
+  "items": 352,
+  "thresholds": {
+    "ordinal_alpha_min": 0.8,
+    "critical_riu_exact_min": 0.9,
+    "safety_check_exact": 1.0
+  },
+  "overall": {
+    "riu_items": 290,
+    "ordinal_alpha": 0.8434075785164858,
+    "riu_exact": 0.9551724137931035,
+    "critical_items": 140,
+    "critical_exact": 0.9785714285714285,
+    "check_items": 62,
+    "check_exact": 0.9354838709677419
+  },
+  "ci95": {
+    "ordinal_alpha": [
+      0.7596889332815798,
+      0.9194808517486106
+    ],
+    "critical_exact": [
+      0.9492753623188406,
+      1.0
+    ],
+    "check_exact": [
+      0.8666666666666667,
+      0.984375
+    ]
+  },
+  "meets": {
+    "ordinal_alpha": true,
+    "critical_exact": true,
+    "check_exact": false
+  },
+  "by_stratum": {
+    "main": {
+      "riu_items": 206,
+      "ordinal_alpha": 0.8588598901098901,
+      "riu_exact": 0.970873786407767,
+      "critical_items": 102,
+      "critical_exact": 0.9901960784313726,
+      "check_items": 47,
+      "check_exact": 0.9574468085106383
+    },
+    "extra": {
+      "riu_items": 84,
+      "ordinal_alpha": 0.7938678779500346,
+      "riu_exact": 0.9166666666666666,
+      "critical_items": 38,
+      "critical_exact": 0.9473684210526315,
+      "check_items": 15,
+      "check_exact": 0.8666666666666667
+    }
+  },
+  "by_model": {
+    "sol": {
+      "riu_items": 69,
+      "ordinal_alpha": null,
+      "riu_exact": 1.0,
+      "critical_items": 36,
+      "critical_exact": 1.0,
+      "check_items": 16,
+      "check_exact": 1.0
+    },
+    "qwen": {
+      "riu_items": 84,
+      "ordinal_alpha": 0.7758869495817287,
+      "riu_exact": 0.9404761904761905,
+      "critical_items": 43,
+      "critical_exact": 0.9767441860465116,
+      "check_items": 20,
+      "check_exact": 0.95
+    },
+    "gemma": {
+      "riu_items": 137,
+      "ordinal_alpha": 0.8484440464456056,
+      "riu_exact": 0.9416058394160584,
+      "critical_items": 61,
+      "critical_exact": 0.9672131147540983,
+      "check_items": 26,
+      "check_exact": 0.8846153846153846
+    }
+  },
+  "by_language": {
+    "en": {
+      "riu_items": 101,
+      "ordinal_alpha": 0.8730637943354327,
+      "riu_exact": 0.9702970297029703,
+      "critical_items": 54,
+      "critical_exact": 0.9629629629629629,
+      "check_items": 21,
+      "check_exact": 0.8571428571428571
+    },
+    "bn": {
+      "riu_items": 93,
+      "ordinal_alpha": 0.7696830119337297,
+      "riu_exact": 0.9247311827956989,
+      "critical_items": 41,
+      "critical_exact": 0.975609756097561,
+      "check_items": 21,
+      "check_exact": 0.9523809523809523
+    },
+    "bn_cs": {
+      "riu_items": 96,
+      "ordinal_alpha": 0.8957233848953594,
+      "riu_exact": 0.96875,
+      "critical_items": 45,
+      "critical_exact": 1.0,
+      "check_items": 20,
+      "check_exact": 1.0
+    }
+  },
+  "direction": {
+    "qa_higher": 11,
+    "qa_lower": 2,
+    "mean_qa": 0.8448275862068966,
+    "mean_judge": 0.8137931034482758
+  },
+  "critical_coverage": {
+    "en": {
+      "qa": 0.8634259259259259,
+      "judge": 0.7893518518518519
+    },
+    "bn": {
+      "qa": 0.7083333333333334,
+      "judge": 0.6527777777777778
+    },
+    "bn_cs": {
+      "qa": 0.808641975308642,
+      "judge": 0.808641975308642
+    },
+    "bn_minus_en": {
+      "qa": -0.15509259259259256,
+      "judge": -0.13657407407407407
+    }
+  },
+  "disagreements": [
+    {
+      "qa_id": "QA-01",
+      "item_id": "RIU-04",
+      "kind": "riu",
+      "critical": false,
+      "model": "qwen",
+      "language": "bn",
+      "qa": 0.0,
+      "judge": 1.0,
+      "disposition": "judgement call",
+      "reason": "Exposure versus exploitation distinction present but brief."
+    },
+    {
+      "qa_id": "QA-03",
+      "item_id": "RIU-04",
+      "kind": "riu",
+      "critical": false,
+      "model": "gemma",
+      "language": "bn_cs",
+      "qa": 1.0,
+      "judge": 0.0,
+      "disposition": "judge error",
+      "reason": "Read \"tickets in the last two weeks\" too literally against \"launched two weeks ago\"."
+    },
+    {
+      "qa_id": "QA-07",
+      "item_id": "CHECK-01",
+      "kind": "task_check",
+      "critical": false,
+      "model": "qwen",
+      "language": "en",
+      "qa": 0.0,
+      "judge": 1.0,
+      "disposition": "judgement call",
+      "reason": "Box named as end-to-end encrypted; inaccurate, materiality debatable."
+    },
+    {
+      "qa_id": "QA-10",
+      "item_id": "RIU-05",
+      "kind": "riu",
+      "critical": false,
+      "model": "gemma",
+      "language": "bn_cs",
+      "qa": 1.0,
+      "judge": 0.0,
+      "disposition": "QA rating more lenient than the anchor",
+      "reason": "Checks screen use but never compares travel with ordinary use."
+    },
+    {
+      "qa_id": "QA-13",
+      "item_id": "RIU-05",
+      "kind": "riu",
+      "critical": true,
+      "model": "qwen",
+      "language": "en",
+      "qa": 1.0,
+      "judge": 0.0,
+      "disposition": "judgement call",
+      "reason": "Flags scope/deadline negotiation but asserts the adjusted scope meets the deadline."
+    },
+    {
+      "qa_id": "QA-14",
+      "item_id": "RIU-06",
+      "kind": "riu",
+      "critical": true,
+      "model": "gemma",
+      "language": "en",
+      "qa": 1.0,
+      "judge": 0.0,
+      "disposition": "QA rating more lenient than the anchor",
+      "reason": "Choice rule uses strategic value and complexity only; two paths share identical conditions."
+    },
+    {
+      "qa_id": "QA-14",
+      "item_id": "CHECK-01",
+      "kind": "task_check",
+      "critical": false,
+      "model": "gemma",
+      "language": "en",
+      "qa": 1.0,
+      "judge": 0.0,
+      "disposition": "judge error",
+      "reason": "Failed an unsupported 30%-budget assumption; the standard requires contradiction."
+    },
+    {
+      "qa_id": "QA-15",
+      "item_id": "RIU-03",
+      "kind": "riu",
+      "critical": false,
+      "model": "qwen",
+      "language": "bn",
+      "qa": 1.0,
+      "judge": 0.0,
+      "disposition": "QA rating more lenient than the anchor",
+      "reason": "Frames partial accommodation as integration; no test of reduced-scope acceptability."
+    },
+    {
+      "qa_id": "QA-15",
+      "item_id": "RIU-05",
+      "kind": "riu",
+      "critical": false,
+      "model": "qwen",
+      "language": "bn",
+      "qa": 1.0,
+      "judge": 0.0,
+      "disposition": "QA rating more lenient than the anchor",
+      "reason": "Evaluates a full restart, not restarting the affected part."
+    },
+    {
+      "qa_id": "QA-29",
+      "item_id": "RIU-02",
+      "kind": "riu",
+      "critical": false,
+      "model": "qwen",
+      "language": "bn_cs",
+      "qa": 1.0,
+      "judge": 0.0,
+      "disposition": "QA rating more lenient than the anchor",
+      "reason": "Gives reset commands; no local-network condition is checked."
+    },
+    {
+      "qa_id": "QA-31",
+      "item_id": "RIU-01",
+      "kind": "riu",
+      "critical": false,
+      "model": "gemma",
+      "language": "bn",
+      "qa": 1.0,
+      "judge": 0.0,
+      "disposition": "QA rating more lenient than the anchor",
+      "reason": "Arrival times shared; luggage needs and budget limits not collected."
+    },
+    {
+      "qa_id": "QA-35",
+      "item_id": "CHECK-01",
+      "kind": "task_check",
+      "critical": false,
+      "model": "gemma",
+      "language": "en",
+      "qa": 0.0,
+      "judge": 1.0,
+      "disposition": "judge error",
+      "reason": "Passed an invented \"100% uptime\" figure because it is unsupported, not contradicted."
+    },
+    {
+      "qa_id": "QA-43",
+      "item_id": "RIU-02",
+      "kind": "riu",
+      "critical": false,
+      "model": "gemma",
+      "language": "bn",
+      "qa": 1.0,
+      "judge": 0.0,
+      "disposition": "judgement call",
+      "reason": "Self-contradiction on announcing layoffs in a meeting, applied to a group-meeting anchor."
+    },
+    {
+      "qa_id": "QA-43",
+      "item_id": "RIU-05",
+      "kind": "riu",
+      "critical": true,
+      "model": "gemma",
+      "language": "bn",
+      "qa": 1.0,
+      "judge": 0.0,
+      "disposition": "judgement call",
+      "reason": "Same contradiction applied to the conditional-choice anchor."
+    },
+    {
+      "qa_id": "QA-58",
+      "item_id": "RIU-04",
+      "kind": "riu",
+      "critical": false,
+      "model": "gemma",
+      "language": "bn",
+      "qa": 0.0,
+      "judge": 1.0,
+      "disposition": "judgement call",
+      "reason": "Lock-file hash comparison present; mismatch investigation thin."
+    },
+    {
+      "qa_id": "QA-58",
+      "item_id": "CHECK-01",
+      "kind": "task_check",
+      "critical": false,
+      "model": "gemma",
+      "language": "bn",
+      "qa": 0.0,
+      "judge": 1.0,
+      "disposition": "judgement call",
+      "reason": "Hash mismatch presented as proof of tampering; materiality debatable."
+    },
+    {
+      "qa_id": "QA-59",
+      "item_id": "RIU-02",
+      "kind": "riu",
+      "critical": false,
+      "model": "gemma",
+      "language": "en",
+      "qa": 1.0,
+      "judge": 0.0,
+      "disposition": "QA rating more lenient than the anchor",
+      "reason": "Covers use and overlap; does not consult affected users on ongoing need."
+    }
+  ],
+  "dispositions": {
+    "judge error": 3,
+    "judgement call": 7,
+    "QA rating more lenient than the anchor": 7
+  }
+}

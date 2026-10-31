@@ -1,0 +1,485 @@
+{
+  "seed": 20261031,
+  "responses": [
+    {
+      "qa_id": "QA-01",
+      "model": "qwen",
+      "task_id": "CYBER074",
+      "language": "bn",
+      "stratum": "main",
+      "response_sha256": "c3201d2bcc68ddb43bb12b377e29e7b2fcf96dfdb98e4d0cbba4ce7c9f7759c1"
+    },
+    {
+      "qa_id": "QA-02",
+      "model": "sol",
+      "task_id": "DEC043",
+      "language": "en",
+      "stratum": "main",
+      "response_sha256": "9d1bfce4f6c6e3018c0c0cc1856707fcb0cdc746fc8343a33fbddca6dee81dad"
+    },
+    {
+      "qa_id": "QA-03",
+      "model": "gemma",
+      "task_id": "SYN049",
+      "language": "bn_cs",
+      "stratum": "extra",
+      "response_sha256": "07ae325bae59b306f6a3924958794470e2e581ee4f96e08d91ba49cd2603f11b"
+    },
+    {
+      "qa_id": "QA-04",
+      "model": "gemma",
+      "task_id": "CYBER071",
+      "language": "bn",
+      "stratum": "extra",
+      "response_sha256": "140500c2596e15caa6982527ac28e50e0382be8852e2bd57c39a2f2c1cc511d7"
+    },
+    {
+      "qa_id": "QA-05",
+      "model": "gemma",
+      "task_id": "DEC091",
+      "language": "en",
+      "stratum": "main",
+      "response_sha256": "b49b0a922a778737437eb6791fadbd1ff130decd1f1c6a54656c5f03a3c0578d"
+    },
+    {
+      "qa_id": "QA-06",
+      "model": "gemma",
+      "task_id": "DEC009",
+      "language": "bn_cs",
+      "stratum": "extra",
+      "response_sha256": "31f9e6bbdfe5740eb8bedd181d30835029185a7e822cfc021b23061b1e5f79a9"
+    },
+    {
+      "qa_id": "QA-07",
+      "model": "qwen",
+      "task_id": "CYBER041",
+      "language": "en",
+      "stratum": "main",
+      "response_sha256": "8ba9043dd992d05a8fbb85cf81d5d76fe8002d6a26bfdfca8ea4393dd6de22a1"
+    },
+    {
+      "qa_id": "QA-08",
+      "model": "qwen",
+      "task_id": "TECH031",
+      "language": "en",
+      "stratum": "main",
+      "response_sha256": "c8a40f35e8ddf89922202e9af42f939b6cd82d82159e576222ad70f47e1bb9c5"
+    },
+    {
+      "qa_id": "QA-09",
+      "model": "gemma",
+      "task_id": "PROC054",
+      "language": "bn_cs",
+      "stratum": "main",
+      "response_sha256": "5c7180dcf31b970a88610f0195f07327f0b4b87b63900f0b5c01a14442b4701b"
+    },
+    {
+      "qa_id": "QA-10",
+      "model": "gemma",
+      "task_id": "TECH074",
+      "language": "bn_cs",
+      "stratum": "main",
+      "response_sha256": "5ef885484ba63dd0897060586a57d5758942c985fc57790e08faee98d07f25dd"
+    },
+    {
+      "qa_id": "QA-11",
+      "model": "gemma",
+      "task_id": "PROC006",
+      "language": "bn",
+      "stratum": "extra",
+      "response_sha256": "2b13d572df4a9e7ea8902d857b0c976a73a036908f7faf5e4b6993a18d06707c"
+    },
+    {
+      "qa_id": "QA-12",
+      "model": "qwen",
+      "task_id": "CYBER023",
+      "language": "bn_cs",
+      "stratum": "extra",
+      "response_sha256": "a9e6683b0f2664c295547f43ede8a0643ef334f824d8a95c2f589c47a218e5be"
+    },
+    {
+      "qa_id": "QA-13",
+      "model": "qwen",
+      "task_id": "PROC094",
+      "language": "en",
+      "stratum": "main",
+      "response_sha256": "88222b23cdc82bb79aece3a3290a325aec1015bfc17008595f990b0dff02a93a"
+    },
+    {
+      "qa_id": "QA-14",
+      "model": "gemma",
+      "task_id": "DEC058",
+      "language": "en",
+      "stratum": "extra",
+      "response_sha256": "5cf398fbfd84cc6015cb6f13793a5c93536d2027435156b0994bca623a76c8c2"
+    },
+    {
+      "qa_id": "QA-15",
+      "model": "qwen",
+      "task_id": "DEC058",
+      "language": "bn",
+      "stratum": "extra",
+      "response_sha256": "d57313244760e29d636f733e43f30c36f2f23488056a67918afe2fe2b2f16b0d"
+    },
+    {
+      "qa_id": "QA-16",
+      "model": "qwen",
+      "task_id": "TECH014",
+      "language": "bn",
+      "stratum": "main",
+      "response_sha256": "27e0e6ad54b8b6fc8627f365207c53c848e4e742553c6c90beea3c042e984c3d"
+    },
+    {
+      "qa_id": "QA-17",
+      "model": "sol",
+      "task_id": "CYBER029",
+      "language": "bn_cs",
+      "stratum": "main",
+      "response_sha256": "0de396d21bd3d5c32e6dabe7b53f3b69d83b1a4fadc30c1449878679513b3357"
+    },
+    {
+      "qa_id": "QA-18",
+      "model": "qwen",
+      "task_id": "SYN023",
+      "language": "en",
+      "stratum": "main",
+      "response_sha256": "2b56f805e727b9d28b5ccbd50d9ade3e525dbb383d2ca788b0813a0eaf657140"
+    },
+    {
+      "qa_id": "QA-19",
+      "model": "gemma",
+      "task_id": "TECH031",
+      "language": "bn",
+      "stratum": "main",
+      "response_sha256": "cd8ef91cbf25dd31233bb27051fa89d581a56aa40c8bcbf8a70f651dcd958f8f"
+    },
+    {
+      "qa_id": "QA-20",
+      "model": "qwen",
+      "task_id": "SYN083",
+      "language": "bn",
+      "stratum": "main",
+      "response_sha256": "beaebcc516020c22e6c5e29ecf0d39c68efb73f107dc1a8fbc834fca5b3c263e"
+    },
+    {
+      "qa_id": "QA-21",
+      "model": "gemma",
+      "task_id": "PROC006",
+      "language": "en",
+      "stratum": "extra",
+      "response_sha256": "666c0288b9c67645cd48c56e534918209c75b27d361200486e7331973e3950b8"
+    },
+    {
+      "qa_id": "QA-22",
+      "model": "gemma",
+      "task_id": "CYBER063",
+      "language": "en",
+      "stratum": "main",
+      "response_sha256": "7e2790397a6555453a66520e38e402010707e6f0c784159527a3ff5d47caa691"
+    },
+    {
+      "qa_id": "QA-23",
+      "model": "qwen",
+      "task_id": "CYBER098",
+      "language": "bn",
+      "stratum": "extra",
+      "response_sha256": "2b096eeac4940cb6ca4c5379a377b8a5d1b76c5fbdca66ae0dee24facb149958"
+    },
+    {
+      "qa_id": "QA-24",
+      "model": "gemma",
+      "task_id": "DEC081",
+      "language": "en",
+      "stratum": "extra",
+      "response_sha256": "0a018abb17ee82a740618f8990cb22bc609ccf8fbd42725568bd3dc96510548c"
+    },
+    {
+      "qa_id": "QA-25",
+      "model": "gemma",
+      "task_id": "SYN009",
+      "language": "bn_cs",
+      "stratum": "main",
+      "response_sha256": "17a4eb3bcba80db20249c01fb45703296384a41f6e5a13a66e938948e1e5e1aa"
+    },
+    {
+      "qa_id": "QA-26",
+      "model": "qwen",
+      "task_id": "PROC043",
+      "language": "bn",
+      "stratum": "main",
+      "response_sha256": "f8550732e1dd63d2833b871002e44d2a422950d967c2c18bdf14e3e3d4772a77"
+    },
+    {
+      "qa_id": "QA-27",
+      "model": "sol",
+      "task_id": "SYN023",
+      "language": "bn",
+      "stratum": "main",
+      "response_sha256": "dee8a5a5ff0533acc8514351f48c3ad86088fb0ece016704352a569a535fd079"
+    },
+    {
+      "qa_id": "QA-28",
+      "model": "sol",
+      "task_id": "DEC014",
+      "language": "bn_cs",
+      "stratum": "main",
+      "response_sha256": "1164202f37de0179a9cd0484b0117189679801a0d30179cd4e2519b1703a4f4a"
+    },
+    {
+      "qa_id": "QA-29",
+      "model": "qwen",
+      "task_id": "TECH011",
+      "language": "bn_cs",
+      "stratum": "extra",
+      "response_sha256": "64a5960c0e78d5cae2f7ba40f2c2481f2f4a4503ee5f43d433f0cf7beb2f2b48"
+    },
+    {
+      "qa_id": "QA-30",
+      "model": "qwen",
+      "task_id": "SYN018",
+      "language": "bn_cs",
+      "stratum": "main",
+      "response_sha256": "9439f372dc63fa0b6e0b2b47738fec082587e49910344a832ad1a0c79ea62a63"
+    },
+    {
+      "qa_id": "QA-31",
+      "model": "gemma",
+      "task_id": "PROC049",
+      "language": "bn",
+      "stratum": "main",
+      "response_sha256": "0ecc634b2715998f10e9bfd22bdb9d99aba9d512ab5efd53b4402655e09b2c16"
+    },
+    {
+      "qa_id": "QA-32",
+      "model": "sol",
+      "task_id": "TECH010",
+      "language": "en",
+      "stratum": "main",
+      "response_sha256": "43d4e63f2beb9770904f9300515dc805ae986af359d25a516de36cd18325d442"
+    },
+    {
+      "qa_id": "QA-33",
+      "model": "sol",
+      "task_id": "CYBER058",
+      "language": "en",
+      "stratum": "main",
+      "response_sha256": "713ab5535578bff7c3a4504f070f4b15edad045b31dacf07f5562da66398d2c6"
+    },
+    {
+      "qa_id": "QA-34",
+      "model": "sol",
+      "task_id": "DEC038",
+      "language": "bn",
+      "stratum": "main",
+      "response_sha256": "b5a1cf5a8dfce49d345cb10733d42b315f628c7917a300e165d7bfc1b58e3f2c"
+    },
+    {
+      "qa_id": "QA-35",
+      "model": "gemma",
+      "task_id": "SYN100",
+      "language": "en",
+      "stratum": "extra",
+      "response_sha256": "fd98360b91284df9803b94f09274af58a42050c1337521976a5f628fd0d7a380"
+    },
+    {
+      "qa_id": "QA-36",
+      "model": "sol",
+      "task_id": "SYN081",
+      "language": "en",
+      "stratum": "main",
+      "response_sha256": "1e0e545bbcf7a45f0138d6ce9a64ad6aa2df09b9093636fe250cb153468f25a3"
+    },
+    {
+      "qa_id": "QA-37",
+      "model": "qwen",
+      "task_id": "DEC011",
+      "language": "en",
+      "stratum": "main",
+      "response_sha256": "02dbdc64ed04c88a2a5da1be10582569559807e5825c582a87a075be8708be9d"
+    },
+    {
+      "qa_id": "QA-38",
+      "model": "gemma",
+      "task_id": "PROC094",
+      "language": "en",
+      "stratum": "extra",
+      "response_sha256": "8dc31a626d09898ca8d2fbaa29b92e87407fee15e3aa783d3ef93fe9781bbb2d"
+    },
+    {
+      "qa_id": "QA-39",
+      "model": "sol",
+      "task_id": "TECH041",
+      "language": "bn",
+      "stratum": "main",
+      "response_sha256": "3c1e90b04d283276293bcb33349d3121fefcc6f5d1c46b2b2d98b3c2dd7f38a8"
+    },
+    {
+      "qa_id": "QA-40",
+      "model": "qwen",
+      "task_id": "DEC083",
+      "language": "bn_cs",
+      "stratum": "main",
+      "response_sha256": "6eeec88e96f6db6486945af85bfb098c9f0792c4af0d513c571df6a46c4119b7"
+    },
+    {
+      "qa_id": "QA-41",
+      "model": "sol",
+      "task_id": "PROC074",
+      "language": "en",
+      "stratum": "main",
+      "response_sha256": "57e0e13263c11c1e024a92c51b42af428df23d4bfcdb3f08624fd9b883cad8cd"
+    },
+    {
+      "qa_id": "QA-42",
+      "model": "gemma",
+      "task_id": "SYN011",
+      "language": "bn",
+      "stratum": "main",
+      "response_sha256": "abaea8ca36ec82d4fe7eed5c3f664a74e39e76490215f8a9d4d6561f8690d1d6"
+    },
+    {
+      "qa_id": "QA-43",
+      "model": "gemma",
+      "task_id": "DEC074",
+      "language": "bn",
+      "stratum": "extra",
+      "response_sha256": "c2ba51b5f802df65fe9453c7358540154f033f42e23ba66f4c6bc8eb88ba20b6"
+    },
+    {
+      "qa_id": "QA-44",
+      "model": "gemma",
+      "task_id": "SYN038",
+      "language": "en",
+      "stratum": "main",
+      "response_sha256": "121e52e569764d02f0561b0997249dccdcafa47ef9588d85603fa42d0db773db"
+    },
+    {
+      "qa_id": "QA-45",
+      "model": "sol",
+      "task_id": "PROC094",
+      "language": "bn",
+      "stratum": "main",
+      "response_sha256": "d7665d74424aaded3fc74ef7117157483d4d52623102ab4a294ebcea64d9bc10"
+    },
+    {
+      "qa_id": "QA-46",
+      "model": "gemma",
+      "task_id": "CYBER018",
+      "language": "bn_cs",
+      "stratum": "extra",
+      "response_sha256": "0f1bf3eae734bf835d83a0ec6c23680595864427e43f9b0b0d8d4d4b95a9dd14"
+    },
+    {
+      "qa_id": "QA-47",
+      "model": "gemma",
+      "task_id": "DEC083",
+      "language": "bn_cs",
+      "stratum": "main",
+      "response_sha256": "ea70c813c5490dd58d0ed58f4cb50b68fc3dc9494ac78f39e4cc2523a0d71bd3"
+    },
+    {
+      "qa_id": "QA-48",
+      "model": "gemma",
+      "task_id": "CYBER006",
+      "language": "bn_cs",
+      "stratum": "main",
+      "response_sha256": "410dbb2a336860f60bdf58f31e0eff1311fcad4d23ebfbd540a2d2f216b0cb5f"
+    },
+    {
+      "qa_id": "QA-49",
+      "model": "qwen",
+      "task_id": "PROC081",
+      "language": "bn_cs",
+      "stratum": "main",
+      "response_sha256": "d11d4c42158931269c43657b826c5364ad5b4e1ecea6b0ee3024426e5cc9b10b"
+    },
+    {
+      "qa_id": "QA-50",
+      "model": "qwen",
+      "task_id": "TECH098",
+      "language": "bn_cs",
+      "stratum": "main",
+      "response_sha256": "1dcdc5c8fd4af2535220a9bbe59d5d81c73398ada224401c94c1e7ee378018d6"
+    },
+    {
+      "qa_id": "QA-51",
+      "model": "sol",
+      "task_id": "PROC006",
+      "language": "bn_cs",
+      "stratum": "main",
+      "response_sha256": "0723c6c72ea367e492279633ec7b21f2e82283fbdc3b771e15cfaa9f4c544b3e"
+    },
+    {
+      "qa_id": "QA-52",
+      "model": "sol",
+      "task_id": "SYN081",
+      "language": "bn_cs",
+      "stratum": "main",
+      "response_sha256": "4ebe31e86ca831ce61edb9b14812d59c4fde2046f1d3f8275c43893459fb0f9f"
+    },
+    {
+      "qa_id": "QA-53",
+      "model": "gemma",
+      "task_id": "TECH071",
+      "language": "en",
+      "stratum": "main",
+      "response_sha256": "a18d524f551e79858263d116cc2d356eae8a6cbf95eee6de24515ded4b79a5cd"
+    },
+    {
+      "qa_id": "QA-54",
+      "model": "gemma",
+      "task_id": "DEC071",
+      "language": "bn",
+      "stratum": "main",
+      "response_sha256": "7714a08c3ea97adab4868e1061a07d4aa0a1edf4c9153ad59248101400b1944f"
+    },
+    {
+      "qa_id": "QA-55",
+      "model": "qwen",
+      "task_id": "DEC071",
+      "language": "bn",
+      "stratum": "main",
+      "response_sha256": "dbc219a4366eaee8f59ca2587073044aae4ec7e06c3a58da5e9640e099073362"
+    },
+    {
+      "qa_id": "QA-56",
+      "model": "sol",
+      "task_id": "CYBER006",
+      "language": "bn",
+      "stratum": "main",
+      "response_sha256": "c559d8f06e038121499ef47348bea015a5d025e7f9b9c24914bffc1849406e90"
+    },
+    {
+      "qa_id": "QA-57",
+      "model": "sol",
+      "task_id": "TECH051",
+      "language": "bn_cs",
+      "stratum": "main",
+      "response_sha256": "9c4767bf5910d1020e55ebe4586e83a94e080f6ee3d96d9ad4b4858fceaf42c1"
+    },
+    {
+      "qa_id": "QA-58",
+      "model": "gemma",
+      "task_id": "CYBER078",
+      "language": "bn",
+      "stratum": "main",
+      "response_sha256": "c86f22edd3c3b5754fd6b2abeefc0d789fc967ad249b2ddd5536570254b3877e"
+    },
+    {
+      "qa_id": "QA-59",
+      "model": "gemma",
+      "task_id": "PROC074",
+      "language": "en",
+      "stratum": "main",
+      "response_sha256": "31cb4599f9c442c04612d7b3df70f738d9d3a9f74206c29b5f3e4cad84b98d96"
+    },
+    {
+      "qa_id": "QA-60",
+      "model": "qwen",
+      "task_id": "CYBER006",
+      "language": "bn_cs",
+      "stratum": "main",
+      "response_sha256": "f83285cd18994d14e1796e6a50712277a9b7909ebb39879436cac5d5d412c856"
+    }
+  ]
+}

@@ -1,8 +1,10 @@
 <div align="center">
 
-# 🌐 Multilingual Trustworthiness Study
+# 🌐 Beyond Omission
 
-### Critical-information fulfillment of large language models in English, Bengali and Bengali–English code-switching
+### Measuring Critical-Information Fulfillment of Large Language Models in Bengali and English
+
+Code, data and results for the paper. Tasks are written in English (EN), natural Bengali (BN) and Bengali–English code-switching (BN-CS).
 
 ![Languages](https://img.shields.io/badge/languages-EN%20%7C%20BN%20%7C%20BN--CS-2b6cb0)
 ![Tasks](https://img.shields.io/badge/tasks-157%20scored%20%2F%20500%20corpus-2f855a)

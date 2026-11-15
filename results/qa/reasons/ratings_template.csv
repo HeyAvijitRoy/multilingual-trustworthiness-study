@@ -1,0 +1,82 @@
+﻿id,score,reason,note
+RC-01,0,omitted,"Covers travel time buffers and daily checklists, but never proposes checking the combined schedule for overlaps/infeasible travel gaps or rescheduling conflicts."
+RC-02,0,omitted,"Covers RBAC, MFA, and SFTP, but does not propose verifying the intended recipient/destination before releasing access or sending secrets."
+RC-03,0,omitted,"Compares file counts, folder counts, sizes, extensions, and timestamps, and mentions looking at long names of missing files, but never proposes comparing file-name or relative-path inventories to identify which files are missing."
+RC-04,0,insufficient,"Proposes an EMV decision rule (C < P*I) and mentions best/worst case sensitivity analysis, but relies on point-estimate EMV calculations rather than integrating input uncertainty into the prioritization rule across the three risks."
+RC-05,0,omitted,Fails to advise assessing the account via an independently opened official service rather than clicking unsolicited reset links; also misreads the prompt by stating the user cannot log in.
+RC-06,0,omitted,States the Friday Oct 16 check-in window (12:30-1:00 PM) but omits the actual workshop schedule of 1:00-3:00 PM.
+RC-07,0.5,partial,"Proposes controlled comparisons (e.g., docker build --no-cache, pulling CI image to run locally) to isolate build vs. runtime, but does not explain how a specific test outcome supports or weakens one of the five named causes."
+RC-08,1,met,Assigns a timekeeper/facilitator to enforce timeboxes during the meeting and defers overrun items to a Parking Lot for a future meeting.
+RC-09,0,insufficient,Labels disconnecting from the internet as merely 'Optional' and recommends running Windows System Restore immediately rather than prompt network isolation.
+RC-10,1,met,Immediately instructs disconnecting the computer from the internet/network and preserving affected files.
+RC-11,0,incorrect,"Incorrectly claims temporary credentials cannot be revoked directly and suggests determining lifetime merely from exposure timestamp vs. generation timestamp and provider limits, omitting audit-log expiration/revocation bounds."
+RC-12,1,met,Explicitly attributes the 3:00 PM meeting time to Note B.
+RC-13,1,met,Negative/conditional safeguard met: the response proposes only read-only diagnostic checks prior to conversion without any destructive in-place repair.
+RC-14,0,omitted,Misinterprets 'boarding pass' as a school/student ID pass and completely omits barcode/QR code data exposure.
+RC-15,0,omitted,"Covers encrypted channels and out-of-band passwords, but omits verifying the intended colleague's contact/destination before granting access or sending secrets."
+RC-16,1,met,Explicitly requires auditing current pantry/fridge stock before adding items to the list to prevent duplicates.
+RC-17,0,omitted,Jumps straight to function reachability and exposure without first checking the advisory against the actual package and version (including transitive dependencies) deployed in the project.
+RC-18,0,omitted,"Warns that misspelled sender domains are phishing attempts to click malicious links, but never affirmatively instructs assessing the account by independently navigating to the official service."
+RC-19,1,met,Explicitly states that Group A improved by 12%.
+RC-20,0,omitted,"Compares folder size, file count, locked files, and hidden files, and suggests FreeFileSync for future copies, but omits comparing source vs. destination file-name/path inventories before recopying."
+RC-21,0.5,partial,"Proposes a timeboxed PoC/research checkpoint before setting subsequent milestone dates, but does not specify how conditional outcomes alter dependent milestones or separate independent work."
+RC-22,0,incorrect,"Schedules overlapping simultaneous interviews and assumes Interviewer A's unused buffer can shift to Interviewer B, violating interviewer availability constraints."
+RC-23,1,met,"Explicitly instructs creating a temporary new user account to test and migrating user data (documents, projects) to a fresh profile rather than destructively resetting without backup."
+RC-24,0,incorrect,Violates the data-preservation constraint by suggesting 'a new partition format' if the drive appears unallocated/offline in Disk Management and advising formatting as exFAT without a backup warning.
+RC-25,0,insufficient,"Includes pre-migration inventory, final sync, and search indexing verification, but falls short of verifying migrated destination content against the source for data loss or corruption before cutover."
+RC-26,1,met,States that the spare projector is in another building with a 15-minute retrieval time.
+RC-27,1,met,"Defines a structured handover checklist, formal sign-off by both parties, and tracking in a single shared tool where unsigned tasks remain 'In Progress'."
+RC-28,0,omitted,"Covers RBAC and SFTP/Data Rooms, but omits verifying the recipient and destination before releasing access or sending secrets."
+RC-29,0,incorrect,Overstates the finding as 'all complaints were limited to one department' (সব অভিযোগ একটি নির্দিষ্ট বিভাগে সীমাবদ্ধ ছিল) instead of concentrated in one department.
+RC-30,1,met,Includes accruals/PO commitments in Phase 2 and projects month-end spending via run-rate analysis in Phases 3 & 5 compared against budget caps to flag overruns early.
+RC-31,0,omitted,"Suggests having the unstable user test a different known-stable application (Phase 1.1), omitting a direct comparison of the same failing operation under both the stable and unstable accounts."
+RC-32,1,met,"Chooses a phone call for the urgent question, explaining how real-time synchronous interaction fits urgency, and follows up via email for nonurgent updates."
+RC-33,0.5,partial,"Preserves retired policies in a searchable digital archive with version/cancelled labels, but omits protection against accidental alteration (e.g., read-only permissions)."
+RC-34,0.5,partial,"Checks content and communication history alongside timestamps/size to identify the current version, but lacks a rule to resolve conflicts with the responsible owner."
+RC-35,1,met,"Explicitly instructs reviewing Login History/Security/Activity settings for unrecognized devices, account changes, and active sessions."
+RC-36,0,insufficient,"Advises keeping the tank 80-90% full and carrying 100-150 km of extra fuel if a route has a 300 km gap, but does not explicitly formulate comparing inter-station distances against realistic vehicle range."
+RC-37,1,met,Explains keeping copies of important files across two distinct storage mediums: an offline external drive stored separately and cloud storage.
+RC-38,0,insufficient,"Mentions projecting remaining month spending from the current spending rate, but does not integrate upcoming commitments/planned costs or explicitly compare the forecast against available budget to flag overruns early."
+RC-39,0,insufficient,"Describes room camera, screen, and microphone setup for remote and on-site attendees, but omits testing the room arrangement prior to the event."
+RC-40,0,insufficient,"States that participants must bring a Wi-Fi-capable laptop and separately mentions reserved loaner laptops, but fails to state the reserved loaner as an exception to bringing a laptop."
+RC-41,0,insufficient,"Addresses arrival times and heavy luggage via a Hub system and Splitwise for activity opt-outs, but does not arrange transport options tailored to each traveler's budget limits."
+RC-42,0,incorrect,Omits the Thursday 4:00-5:30 PM clinic schedule and falsely states that those who do not install the software beforehand cannot join Friday's support session.
+RC-43,0,omitted,"Treats the unexpected extension prompt as unconditionally malicious and instructs declining/removing it, omitting any step to verify legitimacy/need via trusted browser store info or IT support."
+RC-44,1,met,"Uses trip-specific cloud subfolders, clear file naming conventions, and a multi-pocket physical travel wallet/organizer."
+RC-45,0.5,partial,"Checks header/footer status comments and VCS history alongside timestamps, but provides no rule for resolving conflicting evidence with the responsible owner."
+RC-46,0,incorrect,Incorrectly states the spare projector is in the same building ('ভবনটিতে থাকা অতিরিক্ত প্রজেক্টরটি') rather than in another building.
+RC-47,0.5,partial,"Proposes standardized templates and conversion formulas (TEXT, DATEVALUE, VALUE), but lacks concrete preservation rules for edge cases like leading-zero IDs or ambiguous dates."
+RC-48,0,incorrect,Proposes deleting the problematic user profile and creating a new one (Step 4) without any instruction to back up or preserve the user's data first.
+RC-49,0,omitted,"Includes travel buffers and geographic ordering, but omits checking the combined schedule for overlapping appointments/infeasible gaps and rescheduling conflicts."
+RC-50,0.5,partial,"Orders hard prerequisites first and includes a contingency table for delays, but does not explain how to fit prerequisites against provider/family availability windows when constructing the initial sequence."
+RC-51,0,insufficient,"Provides a 2x2 decision matrix mapping strategic criticality and technical complexity to the four paths, but does not integrate assessed incremental costs, resource/budget availability, and hard deadline constraints into the selection rule."
+RC-52,0,incorrect,"Notes that if Disk Management shows the drive as 'Unallocated', it must be repartitioned (with a parenthetical note that data may be lost), proposing a destructive action during initial diagnosis instead of preserving data."
+RC-53,0,incorrect,Proposes deleting application temporary files/caches and resetting AppData/Registry or replacing files without preserving recoverable user data first.
+RC-54,1,met,Correctly assigns testing the projector to Priya.
+RC-55,1,met,"Restricts access via RBAC to specific required researchers (e.g., PI) and enforces the minimum necessary principle."
+RC-56,0,incorrect,Instructs embedding a 'Pending Resolution' section and per-decision reviewer response notes directly inside the final report rather than delivering a clean final report with a separately retrievable review trail.
+RC-57,0,omitted,"Covers hidden/locked files, total file count, total folder size, and error logs, but omits comparing source and destination file-name or relative-path inventories to identify which files are missing."
+RC-58,0,omitted,"Recommends antivirus scanning, checking file extensions, and System Restore, completely omitting network isolation of the affected computer."
+RC-59,0,insufficient,"Places legal deadline = 5 cases into Tier 1 (24-48h resolution) and uses a weighted sum formula, which allows binding legal deadlines to be traded off against effort or delayed up to 48 hours without an escalation path when capacity cannot meet a statutory deadline."
+RC-60,0,insufficient,"Divides 60 staff into three batches of 20 by day, but fails to map batches across shifts (Morning, Evening, Night) to show how shift-level minimum staffing is maintained while completing all 60 trainings."
+RC-61,1,met,Explicitly states the requirement to use data through June.
+RC-62,1,met,"Proposes waterproof tents/indoor backup and sets a concrete cut-off time (e.g., 2 hours before the event) with a weather threshold to trigger Plan B."
+RC-63,0,omitted,"Discusses attack vectors, IP/frequency patterns, and admin rate-limiting, but omits advising the user to assess the account via an independently opened official service rather than reset links."
+RC-64,0,insufficient,"Mentions the two temporary implementation specialists who are not part of normal staffing, but omits that they supported the first six weeks."
+RC-65,0,insufficient,"Mentions that two departments adopted the full workflow 'quickly' (দ্রুত) while the third used a hybrid workflow through week six, omitting the specific 'by week three' timing for the first two departments."
+RC-66,0,omitted,"Proposes encrypted file-sharing links, password-protected archives, and out-of-band passwords, but omits verifying the intended colleague/destination before granting access or sending secrets."
+RC-67,0,omitted,"Covers travel buffers, route optimization, checklists, and alarms, but omits checking the combined schedule for conflicts/infeasible gaps and rescheduling when found."
+RC-68,1,met,Explicitly reports in the timeline that a file was modified at 12:15 AM.
+RC-69,0,incorrect,Violates external-checks-first ordering by instructing the user in Step 2 (before checking monitor power/input source in Step 3) to open the PC and reseat the graphics card and motherboard power connectors.
+RC-70,0,insufficient,Assumes a single continuous 3-hour overlapping window (09:00-12:00) for both interviewers rather than providing a method to schedule four interviews across partially overlapping availability or split interview assignments.
+RC-71,0,insufficient,"States in sentence 2 that participants must bring a Wi-Fi-capable laptop and in sentence 4 that eight loaner laptops are reserved for those who requested one by Wednesday at noon, but fails to link the loaner as an exception to the requirement to bring a laptop."
+RC-72,0,incorrect,"Mentions the vendor's warning of intermittent outages, but contradicts the 'possibility' requirement in the summary by treating it as a guaranteed 'planned vendor outage' and 'total service collapse'."
+RC-73,1,met,"Provides both conditional guidelines and a step-by-step decision tree connecting audience/impact characteristics (personal vs. broad emotional/high-impact vs. informational) to specific channels or combinations (e.g., Team Meeting followed by One-on-One)."
+RC-74,0,incorrect,Proposes manually summing a few rows from the affected month and comparing that partial sum to the full query result—a flawed test that does not isolate query logic from data quality—and omits using a correct month as a control.
+RC-75,0,insufficient,"Advises checking for CVEs (`npm audit`/`snyk`) and maintainer activity, and separately asks if a specific feature is needed, but does not explicitly connect checking whether the vulnerable code/issue is actually reachable or relevant to how the project uses the dependency."
+RC-76,0,omitted,"Advises changing password, enabling 2FA, and checking active sessions, but omits instructing the user to access the account via an independently opened official service rather than clicking links in the reset emails."
+RC-77,0,omitted,"Mentions that vendor maintenance coincides with peak traffic, but omits the specific fact that the maintenance is planned during the project's launch weekend."
+RC-78,1,met,Explicitly states that full-time employees were overrepresented among respondents compared to the general workforce.
+RC-79,1,met,"Explicitly triages the backlog into Critical, Important, and Optional tasks and defers Important/Optional tasks to Phase 2."
+RC-80,1,met,"Explains uploading to cloud storage or file transfer services, setting link permissions, and sending the retrieval link to the recipient."
+RC-81,0,insufficient,"Mentions 'weekend high traffic' (সপ্তাহান্তের উচ্চ ট্রাফিকের সময়) and 'maintenance plan', but omits that it is the project's launch weekend."

@@ -52,7 +52,7 @@ Paired, domain-equal language effects across the three models, with 95% CIs:
 | RIU coverage, BN-CS − BN | +0.028 [+0.012, +0.045] | Code-switching recovers part of the Bengali loss in overall coverage. |
 
 > [!NOTE]
-> Post hoc robustness checks (judge agreement by language, length control, leave-one-domain-out, token premium) are in [`results/robustness/summary.md`](results/robustness/summary.md). The coverage and success gaps hold in all of them. The primary omission estimate is +0.011 [+0.003, +0.019] when technical troubleshooting is dropped.
+> Post hoc robustness checks (judge agreement by language, length control, leave-one-domain-out, token premium) are in [`results/robustness/summary.md`](results/robustness/summary.md). The coverage and success gaps hold in all of them. The primary omission estimate is +0.011 [+0.003, +0.019] when technical troubleshooting is dropped. A blind reviewer check of the judge's reason codes ([`results/qa/reasons/summary.md`](results/qa/reasons/summary.md)) agreed on whether a critical unit was omitted for 79 of 81 units (kappa 0.936).
 
 **Score review.** The results include seven item corrections made after reviewing the 17 QA disagreements. Each corrected score keeps its original rating, evidence and review rationale, and [`results/analysis/summary.md`](results/analysis/summary.md) reports the initial and reviewed effects side by side. QA agreement is computed against the initial judge scores.
 
@@ -76,7 +76,7 @@ results/
   scores/              judge ratings per response
   validation/          judge scores and agreement results on the validation sets
   analysis/            results.json, summary.md, figures
-  qa/                  QA sample: selection, reviewer ratings, agreement
+  qa/                  QA sample: selection, reviewer ratings, agreement; reasons/ holds the reason-code check
   robustness/          post hoc checks and the manuscript figures
   STATUS.md            generated status and integrity report
 scripts/               numbered pipeline (below), common.py, tests/
@@ -103,6 +103,7 @@ Each step resumes where it stopped, and paid steps take a `--max-usd` cap per ru
 
 ### Requirements
 
+- 🐧 Ubuntu (commands in [`RUNBOOK.md`](RUNBOOK.md) are written for Ubuntu).
 - 🐍 Python 3.11+ with `numpy` and `matplotlib`.
 - 🔑 Paid steps: `OPENAI_API_KEY` in `.env`.
 - 🖥️ Local generation: `torch` 2.14 and `transformers` 5.20 on a CUDA GPU with BF16 support, using the pinned checkpoints in the Hugging Face cache.

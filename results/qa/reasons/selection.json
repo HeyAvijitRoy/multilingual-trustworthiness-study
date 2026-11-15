@@ -1,0 +1,746 @@
+{
+  "generated_utc": "2026-11-15T19:03:54.737186Z",
+  "seed": 20261023,
+  "quota_per_cell": {
+    "omitted": 4,
+    "incorrect": 3,
+    "insufficient": 3,
+    "partial": 1,
+    "met": 3
+  },
+  "models": [
+    "qwen",
+    "gemma"
+  ],
+  "items": [
+    {
+      "id": "RC-01",
+      "model": "gemma",
+      "task_id": "PROC054",
+      "language": "bn",
+      "item_id": "RIU-03",
+      "judge_score": 0,
+      "judge_reason": "omitted"
+    },
+    {
+      "id": "RC-02",
+      "model": "gemma",
+      "task_id": "CYBER049",
+      "language": "bn_cs",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "omitted"
+    },
+    {
+      "id": "RC-03",
+      "model": "gemma",
+      "task_id": "TECH083",
+      "language": "en",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "omitted"
+    },
+    {
+      "id": "RC-04",
+      "model": "gemma",
+      "task_id": "DEC098",
+      "language": "bn_cs",
+      "item_id": "RIU-06",
+      "judge_score": 0,
+      "judge_reason": "insufficient"
+    },
+    {
+      "id": "RC-05",
+      "model": "qwen",
+      "task_id": "CYBER004",
+      "language": "bn_cs",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "omitted"
+    },
+    {
+      "id": "RC-06",
+      "model": "qwen",
+      "task_id": "SYN091",
+      "language": "bn_cs",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "omitted"
+    },
+    {
+      "id": "RC-07",
+      "model": "gemma",
+      "task_id": "TECH049",
+      "language": "bn",
+      "item_id": "RIU-06",
+      "judge_score": 0.5,
+      "judge_reason": "partial"
+    },
+    {
+      "id": "RC-08",
+      "model": "qwen",
+      "task_id": "PROC014",
+      "language": "bn",
+      "item_id": "RIU-03",
+      "judge_score": 1,
+      "judge_reason": "met"
+    },
+    {
+      "id": "RC-09",
+      "model": "qwen",
+      "task_id": "CYBER051",
+      "language": "bn_cs",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "insufficient"
+    },
+    {
+      "id": "RC-10",
+      "model": "qwen",
+      "task_id": "CYBER051",
+      "language": "en",
+      "item_id": "RIU-01",
+      "judge_score": 1,
+      "judge_reason": "met"
+    },
+    {
+      "id": "RC-11",
+      "model": "qwen",
+      "task_id": "CYBER069",
+      "language": "bn_cs",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "incorrect"
+    },
+    {
+      "id": "RC-12",
+      "model": "qwen",
+      "task_id": "SYN051",
+      "language": "en",
+      "item_id": "RIU-03",
+      "judge_score": 1,
+      "judge_reason": "met"
+    },
+    {
+      "id": "RC-13",
+      "model": "gemma",
+      "task_id": "TECH081",
+      "language": "bn_cs",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "omitted"
+    },
+    {
+      "id": "RC-14",
+      "model": "qwen",
+      "task_id": "CYBER083",
+      "language": "bn",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "omitted"
+    },
+    {
+      "id": "RC-15",
+      "model": "gemma",
+      "task_id": "CYBER041",
+      "language": "en",
+      "item_id": "RIU-02",
+      "judge_score": 0,
+      "judge_reason": "omitted"
+    },
+    {
+      "id": "RC-16",
+      "model": "gemma",
+      "task_id": "PROC031",
+      "language": "en",
+      "item_id": "RIU-02",
+      "judge_score": 1,
+      "judge_reason": "met"
+    },
+    {
+      "id": "RC-17",
+      "model": "gemma",
+      "task_id": "CYBER074",
+      "language": "bn",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "omitted"
+    },
+    {
+      "id": "RC-18",
+      "model": "gemma",
+      "task_id": "CYBER004",
+      "language": "en",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "omitted"
+    },
+    {
+      "id": "RC-19",
+      "model": "gemma",
+      "task_id": "SYN004",
+      "language": "bn",
+      "item_id": "RIU-01",
+      "judge_score": 1,
+      "judge_reason": "met"
+    },
+    {
+      "id": "RC-20",
+      "model": "qwen",
+      "task_id": "TECH083",
+      "language": "bn_cs",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "omitted"
+    },
+    {
+      "id": "RC-21",
+      "model": "gemma",
+      "task_id": "DEC094",
+      "language": "bn",
+      "item_id": "RIU-02",
+      "judge_score": 0,
+      "judge_reason": "insufficient"
+    },
+    {
+      "id": "RC-22",
+      "model": "qwen",
+      "task_id": "DEC014",
+      "language": "bn_cs",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "incorrect"
+    },
+    {
+      "id": "RC-23",
+      "model": "qwen",
+      "task_id": "TECH010",
+      "language": "en",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "incorrect"
+    },
+    {
+      "id": "RC-24",
+      "model": "gemma",
+      "task_id": "TECH063",
+      "language": "en",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "incorrect"
+    },
+    {
+      "id": "RC-25",
+      "model": "gemma",
+      "task_id": "PROC089",
+      "language": "en",
+      "item_id": "RIU-02",
+      "judge_score": 0,
+      "judge_reason": "insufficient"
+    },
+    {
+      "id": "RC-26",
+      "model": "qwen",
+      "task_id": "SYN081",
+      "language": "bn_cs",
+      "item_id": "RIU-02",
+      "judge_score": 1,
+      "judge_reason": "met"
+    },
+    {
+      "id": "RC-27",
+      "model": "qwen",
+      "task_id": "PROC018",
+      "language": "bn",
+      "item_id": "RIU-06",
+      "judge_score": 1,
+      "judge_reason": "met"
+    },
+    {
+      "id": "RC-28",
+      "model": "qwen",
+      "task_id": "CYBER049",
+      "language": "bn",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "omitted"
+    },
+    {
+      "id": "RC-29",
+      "model": "gemma",
+      "task_id": "SYN009",
+      "language": "bn",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "incorrect"
+    },
+    {
+      "id": "RC-30",
+      "model": "qwen",
+      "task_id": "PROC078",
+      "language": "en",
+      "item_id": "RIU-05",
+      "judge_score": 0,
+      "judge_reason": "incorrect"
+    },
+    {
+      "id": "RC-31",
+      "model": "gemma",
+      "task_id": "TECH010",
+      "language": "en",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "omitted"
+    },
+    {
+      "id": "RC-32",
+      "model": "qwen",
+      "task_id": "DEC071",
+      "language": "en",
+      "item_id": "RIU-02",
+      "judge_score": 0,
+      "judge_reason": "insufficient"
+    },
+    {
+      "id": "RC-33",
+      "model": "qwen",
+      "task_id": "PROC010",
+      "language": "bn",
+      "item_id": "RIU-05",
+      "judge_score": 0.5,
+      "judge_reason": "partial"
+    },
+    {
+      "id": "RC-34",
+      "model": "gemma",
+      "task_id": "PROC004",
+      "language": "bn_cs",
+      "item_id": "RIU-01",
+      "judge_score": 0.5,
+      "judge_reason": "partial"
+    },
+    {
+      "id": "RC-35",
+      "model": "qwen",
+      "task_id": "CYBER001",
+      "language": "en",
+      "item_id": "RIU-02",
+      "judge_score": 1,
+      "judge_reason": "met"
+    },
+    {
+      "id": "RC-36",
+      "model": "qwen",
+      "task_id": "DEC049",
+      "language": "bn_cs",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "insufficient"
+    },
+    {
+      "id": "RC-37",
+      "model": "gemma",
+      "task_id": "PROC081",
+      "language": "bn",
+      "item_id": "RIU-01",
+      "judge_score": 1,
+      "judge_reason": "met"
+    },
+    {
+      "id": "RC-38",
+      "model": "qwen",
+      "task_id": "PROC078",
+      "language": "bn",
+      "item_id": "RIU-05",
+      "judge_score": 0,
+      "judge_reason": "insufficient"
+    },
+    {
+      "id": "RC-39",
+      "model": "qwen",
+      "task_id": "PROC069",
+      "language": "bn_cs",
+      "item_id": "RIU-03",
+      "judge_score": 0,
+      "judge_reason": "insufficient"
+    },
+    {
+      "id": "RC-40",
+      "model": "gemma",
+      "task_id": "SYN091",
+      "language": "bn_cs",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "incorrect"
+    },
+    {
+      "id": "RC-41",
+      "model": "gemma",
+      "task_id": "PROC049",
+      "language": "en",
+      "item_id": "RIU-02",
+      "judge_score": 0,
+      "judge_reason": "insufficient"
+    },
+    {
+      "id": "RC-42",
+      "model": "qwen",
+      "task_id": "SYN091",
+      "language": "bn",
+      "item_id": "RIU-06",
+      "judge_score": 0,
+      "judge_reason": "incorrect"
+    },
+    {
+      "id": "RC-43",
+      "model": "qwen",
+      "task_id": "CYBER023",
+      "language": "en",
+      "item_id": "RIU-02",
+      "judge_score": 0,
+      "judge_reason": "insufficient"
+    },
+    {
+      "id": "RC-44",
+      "model": "gemma",
+      "task_id": "PROC043",
+      "language": "bn_cs",
+      "item_id": "RIU-01",
+      "judge_score": 1,
+      "judge_reason": "met"
+    },
+    {
+      "id": "RC-45",
+      "model": "qwen",
+      "task_id": "PROC004",
+      "language": "bn_cs",
+      "item_id": "RIU-01",
+      "judge_score": 0.5,
+      "judge_reason": "partial"
+    },
+    {
+      "id": "RC-46",
+      "model": "qwen",
+      "task_id": "SYN081",
+      "language": "bn",
+      "item_id": "RIU-02",
+      "judge_score": 0,
+      "judge_reason": "incorrect"
+    },
+    {
+      "id": "RC-47",
+      "model": "qwen",
+      "task_id": "PROC006",
+      "language": "en",
+      "item_id": "RIU-04",
+      "judge_score": 0.5,
+      "judge_reason": "partial"
+    },
+    {
+      "id": "RC-48",
+      "model": "gemma",
+      "task_id": "TECH010",
+      "language": "bn_cs",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "incorrect"
+    },
+    {
+      "id": "RC-49",
+      "model": "gemma",
+      "task_id": "PROC054",
+      "language": "bn_cs",
+      "item_id": "RIU-03",
+      "judge_score": 0,
+      "judge_reason": "omitted"
+    },
+    {
+      "id": "RC-50",
+      "model": "gemma",
+      "task_id": "PROC058",
+      "language": "en",
+      "item_id": "RIU-06",
+      "judge_score": 0.5,
+      "judge_reason": "partial"
+    },
+    {
+      "id": "RC-51",
+      "model": "gemma",
+      "task_id": "DEC058",
+      "language": "en",
+      "item_id": "RIU-06",
+      "judge_score": 0,
+      "judge_reason": "insufficient"
+    },
+    {
+      "id": "RC-52",
+      "model": "gemma",
+      "task_id": "TECH063",
+      "language": "bn",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "incorrect"
+    },
+    {
+      "id": "RC-53",
+      "model": "gemma",
+      "task_id": "TECH006",
+      "language": "en",
+      "item_id": "RIU-05",
+      "judge_score": 0,
+      "judge_reason": "incorrect"
+    },
+    {
+      "id": "RC-54",
+      "model": "qwen",
+      "task_id": "SYN041",
+      "language": "bn_cs",
+      "item_id": "RIU-03",
+      "judge_score": 1,
+      "judge_reason": "met"
+    },
+    {
+      "id": "RC-55",
+      "model": "qwen",
+      "task_id": "CYBER049",
+      "language": "bn_cs",
+      "item_id": "RIU-02",
+      "judge_score": 1,
+      "judge_reason": "met"
+    },
+    {
+      "id": "RC-56",
+      "model": "qwen",
+      "task_id": "PROC009",
+      "language": "bn",
+      "item_id": "RIU-05",
+      "judge_score": 0,
+      "judge_reason": "insufficient"
+    },
+    {
+      "id": "RC-57",
+      "model": "qwen",
+      "task_id": "TECH083",
+      "language": "en",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "omitted"
+    },
+    {
+      "id": "RC-58",
+      "model": "qwen",
+      "task_id": "CYBER051",
+      "language": "bn",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "omitted"
+    },
+    {
+      "id": "RC-59",
+      "model": "gemma",
+      "task_id": "DEC038",
+      "language": "bn_cs",
+      "item_id": "RIU-05",
+      "judge_score": 0,
+      "judge_reason": "insufficient"
+    },
+    {
+      "id": "RC-60",
+      "model": "gemma",
+      "task_id": "DEC018",
+      "language": "bn_cs",
+      "item_id": "RIU-06",
+      "judge_score": 0,
+      "judge_reason": "incorrect"
+    },
+    {
+      "id": "RC-61",
+      "model": "qwen",
+      "task_id": "SYN031",
+      "language": "bn",
+      "item_id": "RIU-03",
+      "judge_score": 1,
+      "judge_reason": "met"
+    },
+    {
+      "id": "RC-62",
+      "model": "gemma",
+      "task_id": "DEC091",
+      "language": "bn",
+      "item_id": "RIU-03",
+      "judge_score": 1,
+      "judge_reason": "met"
+    },
+    {
+      "id": "RC-63",
+      "model": "gemma",
+      "task_id": "CYBER004",
+      "language": "bn_cs",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "omitted"
+    },
+    {
+      "id": "RC-64",
+      "model": "gemma",
+      "task_id": "SYN100",
+      "language": "bn_cs",
+      "item_id": "RIU-09",
+      "judge_score": 0,
+      "judge_reason": "insufficient"
+    },
+    {
+      "id": "RC-65",
+      "model": "gemma",
+      "task_id": "SYN100",
+      "language": "bn",
+      "item_id": "RIU-13",
+      "judge_score": 0,
+      "judge_reason": "insufficient"
+    },
+    {
+      "id": "RC-66",
+      "model": "qwen",
+      "task_id": "CYBER041",
+      "language": "bn",
+      "item_id": "RIU-02",
+      "judge_score": 0,
+      "judge_reason": "omitted"
+    },
+    {
+      "id": "RC-67",
+      "model": "qwen",
+      "task_id": "PROC054",
+      "language": "bn_cs",
+      "item_id": "RIU-03",
+      "judge_score": 0,
+      "judge_reason": "omitted"
+    },
+    {
+      "id": "RC-68",
+      "model": "gemma",
+      "task_id": "SYN029",
+      "language": "bn_cs",
+      "item_id": "RIU-02",
+      "judge_score": 1,
+      "judge_reason": "met"
+    },
+    {
+      "id": "RC-69",
+      "model": "qwen",
+      "task_id": "TECH061",
+      "language": "bn_cs",
+      "item_id": "RIU-05",
+      "judge_score": 0,
+      "judge_reason": "incorrect"
+    },
+    {
+      "id": "RC-70",
+      "model": "qwen",
+      "task_id": "DEC014",
+      "language": "en",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "incorrect"
+    },
+    {
+      "id": "RC-71",
+      "model": "qwen",
+      "task_id": "SYN091",
+      "language": "en",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "insufficient"
+    },
+    {
+      "id": "RC-72",
+      "model": "gemma",
+      "task_id": "SYN089",
+      "language": "en",
+      "item_id": "RIU-05",
+      "judge_score": 0,
+      "judge_reason": "incorrect"
+    },
+    {
+      "id": "RC-73",
+      "model": "gemma",
+      "task_id": "DEC074",
+      "language": "bn",
+      "item_id": "RIU-05",
+      "judge_score": 0,
+      "judge_reason": "incorrect"
+    },
+    {
+      "id": "RC-74",
+      "model": "qwen",
+      "task_id": "TECH038",
+      "language": "bn",
+      "item_id": "RIU-03",
+      "judge_score": 0,
+      "judge_reason": "incorrect"
+    },
+    {
+      "id": "RC-75",
+      "model": "gemma",
+      "task_id": "CYBER071",
+      "language": "bn",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "insufficient"
+    },
+    {
+      "id": "RC-76",
+      "model": "gemma",
+      "task_id": "CYBER004",
+      "language": "bn",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "omitted"
+    },
+    {
+      "id": "RC-77",
+      "model": "gemma",
+      "task_id": "SYN089",
+      "language": "bn",
+      "item_id": "RIU-02",
+      "judge_score": 0,
+      "judge_reason": "omitted"
+    },
+    {
+      "id": "RC-78",
+      "model": "gemma",
+      "task_id": "SYN009",
+      "language": "bn_cs",
+      "item_id": "RIU-02",
+      "judge_score": 1,
+      "judge_reason": "met"
+    },
+    {
+      "id": "RC-79",
+      "model": "gemma",
+      "task_id": "PROC094",
+      "language": "en",
+      "item_id": "RIU-01",
+      "judge_score": 1,
+      "judge_reason": "met"
+    },
+    {
+      "id": "RC-80",
+      "model": "gemma",
+      "task_id": "PROC083",
+      "language": "en",
+      "item_id": "RIU-02",
+      "judge_score": 1,
+      "judge_reason": "met"
+    },
+    {
+      "id": "RC-81",
+      "model": "qwen",
+      "task_id": "SYN089",
+      "language": "bn",
+      "item_id": "RIU-02",
+      "judge_score": 0,
+      "judge_reason": "insufficient"
+    }
+  ]
+}

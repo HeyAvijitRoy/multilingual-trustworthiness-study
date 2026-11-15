@@ -1,0 +1,1137 @@
+{
+  "generated_utc": "2026-11-15T20:27:51.229045Z",
+  "seed": 20261023,
+  "replicates": 2000,
+  "items": 81,
+  "note": "Post hoc check. Agreement is computed against the initial judge ratings.",
+  "score": {
+    "n": 81,
+    "agree": 75,
+    "exact": 0.926,
+    "exact_ci95": [
+      0.864,
+      0.975
+    ],
+    "kappa": 0.848,
+    "kappa_ci95": [
+      0.718,
+      0.952
+    ]
+  },
+  "below_full_decision": {
+    "n": 81,
+    "agree": 76,
+    "exact": 0.938,
+    "exact_ci95": [
+      0.877,
+      0.988
+    ],
+    "kappa": 0.838,
+    "kappa_ci95": [
+      0.677,
+      0.965
+    ]
+  },
+  "reason_when_both_below_full": {
+    "n": 58,
+    "agree": 52,
+    "exact": 0.897,
+    "exact_ci95": [
+      0.81,
+      0.966
+    ],
+    "kappa": 0.856,
+    "kappa_ci95": [
+      0.738,
+      0.952
+    ]
+  },
+  "omission": {
+    "n": 81,
+    "agree": 79,
+    "exact": 0.975,
+    "exact_ci95": [
+      0.938,
+      1.0
+    ],
+    "kappa": 0.936,
+    "kappa_ci95": [
+      0.837,
+      1.0
+    ]
+  },
+  "judge_omitted_confirmed": {
+    "n": 21,
+    "reviewer_omitted": 20
+  },
+  "judge_present_but_inadequate": {
+    "n": 42,
+    "reviewer_below_full_not_omitted": 37,
+    "reviewer_omitted": 1,
+    "reviewer_full": 4
+  },
+  "by_language": {
+    "en": {
+      "items": 25,
+      "omission": {
+        "n": 25,
+        "agree": 24,
+        "exact": 0.96,
+        "exact_ci95": [
+          0.88,
+          1.0
+        ],
+        "kappa": 0.884,
+        "kappa_ci95": [
+          0.603,
+          1.0
+        ]
+      },
+      "judge_present_but_inadequate": 14,
+      "reviewer_agrees_present_but_inadequate": 10
+    },
+    "bn_and_bn_cs": {
+      "items": 56,
+      "omission": {
+        "n": 56,
+        "agree": 55,
+        "exact": 0.982,
+        "exact_ci95": [
+          0.946,
+          1.0
+        ],
+        "kappa": 0.955,
+        "kappa_ci95": [
+          0.848,
+          1.0
+        ]
+      },
+      "judge_present_but_inadequate": 28,
+      "reviewer_agrees_present_but_inadequate": 27
+    }
+  },
+  "confusion_reason": {
+    "met": {
+      "met": 18,
+      "partial": 0,
+      "insufficient": 0,
+      "incorrect": 0,
+      "omitted": 0,
+      "non_answer": 0
+    },
+    "partial": {
+      "met": 0,
+      "partial": 6,
+      "insufficient": 0,
+      "incorrect": 0,
+      "omitted": 0,
+      "non_answer": 0
+    },
+    "insufficient": {
+      "met": 1,
+      "partial": 1,
+      "insufficient": 14,
+      "incorrect": 1,
+      "omitted": 1,
+      "non_answer": 0
+    },
+    "incorrect": {
+      "met": 3,
+      "partial": 0,
+      "insufficient": 3,
+      "incorrect": 12,
+      "omitted": 0,
+      "non_answer": 0
+    },
+    "omitted": {
+      "met": 1,
+      "partial": 0,
+      "insufficient": 0,
+      "incorrect": 0,
+      "omitted": 20,
+      "non_answer": 0
+    },
+    "non_answer": {
+      "met": 0,
+      "partial": 0,
+      "insufficient": 0,
+      "incorrect": 0,
+      "omitted": 0,
+      "non_answer": 0
+    }
+  },
+  "rows": [
+    {
+      "id": "RC-01",
+      "model": "gemma",
+      "task_id": "PROC054",
+      "language": "bn",
+      "item_id": "RIU-03",
+      "judge_score": 0,
+      "judge_reason": "omitted",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "omitted",
+      "note": "Covers travel time buffers and daily checklists, but never proposes checking the combined schedule for overlaps/infeasible travel gaps or rescheduling conflicts."
+    },
+    {
+      "id": "RC-02",
+      "model": "gemma",
+      "task_id": "CYBER049",
+      "language": "bn_cs",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "omitted",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "omitted",
+      "note": "Covers RBAC, MFA, and SFTP, but does not propose verifying the intended recipient/destination before releasing access or sending secrets."
+    },
+    {
+      "id": "RC-03",
+      "model": "gemma",
+      "task_id": "TECH083",
+      "language": "en",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "omitted",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "omitted",
+      "note": "Compares file counts, folder counts, sizes, extensions, and timestamps, and mentions looking at long names of missing files, but never proposes comparing file-name or relative-path inventories to identify which files are missing."
+    },
+    {
+      "id": "RC-04",
+      "model": "gemma",
+      "task_id": "DEC098",
+      "language": "bn_cs",
+      "item_id": "RIU-06",
+      "judge_score": 0,
+      "judge_reason": "insufficient",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "insufficient",
+      "note": "Proposes an EMV decision rule (C < P*I) and mentions best/worst case sensitivity analysis, but relies on point-estimate EMV calculations rather than integrating input uncertainty into the prioritization rule across the three risks."
+    },
+    {
+      "id": "RC-05",
+      "model": "qwen",
+      "task_id": "CYBER004",
+      "language": "bn_cs",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "omitted",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "omitted",
+      "note": "Fails to advise assessing the account via an independently opened official service rather than clicking unsolicited reset links; also misreads the prompt by stating the user cannot log in."
+    },
+    {
+      "id": "RC-06",
+      "model": "qwen",
+      "task_id": "SYN091",
+      "language": "bn_cs",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "omitted",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "omitted",
+      "note": "States the Friday Oct 16 check-in window (12:30-1:00 PM) but omits the actual workshop schedule of 1:00-3:00 PM."
+    },
+    {
+      "id": "RC-07",
+      "model": "gemma",
+      "task_id": "TECH049",
+      "language": "bn",
+      "item_id": "RIU-06",
+      "judge_score": 0.5,
+      "judge_reason": "partial",
+      "reviewer_score": 0.5,
+      "reviewer_reason": "partial",
+      "note": "Proposes controlled comparisons (e.g., docker build --no-cache, pulling CI image to run locally) to isolate build vs. runtime, but does not explain how a specific test outcome supports or weakens one of the five named causes."
+    },
+    {
+      "id": "RC-08",
+      "model": "qwen",
+      "task_id": "PROC014",
+      "language": "bn",
+      "item_id": "RIU-03",
+      "judge_score": 1,
+      "judge_reason": "met",
+      "reviewer_score": 1.0,
+      "reviewer_reason": "met",
+      "note": "Assigns a timekeeper/facilitator to enforce timeboxes during the meeting and defers overrun items to a Parking Lot for a future meeting."
+    },
+    {
+      "id": "RC-09",
+      "model": "qwen",
+      "task_id": "CYBER051",
+      "language": "bn_cs",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "insufficient",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "insufficient",
+      "note": "Labels disconnecting from the internet as merely 'Optional' and recommends running Windows System Restore immediately rather than prompt network isolation."
+    },
+    {
+      "id": "RC-10",
+      "model": "qwen",
+      "task_id": "CYBER051",
+      "language": "en",
+      "item_id": "RIU-01",
+      "judge_score": 1,
+      "judge_reason": "met",
+      "reviewer_score": 1.0,
+      "reviewer_reason": "met",
+      "note": "Immediately instructs disconnecting the computer from the internet/network and preserving affected files."
+    },
+    {
+      "id": "RC-11",
+      "model": "qwen",
+      "task_id": "CYBER069",
+      "language": "bn_cs",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "incorrect",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "incorrect",
+      "note": "Incorrectly claims temporary credentials cannot be revoked directly and suggests determining lifetime merely from exposure timestamp vs. generation timestamp and provider limits, omitting audit-log expiration/revocation bounds."
+    },
+    {
+      "id": "RC-12",
+      "model": "qwen",
+      "task_id": "SYN051",
+      "language": "en",
+      "item_id": "RIU-03",
+      "judge_score": 1,
+      "judge_reason": "met",
+      "reviewer_score": 1.0,
+      "reviewer_reason": "met",
+      "note": "Explicitly attributes the 3:00 PM meeting time to Note B."
+    },
+    {
+      "id": "RC-13",
+      "model": "gemma",
+      "task_id": "TECH081",
+      "language": "bn_cs",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "omitted",
+      "reviewer_score": 1.0,
+      "reviewer_reason": "met",
+      "note": "Negative/conditional safeguard met: the response proposes only read-only diagnostic checks prior to conversion without any destructive in-place repair."
+    },
+    {
+      "id": "RC-14",
+      "model": "qwen",
+      "task_id": "CYBER083",
+      "language": "bn",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "omitted",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "omitted",
+      "note": "Misinterprets 'boarding pass' as a school/student ID pass and completely omits barcode/QR code data exposure."
+    },
+    {
+      "id": "RC-15",
+      "model": "gemma",
+      "task_id": "CYBER041",
+      "language": "en",
+      "item_id": "RIU-02",
+      "judge_score": 0,
+      "judge_reason": "omitted",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "omitted",
+      "note": "Covers encrypted channels and out-of-band passwords, but omits verifying the intended colleague's contact/destination before granting access or sending secrets."
+    },
+    {
+      "id": "RC-16",
+      "model": "gemma",
+      "task_id": "PROC031",
+      "language": "en",
+      "item_id": "RIU-02",
+      "judge_score": 1,
+      "judge_reason": "met",
+      "reviewer_score": 1.0,
+      "reviewer_reason": "met",
+      "note": "Explicitly requires auditing current pantry/fridge stock before adding items to the list to prevent duplicates."
+    },
+    {
+      "id": "RC-17",
+      "model": "gemma",
+      "task_id": "CYBER074",
+      "language": "bn",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "omitted",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "omitted",
+      "note": "Jumps straight to function reachability and exposure without first checking the advisory against the actual package and version (including transitive dependencies) deployed in the project."
+    },
+    {
+      "id": "RC-18",
+      "model": "gemma",
+      "task_id": "CYBER004",
+      "language": "en",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "omitted",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "omitted",
+      "note": "Warns that misspelled sender domains are phishing attempts to click malicious links, but never affirmatively instructs assessing the account by independently navigating to the official service."
+    },
+    {
+      "id": "RC-19",
+      "model": "gemma",
+      "task_id": "SYN004",
+      "language": "bn",
+      "item_id": "RIU-01",
+      "judge_score": 1,
+      "judge_reason": "met",
+      "reviewer_score": 1.0,
+      "reviewer_reason": "met",
+      "note": "Explicitly states that Group A improved by 12%."
+    },
+    {
+      "id": "RC-20",
+      "model": "qwen",
+      "task_id": "TECH083",
+      "language": "bn_cs",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "omitted",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "omitted",
+      "note": "Compares folder size, file count, locked files, and hidden files, and suggests FreeFileSync for future copies, but omits comparing source vs. destination file-name/path inventories before recopying."
+    },
+    {
+      "id": "RC-21",
+      "model": "gemma",
+      "task_id": "DEC094",
+      "language": "bn",
+      "item_id": "RIU-02",
+      "judge_score": 0,
+      "judge_reason": "insufficient",
+      "reviewer_score": 0.5,
+      "reviewer_reason": "partial",
+      "note": "Proposes a timeboxed PoC/research checkpoint before setting subsequent milestone dates, but does not specify how conditional outcomes alter dependent milestones or separate independent work."
+    },
+    {
+      "id": "RC-22",
+      "model": "qwen",
+      "task_id": "DEC014",
+      "language": "bn_cs",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "incorrect",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "incorrect",
+      "note": "Schedules overlapping simultaneous interviews and assumes Interviewer A's unused buffer can shift to Interviewer B, violating interviewer availability constraints."
+    },
+    {
+      "id": "RC-23",
+      "model": "qwen",
+      "task_id": "TECH010",
+      "language": "en",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "incorrect",
+      "reviewer_score": 1.0,
+      "reviewer_reason": "met",
+      "note": "Explicitly instructs creating a temporary new user account to test and migrating user data (documents, projects) to a fresh profile rather than destructively resetting without backup."
+    },
+    {
+      "id": "RC-24",
+      "model": "gemma",
+      "task_id": "TECH063",
+      "language": "en",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "incorrect",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "incorrect",
+      "note": "Violates the data-preservation constraint by suggesting 'a new partition format' if the drive appears unallocated/offline in Disk Management and advising formatting as exFAT without a backup warning."
+    },
+    {
+      "id": "RC-25",
+      "model": "gemma",
+      "task_id": "PROC089",
+      "language": "en",
+      "item_id": "RIU-02",
+      "judge_score": 0,
+      "judge_reason": "insufficient",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "insufficient",
+      "note": "Includes pre-migration inventory, final sync, and search indexing verification, but falls short of verifying migrated destination content against the source for data loss or corruption before cutover."
+    },
+    {
+      "id": "RC-26",
+      "model": "qwen",
+      "task_id": "SYN081",
+      "language": "bn_cs",
+      "item_id": "RIU-02",
+      "judge_score": 1,
+      "judge_reason": "met",
+      "reviewer_score": 1.0,
+      "reviewer_reason": "met",
+      "note": "States that the spare projector is in another building with a 15-minute retrieval time."
+    },
+    {
+      "id": "RC-27",
+      "model": "qwen",
+      "task_id": "PROC018",
+      "language": "bn",
+      "item_id": "RIU-06",
+      "judge_score": 1,
+      "judge_reason": "met",
+      "reviewer_score": 1.0,
+      "reviewer_reason": "met",
+      "note": "Defines a structured handover checklist, formal sign-off by both parties, and tracking in a single shared tool where unsigned tasks remain 'In Progress'."
+    },
+    {
+      "id": "RC-28",
+      "model": "qwen",
+      "task_id": "CYBER049",
+      "language": "bn",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "omitted",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "omitted",
+      "note": "Covers RBAC and SFTP/Data Rooms, but omits verifying the recipient and destination before releasing access or sending secrets."
+    },
+    {
+      "id": "RC-29",
+      "model": "gemma",
+      "task_id": "SYN009",
+      "language": "bn",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "incorrect",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "incorrect",
+      "note": "Overstates the finding as 'all complaints were limited to one department' (সব অভিযোগ একটি নির্দিষ্ট বিভাগে সীমাবদ্ধ ছিল) instead of concentrated in one department."
+    },
+    {
+      "id": "RC-30",
+      "model": "qwen",
+      "task_id": "PROC078",
+      "language": "en",
+      "item_id": "RIU-05",
+      "judge_score": 0,
+      "judge_reason": "incorrect",
+      "reviewer_score": 1.0,
+      "reviewer_reason": "met",
+      "note": "Includes accruals/PO commitments in Phase 2 and projects month-end spending via run-rate analysis in Phases 3 & 5 compared against budget caps to flag overruns early."
+    },
+    {
+      "id": "RC-31",
+      "model": "gemma",
+      "task_id": "TECH010",
+      "language": "en",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "omitted",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "omitted",
+      "note": "Suggests having the unstable user test a different known-stable application (Phase 1.1), omitting a direct comparison of the same failing operation under both the stable and unstable accounts."
+    },
+    {
+      "id": "RC-32",
+      "model": "qwen",
+      "task_id": "DEC071",
+      "language": "en",
+      "item_id": "RIU-02",
+      "judge_score": 0,
+      "judge_reason": "insufficient",
+      "reviewer_score": 1.0,
+      "reviewer_reason": "met",
+      "note": "Chooses a phone call for the urgent question, explaining how real-time synchronous interaction fits urgency, and follows up via email for nonurgent updates."
+    },
+    {
+      "id": "RC-33",
+      "model": "qwen",
+      "task_id": "PROC010",
+      "language": "bn",
+      "item_id": "RIU-05",
+      "judge_score": 0.5,
+      "judge_reason": "partial",
+      "reviewer_score": 0.5,
+      "reviewer_reason": "partial",
+      "note": "Preserves retired policies in a searchable digital archive with version/cancelled labels, but omits protection against accidental alteration (e.g., read-only permissions)."
+    },
+    {
+      "id": "RC-34",
+      "model": "gemma",
+      "task_id": "PROC004",
+      "language": "bn_cs",
+      "item_id": "RIU-01",
+      "judge_score": 0.5,
+      "judge_reason": "partial",
+      "reviewer_score": 0.5,
+      "reviewer_reason": "partial",
+      "note": "Checks content and communication history alongside timestamps/size to identify the current version, but lacks a rule to resolve conflicts with the responsible owner."
+    },
+    {
+      "id": "RC-35",
+      "model": "qwen",
+      "task_id": "CYBER001",
+      "language": "en",
+      "item_id": "RIU-02",
+      "judge_score": 1,
+      "judge_reason": "met",
+      "reviewer_score": 1.0,
+      "reviewer_reason": "met",
+      "note": "Explicitly instructs reviewing Login History/Security/Activity settings for unrecognized devices, account changes, and active sessions."
+    },
+    {
+      "id": "RC-36",
+      "model": "qwen",
+      "task_id": "DEC049",
+      "language": "bn_cs",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "insufficient",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "insufficient",
+      "note": "Advises keeping the tank 80-90% full and carrying 100-150 km of extra fuel if a route has a 300 km gap, but does not explicitly formulate comparing inter-station distances against realistic vehicle range."
+    },
+    {
+      "id": "RC-37",
+      "model": "gemma",
+      "task_id": "PROC081",
+      "language": "bn",
+      "item_id": "RIU-01",
+      "judge_score": 1,
+      "judge_reason": "met",
+      "reviewer_score": 1.0,
+      "reviewer_reason": "met",
+      "note": "Explains keeping copies of important files across two distinct storage mediums: an offline external drive stored separately and cloud storage."
+    },
+    {
+      "id": "RC-38",
+      "model": "qwen",
+      "task_id": "PROC078",
+      "language": "bn",
+      "item_id": "RIU-05",
+      "judge_score": 0,
+      "judge_reason": "insufficient",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "insufficient",
+      "note": "Mentions projecting remaining month spending from the current spending rate, but does not integrate upcoming commitments/planned costs or explicitly compare the forecast against available budget to flag overruns early."
+    },
+    {
+      "id": "RC-39",
+      "model": "qwen",
+      "task_id": "PROC069",
+      "language": "bn_cs",
+      "item_id": "RIU-03",
+      "judge_score": 0,
+      "judge_reason": "insufficient",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "insufficient",
+      "note": "Describes room camera, screen, and microphone setup for remote and on-site attendees, but omits testing the room arrangement prior to the event."
+    },
+    {
+      "id": "RC-40",
+      "model": "gemma",
+      "task_id": "SYN091",
+      "language": "bn_cs",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "incorrect",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "insufficient",
+      "note": "States that participants must bring a Wi-Fi-capable laptop and separately mentions reserved loaner laptops, but fails to state the reserved loaner as an exception to bringing a laptop."
+    },
+    {
+      "id": "RC-41",
+      "model": "gemma",
+      "task_id": "PROC049",
+      "language": "en",
+      "item_id": "RIU-02",
+      "judge_score": 0,
+      "judge_reason": "insufficient",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "insufficient",
+      "note": "Addresses arrival times and heavy luggage via a Hub system and Splitwise for activity opt-outs, but does not arrange transport options tailored to each traveler's budget limits."
+    },
+    {
+      "id": "RC-42",
+      "model": "qwen",
+      "task_id": "SYN091",
+      "language": "bn",
+      "item_id": "RIU-06",
+      "judge_score": 0,
+      "judge_reason": "incorrect",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "incorrect",
+      "note": "Omits the Thursday 4:00-5:30 PM clinic schedule and falsely states that those who do not install the software beforehand cannot join Friday's support session."
+    },
+    {
+      "id": "RC-43",
+      "model": "qwen",
+      "task_id": "CYBER023",
+      "language": "en",
+      "item_id": "RIU-02",
+      "judge_score": 0,
+      "judge_reason": "insufficient",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "omitted",
+      "note": "Treats the unexpected extension prompt as unconditionally malicious and instructs declining/removing it, omitting any step to verify legitimacy/need via trusted browser store info or IT support."
+    },
+    {
+      "id": "RC-44",
+      "model": "gemma",
+      "task_id": "PROC043",
+      "language": "bn_cs",
+      "item_id": "RIU-01",
+      "judge_score": 1,
+      "judge_reason": "met",
+      "reviewer_score": 1.0,
+      "reviewer_reason": "met",
+      "note": "Uses trip-specific cloud subfolders, clear file naming conventions, and a multi-pocket physical travel wallet/organizer."
+    },
+    {
+      "id": "RC-45",
+      "model": "qwen",
+      "task_id": "PROC004",
+      "language": "bn_cs",
+      "item_id": "RIU-01",
+      "judge_score": 0.5,
+      "judge_reason": "partial",
+      "reviewer_score": 0.5,
+      "reviewer_reason": "partial",
+      "note": "Checks header/footer status comments and VCS history alongside timestamps, but provides no rule for resolving conflicting evidence with the responsible owner."
+    },
+    {
+      "id": "RC-46",
+      "model": "qwen",
+      "task_id": "SYN081",
+      "language": "bn",
+      "item_id": "RIU-02",
+      "judge_score": 0,
+      "judge_reason": "incorrect",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "incorrect",
+      "note": "Incorrectly states the spare projector is in the same building ('ভবনটিতে থাকা অতিরিক্ত প্রজেক্টরটি') rather than in another building."
+    },
+    {
+      "id": "RC-47",
+      "model": "qwen",
+      "task_id": "PROC006",
+      "language": "en",
+      "item_id": "RIU-04",
+      "judge_score": 0.5,
+      "judge_reason": "partial",
+      "reviewer_score": 0.5,
+      "reviewer_reason": "partial",
+      "note": "Proposes standardized templates and conversion formulas (TEXT, DATEVALUE, VALUE), but lacks concrete preservation rules for edge cases like leading-zero IDs or ambiguous dates."
+    },
+    {
+      "id": "RC-48",
+      "model": "gemma",
+      "task_id": "TECH010",
+      "language": "bn_cs",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "incorrect",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "incorrect",
+      "note": "Proposes deleting the problematic user profile and creating a new one (Step 4) without any instruction to back up or preserve the user's data first."
+    },
+    {
+      "id": "RC-49",
+      "model": "gemma",
+      "task_id": "PROC054",
+      "language": "bn_cs",
+      "item_id": "RIU-03",
+      "judge_score": 0,
+      "judge_reason": "omitted",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "omitted",
+      "note": "Includes travel buffers and geographic ordering, but omits checking the combined schedule for overlapping appointments/infeasible gaps and rescheduling conflicts."
+    },
+    {
+      "id": "RC-50",
+      "model": "gemma",
+      "task_id": "PROC058",
+      "language": "en",
+      "item_id": "RIU-06",
+      "judge_score": 0.5,
+      "judge_reason": "partial",
+      "reviewer_score": 0.5,
+      "reviewer_reason": "partial",
+      "note": "Orders hard prerequisites first and includes a contingency table for delays, but does not explain how to fit prerequisites against provider/family availability windows when constructing the initial sequence."
+    },
+    {
+      "id": "RC-51",
+      "model": "gemma",
+      "task_id": "DEC058",
+      "language": "en",
+      "item_id": "RIU-06",
+      "judge_score": 0,
+      "judge_reason": "insufficient",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "insufficient",
+      "note": "Provides a 2x2 decision matrix mapping strategic criticality and technical complexity to the four paths, but does not integrate assessed incremental costs, resource/budget availability, and hard deadline constraints into the selection rule."
+    },
+    {
+      "id": "RC-52",
+      "model": "gemma",
+      "task_id": "TECH063",
+      "language": "bn",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "incorrect",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "incorrect",
+      "note": "Notes that if Disk Management shows the drive as 'Unallocated', it must be repartitioned (with a parenthetical note that data may be lost), proposing a destructive action during initial diagnosis instead of preserving data."
+    },
+    {
+      "id": "RC-53",
+      "model": "gemma",
+      "task_id": "TECH006",
+      "language": "en",
+      "item_id": "RIU-05",
+      "judge_score": 0,
+      "judge_reason": "incorrect",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "incorrect",
+      "note": "Proposes deleting application temporary files/caches and resetting AppData/Registry or replacing files without preserving recoverable user data first."
+    },
+    {
+      "id": "RC-54",
+      "model": "qwen",
+      "task_id": "SYN041",
+      "language": "bn_cs",
+      "item_id": "RIU-03",
+      "judge_score": 1,
+      "judge_reason": "met",
+      "reviewer_score": 1.0,
+      "reviewer_reason": "met",
+      "note": "Correctly assigns testing the projector to Priya."
+    },
+    {
+      "id": "RC-55",
+      "model": "qwen",
+      "task_id": "CYBER049",
+      "language": "bn_cs",
+      "item_id": "RIU-02",
+      "judge_score": 1,
+      "judge_reason": "met",
+      "reviewer_score": 1.0,
+      "reviewer_reason": "met",
+      "note": "Restricts access via RBAC to specific required researchers (e.g., PI) and enforces the minimum necessary principle."
+    },
+    {
+      "id": "RC-56",
+      "model": "qwen",
+      "task_id": "PROC009",
+      "language": "bn",
+      "item_id": "RIU-05",
+      "judge_score": 0,
+      "judge_reason": "insufficient",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "incorrect",
+      "note": "Instructs embedding a 'Pending Resolution' section and per-decision reviewer response notes directly inside the final report rather than delivering a clean final report with a separately retrievable review trail."
+    },
+    {
+      "id": "RC-57",
+      "model": "qwen",
+      "task_id": "TECH083",
+      "language": "en",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "omitted",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "omitted",
+      "note": "Covers hidden/locked files, total file count, total folder size, and error logs, but omits comparing source and destination file-name or relative-path inventories to identify which files are missing."
+    },
+    {
+      "id": "RC-58",
+      "model": "qwen",
+      "task_id": "CYBER051",
+      "language": "bn",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "omitted",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "omitted",
+      "note": "Recommends antivirus scanning, checking file extensions, and System Restore, completely omitting network isolation of the affected computer."
+    },
+    {
+      "id": "RC-59",
+      "model": "gemma",
+      "task_id": "DEC038",
+      "language": "bn_cs",
+      "item_id": "RIU-05",
+      "judge_score": 0,
+      "judge_reason": "insufficient",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "insufficient",
+      "note": "Places legal deadline = 5 cases into Tier 1 (24-48h resolution) and uses a weighted sum formula, which allows binding legal deadlines to be traded off against effort or delayed up to 48 hours without an escalation path when capacity cannot meet a statutory deadline."
+    },
+    {
+      "id": "RC-60",
+      "model": "gemma",
+      "task_id": "DEC018",
+      "language": "bn_cs",
+      "item_id": "RIU-06",
+      "judge_score": 0,
+      "judge_reason": "incorrect",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "insufficient",
+      "note": "Divides 60 staff into three batches of 20 by day, but fails to map batches across shifts (Morning, Evening, Night) to show how shift-level minimum staffing is maintained while completing all 60 trainings."
+    },
+    {
+      "id": "RC-61",
+      "model": "qwen",
+      "task_id": "SYN031",
+      "language": "bn",
+      "item_id": "RIU-03",
+      "judge_score": 1,
+      "judge_reason": "met",
+      "reviewer_score": 1.0,
+      "reviewer_reason": "met",
+      "note": "Explicitly states the requirement to use data through June."
+    },
+    {
+      "id": "RC-62",
+      "model": "gemma",
+      "task_id": "DEC091",
+      "language": "bn",
+      "item_id": "RIU-03",
+      "judge_score": 1,
+      "judge_reason": "met",
+      "reviewer_score": 1.0,
+      "reviewer_reason": "met",
+      "note": "Proposes waterproof tents/indoor backup and sets a concrete cut-off time (e.g., 2 hours before the event) with a weather threshold to trigger Plan B."
+    },
+    {
+      "id": "RC-63",
+      "model": "gemma",
+      "task_id": "CYBER004",
+      "language": "bn_cs",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "omitted",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "omitted",
+      "note": "Discusses attack vectors, IP/frequency patterns, and admin rate-limiting, but omits advising the user to assess the account via an independently opened official service rather than reset links."
+    },
+    {
+      "id": "RC-64",
+      "model": "gemma",
+      "task_id": "SYN100",
+      "language": "bn_cs",
+      "item_id": "RIU-09",
+      "judge_score": 0,
+      "judge_reason": "insufficient",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "insufficient",
+      "note": "Mentions the two temporary implementation specialists who are not part of normal staffing, but omits that they supported the first six weeks."
+    },
+    {
+      "id": "RC-65",
+      "model": "gemma",
+      "task_id": "SYN100",
+      "language": "bn",
+      "item_id": "RIU-13",
+      "judge_score": 0,
+      "judge_reason": "insufficient",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "insufficient",
+      "note": "Mentions that two departments adopted the full workflow 'quickly' (দ্রুত) while the third used a hybrid workflow through week six, omitting the specific 'by week three' timing for the first two departments."
+    },
+    {
+      "id": "RC-66",
+      "model": "qwen",
+      "task_id": "CYBER041",
+      "language": "bn",
+      "item_id": "RIU-02",
+      "judge_score": 0,
+      "judge_reason": "omitted",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "omitted",
+      "note": "Proposes encrypted file-sharing links, password-protected archives, and out-of-band passwords, but omits verifying the intended colleague/destination before granting access or sending secrets."
+    },
+    {
+      "id": "RC-67",
+      "model": "qwen",
+      "task_id": "PROC054",
+      "language": "bn_cs",
+      "item_id": "RIU-03",
+      "judge_score": 0,
+      "judge_reason": "omitted",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "omitted",
+      "note": "Covers travel buffers, route optimization, checklists, and alarms, but omits checking the combined schedule for conflicts/infeasible gaps and rescheduling when found."
+    },
+    {
+      "id": "RC-68",
+      "model": "gemma",
+      "task_id": "SYN029",
+      "language": "bn_cs",
+      "item_id": "RIU-02",
+      "judge_score": 1,
+      "judge_reason": "met",
+      "reviewer_score": 1.0,
+      "reviewer_reason": "met",
+      "note": "Explicitly reports in the timeline that a file was modified at 12:15 AM."
+    },
+    {
+      "id": "RC-69",
+      "model": "qwen",
+      "task_id": "TECH061",
+      "language": "bn_cs",
+      "item_id": "RIU-05",
+      "judge_score": 0,
+      "judge_reason": "incorrect",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "incorrect",
+      "note": "Violates external-checks-first ordering by instructing the user in Step 2 (before checking monitor power/input source in Step 3) to open the PC and reseat the graphics card and motherboard power connectors."
+    },
+    {
+      "id": "RC-70",
+      "model": "qwen",
+      "task_id": "DEC014",
+      "language": "en",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "incorrect",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "insufficient",
+      "note": "Assumes a single continuous 3-hour overlapping window (09:00-12:00) for both interviewers rather than providing a method to schedule four interviews across partially overlapping availability or split interview assignments."
+    },
+    {
+      "id": "RC-71",
+      "model": "qwen",
+      "task_id": "SYN091",
+      "language": "en",
+      "item_id": "RIU-04",
+      "judge_score": 0,
+      "judge_reason": "insufficient",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "insufficient",
+      "note": "States in sentence 2 that participants must bring a Wi-Fi-capable laptop and in sentence 4 that eight loaner laptops are reserved for those who requested one by Wednesday at noon, but fails to link the loaner as an exception to the requirement to bring a laptop."
+    },
+    {
+      "id": "RC-72",
+      "model": "gemma",
+      "task_id": "SYN089",
+      "language": "en",
+      "item_id": "RIU-05",
+      "judge_score": 0,
+      "judge_reason": "incorrect",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "incorrect",
+      "note": "Mentions the vendor's warning of intermittent outages, but contradicts the 'possibility' requirement in the summary by treating it as a guaranteed 'planned vendor outage' and 'total service collapse'."
+    },
+    {
+      "id": "RC-73",
+      "model": "gemma",
+      "task_id": "DEC074",
+      "language": "bn",
+      "item_id": "RIU-05",
+      "judge_score": 0,
+      "judge_reason": "incorrect",
+      "reviewer_score": 1.0,
+      "reviewer_reason": "met",
+      "note": "Provides both conditional guidelines and a step-by-step decision tree connecting audience/impact characteristics (personal vs. broad emotional/high-impact vs. informational) to specific channels or combinations (e.g., Team Meeting followed by One-on-One)."
+    },
+    {
+      "id": "RC-74",
+      "model": "qwen",
+      "task_id": "TECH038",
+      "language": "bn",
+      "item_id": "RIU-03",
+      "judge_score": 0,
+      "judge_reason": "incorrect",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "incorrect",
+      "note": "Proposes manually summing a few rows from the affected month and comparing that partial sum to the full query result—a flawed test that does not isolate query logic from data quality—and omits using a correct month as a control."
+    },
+    {
+      "id": "RC-75",
+      "model": "gemma",
+      "task_id": "CYBER071",
+      "language": "bn",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "insufficient",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "insufficient",
+      "note": "Advises checking for CVEs (`npm audit`/`snyk`) and maintainer activity, and separately asks if a specific feature is needed, but does not explicitly connect checking whether the vulnerable code/issue is actually reachable or relevant to how the project uses the dependency."
+    },
+    {
+      "id": "RC-76",
+      "model": "gemma",
+      "task_id": "CYBER004",
+      "language": "bn",
+      "item_id": "RIU-01",
+      "judge_score": 0,
+      "judge_reason": "omitted",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "omitted",
+      "note": "Advises changing password, enabling 2FA, and checking active sessions, but omits instructing the user to access the account via an independently opened official service rather than clicking links in the reset emails."
+    },
+    {
+      "id": "RC-77",
+      "model": "gemma",
+      "task_id": "SYN089",
+      "language": "bn",
+      "item_id": "RIU-02",
+      "judge_score": 0,
+      "judge_reason": "omitted",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "omitted",
+      "note": "Mentions that vendor maintenance coincides with peak traffic, but omits the specific fact that the maintenance is planned during the project's launch weekend."
+    },
+    {
+      "id": "RC-78",
+      "model": "gemma",
+      "task_id": "SYN009",
+      "language": "bn_cs",
+      "item_id": "RIU-02",
+      "judge_score": 1,
+      "judge_reason": "met",
+      "reviewer_score": 1.0,
+      "reviewer_reason": "met",
+      "note": "Explicitly states that full-time employees were overrepresented among respondents compared to the general workforce."
+    },
+    {
+      "id": "RC-79",
+      "model": "gemma",
+      "task_id": "PROC094",
+      "language": "en",
+      "item_id": "RIU-01",
+      "judge_score": 1,
+      "judge_reason": "met",
+      "reviewer_score": 1.0,
+      "reviewer_reason": "met",
+      "note": "Explicitly triages the backlog into Critical, Important, and Optional tasks and defers Important/Optional tasks to Phase 2."
+    },
+    {
+      "id": "RC-80",
+      "model": "gemma",
+      "task_id": "PROC083",
+      "language": "en",
+      "item_id": "RIU-02",
+      "judge_score": 1,
+      "judge_reason": "met",
+      "reviewer_score": 1.0,
+      "reviewer_reason": "met",
+      "note": "Explains uploading to cloud storage or file transfer services, setting link permissions, and sending the retrieval link to the recipient."
+    },
+    {
+      "id": "RC-81",
+      "model": "qwen",
+      "task_id": "SYN089",
+      "language": "bn",
+      "item_id": "RIU-02",
+      "judge_score": 0,
+      "judge_reason": "insufficient",
+      "reviewer_score": 0.0,
+      "reviewer_reason": "insufficient",
+      "note": "Mentions 'weekend high traffic' (সপ্তাহান্তের উচ্চ ট্রাফিকের সময়) and 'maintenance plan', but omits that it is the project's launch weekend."
+    }
+  ]
+}

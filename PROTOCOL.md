@@ -125,6 +125,8 @@ These checks were run after the primary analysis (`scripts/08_robustness.py`, `r
 - **Task checks**: dropping CHECK-01 from the success outcomes widens the gaps (strict success BN − EN −0.114 against −0.093).
 - **Leave-one-domain-out**: coverage and success gaps hold in every run. The primary omission estimate is −0.001 to +0.003 in four runs and +0.011 [+0.003, +0.019] without technical troubleshooting.
 - **Token premium** (BN over EN, recorded usage): input ×1.75 (Sol), ×2.00 (Qwen), ×1.24 (Gemma); it does not track the quality gap.
+- **Reason-code check** (`scripts/09_reason_check.py`, `results/qa/reasons/`): R1 rated 81 critical RIUs from Qwen and Gemma, one per response, stratified by model × language × judge reason and including fully met units, blind to model and judge. Agreement with the initial judge ratings was 79/81 (kappa 0.936) on omitted or not and 52/58 (kappa 0.856) on the reason where both scored below full. Of 42 units the judge coded partial, insufficient or incorrect, the reviewer coded 1 as omitted and 4 as met.
+- **Thinking-enabled subset** (`scripts/10_thinking_subset.py`, `results/thinking/`): Qwen and Gemma with thinking enabled on 30 tasks (EN and BN), using each checkpoint's sampling settings with a seeded sample per cell, compared with the stored thinking-off responses on the same tasks.
 
 ## Deviations from the plan
 

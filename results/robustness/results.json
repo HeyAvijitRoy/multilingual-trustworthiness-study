@@ -1,0 +1,1207 @@
+{
+  "generated_utc": "2026-11-11T04:11:14.301735Z",
+  "replicates": 2000,
+  "seed": 20261023,
+  "qa_agreement_by_group": {
+    "all 60|language=bn": {
+      "riu_items": 93,
+      "ordinal_alpha": 0.7696830119337297,
+      "riu_exact": 0.9247311827956989,
+      "critical_items": 41,
+      "critical_exact": 0.975609756097561,
+      "check_items": 21,
+      "check_exact": 0.9523809523809523,
+      "check01_items": 20,
+      "check01_exact": 0.95,
+      "format_check_items": 1,
+      "format_check_exact": 1.0,
+      "responses": 20,
+      "mean_qa_minus_judge": 0.03225806451612903
+    },
+    "all 60|language=bn_cs": {
+      "riu_items": 96,
+      "ordinal_alpha": 0.8957233848953594,
+      "riu_exact": 0.96875,
+      "critical_items": 45,
+      "critical_exact": 1.0,
+      "check_items": 20,
+      "check_exact": 1.0,
+      "check01_items": 20,
+      "check01_exact": 1.0,
+      "format_check_items": 0,
+      "format_check_exact": null,
+      "responses": 20,
+      "mean_qa_minus_judge": 0.03125
+    },
+    "all 60|language=en": {
+      "riu_items": 101,
+      "ordinal_alpha": 0.8730637943354327,
+      "riu_exact": 0.9702970297029703,
+      "critical_items": 54,
+      "critical_exact": 0.9629629629629629,
+      "check_items": 21,
+      "check_exact": 0.8571428571428571,
+      "check01_items": 20,
+      "check01_exact": 0.85,
+      "format_check_items": 1,
+      "format_check_exact": 1.0,
+      "responses": 20,
+      "mean_qa_minus_judge": 0.0297029702970297
+    },
+    "all 60|model=gemma": {
+      "riu_items": 137,
+      "ordinal_alpha": 0.8484440464456056,
+      "riu_exact": 0.9416058394160584,
+      "critical_items": 61,
+      "critical_exact": 0.9672131147540983,
+      "check_items": 26,
+      "check_exact": 0.8846153846153846,
+      "check01_items": 26,
+      "check01_exact": 0.8846153846153846,
+      "format_check_items": 0,
+      "format_check_exact": null,
+      "responses": 26,
+      "mean_qa_minus_judge": 0.043795620437956206
+    },
+    "all 60|model=qwen": {
+      "riu_items": 84,
+      "ordinal_alpha": 0.7758869495817287,
+      "riu_exact": 0.9404761904761905,
+      "critical_items": 43,
+      "critical_exact": 0.9767441860465116,
+      "check_items": 20,
+      "check_exact": 0.95,
+      "check01_items": 19,
+      "check01_exact": 0.9473684210526315,
+      "format_check_items": 1,
+      "format_check_exact": 1.0,
+      "responses": 19,
+      "mean_qa_minus_judge": 0.03571428571428571
+    },
+    "all 60|model=sol": {
+      "riu_items": 69,
+      "ordinal_alpha": null,
+      "riu_exact": 1.0,
+      "critical_items": 36,
+      "critical_exact": 1.0,
+      "check_items": 16,
+      "check_exact": 1.0,
+      "check01_items": 15,
+      "check01_exact": 1.0,
+      "format_check_items": 1,
+      "format_check_exact": 1.0,
+      "responses": 15,
+      "mean_qa_minus_judge": 0.0
+    },
+    "stratified 45|language=bn": {
+      "riu_items": 68,
+      "ordinal_alpha": 0.844170834936514,
+      "riu_exact": 0.9558823529411765,
+      "critical_items": 33,
+      "critical_exact": 1.0,
+      "check_items": 16,
+      "check_exact": 0.9375,
+      "check01_items": 15,
+      "check01_exact": 0.9333333333333333,
+      "format_check_items": 1,
+      "format_check_exact": 1.0,
+      "responses": 15,
+      "mean_qa_minus_judge": -0.014705882352941176
+    },
+    "stratified 45|language=bn_cs": {
+      "riu_items": 75,
+      "ordinal_alpha": 0.9340999557717824,
+      "riu_exact": 0.9866666666666667,
+      "critical_items": 36,
+      "critical_exact": 1.0,
+      "check_items": 15,
+      "check_exact": 1.0,
+      "check01_items": 15,
+      "check01_exact": 1.0,
+      "format_check_items": 0,
+      "format_check_exact": null,
+      "responses": 15,
+      "mean_qa_minus_judge": 0.013333333333333334
+    },
+    "stratified 45|language=en": {
+      "riu_items": 63,
+      "ordinal_alpha": 0.7351694915254237,
+      "riu_exact": 0.9682539682539683,
+      "critical_items": 33,
+      "critical_exact": 0.9696969696969697,
+      "check_items": 16,
+      "check_exact": 0.9375,
+      "check01_items": 15,
+      "check01_exact": 0.9333333333333333,
+      "format_check_items": 1,
+      "format_check_exact": 1.0,
+      "responses": 15,
+      "mean_qa_minus_judge": 0.031746031746031744
+    },
+    "stratified 45|model=gemma": {
+      "riu_items": 70,
+      "ordinal_alpha": 0.8457269700332963,
+      "riu_exact": 0.9428571428571428,
+      "critical_items": 28,
+      "critical_exact": 1.0,
+      "check_items": 15,
+      "check_exact": 0.9333333333333333,
+      "check01_items": 15,
+      "check01_exact": 0.9333333333333333,
+      "format_check_items": 0,
+      "format_check_exact": null,
+      "responses": 15,
+      "mean_qa_minus_judge": 0.02857142857142857
+    },
+    "stratified 45|model=qwen": {
+      "riu_items": 67,
+      "ordinal_alpha": 0.8416666666666667,
+      "riu_exact": 0.9701492537313433,
+      "critical_items": 38,
+      "critical_exact": 0.9736842105263158,
+      "check_items": 16,
+      "check_exact": 0.9375,
+      "check01_items": 15,
+      "check01_exact": 0.9333333333333333,
+      "format_check_items": 1,
+      "format_check_exact": 1.0,
+      "responses": 15,
+      "mean_qa_minus_judge": 0.0
+    },
+    "stratified 45|model=sol": {
+      "riu_items": 69,
+      "ordinal_alpha": null,
+      "riu_exact": 1.0,
+      "critical_items": 36,
+      "critical_exact": 1.0,
+      "check_items": 16,
+      "check_exact": 1.0,
+      "check01_items": 15,
+      "check01_exact": 1.0,
+      "format_check_items": 1,
+      "format_check_exact": 1.0,
+      "responses": 15,
+      "mean_qa_minus_judge": 0.0
+    }
+  },
+  "qa_bn_en_gap": {
+    "all 60": {
+      "en": {
+        "qa": 0.8634259259259259,
+        "judge": 0.7893518518518519
+      },
+      "bn": {
+        "qa": 0.7083333333333334,
+        "judge": 0.6527777777777778
+      },
+      "bn_cs": {
+        "qa": 0.808641975308642,
+        "judge": 0.808641975308642
+      },
+      "bn_minus_en": {
+        "qa": -0.15509259259259256,
+        "judge": -0.13657407407407407
+      }
+    },
+    "stratified 45": {
+      "en": {
+        "qa": 0.9358974358974359,
+        "judge": 0.9102564102564104
+      },
+      "bn": {
+        "qa": 0.8076923076923077,
+        "judge": 0.8076923076923077
+      },
+      "bn_cs": {
+        "qa": 0.9658119658119658,
+        "judge": 0.9658119658119658
+      },
+      "bn_minus_en": {
+        "qa": -0.1282051282051282,
+        "judge": -0.10256410256410264
+      }
+    }
+  },
+  "length_median": {
+    "sol:en": {
+      "words": 255.0,
+      "chars": 1720.0,
+      "out_tokens": 380.0
+    },
+    "sol:bn": {
+      "words": 286.0,
+      "chars": 1908.0,
+      "out_tokens": 661.0
+    },
+    "sol:bn_cs": {
+      "words": 345.0,
+      "chars": 2260.0,
+      "out_tokens": 686.0
+    },
+    "qwen:en": {
+      "words": 598.0,
+      "chars": 3878.0,
+      "out_tokens": 896.0
+    },
+    "qwen:bn": {
+      "words": 487.0,
+      "chars": 3260.0,
+      "out_tokens": 1488.0
+    },
+    "qwen:bn_cs": {
+      "words": 570.0,
+      "chars": 3823.0,
+      "out_tokens": 1651.0
+    },
+    "gemma:en": {
+      "words": 486.0,
+      "chars": 3111.0,
+      "out_tokens": 752.0
+    },
+    "gemma:bn": {
+      "words": 398.0,
+      "chars": 2603.0,
+      "out_tokens": 695.0
+    },
+    "gemma:bn_cs": {
+      "words": 432.0,
+      "chars": 2758.0,
+      "out_tokens": 768.0
+    }
+  },
+  "length_effects": {
+    "qwen|no_length": {
+      "bn_minus_en": -0.08929440389294403,
+      "ci95": [
+        -0.14591954022988504,
+        -0.030617283950617285
+      ]
+    },
+    "qwen|with_length": {
+      "bn_minus_en": -0.09115108642249069,
+      "ci95": [
+        -0.1490417949794452,
+        -0.03025228568217361
+      ]
+    },
+    "gemma|no_length": {
+      "bn_minus_en": -0.06763990267639904,
+      "ci95": [
+        -0.10764925373134326,
+        -0.027634803921568616
+      ]
+    },
+    "gemma|with_length": {
+      "bn_minus_en": -0.0552962139077272,
+      "ci95": [
+        -0.0926516648691602,
+        -0.01817128810390689
+      ]
+    },
+    "sol|no_length": {
+      "bn_minus_en": -0.00218978102189781,
+      "ci95": [
+        -0.019082125603864738,
+        0.013526570048309181
+      ]
+    },
+    "sol|with_length": {
+      "bn_minus_en": -0.0015637737133706682,
+      "ci95": [
+        -0.018551786583560933,
+        0.01467966261073408
+      ]
+    }
+  },
+  "reasons": {
+    "sol:en": {
+      "critical_judgments": 348,
+      "below_full": 7,
+      "partial": 2,
+      "insufficient": 5,
+      "incorrect": 0,
+      "omitted": 0,
+      "non_answer": 0
+    },
+    "sol:bn": {
+      "critical_judgments": 348,
+      "below_full": 8,
+      "partial": 1,
+      "insufficient": 7,
+      "incorrect": 0,
+      "omitted": 0,
+      "non_answer": 0
+    },
+    "sol:bn_cs": {
+      "critical_judgments": 348,
+      "below_full": 2,
+      "partial": 0,
+      "insufficient": 1,
+      "incorrect": 0,
+      "omitted": 1,
+      "non_answer": 0
+    },
+    "qwen:en": {
+      "critical_judgments": 348,
+      "below_full": 35,
+      "partial": 5,
+      "insufficient": 19,
+      "incorrect": 10,
+      "omitted": 1,
+      "non_answer": 0
+    },
+    "qwen:bn": {
+      "critical_judgments": 348,
+      "below_full": 67,
+      "partial": 12,
+      "insufficient": 30,
+      "incorrect": 19,
+      "omitted": 6,
+      "non_answer": 0
+    },
+    "qwen:bn_cs": {
+      "critical_judgments": 348,
+      "below_full": 54,
+      "partial": 4,
+      "insufficient": 19,
+      "incorrect": 21,
+      "omitted": 10,
+      "non_answer": 0
+    },
+    "gemma:en": {
+      "critical_judgments": 348,
+      "below_full": 43,
+      "partial": 5,
+      "insufficient": 26,
+      "incorrect": 7,
+      "omitted": 5,
+      "non_answer": 0
+    },
+    "gemma:bn": {
+      "critical_judgments": 348,
+      "below_full": 69,
+      "partial": 13,
+      "insufficient": 36,
+      "incorrect": 12,
+      "omitted": 8,
+      "non_answer": 0
+    },
+    "gemma:bn_cs": {
+      "critical_judgments": 348,
+      "below_full": 54,
+      "partial": 6,
+      "insufficient": 30,
+      "incorrect": 11,
+      "omitted": 7,
+      "non_answer": 0
+    }
+  },
+  "check01_effects": {
+    "sol|bn-en": {
+      "estimate": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    "sol|bn_cs-en": {
+      "estimate": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    "qwen|bn-en": {
+      "estimate": -0.03821656050955414,
+      "ci95": [
+        -0.12101910828025478,
+        0.044585987261146494
+      ]
+    },
+    "qwen|bn_cs-en": {
+      "estimate": -0.10191082802547771,
+      "ci95": [
+        -0.18471337579617833,
+        -0.01910828025477707
+      ]
+    },
+    "gemma|bn-en": {
+      "estimate": 0.0,
+      "ci95": [
+        -0.06369426751592357,
+        0.06369426751592357
+      ]
+    },
+    "gemma|bn_cs-en": {
+      "estimate": -0.03184713375796178,
+      "ci95": [
+        -0.09554140127388536,
+        0.025477707006369428
+      ]
+    }
+  },
+  "sensitivity": {
+    "check01": {
+      "strict_complete_task_success:bn-en": {
+        "estimate": -0.09274425287356323,
+        "ci95": [
+          -0.13132183908045977,
+          -0.0548132183908046
+        ],
+        "by_model": {
+          "sol": 0.0,
+          "qwen": -0.14633620689655175,
+          "gemma": -0.13189655172413794
+        },
+        "by_model_ci95": {
+          "sol": [
+            -0.04375,
+            0.04375
+          ],
+          "qwen": [
+            -0.22758620689655173,
+            -0.06443965517241379
+          ],
+          "gemma": [
+            -0.2006465517241379,
+            -0.06379310344827586
+          ]
+        },
+        "paired_tasks": {
+          "sol": 157,
+          "qwen": 157,
+          "gemma": 157
+        }
+      },
+      "strict_complete_task_success:bn_cs-en": {
+        "estimate": -0.05668103448275863,
+        "ci95": [
+          -0.09756106321839081,
+          -0.01645114942528736
+        ],
+        "by_model": {
+          "sol": 0.04504310344827586,
+          "qwen": -0.11443965517241379,
+          "gemma": -0.10064655172413794
+        },
+        "by_model_ci95": {
+          "sol": [
+            0.006896551724137931,
+            0.08943965517241378
+          ],
+          "qwen": [
+            -0.19202586206896552,
+            -0.03814655172413793
+          ],
+          "gemma": [
+            -0.1743696120689655,
+            -0.026293103448275863
+          ]
+        },
+        "paired_tasks": {
+          "sol": 157,
+          "qwen": 157,
+          "gemma": 157
+        }
+      },
+      "strict_no_checks:bn-en": {
+        "estimate": -0.11357758620689655,
+        "ci95": [
+          -0.15524425287356322,
+          -0.07334770114942529
+        ],
+        "by_model": {
+          "sol": 0.0,
+          "qwen": -0.19008620689655173,
+          "gemma": -0.15064655172413793
+        },
+        "by_model_ci95": {
+          "sol": [
+            -0.04375,
+            0.04375
+          ],
+          "qwen": [
+            -0.27198275862068966,
+            -0.10754310344827586
+          ],
+          "gemma": [
+            -0.21875,
+            -0.0875
+          ]
+        },
+        "paired_tasks": {
+          "sol": 157,
+          "qwen": 157,
+          "gemma": 157
+        }
+      },
+      "strict_no_checks:bn_cs-en": {
+        "estimate": -0.05646551724137932,
+        "ci95": [
+          -0.09375,
+          -0.020186781609195403
+        ],
+        "by_model": {
+          "sol": 0.04504310344827586,
+          "qwen": -0.12629310344827588,
+          "gemma": -0.08814655172413793
+        },
+        "by_model_ci95": {
+          "sol": [
+            0.006896551724137931,
+            0.08943965517241378
+          ],
+          "qwen": [
+            -0.19936961206896547,
+            -0.05625
+          ],
+          "gemma": [
+            -0.15689655172413794,
+            -0.01875
+          ]
+        },
+        "paired_tasks": {
+          "sol": 157,
+          "qwen": 157,
+          "gemma": 157
+        }
+      },
+      "core_task_success:bn-en": {
+        "estimate": -0.057295760721789636,
+        "ci95": [
+          -0.09942457098863522,
+          -0.015885631497274066
+        ],
+        "by_model": {
+          "sol": 0.0002958019198286158,
+          "qwen": -0.09017591562641618,
+          "gemma": -0.08200716845878137
+        },
+        "by_model_ci95": {
+          "sol": [
+            -0.033768678160919545,
+            0.03397210249042146
+          ],
+          "qwen": [
+            -0.1836762447069476,
+            0.004083637475651956
+          ],
+          "gemma": [
+            -0.1553058359142693,
+            -0.01066380369722976
+          ]
+        },
+        "paired_tasks": {
+          "sol": 137,
+          "qwen": 137,
+          "gemma": 137
+        }
+      },
+      "core_task_success:bn_cs-en": {
+        "estimate": -0.03587607629876818,
+        "ci95": [
+          -0.07969825444377028,
+          0.0068597452093697945
+        ],
+        "by_model": {
+          "sol": 0.037422238701437814,
+          "qwen": -0.09207267334074899,
+          "gemma": -0.05297779425699336
+        },
+        "by_model_ci95": {
+          "sol": [
+            0.001020964652082561,
+            0.07863624459371697
+          ],
+          "qwen": [
+            -0.1789873253875683,
+            -0.002509442590532687
+          ],
+          "gemma": [
+            -0.13106535081605306,
+            0.02531536265785511
+          ]
+        },
+        "paired_tasks": {
+          "sol": 137,
+          "qwen": 137,
+          "gemma": 137
+        }
+      },
+      "core_no_checks:bn-en": {
+        "estimate": -0.07821667421964047,
+        "ci95": [
+          -0.12247333994499802,
+          -0.034554523581463256
+        ],
+        "by_model": {
+          "sol": 0.0002958019198286158,
+          "qwen": -0.12876900259547647,
+          "gemma": -0.10617682198327358
+        },
+        "by_model_ci95": {
+          "sol": [
+            -0.033768678160919545,
+            0.03397210249042146
+          ],
+          "qwen": [
+            -0.21928581691297205,
+            -0.039118426337906326
+          ],
+          "gemma": [
+            -0.17794972819621327,
+            -0.037359022922294614
+          ]
+        },
+        "paired_tasks": {
+          "sol": 137,
+          "qwen": 137,
+          "gemma": 137
+        }
+      },
+      "core_no_checks:bn_cs-en": {
+        "estimate": -0.03254274296543485,
+        "ci95": [
+          -0.06990842876867204,
+          0.0038057295155733534
+        ],
+        "by_model": {
+          "sol": 0.037422238701437814,
+          "qwen": -0.08873934000741565,
+          "gemma": -0.0463111275903267
+        },
+        "by_model_ci95": {
+          "sol": [
+            0.001020964652082561,
+            0.07863624459371697
+          ],
+          "qwen": [
+            -0.16223033439030377,
+            -0.0178583238622625
+          ],
+          "gemma": [
+            -0.11685119340475986,
+            0.023163594156001135
+          ]
+        },
+        "paired_tasks": {
+          "sol": 137,
+          "qwen": 137,
+          "gemma": 137
+        }
+      }
+    },
+    "drop_domain": {
+      "cybersecurity_digital_safety": {
+        "critical_omission_rate": {
+          "estimate": -0.0005441145168156667,
+          "ci95": [
+            -0.020569259058842392,
+            0.014045948350205341
+          ],
+          "by_model": {
+            "sol": 0.0,
+            "qwen": -0.005555555555555557,
+            "gemma": 0.0039232120051085565
+          },
+          "by_model_ci95": {
+            "sol": [
+              0.0,
+              0.0
+            ],
+            "qwen": [
+              -0.035634236453201976,
+              0.015277777777777777
+            ],
+            "gemma": [
+              -0.02942813886368219,
+              0.033077594124880455
+            ]
+          },
+          "paired_tasks": {
+            "sol": 106,
+            "qwen": 106,
+            "gemma": 106
+          }
+        },
+        "critical_coverage": {
+          "estimate": -0.04242709663686675,
+          "ci95": [
+            -0.07430958030708047,
+            -0.008721990868585047
+          ],
+          "by_model": {
+            "sol": -0.006481481481481484,
+            "qwen": -0.05081098339719029,
+            "gemma": -0.06998882503192848
+          },
+          "by_model_ci95": {
+            "sol": [
+              -0.02530531609195403,
+              0.010585376954379945
+            ],
+            "qwen": [
+              -0.12200428397031134,
+              0.020681219522814338
+            ],
+            "gemma": [
+              -0.12164537549143774,
+              -0.0182535467283169
+            ]
+          },
+          "paired_tasks": {
+            "sol": 106,
+            "qwen": 106,
+            "gemma": 106
+          }
+        },
+        "strict_complete_task_success": {
+          "estimate": -0.08468031609195403,
+          "ci95": [
+            -0.12742456896551724,
+            -0.0419360632183908
+          ],
+          "by_model": {
+            "sol": -0.015625,
+            "qwen": -0.10479525862068965,
+            "gemma": -0.13362068965517243
+          },
+          "by_model_ci95": {
+            "sol": [
+              -0.06411637931034483,
+              0.03286637931034483
+            ],
+            "qwen": [
+              -0.19854525862068967,
+              -0.011045258620689655
+            ],
+            "gemma": [
+              -0.21174568965517243,
+              -0.0625
+            ]
+          },
+          "paired_tasks": {
+            "sol": 125,
+            "qwen": 125,
+            "gemma": 125
+          }
+        }
+      },
+      "decision_support": {
+        "critical_omission_rate": {
+          "estimate": 0.0016761164668561773,
+          "ci95": [
+            -0.018726441245555368,
+            0.017239046421228008
+          ],
+          "by_model": {
+            "sol": 0.0,
+            "qwen": 0.008154121863799282,
+            "gemma": -0.0031257724632307504
+          },
+          "by_model_ci95": {
+            "sol": [
+              0.0,
+              0.0
+            ],
+            "qwen": [
+              -0.02381172453860576,
+              0.03387096774193549
+            ],
+            "gemma": [
+              -0.03789385504338339,
+              0.027621040574182926
+            ]
+          },
+          "paired_tasks": {
+            "sol": 110,
+            "qwen": 110,
+            "gemma": 110
+          }
+        },
+        "critical_coverage": {
+          "estimate": -0.04930184773204795,
+          "ci95": [
+            -0.0795435446374315,
+            -0.016544295616528655
+          ],
+          "by_model": {
+            "sol": -0.007078853046594984,
+            "qwen": -0.09157412557162278,
+            "gemma": -0.049252564577926095
+          },
+          "by_model_ci95": {
+            "sol": [
+              -0.02509848906192065,
+              0.008572603819058212
+            ],
+            "qwen": [
+              -0.16065944564212117,
+              -0.02138565073630302
+            ],
+            "gemma": [
+              -0.09274063646186208,
+              -0.0019829002674888315
+            ]
+          },
+          "paired_tasks": {
+            "sol": 110,
+            "qwen": 110,
+            "gemma": 110
+          }
+        },
+        "strict_complete_task_success": {
+          "estimate": -0.0950969827586207,
+          "ci95": [
+            -0.1391882183908046,
+            -0.052352729885057465
+          ],
+          "by_model": {
+            "sol": -0.015625,
+            "qwen": -0.16729525862068967,
+            "gemma": -0.10237068965517242
+          },
+          "by_model_ci95": {
+            "sol": [
+              -0.06330818965517242,
+              0.03205818965517242
+            ],
+            "qwen": [
+              -0.2540409482758621,
+              -0.08135775862068965
+            ],
+            "gemma": [
+              -0.1796875,
+              -0.03125
+            ]
+          },
+          "paired_tasks": {
+            "sol": 125,
+            "qwen": 125,
+            "gemma": 125
+          }
+        }
+      },
+      "information_synthesis": {
+        "critical_omission_rate": {
+          "estimate": 0.0026446136997212264,
+          "ci95": [
+            -0.018126815048289786,
+            0.018427862716547193
+          ],
+          "by_model": {
+            "sol": 0.0,
+            "qwen": 0.008154121863799282,
+            "gemma": -0.00022028076463560288
+          },
+          "by_model_ci95": {
+            "sol": [
+              0.0,
+              0.0
+            ],
+            "qwen": [
+              -0.024413751571009633,
+              0.03387096774193549
+            ],
+            "gemma": [
+              -0.036089135014985785,
+              0.03179045347496404
+            ]
+          },
+          "paired_tasks": {
+            "sol": 108,
+            "qwen": 108,
+            "gemma": 108
+          }
+        },
+        "critical_coverage": {
+          "estimate": -0.05434388689765033,
+          "ci95": [
+            -0.08880614191419646,
+            -0.018705764633439613
+          ],
+          "by_model": {
+            "sol": 0.00588410991636798,
+            "qwen": -0.08483721624850657,
+            "gemma": -0.08407855436081242
+          },
+          "by_model_ci95": {
+            "sol": [
+              -0.005555555555555556,
+              0.020337355038998355
+            ],
+            "qwen": [
+              -0.1630581676296109,
+              -0.005665142746913606
+            ],
+            "gemma": [
+              -0.13634209656084656,
+              -0.0325362084325847
+            ]
+          },
+          "paired_tasks": {
+            "sol": 108,
+            "qwen": 108,
+            "gemma": 108
+          }
+        },
+        "strict_complete_task_success": {
+          "estimate": -0.1015625,
+          "ci95": [
+            -0.1484375,
+            -0.0546875
+          ],
+          "by_model": {
+            "sol": 0.0,
+            "qwen": -0.1484375,
+            "gemma": -0.15625
+          },
+          "by_model_ci95": {
+            "sol": [
+              -0.046875,
+              0.046875
+            ],
+            "qwen": [
+              -0.2421875,
+              -0.046875
+            ],
+            "gemma": [
+              -0.2421875,
+              -0.078125
+            ]
+          },
+          "paired_tasks": {
+            "sol": 128,
+            "qwen": 128,
+            "gemma": 128
+          }
+        }
+      },
+      "procedural_instructional": {
+        "critical_omission_rate": {
+          "estimate": -0.0014103032862302423,
+          "ci95": [
+            -0.021565340109171702,
+            0.013159058464606289
+          ],
+          "by_model": {
+            "sol": 0.0,
+            "qwen": 0.0012096774193548383,
+            "gemma": -0.005440587278045565
+          },
+          "by_model_ci95": {
+            "sol": [
+              0.0,
+              0.0
+            ],
+            "qwen": [
+              -0.029796264855687603,
+              0.024193548387096774
+            ],
+            "gemma": [
+              -0.04059998460591133,
+              0.024761135057471254
+            ]
+          },
+          "paired_tasks": {
+            "sol": 107,
+            "qwen": 107,
+            "gemma": 107
+          }
+        },
+        "critical_coverage": {
+          "estimate": -0.047550304522171405,
+          "ci95": [
+            -0.0799826691651894,
+            -0.012939660128843861
+          ],
+          "by_model": {
+            "sol": 0.00032855436081242334,
+            "qwen": -0.08048616260865982,
+            "gemma": -0.06249330531866683
+          },
+          "by_model_ci95": {
+            "sol": [
+              -0.018507728287713864,
+              0.018251445678730324
+            ],
+            "qwen": [
+              -0.15675173524766062,
+              -0.004736922028769337
+            ],
+            "gemma": [
+              -0.11221561598233142,
+              -0.011648768041258226
+            ]
+          },
+          "paired_tasks": {
+            "sol": 107,
+            "qwen": 107,
+            "gemma": 107
+          }
+        },
+        "strict_complete_task_success": {
+          "estimate": -0.08468031609195403,
+          "ci95": [
+            -0.126171875,
+            -0.042744252873563225
+          ],
+          "by_model": {
+            "sol": 0.03125,
+            "qwen": -0.15167025862068967,
+            "gemma": -0.13362068965517243
+          },
+          "by_model_ci95": {
+            "sol": [
+              -0.009428879310344827,
+              0.078125
+            ],
+            "qwen": [
+              -0.2400323275862069,
+              -0.06330818965517242
+            ],
+            "gemma": [
+              -0.20554956896551724,
+              -0.06328798491379341
+            ]
+          },
+          "paired_tasks": {
+            "sol": 125,
+            "qwen": 125,
+            "gemma": 125
+          }
+        }
+      },
+      "technical_troubleshooting": {
+        "critical_omission_rate": {
+          "estimate": 0.010510993010066055,
+          "ci95": [
+            0.0027699469317760475,
+            0.019061439518336068
+          ],
+          "by_model": {
+            "sol": 0.0,
+            "qwen": 0.020654121863799283,
+            "gemma": 0.01087885716639888
+          },
+          "by_model_ci95": {
+            "sol": [
+              0.0,
+              0.0
+            ],
+            "qwen": [
+              0.0058728448275862065,
+              0.038304854062384125
+            ],
+            "gemma": [
+              -0.007998832614942528,
+              0.030746282244822284
+            ]
+          },
+          "paired_tasks": {
+            "sol": 117,
+            "qwen": 117,
+            "gemma": 117
+          }
+        },
+        "critical_coverage": {
+          "estimate": -0.05852252674439363,
+          "ci95": [
+            -0.08310653914078618,
+            -0.03545091770488696
+          ],
+          "by_model": {
+            "sol": -0.0024492234169653545,
+            "qwen": -0.10118060705310426,
+            "gemma": -0.07193774976311128
+          },
+          "by_model_ci95": {
+            "sol": [
+              -0.02261938384746279,
+              0.016338034944581265
+            ],
+            "qwen": [
+              -0.15486651077764468,
+              -0.0484517055988135
+            ],
+            "gemma": [
+              -0.11599594710268354,
+              -0.0319886697748656
+            ]
+          },
+          "paired_tasks": {
+            "sol": 117,
+            "qwen": 117,
+            "gemma": 117
+          }
+        },
+        "strict_complete_task_success": {
+          "estimate": -0.09770114942528736,
+          "ci95": [
+            -0.13990660919540232,
+            -0.05710533405172423
+          ],
+          "by_model": {
+            "sol": 0.0,
+            "qwen": -0.15948275862068967,
+            "gemma": -0.13362068965517243
+          },
+          "by_model_ci95": {
+            "sol": [
+              -0.04849137931034483,
+              0.04768318965517242
+            ],
+            "qwen": [
+              -0.24703663793103448,
+              -0.07273706896551724
+            ],
+            "gemma": [
+              -0.2039331896551724,
+              -0.06330818965517242
+            ]
+          },
+          "paired_tasks": {
+            "sol": 125,
+            "qwen": 125,
+            "gemma": 125
+          }
+        }
+      }
+    }
+  },
+  "token_premium": {
+    "sol|bn|input": 1.75,
+    "sol|bn|output": 1.7949640287769784,
+    "sol|bn|output_per_word": 1.7184400656814447,
+    "sol|bn_cs|input": 1.28,
+    "sol|bn_cs|output": 1.7580645161290323,
+    "sol|bn_cs|output_per_word": 1.4163405088062622,
+    "qwen|bn|input": 2.0,
+    "qwen|bn|output": 1.7490935460478607,
+    "qwen|bn|output_per_word": 2.031655810232314,
+    "qwen|bn_cs|input": 1.456140350877193,
+    "qwen|bn_cs|output": 1.873913043478261,
+    "qwen|bn_cs|output_per_word": 1.9878344556112606,
+    "gemma|bn|input": 1.2380952380952381,
+    "gemma|bn|output": 0.9836257309941521,
+    "gemma|bn|output_per_word": 1.182321443132707,
+    "gemma|bn_cs|input": 1.1346153846153846,
+    "gemma|bn_cs|output": 1.0451127819548873,
+    "gemma|bn_cs|output_per_word": 1.19250352498825
+  },
+  "word_ratio": {
+    "prompt_bn_en_median": 1.125,
+    "sol": {
+      "raw": 1.0574374079528719,
+      "prompt_normalised": 0.9310163243812534
+    },
+    "qwen": {
+      "raw": 0.8632478632478633,
+      "prompt_normalised": 0.7481481481481482
+    },
+    "gemma": {
+      "raw": 0.8344988344988346,
+      "prompt_normalised": 0.7340920523138832
+    }
+  }
+}

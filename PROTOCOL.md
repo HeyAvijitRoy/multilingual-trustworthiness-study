@@ -2,7 +2,7 @@
 
 ## Aim
 
-The study tests whether semantically equivalent prompts give systematically different trustworthiness outcomes in English (EN), Bengali (BN) and Bengali-English code-switched Bengali (BN-CS). The unit of interest is trustworthiness-critical information: does a response contain what a sound answer must contain, and does it avoid material errors?
+The study tests whether semantically equivalent prompts give systematically different trustworthiness outcomes in English (EN), natural Bengali (BN) and Bengali-matrix Bengali–English code-switching (BN-CS). The unit of interest is trustworthiness-critical information: does a response contain what a sound answer must contain, and does it avoid material errors?
 
 Research questions:
 1. Do completeness and critical-information outcomes differ across EN, BN and BN-CS?
@@ -52,13 +52,13 @@ The remaining 343 tasks have draft rubrics for the full study.
 
 ## Scoring
 
-Each response is scored by an automated judge, **gpt-5.4-2026-03-05** (reasoning effort medium), under procedure **scoring-0.5**. Initial reference scores were drafted with AI assistance and validated by humans; the study-response QA ratings are human ratings. These roles are distinct from the automated production judge.
+Each response is scored by an automated judge, **gpt-5.4-2026-03-05** (reasoning effort medium), under procedure **scoring-0.5**. The validation reference scores and the study-response QA ratings are both separate from the automated production judge.
 - The judge sees the task objective, constraints, prompt, response and rubric.
 - It never sees the model identity.
 - It returns a score, reason, evidence quote and note for every RIU and task check.
 - Output is schema-constrained and validated: complete item coverage, allowed scale values, and reasons consistent with scores.
 
-**Score review (2026-10-31).** A targeted review of the 17 human-QA disagreements corrected seven item ratings across six responses. Review used the existing prompts, rubric anchors and response evidence, retaining ten disputed ratings where the full anchor was not met or the initial rating remained defensible. Each correction is labeled `Review` and records reviewer, date, original rating, corrected rating and rationale within the score record. The review was performed with Codex, separately from human QA; it is not additional independent human validation. No responses, thresholds, RIU anchors or automated judge instructions changed. For SYN100, the review applied the local unsupported-content rubric to the fabricated uptime metric; this is disclosed rather than described as a universally contradiction-only standard. Current analysis uses reviewed ratings and reports initial effects alongside them. Human QA agreement remains calculated against the initial judge ratings, so inspecting and correcting disputes cannot inflate that agreement.
+**Score review (2026-10-31).** A targeted review of the 17 QA disagreements corrected seven item ratings across six responses. The review used the existing prompts, rubric anchors and response evidence, and it kept ten disputed ratings where the full anchor was not met or the initial rating remained defensible. Each correction is labeled `Review` and records the reviewer, date, original rating, corrected rating and rationale within the score record. The review was separate from the QA rating and is not an additional independent validation. No responses, thresholds, RIU anchors or automated judge instructions changed. For SYN100, the review applied that task's own unsupported-content rubric to the fabricated uptime figure, which is stricter than the contradiction-only standard used elsewhere. The analysis uses the reviewed ratings and reports the initial effects alongside them. QA agreement is still calculated against the initial judge ratings, so correcting disputed items cannot inflate it.
 
 Procedure scoring-0.5 makes explicit how the frozen rules apply:
 1. **Requirement form.** Each RIU is marked `affirmative` (silence fails) or `negative_or_conditional`. For the latter the item's own anchor governs, and a compliant path meets it without restating the prohibition.
@@ -74,9 +74,11 @@ Procedure scoring-0.5 makes explicit how the frozen rules apply:
 - critical-RIU exact agreement ≥ 0.90;
 - safety-check exact agreement = 1.00.
 
-The sets and results are in `data/validation/README.md`. On the 88-fixture held-out set, agreement against the original references was alpha 0.9774, critical 182/183 and task checks 95/99, missing the task-check threshold. Following blinded selective re-rating and six revised references, agreement was alpha 0.9906, critical 183/183 and task checks 99/99. The latter measures agreement against revised references, rather than an untouched held-out pass.
+The sets and results are in `data/validation/README.md`. On the 88-fixture held-out set, agreement against the original references was alpha 0.9774, critical 182/183 and task checks 95/99, which missed the task-check threshold. After a blind re-rate of the disputed fixtures revised six references, agreement was alpha 0.9906, critical 183/183 and task checks 99/99. This second figure measures agreement against revised references and is therefore not an untouched held-out pass.
 
-## Analysis (pre-registered)
+## Analysis (prespecified)
+
+The analysis plan below was frozen in this repository on 2026-10-23, before generation (see `LOG.md`).
 
 **Per-response outcomes:**
 - **RIU coverage:** mean RIU score.
@@ -116,9 +118,9 @@ Secondary intervals are descriptive. There is one primary hypothesis, and no ana
 
 ## Post hoc robustness checks
 
-Run after the primary analysis (`scripts/08_robustness.py`, `results/robustness/`). They are not part of the prespecified analysis, and their intervals are unadjusted for multiplicity.
+These checks were run after the primary analysis (`scripts/08_robustness.py`, `results/robustness/`). They are not part of the prespecified analysis, and their intervals are unadjusted for multiplicity. The length control and CHECK-01 contrasts use 2,000 bootstrap replicates; the task-check and leave-one-domain-out sensitivity reuse the 10,000-replicate estimator of the main analysis.
 
-- **Judge agreement by language and model** (QA sample): the human-minus-judge offset on RIUs is about +0.03 in EN, BN and BN-CS. Bengali RIU alpha is 0.770, below the 0.80 threshold; critical exact agreement is 0.976.
+- **Judge agreement by language and model** (QA sample): the reviewer-minus-judge offset on RIUs is about +0.03 in EN, BN and BN-CS. Bengali RIU alpha is 0.770, below the 0.80 threshold; critical exact agreement is 0.976.
 - **Length control** (task fixed effects, log word count): Qwen's BN − EN critical-coverage gap is unchanged (−0.089 to −0.091); Gemma's shrinks from −0.068 to −0.055 and stays below zero.
 - **Task checks**: dropping CHECK-01 from the success outcomes widens the gaps (strict success BN − EN −0.114 against −0.093).
 - **Leave-one-domain-out**: coverage and success gaps hold in every run. The primary omission estimate is −0.001 to +0.003 in four runs and +0.011 [+0.003, +0.019] without technical troubleshooting.
@@ -129,19 +131,19 @@ Run after the primary analysis (`scripts/08_robustness.py`, `results/robustness/
 | Planned | Done | Reason / effect |
 |---|---|---|
 | Four primary models: Sol, Gemini, Qwen, Gemma (approved 2026-10-23) | Sol, Qwen, Gemma primary; Gemini exploratory on 20 tasks | Gemini's free-tier quota (20 requests/day) would have taken weeks for 471 responses. Changed on 2026-10-24, before any study response. |
-| Gemini exploratory sample of 60 responses | 20 responses | Collection stopped on 2026-10-25 to keep the study moving |
+| Gemini exploratory sample of 60 responses | 20 responses | Collection stopped on 2026-10-25 because the free-tier quota would have delayed the study by several weeks |
 | Judge validated on the 30 calibration fixtures with procedure scoring-0.3 | Failed safety checks (25/30); procedure revised to scoring-0.5 and validated on a new held-out set | The seven disputed items, adjudicated by the independent reviewer, traced to instruction gaps in the judge procedure, not to the references |
 | Held-out set of 90 fixtures | 88 | Two fixtures had unresolved references and were removed before the freeze |
 | Held-out references frozen before the judge pass | 6 references revised after the pass, through a blind re-rate of the 8 disputed fixtures mixed with 12 decoys | The decoys (62/62 unchanged) show the reviewer was consistent. The re-rate covered only disputed fixtures, so shared errors in agreed items would not be found. |
-| Independent QA of study scores before audited conclusions | Human QA on 60 responses (352 items), `results/qa/summary.md`. Alpha 0.843 and critical exact 0.979 met the point-estimate thresholds; CHECK-01 exact was 0.933 (56/60), and all task checks combined were 0.935 (58/62), against the 1.00 threshold, which was not met. The judge configuration was kept unchanged | The 17 disagreements (4.8%) have recorded review dispositions: 3 classified as judge errors, 7 judgement calls and 7 more lenient QA ratings. These classifications are sample-specific and remain provisional where CHECK-01 wording is inconsistent. The sampled dispositions do not require changing omission counts, but QA did not independently record omission reasons. The 2026-10-22 protocol used a contradiction-based standard, while some task rubrics say unsupported; this conflict remains to be adjudicated before changing the judge. CHECK-01 and composite task-success rates carry this caveat. |
+| Independent QA of study scores before audited conclusions | Reviewer QA on 60 responses (352 items), `results/qa/summary.md`. Alpha 0.843 and critical exact 0.979 met the point-estimate thresholds; CHECK-01 exact was 0.933 (56/60), and all task checks combined were 0.935 (58/62), against the 1.00 threshold, which was not met. The judge configuration was kept unchanged | The 17 disagreements (4.8%) have recorded review dispositions: 3 classified as judge errors, 7 judgement calls and 7 more lenient QA ratings. These classifications are sample-specific. The sampled dispositions do not require changing omission counts, but QA did not independently record omission reasons. The 2026-10-22 protocol defines CHECK-01 by contradiction, while a few task rubrics use the word unsupported, so CHECK-01 dispositions on those tasks depend on which reading is applied. The judge was kept on the protocol standard, and CHECK-01 and composite task-success rates carry this caveat. |
 
 ## Limitations
 
-- **The judge.** Scores come from one automated judge from the same provider as one of the generators. Reference agreement was measured on constructed fixtures; human QA separately assessed 60 study responses. The QA sample includes 15 responses selected for low critical scores, so pooled agreement and review dispositions are sample-specific. Human QA did not independently record omission/non-answer reason codes. Composite task-success outcomes depend on CHECK-01 and inherit its operational-definition limitation.
+- **The judge.** Scores come from one automated judge from the same provider as one of the generators. Reference agreement was measured on constructed fixtures; a reviewer separately rated 60 study responses for QA. The QA sample includes 15 responses selected for low critical scores, so pooled agreement and review dispositions are sample-specific. The QA ratings did not independently record omission/non-answer reason codes. Composite task-success outcomes depend on CHECK-01 and inherit its operational-definition limitation.
 - **Sample.** The 157 tasks come from the pilot and expansion calibration rounds, not a random sample of the corpus. The panel has three models, so effects do not generalize to other models, languages or tasks.
 - **Reviewers.** Gold rubrics had one independent reviewer, so inter-annotator agreement on the rubrics themselves is not available.
 - **Local models.** Qwen and Gemma ran locally in BF16 with fixed settings, while Sol ran through an API. Local-vs-cloud differences are not causal capacity comparisons.
 
 ## Reproduction
 
-The pipeline is `scripts/01_validate_inputs.py` through `scripts/06_analyze.py`. Run order and requirements are in `README.md`. All responses, scores, validation scores and analysis outputs are in `results/`.
+The pipeline is `scripts/01_validate_inputs.py` through `scripts/08_robustness.py`. Run order and requirements are in `README.md`. All responses, scores, validation scores, QA ratings and analysis outputs are in `results/`.

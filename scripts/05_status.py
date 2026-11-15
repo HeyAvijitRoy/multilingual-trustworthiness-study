@@ -103,10 +103,10 @@ def main():
     status['notes'] = [
         f"Gemini is exploratory: {gemini.get('responses', 0)} of 60 planned responses (20 matched tasks x 3 languages); "
         'collection stopped and Gemini is excluded from the primary analysis.',
-        'QA sample study (independent check of a sample of study scores): '
-        + ('done, see results/qa/summary.md.' if (RESULTS / 'qa').exists() else 'pending.'),
+        'QA sample study (reviewer ratings of 60 sampled responses): '
+        + ('results/qa/summary.md.' if (RESULTS / 'qa').exists() else 'pending.'),
         f"Score review: {sum(m['reviewed_items'] for m in status['models'].values())} corrected items; "
-        'original ratings are retained within each score record. Human QA compares the initial judge scores.',
+        'original ratings are retained within each score record. QA agreement uses the initial judge scores.',
     ]
     write_json(RESULTS / 'status.json', status)
     (RESULTS / 'STATUS.md').write_text(render(status), encoding='utf-8')

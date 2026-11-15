@@ -1,6 +1,6 @@
 # QA sample study
 
-60 study responses (352 items) were rated by a human against the rubrics, separately from the judge, and compared with the initial judge scores. 45 responses are one per model x language x domain; 15 are responses where the judge scored a critical item below 1.
+60 study responses (352 items) were rated by a reviewer against the rubrics, separately from the judge, and compared with the initial judge scores. 45 responses are one per model x language x domain; 15 are responses where the judge scored a critical item below 1.
 
 Agreement is measured before score review. Corrections recorded after examining disagreements are used in results/analysis/; they do not retroactively improve the independent QA agreement.
 
@@ -42,9 +42,9 @@ RIU disagreements: the QA rating is higher on 11 and lower on 2. Mean RIU score 
 
 ## Disagreements (17 of 352 items, 4.8%)
 
-The initial review classified 3 items as judge errors (0.9% of sampled items), 7 as judgement calls and 7 as items where the QA rating was more lenient than the anchor as written (mostly anchors with several required parts). These are recorded review dispositions, not a population estimate of judge error. CHECK-01 dispositions remain provisional where rubric wording and the operational standard differ.
+The initial review classified 3 items as judge errors (0.9% of sampled items), 7 as judgement calls and 7 as items where the QA rating was more lenient than the anchor as written (mostly anchors with several required parts). These are recorded review dispositions, not a population estimate of judge error. For CHECK-01, a few task rubrics use the word unsupported while the scoring standard requires a contradiction, so those dispositions depend on which reading is applied.
 
-The recorded dispositions do not require changing the sampled omission counts. Human QA records scores and notes, but not independent omission/non-answer reason codes; it therefore does not establish that the primary omission estimate is free of classification error.
+The recorded dispositions do not require changing the sampled omission counts. The QA ratings record scores and notes, but not independent omission/non-answer reason codes; it therefore does not establish that the primary omission estimate is free of classification error.
 
 | Item | Model, language | QA | Judge | Disposition | Note |
 |---|---|---:|---:|---|---|

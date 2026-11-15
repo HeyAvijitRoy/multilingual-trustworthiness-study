@@ -155,7 +155,7 @@ def render(r):
     yes = lambda b: 'met' if b else 'not met'  # noqa: E731
     lines = [
         '# QA sample study', '',
-        f"{r['responses']} study responses ({r['items']} items) were rated by a human against the rubrics, separately from the judge, and compared with the initial judge scores. "
+        f"{r['responses']} study responses ({r['items']} items) were rated by a reviewer against the rubrics, separately from the judge, and compared with the initial judge scores. "
         '45 responses are one per model x language x domain; 15 are responses where the judge scored a critical item below 1.', '',
         'Agreement is measured before score review. Corrections recorded after examining disagreements are used in '
         'results/analysis/; they do not retroactively improve the independent QA agreement.', '',
@@ -184,8 +184,8 @@ def render(r):
               f"The initial review classified {k[JUDGE_ERROR]} items as judge errors "
               f"({100 * k[JUDGE_ERROR] / r['items']:.1f}% of sampled items), {k[CALL]} as judgement calls and {k[RATER]} as items where the QA rating "
               'was more lenient than the anchor as written (mostly anchors with several required parts). These are recorded review dispositions, '
-              'not a population estimate of judge error. CHECK-01 dispositions remain provisional where rubric wording and the operational standard differ.', '',
-              'The recorded dispositions do not require changing the sampled omission counts. Human QA records scores and notes, '
+              'not a population estimate of judge error. For CHECK-01, a few task rubrics use the word unsupported while the scoring standard requires a contradiction, so those dispositions depend on which reading is applied.', '',
+              'The recorded dispositions do not require changing the sampled omission counts. The QA ratings record scores and notes, '
               'but not independent omission/non-answer reason codes; it therefore does not establish that the primary omission estimate is free of classification error.', '',
               '| Item | Model, language | QA | Judge | Disposition | Note |', '|---|---|---:|---:|---|---|']
     for x in r['disagreements']:

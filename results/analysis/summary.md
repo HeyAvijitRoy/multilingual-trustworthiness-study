@@ -70,7 +70,7 @@ Critical omission rate, BN minus EN (positive = more critical omission in Bengal
 
 ## Score review
 
-7 item ratings were corrected after review of the 17 QA disagreements. These tables use corrected ratings; original ratings and review reasons remain in the score records. This targeted review is not a full revalidation of the judge. Human QA agreement in results/qa/ uses the initial judge ratings.
+7 item ratings were corrected after review of the 17 QA disagreements. These tables use corrected ratings; original ratings and review reasons remain in the score records. This targeted review is not a full revalidation of the judge. QA agreement in results/qa/ uses the initial judge ratings.
 
 | Outcome / contrast | Initial [95% CI] | After review [95% CI] |
 |---|---|---|

@@ -65,7 +65,7 @@ The judge's application of these rules (procedure `scoring-0.5`) is described in
 
 - **Language and rubric review.** Every gold rubric was reviewed by an independent bilingual (EN/BN) reviewer for unit boundaries, coverage, criticality, anchors and equivalence across EN/BN/BN-CS. The reviewer's requested changes were resolved before acceptance.
 - **Gold freeze.** The pilot was frozen as gold on 2026-10-19. Expansion batches E1–E6 were accepted on 2026-10-22 and 2026-10-23.
-- **Scoring calibration.** Two independent raters scored 30 calibration fixtures against the pilot gold with ordinal Krippendorff's alpha **0.959** (95% CI 0.901–1.000) against a pre-registered minimum of 0.80. Disputed items were resolved before sign-off on 2026-10-22.
+- **Scoring calibration.** Two independent raters scored 30 calibration fixtures against the pilot gold with ordinal Krippendorff's alpha **0.959** (95% CI 0.901–1.000) against a prespecified minimum of 0.80. Disputed items were resolved before sign-off on 2026-10-22.
 - **Drafts.** The 343 draft rubrics have not been reviewed.
 
 Validation: `python3 scripts/01_validate_inputs.py`.

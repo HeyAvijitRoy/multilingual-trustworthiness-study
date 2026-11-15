@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Step 06: compute the pre-registered analysis and write results/analysis/.
+"""Step 06: compute the prespecified analysis and write results/analysis/.
 
 Per response: RIU coverage, strict RIU coverage, critical coverage, critical omission
 rate (critical RIUs coded omitted or non_answer), critical unmet/zero rates, strict
@@ -210,7 +210,7 @@ def summary(report, models):
         lines += ['', '## Score review', '',
                   f"{report['review']['corrected_items']} item ratings were corrected after review of the 17 QA disagreements. "
                   'These tables use corrected ratings; original ratings and review reasons remain in the score records. '
-                  'This targeted review is not a full revalidation of the judge. Human QA agreement in results/qa/ uses the initial judge ratings.', '',
+                  'This targeted review is not a full revalidation of the judge. QA agreement in results/qa/ uses the initial judge ratings.', '',
                   '| Outcome / contrast | Initial [95% CI] | After review [95% CI] |', '|---|---|---|']
         for key in ('critical_omission_rate:bn-en', 'critical_coverage:bn-en',
                     'strict_complete_task_success:bn-en', 'riu_coverage:bn_cs-bn'):

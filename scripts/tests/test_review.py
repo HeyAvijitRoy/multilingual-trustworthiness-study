@@ -8,7 +8,7 @@ class ReviewTest(unittest.TestCase):
     def score(self):
         before, after = rating('RIU-01', 0, 'insufficient'), rating('RIU-01', 1)
         return {'response_sha256': 'abc', 'ratings': [after], 'reviews': [
-            {'reviewer': 'Codex', 'reviewed_at_utc': '2026-10-31T12:00:00Z', 'response_sha256': 'abc',
+            {'reviewer': 'Reviewer', 'reviewed_at_utc': '2026-10-31T12:00:00Z', 'response_sha256': 'abc',
              'changes': [{'original_rating': before, 'corrected_rating': copy.deepcopy(after), 'rationale': 'Evidence meets anchor.'}]}]}
 
     def test_initial_ratings_recovered_without_mutating_corrected_scores(self):

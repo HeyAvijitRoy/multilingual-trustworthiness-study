@@ -10,9 +10,9 @@
 
 ---
 
-## Which part do you need?
+## Overview
 
-| Goal | Sections | Cost | Hardware |
+| Task | Sections | Cost | Hardware |
 |---|---|---|---|
 | Reproduce every reported table and figure from the stored responses and scores | 1, 2 | free | any CPU, under a minute |
 | Browse the results interactively | 1, 3 | free | any CPU |
@@ -20,7 +20,7 @@
 | Regenerate model responses | 1, 5 | Sol: paid API; Qwen/Gemma: free | CUDA GPU with BF16 for Qwen/Gemma |
 | Add models, tasks or a judge | 1, 6 | depends | depends |
 
-All commands are for a Linux shell (bash) and are run from the repository root. They were checked on Ubuntu 24.04 with Python 3.13; CI runs the tests on Python 3.11.
+All commands are for Ubuntu (bash) and are run from the repository root. They were checked on Ubuntu 24.04 with Python 3.13; CI runs the tests on Python 3.11.
 
 ---
 
@@ -35,7 +35,7 @@ python -m pip install --upgrade pip
 python -m pip install numpy matplotlib
 ```
 
-On Ubuntu or Debian, install the venv module first if it is missing: `sudo apt install python3-venv`.
+If the venv module is missing, install it first: `sudo apt install python3-venv`.
 
 **1.2 Keep LF line endings.** Prompts, annotations, responses and scores are checked by SHA-256, and `.gitattributes` keeps `data/`, `results/` and `scripts/` on LF. Keep `core.autocrlf` off (`git config core.autocrlf false`) so that no tool converts them to CRLF.
 

@@ -114,6 +114,16 @@ Secondary intervals are descriptive. There is one primary hypothesis, and no ana
 
 **Missing data.** No cell is imputed, and every missing or undefined cell is reported.
 
+## Post hoc robustness checks
+
+Run after the primary analysis (`scripts/08_robustness.py`, `results/robustness/`). They are not part of the prespecified analysis, and their intervals are unadjusted for multiplicity.
+
+- **Judge agreement by language and model** (QA sample): the human-minus-judge offset on RIUs is about +0.03 in EN, BN and BN-CS. Bengali RIU alpha is 0.770, below the 0.80 threshold; critical exact agreement is 0.976.
+- **Length control** (task fixed effects, log word count): Qwen's BN − EN critical-coverage gap is unchanged (−0.089 to −0.091); Gemma's shrinks from −0.068 to −0.055 and stays below zero.
+- **Task checks**: dropping CHECK-01 from the success outcomes widens the gaps (strict success BN − EN −0.114 against −0.093).
+- **Leave-one-domain-out**: coverage and success gaps hold in every run. The primary omission estimate is −0.001 to +0.003 in four runs and +0.011 [+0.003, +0.019] without technical troubleshooting.
+- **Token premium** (BN over EN, recorded usage): input ×1.75 (Sol), ×2.00 (Qwen), ×1.24 (Gemma); it does not track the quality gap.
+
 ## Deviations from the plan
 
 | Planned | Done | Reason / effect |

@@ -21,6 +21,8 @@ Paired, domain-equal language effects across the three models, with 95% CIs:
 - **Strict complete-task success, BN − EN: −0.093 [−0.131, −0.055].**
 - **RIU coverage, BN-CS − BN: +0.028 [+0.012, +0.045].** Code-switching recovers part of the Bengali loss in overall coverage.
 
+Post hoc robustness checks (judge agreement by language, length control, leave-one-domain-out, token premium) are in `results/robustness/summary.md`. The coverage and success gaps hold in all of them; the primary omission estimate is +0.011 [+0.003, +0.019] when technical troubleshooting is dropped.
+
 These results include seven item corrections from review of the 17 QA disagreements. Each corrected score retains its original rating, evidence and review rationale. Initial-versus-reviewed effects are in `results/analysis/summary.md`; human QA agreement below remains a comparison with the initial judge scores.
 
 Full tables and figures: `results/analysis/summary.md`. Status and integrity checks: `results/STATUS.md`. Human QA sample study (60 responses, 352 items): `results/qa/summary.md`. Agreement with the judge: alpha 0.843, critical exact 0.979, CHECK-01 exact 0.933 (56/60); all task checks combined 0.935 (58/62). The task-check threshold of 1.00 was not met; see `PROTOCOL.md`.
@@ -40,6 +42,7 @@ results/
   scores/              judge ratings per response
   validation/          judge scores and agreement results on the validation sets
   analysis/            results.json, summary.md, figures
+  robustness/          judge-by-language, length control, reasons, manuscript figures
   STATUS.md            generated status and integrity report
 scripts/               numbered pipeline (below), common.py, tests/
 notebooks/analysis.ipynb   walkthrough of the results
@@ -56,6 +59,7 @@ notebooks/analysis.ipynb   walkthrough of the results
 | 05 | `python3 scripts/05_status.py` | Integrity checks; writes `results/STATUS.md` | free |
 | 06 | `python3 scripts/06_analyze.py` | Pre-registered analysis; writes `results/analysis/` | free |
 | 07 | `python3 scripts/07_qa.py` | Compares recorded human QA ratings with judge scores; writes `results/qa/` | free |
+| 08 | `python3 scripts/08_robustness.py` | Judge agreement by language/model, response-length control, reasons table, CHECK-01 contrasts; writes `results/robustness/` | free |
 | tests | `python3 -m unittest discover -s scripts/tests` | Tests for every step and the notebook | free |
 
 Each step resumes where it stopped. Paid steps take a `--max-usd` cap per run.

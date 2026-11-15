@@ -1,0 +1,126 @@
+Loading weights:   0%|          | 0/760 [00:00<?, ?it/s]Loading weights:   0%|          | 1/760 [00:00<03:13,  3.93it/s]Loading weights:   0%|          | 2/760 [00:00<03:36,  3.50it/s]Loading weights:   4%|▎         | 27/760 [00:00<00:12, 58.68it/s]Loading weights:   6%|▌         | 46/760 [00:00<00:08, 87.46it/s]Loading weights:   9%|▉         | 67/760 [00:00<00:05, 117.67it/s]Loading weights:  12%|█▏        | 91/760 [00:00<00:04, 149.46it/s]Loading weights:  14%|█▍        | 110/760 [00:01<00:04, 153.68it/s]Loading weights:  18%|█▊        | 133/760 [00:01<00:03, 171.63it/s]Loading weights:  20%|██        | 153/760 [00:01<00:03, 165.57it/s]Loading weights:  23%|██▎       | 174/760 [00:01<00:03, 176.76it/s]Loading weights:  26%|██▋       | 200/760 [00:01<00:02, 196.65it/s]Loading weights:  29%|██▉       | 221/760 [00:01<00:02, 193.90it/s]Loading weights:  32%|███▏      | 242/760 [00:01<00:02, 187.39it/s]Loading weights:  34%|███▍      | 262/760 [00:01<00:02, 183.69it/s]Loading weights:  38%|███▊      | 288/760 [00:01<00:02, 203.20it/s]Loading weights:  41%|████      | 309/760 [00:02<00:02, 194.10it/s]Loading weights:  44%|████▎     | 331/760 [00:02<00:02, 200.24it/s]Loading weights:  47%|████▋     | 355/760 [00:02<00:01, 205.71it/s]Loading weights:  49%|████▉     | 376/760 [00:02<00:01, 194.31it/s]Loading weights:  52%|█████▏    | 398/760 [00:02<00:01, 198.91it/s]Loading weights:  55%|█████▌    | 419/760 [00:02<00:01, 179.23it/s]Loading weights:  79%|███████▊  | 598/760 [00:02<00:00, 598.28it/s]Loading weights: 100%|██████████| 760/760 [00:02<00:00, 263.23it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `fused_recurrent_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+CYBER071 en ok 2036 tokens (1027 thinking) 99s
+CYBER071 bn ok 2898 tokens (1436 thinking) 140s
+DEC078 en ok 2625 tokens (934 thinking) 127s
+DEC078 bn ok 3565 tokens (1131 thinking) 173s
+TECH063 en ok 3836 tokens (3718 thinking) 187s
+TECH063 bn ok 2643 tokens (1768 thinking) 130s
+CYBER094 en ok 2222 tokens (1206 thinking) 109s
+CYBER094 bn ok 2810 tokens (1179 thinking) 138s
+DEC091 en ok 2164 tokens (1000 thinking) 106s
+DEC091 bn ok 2538 tokens (1156 thinking) 124s
+TECH081 en ok 1806 tokens (1273 thinking) 88s
+TECH081 bn ok 4066 tokens (3070 thinking) 199s
+SYN038 en ok 4412 tokens (4010 thinking) 216s
+SYN038 bn ok 5070 tokens (4681 thinking) 249s
+PROC058 en ok 3631 tokens (2026 thinking) 179s
+PROC058 bn ok 6745 tokens (4378 thinking) 329s
+PROC004 en ok 2029 tokens (887 thinking) 99s
+PROC004 bn ok 2477 tokens (1147 thinking) 121s
+SYN071 en ok 3291 tokens (3128 thinking) 161s
+SYN071 bn ok 3341 tokens (2851 thinking) 164s
+CYBER069 en ok 2764 tokens (1399 thinking) 136s
+CYBER069 bn ok 2929 tokens (1191 thinking) 143s
+SYN049 en ok 1765 tokens (1297 thinking) 86s
+SYN049 bn ok 4042 tokens (2061 thinking) 199s
+TECH029 en ok 2351 tokens (1142 thinking) 115s
+TECH029 bn ok 4070 tokens (1410 thinking) 200s
+PROC089 en ok 2508 tokens (1177 thinking) 123s
+PROC089 bn ok 3337 tokens (1559 thinking) 164s
+CYBER089 en ok 2558 tokens (1327 thinking) 126s
+CYBER089 bn ok 3752 tokens (1871 thinking) 184s
+SYN083 en ok 633 tokens (559 thinking) 31s
+SYN083 bn ok 1645 tokens (1511 thinking) 81s
+TECH018 en ok 2804 tokens (1180 thinking) 139s
+TECH018 bn ok 3520 tokens (1260 thinking) 174s
+DEC006 en ok 2959 tokens (1975 thinking) 146s
+DEC006 bn ok 4039 tokens (3159 thinking) 199s
+PROC049 en ok 2873 tokens (1110 thinking) 142s
+PROC049 bn ok 3719 tokens (2013 thinking) 183s
+DEC009 en ok 2739 tokens (1240 thinking) 135s
+DEC009 bn ok 3726 tokens (1465 thinking) 184s
+TECH014 en ok 2568 tokens (1124 thinking) 127s
+TECH014 bn ok 3769 tokens (1658 thinking) 186s
+PROC081 en ok 2482 tokens (1871 thinking) 121s
+PROC081 bn ok 2917 tokens (1166 thinking) 143s
+DEC010 en ok 3519 tokens (2067 thinking) 173s
+DEC010 bn ok 4507 tokens (2073 thinking) 222s
+SYN034 en ok 872 tokens (784 thinking) 44s
+SYN034 bn ok 3197 tokens (3019 thinking) 161s
+DEC094 en ok 2420 tokens (1133 thinking) 121s
+DEC094 bn ok 6739 tokens (5177 thinking) 330s
+TECH010 en ok 3632 tokens (1990 thinking) 178s
+TECH010 bn ok 3157 tokens (1348 thinking) 155s
+SYN100 en ok 2616 tokens (1947 thinking) 128s
+SYN100 bn ok 3359 tokens (1653 thinking) 165s
+PROC034 en ok 1832 tokens (927 thinking) 90s
+PROC034 bn ok 2614 tokens (1282 thinking) 129s
+CYBER018 en ok 2397 tokens (1317 thinking) 118s
+CYBER018 bn ok 3666 tokens (1727 thinking) 181s
+CYBER004 en ok 4247 tokens (2793 thinking) 208s
+CYBER004 bn ok 4834 tokens (3210 thinking) 238s
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights:   0%|          | 3/677 [00:00<00:54, 12.45it/s]Loading weights:   3%|▎         | 20/677 [00:00<00:09, 69.29it/s]Loading weights:   5%|▌         | 36/677 [00:00<00:06, 96.33it/s]Loading weights:   9%|▉         | 62/677 [00:00<00:04, 148.04it/s]Loading weights:  12%|█▏        | 84/677 [00:00<00:03, 167.34it/s]Loading weights:  16%|█▌        | 105/677 [00:00<00:03, 177.98it/s]Loading weights:  19%|█▉        | 132/677 [00:00<00:02, 205.03it/s]Loading weights:  23%|██▎       | 159/677 [00:00<00:02, 213.67it/s]Loading weights:  27%|██▋       | 182/677 [00:01<00:02, 202.76it/s]Loading weights:  30%|██▉       | 203/677 [00:01<00:02, 189.76it/s]Loading weights:  34%|███▎      | 228/677 [00:01<00:02, 204.16it/s]Loading weights:  37%|███▋      | 249/677 [00:01<00:02, 200.98it/s]Loading weights:  40%|███▉      | 270/677 [00:01<00:02, 189.63it/s]Loading weights:  43%|████▎     | 293/677 [00:01<00:01, 197.65it/s]Loading weights:  46%|████▋     | 314/677 [00:01<00:01, 187.85it/s]Loading weights:  50%|████▉     | 338/677 [00:01<00:01, 197.68it/s]Loading weights:  53%|█████▎    | 359/677 [00:02<00:01, 195.65it/s]Loading weights:  56%|█████▌    | 380/677 [00:02<00:01, 199.07it/s]Loading weights:  59%|█████▉    | 401/677 [00:02<00:01, 197.11it/s]Loading weights:  62%|██████▏   | 421/677 [00:02<00:01, 194.17it/s]Loading weights:  65%|██████▌   | 441/677 [00:02<00:01, 191.57it/s]Loading weights:  68%|██████▊   | 463/677 [00:02<00:01, 197.25it/s]Loading weights:  71%|███████▏  | 483/677 [00:02<00:00, 194.72it/s]Loading weights:  74%|███████▍  | 504/677 [00:02<00:00, 198.72it/s]Loading weights:  77%|███████▋  | 524/677 [00:02<00:00, 194.28it/s]Loading weights:  81%|████████  | 546/677 [00:02<00:00, 199.79it/s]Loading weights:  84%|████████▍ | 571/677 [00:03<00:00, 213.52it/s]Loading weights:  88%|████████▊ | 593/677 [00:03<00:00, 209.72it/s]Loading weights:  91%|█████████ | 616/677 [00:03<00:00, 214.56it/s]Loading weights:  95%|█████████▍| 643/677 [00:03<00:00, 230.33it/s]Loading weights:  99%|█████████▊| 667/677 [00:03<00:00, 228.96it/s]Loading weights: 100%|██████████| 677/677 [00:03<00:00, 192.99it/s]
+CYBER071 en ok 1262 tokens (489 thinking) batch 8 135s
+CYBER071 bn ok 1301 tokens (546 thinking) batch 8 135s
+DEC078 en ok 1698 tokens (621 thinking) batch 8 135s
+DEC078 bn ok 1697 tokens (712 thinking) batch 8 135s
+TECH063 en ok 1204 tokens (545 thinking) batch 8 135s
+TECH063 bn ok 1233 tokens (556 thinking) batch 8 135s
+CYBER094 en ok 1217 tokens (444 thinking) batch 8 135s
+CYBER094 bn ok 1578 tokens (770 thinking) batch 8 135s
+DEC091 en ok 1110 tokens (471 thinking) batch 8 126s
+DEC091 bn ok 1258 tokens (595 thinking) batch 8 126s
+TECH081 en ok 1029 tokens (479 thinking) batch 8 126s
+TECH081 bn ok 1419 tokens (847 thinking) batch 8 126s
+SYN038 en ok 599 tokens (453 thinking) batch 8 126s
+SYN038 bn ok 1203 tokens (855 thinking) batch 8 126s
+PROC058 en ok 1505 tokens (611 thinking) batch 8 126s
+PROC058 bn ok 1590 tokens (726 thinking) batch 8 126s
+PROC004 en ok 986 tokens (370 thinking) batch 8 144s
+PROC004 bn ok 1370 tokens (651 thinking) batch 8 144s
+SYN071 en ok 630 tokens (512 thinking) batch 8 144s
+SYN071 bn ok 960 tokens (826 thinking) batch 8 144s
+CYBER069 en ok 1807 tokens (710 thinking) batch 8 144s
+CYBER069 bn ok 1706 tokens (796 thinking) batch 8 144s
+SYN049 en ok 884 tokens (365 thinking) batch 8 144s
+SYN049 bn ok 1376 tokens (587 thinking) batch 8 144s
+TECH029 en ok 1760 tokens (766 thinking) batch 8 140s
+TECH029 bn ok 1606 tokens (674 thinking) batch 8 140s
+PROC089 en ok 1567 tokens (612 thinking) batch 8 140s
+PROC089 bn ok 1636 tokens (691 thinking) batch 8 140s
+CYBER089 en ok 1506 tokens (643 thinking) batch 8 140s
+CYBER089 bn ok 1765 tokens (783 thinking) batch 8 140s
+SYN083 en ok 350 tokens (295 thinking) batch 8 140s
+SYN083 bn ok 965 tokens (622 thinking) batch 8 140s
+TECH018 en ok 1825 tokens (811 thinking) batch 8 150s
+TECH018 bn ok 1899 tokens (893 thinking) batch 8 150s
+DEC006 en ok 1395 tokens (551 thinking) batch 8 150s
+DEC006 bn ok 1336 tokens (693 thinking) batch 8 150s
+PROC049 en ok 1238 tokens (571 thinking) batch 8 150s
+PROC049 bn ok 1359 tokens (603 thinking) batch 8 150s
+DEC009 en ok 1653 tokens (602 thinking) batch 8 150s
+DEC009 bn ok 1693 tokens (798 thinking) batch 8 150s
+TECH014 en ok 1236 tokens (580 thinking) batch 8 155s
+TECH014 bn ok 1508 tokens (671 thinking) batch 8 155s
+PROC081 en ok 1348 tokens (506 thinking) batch 8 155s
+PROC081 bn ok 1470 tokens (728 thinking) batch 8 155s
+DEC010 en ok 1978 tokens (797 thinking) batch 8 155s
+DEC010 bn ok 1600 tokens (639 thinking) batch 8 155s
+SYN034 en ok 425 tokens (354 thinking) batch 8 155s
+SYN034 bn ok 466 tokens (359 thinking) batch 8 155s
+DEC094 en ok 1596 tokens (621 thinking) batch 8 144s
+DEC094 bn ok 1621 tokens (807 thinking) batch 8 144s
+TECH010 en ok 1529 tokens (528 thinking) batch 8 144s
+TECH010 bn ok 1636 tokens (695 thinking) batch 8 144s
+SYN100 en ok 1341 tokens (696 thinking) batch 8 144s
+SYN100 bn ok 1825 tokens (1020 thinking) batch 8 144s
+PROC034 en ok 1218 tokens (565 thinking) batch 8 144s
+PROC034 bn ok 1442 tokens (698 thinking) batch 8 144s
+CYBER018 en ok 1648 tokens (660 thinking) batch 4 135s
+CYBER018 bn ok 1695 tokens (776 thinking) batch 4 135s
+CYBER004 en ok 1544 tokens (608 thinking) batch 4 135s
+CYBER004 bn ok 1700 tokens (786 thinking) batch 4 135s

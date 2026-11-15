@@ -13,13 +13,16 @@ Differences from the main run, recorded in the outputs:
 - decoding uses each checkpoint's own sampling settings (generation_config) with a fixed
   seed per cell, because greedy decoding in thinking mode tends to repeat until the token
   limit;
-- the reasoning trace is stored separately and only the final answer is scored.
+- the reasoning trace is stored separately and only the final answer is scored;
+- with --batch-size above 1 (used for Gemma), cells run in left-padded batches seeded once
+  per batch, so a sample depends on its batch; the batch seed, size and members are
+  recorded in each response's "batch" field.
 
 Stored study responses and scores are not touched; outputs go to results/thinking/.
 
     python3 scripts/10_thinking_subset.py plan --model qwen
     python3 scripts/10_thinking_subset.py generate --model qwen --verify-weights
-    python3 scripts/10_thinking_subset.py generate --model gemma
+    python3 scripts/10_thinking_subset.py generate --model gemma --verify-weights --batch-size 8
     python3 scripts/10_thinking_subset.py score --max-usd 10
     python3 scripts/10_thinking_subset.py analyze
 
@@ -133,6 +136,43 @@ def make_thinking_model(gen):
                     'returned_model': cfg['model_id'], 'finish_status': 'stop' if ended else 'length',
                     'truncated': not ended and len(output) >= max_new, 'sampling': sampling,
                     'usage': {'input_tokens': len(ids), 'output_tokens': len(output), 'thinking_tokens': thinking_tokens}}
+
+        def generate_batch(self, prompts, seed):
+            """Several prompts in one left-padded generate call, seeded once per batch.
+
+            Rows share one random stream, so a row's sample depends on the batch it ran in;
+            the batch seed and composition are recorded with each response.
+            """
+            torch, cfg = self.torch, self.model_cfg
+            max_new = self.study['max_output_tokens']
+            all_ids = [self.tokenizer.apply_chat_template(
+                [{'role': 'system', 'content': self.study['system_prompt']}, {'role': 'user', 'content': p}],
+                tokenize=True, add_generation_prompt=True, enable_thinking=True, return_dict=False) for p in prompts]
+            width = max(len(ids) for ids in all_ids)
+            if width + max_new > cfg['context_tokens']:
+                raise RuntimeError('input plus output allowance exceeds the context window')
+            gc = self.model.generation_config
+            sampling = {'do_sample': True, 'temperature': gc.temperature, 'top_p': gc.top_p, 'top_k': gc.top_k}
+            inputs = torch.tensor([[self.pad] * (width - len(ids)) + ids for ids in all_ids], dtype=torch.long, device='cuda')
+            mask = torch.tensor([[0] * (width - len(ids)) + [1] * len(ids) for ids in all_ids], dtype=torch.long, device='cuda')
+            torch.manual_seed(seed)
+            with torch.inference_mode():
+                result = self.model.generate(input_ids=inputs, attention_mask=mask, max_new_tokens=max_new,
+                                             use_cache=True, eos_token_id=self.eos, pad_token_id=self.pad, **sampling)
+            rows = []
+            for ids, row in zip(all_ids, result[:, width:].tolist()):
+                stop = next((i for i, tok in enumerate(row) if tok in self.eos), None)
+                output = row if stop is None else row[:stop + 1]
+                raw = self.tokenizer.decode(output, skip_special_tokens=False)
+                thinking, answer, finished = split_thinking(raw, self.tokenizer.all_special_tokens)
+                ended = stop is not None
+                thinking_tokens = len(self.tokenizer.encode(thinking, add_special_tokens=False)) if thinking else 0
+                rows.append({'response_text': answer, 'thinking_text': thinking, 'thinking_finished': finished,
+                             'returned_model': cfg['model_id'], 'finish_status': 'stop' if ended else 'length',
+                             'truncated': not ended and len(output) >= max_new, 'sampling': sampling,
+                             'usage': {'input_tokens': len(ids), 'output_tokens': len(output),
+                                       'thinking_tokens': thinking_tokens}})
+            return rows
     return ThinkingModel
 
 
@@ -145,7 +185,55 @@ def plan(key, tasks):
         print(' ', c['task_id'], c['language'])
 
 
-def generate(key, tasks, limit=None, verify_weights=False):
+def record(key, model, cell, seed, result, latency, batch=None):
+    rec = {'task_id': cell['task_id'], 'language': cell['language'], 'model': key, 'thinking': True,
+           'model_id': model['model_id'], 'returned_model': result['returned_model'], 'seed': seed,
+           'sampling': result['sampling'], 'prompt_sha256': sha256_text(cell['prompt_text']),
+           'response_text': result['response_text'], 'response_sha256': sha256_text(result['response_text']),
+           'thinking_text': result['thinking_text'], 'thinking_finished': result['thinking_finished'],
+           'finish_status': result['finish_status'], 'truncated': result['truncated'],
+           'usage': result['usage'], 'latency_seconds': latency, 'generated_at_utc': utc_now()}
+    if batch is not None:
+        rec['batch'] = batch
+    return rec
+
+
+def generate_batched(key, model, client, todo, batch_size, out, errors):
+    """Run cells in batches; on CUDA out-of-memory, retry the batch as two halves."""
+    torch = client.torch
+    queue = [todo[i:i + batch_size] for i in range(0, len(todo), batch_size)]
+    while queue:
+        group = queue.pop(0)
+        seed = cell_seed(model['seed'], group[0]['task_id'], group[0]['language'])
+        started = time.perf_counter()
+        try:
+            results = client.generate_batch([c['prompt_text'] for c in group], seed)
+        except torch.OutOfMemoryError:
+            torch.cuda.empty_cache()
+            if len(group) == 1:
+                raise
+            half = len(group) // 2
+            print(f'out of memory at batch size {len(group)}; retrying as {half} + {len(group) - half}', flush=True)
+            queue[:0] = [group[:half], group[half:]]
+            continue
+        except RuntimeError as exc:
+            for cell in group:
+                append_jsonl(errors, {'task_id': cell['task_id'], 'language': cell['language'], 'model': key,
+                                      'error': str(exc)[:500], 'at_utc': utc_now()})
+                print(cell['task_id'], cell['language'], 'FAILED', str(exc)[:200], flush=True)
+            continue
+        latency = round(time.perf_counter() - started, 3)
+        members = [f"{c['task_id']}/{c['language']}" for c in group]
+        for i, (cell, result) in enumerate(zip(group, results)):
+            batch = {'size': len(group), 'index': i, 'seed_scope': 'batch', 'members': members}
+            append_jsonl(out, record(key, model, cell, seed, result, latency, batch))
+            u = result['usage']
+            print(cell['task_id'], cell['language'], 'ok', f"{u['output_tokens']} tokens ({u['thinking_tokens']} thinking)",
+                  f'batch {len(group)} {latency:.0f}s', flush=True)
+        torch.cuda.empty_cache()
+
+
+def generate(key, tasks, limit=None, verify_weights=False, batch_size=1):
     gen = _load('generate', '02_generate.py')
     model = load_models()[key]
     if model['provider'] != 'local':
@@ -153,6 +241,10 @@ def generate(key, tasks, limit=None, verify_weights=False):
     client = make_thinking_model(gen)(model, load_study(), verify_weights)
     OUT.mkdir(parents=True, exist_ok=True)
     out, errors = OUT / f'responses_{key}.jsonl', OUT / f'responses_{key}.errors.jsonl'
+    if batch_size > 1:
+        todo = cells(key, tasks)
+        generate_batched(key, model, client, todo if limit is None else todo[:limit], batch_size, out, errors)
+        return
     done = 0
     for cell in cells(key, tasks):
         if limit is not None and done >= limit:
@@ -167,13 +259,7 @@ def generate(key, tasks, limit=None, verify_weights=False):
             print(cell['task_id'], cell['language'], 'FAILED', str(exc)[:200], flush=True)
             continue
         latency = round(time.perf_counter() - started, 3)
-        append_jsonl(out, {'task_id': cell['task_id'], 'language': cell['language'], 'model': key, 'thinking': True,
-                           'model_id': model['model_id'], 'returned_model': result['returned_model'], 'seed': seed,
-                           'sampling': result['sampling'], 'prompt_sha256': sha256_text(cell['prompt_text']),
-                           'response_text': result['response_text'], 'response_sha256': sha256_text(result['response_text']),
-                           'thinking_text': result['thinking_text'], 'thinking_finished': result['thinking_finished'],
-                           'finish_status': result['finish_status'], 'truncated': result['truncated'],
-                           'usage': result['usage'], 'latency_seconds': latency, 'generated_at_utc': utc_now()})
+        append_jsonl(out, record(key, model, cell, seed, result, latency))
         done += 1
         u = result['usage']
         print(cell['task_id'], cell['language'], 'ok', f"{u['output_tokens']} tokens ({u['thinking_tokens']} thinking)",
@@ -301,6 +387,8 @@ def main():
         s.add_argument('--limit', type=int)
         if name == 'generate':
             s.add_argument('--verify-weights', action='store_true')
+            s.add_argument('--batch-size', type=int, default=1,
+                           help='cells per generate call; above 1, one seed per batch (recorded per response)')
     s = sub.add_parser('score')
     s.add_argument('--limit', type=int)
     s.add_argument('--max-usd', type=float, default=10.0)
@@ -310,7 +398,7 @@ def main():
     if args.command == 'plan':
         plan(args.model, tasks)
     elif args.command == 'generate':
-        generate(args.model, tasks, args.limit, args.verify_weights)
+        generate(args.model, tasks, args.limit, args.verify_weights, args.batch_size)
     elif args.command == 'score':
         score(args.limit, args.max_usd)
     else:

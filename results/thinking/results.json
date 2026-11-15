@@ -1,0 +1,200 @@
+{
+  "generated_utc": "2026-11-15T22:27:13.244325Z",
+  "seed": 20261023,
+  "replicates": 2000,
+  "note": "Post hoc. Thinking-on responses use the checkpoint sampling settings; thinking-off responses are the stored study responses (greedy). Scores are initial judge ratings for both, so no review corrections enter the comparison.",
+  "models": {
+    "qwen": {
+      "tasks": 30,
+      "truncated": 0,
+      "unfinished_thinking": 0,
+      "median_thinking_tokens": 1423.0,
+      "metrics": {
+        "critical_coverage": {
+          "tasks": 30,
+          "off_en": 0.876,
+          "off_bn": 0.748,
+          "on_en": 0.798,
+          "on_bn": 0.819,
+          "gap_off": -0.127,
+          "gap_off_ci95": [
+            -0.244,
+            -0.023
+          ],
+          "gap_on": 0.021,
+          "gap_on_ci95": [
+            -0.084,
+            0.132
+          ],
+          "change": 0.148,
+          "change_ci95": [
+            -0.008,
+            0.344
+          ]
+        },
+        "strict_complete_task_success": {
+          "tasks": 30,
+          "off_en": 0.467,
+          "off_bn": 0.4,
+          "on_en": 0.3,
+          "on_bn": 0.367,
+          "gap_off": -0.067,
+          "gap_off_ci95": [
+            -0.233,
+            0.1
+          ],
+          "gap_on": 0.067,
+          "gap_on_ci95": [
+            -0.1,
+            0.233
+          ],
+          "change": 0.133,
+          "change_ci95": [
+            0.0,
+            0.3
+          ]
+        },
+        "critical_omission_rate": {
+          "tasks": 30,
+          "off_en": 0.0,
+          "off_bn": 0.0,
+          "on_en": 0.003,
+          "on_bn": 0.017,
+          "gap_off": 0.0,
+          "gap_off_ci95": [
+            0.0,
+            0.0
+          ],
+          "gap_on": 0.014,
+          "gap_on_ci95": [
+            -0.008,
+            0.05
+          ],
+          "change": 0.014,
+          "change_ci95": [
+            -0.008,
+            0.05
+          ]
+        },
+        "critical_unmet_rate": {
+          "tasks": 30,
+          "off_en": 0.133,
+          "off_bn": 0.28,
+          "on_en": 0.211,
+          "on_bn": 0.226,
+          "gap_off": 0.147,
+          "gap_off_ci95": [
+            0.036,
+            0.286
+          ],
+          "gap_on": 0.016,
+          "gap_on_ci95": [
+            -0.105,
+            0.132
+          ],
+          "change": -0.132,
+          "change_ci95": [
+            -0.297,
+            0.006
+          ]
+        }
+      }
+    },
+    "gemma": {
+      "tasks": 30,
+      "truncated": 0,
+      "unfinished_thinking": 0,
+      "median_thinking_tokens": 630.5,
+      "metrics": {
+        "critical_coverage": {
+          "tasks": 30,
+          "off_en": 0.805,
+          "off_bn": 0.722,
+          "on_en": 0.798,
+          "on_bn": 0.747,
+          "gap_off": -0.082,
+          "gap_off_ci95": [
+            -0.162,
+            -0.003
+          ],
+          "gap_on": -0.051,
+          "gap_on_ci95": [
+            -0.183,
+            0.082
+          ],
+          "change": 0.031,
+          "change_ci95": [
+            -0.138,
+            0.191
+          ]
+        },
+        "strict_complete_task_success": {
+          "tasks": 30,
+          "off_en": 0.433,
+          "off_bn": 0.3,
+          "on_en": 0.367,
+          "on_bn": 0.433,
+          "gap_off": -0.133,
+          "gap_off_ci95": [
+            -0.267,
+            -0.033
+          ],
+          "gap_on": 0.067,
+          "gap_on_ci95": [
+            -0.1,
+            0.233
+          ],
+          "change": 0.2,
+          "change_ci95": [
+            0.0,
+            0.4
+          ]
+        },
+        "critical_omission_rate": {
+          "tasks": 30,
+          "off_en": 0.019,
+          "off_bn": 0.061,
+          "on_en": 0.0,
+          "on_bn": 0.078,
+          "gap_off": 0.042,
+          "gap_off_ci95": [
+            -0.008,
+            0.1
+          ],
+          "gap_on": 0.078,
+          "gap_on_ci95": [
+            0.011,
+            0.161
+          ],
+          "change": 0.036,
+          "change_ci95": [
+            -0.05,
+            0.144
+          ]
+        },
+        "critical_unmet_rate": {
+          "tasks": 30,
+          "off_en": 0.213,
+          "off_bn": 0.307,
+          "on_en": 0.219,
+          "on_bn": 0.253,
+          "gap_off": 0.094,
+          "gap_off_ci95": [
+            0.006,
+            0.182
+          ],
+          "gap_on": 0.034,
+          "gap_on_ci95": [
+            -0.106,
+            0.173
+          ],
+          "change": -0.059,
+          "change_ci95": [
+            -0.226,
+            0.111
+          ]
+        }
+      }
+    }
+  }
+}
